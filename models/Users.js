@@ -13,6 +13,10 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         len: [1]
       }
+    },
+    admin: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true
     }
   });
 
@@ -23,4 +27,4 @@ module.exports = (sequelize, DataTypes) => {
   };
 
   return Users;
-}
+};

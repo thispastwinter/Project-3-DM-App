@@ -28,6 +28,6 @@ INSERT INTO Games (`name`)
 VALUES
 ('My First D&D Game');
 
-INSERT INTO Characters (`name`, `armor-class`, `hit-points`, `image`)
+INSERT INTO Characters (`name`, `armorClass`, `hitPoints`, `image`)
 VALUES
 ('Ront', 17, 68, './images/orc.png');
