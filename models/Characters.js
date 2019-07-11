@@ -7,6 +7,14 @@ module.exports = (sequelize, DataTypes) => {
         len: [1]
       }
     },
+    initiative: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 1,
+      validate: {
+        len:[1]
+      }
+    },
     armorClass: {
       type: DataTypes.INTEGER,
       allowNull: false,

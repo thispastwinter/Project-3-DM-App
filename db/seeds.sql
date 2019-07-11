@@ -15,6 +15,7 @@ CREATE TABLE Games (
 DROP TABLE IF EXISTS Characters;
 CREATE TABLE Characters (
   `name` VARCHAR (250)
+, `initiative` INT
 , `armor-class` INT
 , `hit-points` INT
 , `image` VARCHAR (250)
