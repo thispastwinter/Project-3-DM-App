@@ -8,19 +8,19 @@
     "define": {
       "charset": "utf8",
       "timestamps": true,
-      "underscored": true
+      "underscored": false
     }
   },
   "test": {
     "username": "root",
     "password": null,
-    "database": "test",
+    "database": "initiative_db",
     "host": "127.0.0.1",
     "dialect": "mysql",
     "define": {
       "charset": "utf8",
       "timestamps": true,
-      "underscored": true
+      "underscored": false
     }
   },
   "production": {
@@ -29,7 +29,7 @@
     "define": {
       "charset": "utf8",
       "timestamps": true,
-      "underscored": true
+      "underscored": false
     },
     "logging": false
   }
