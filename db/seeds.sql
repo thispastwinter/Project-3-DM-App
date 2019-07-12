@@ -2,29 +2,29 @@ USE initiative_db;
 
 DROP TABLE IF EXISTS Users;
 CREATE TABLE Users (
-  `user_id` INT AUTO_INCREMENT NOT NULL
+  `id` INT AUTO_INCREMENT NOT NULL
 , `email` VARCHAR (50)
 , `password` VARCHAR (50)
 , `admin` BOOLEAN
-, PRIMARY KEY(`user_id`)
+, PRIMARY KEY(`id`)
 );
 
 DROP TABLE IF EXISTS Games;
 CREATE TABLE Games (
-  `game_id` INT AUTO_INCREMENT NOT NULL
+  `id` INT AUTO_INCREMENT NOT NULL
 , `name` VARCHAR (250)
-, PRIMARY KEY(`game_id`)
+, PRIMARY KEY(`id`)
 );
 
 DROP TABLE IF EXISTS Characters;
 CREATE TABLE Characters (
-  `character_id` INT AUTO_INCREMENT NOT NULL
+  `id` INT AUTO_INCREMENT NOT NULL
 , `name` VARCHAR (250)
 , `initiative` INT
 , `armorClass` INT
 , `hitPoints` INT
 , `image` VARCHAR (250)
-, PRIMARY KEY(`character_id`)
+, PRIMARY KEY(`id`)
 );
 
 INSERT INTO Users (`email`, `password`, `admin`, createdAt, updatedAt)

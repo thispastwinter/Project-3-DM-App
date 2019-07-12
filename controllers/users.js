@@ -17,4 +17,5 @@ const findAll = async (req, res) => {
   }
 };
 
+exports.create = create;
 exports.findAll = findAll;
