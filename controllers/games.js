@@ -1,9 +1,9 @@
 const db = require('../models');
 
-
 const create = async (req, res) => {
   try {
-    const game = await db.Games.create({ req.body })
+    const game = await db.Games.create(req.body);
+    res.json(game);
   } catch (error) {
     res.status(500).send(error);
   }

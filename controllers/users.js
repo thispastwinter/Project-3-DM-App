@@ -2,7 +2,7 @@ const db = require('../models');
 
 const create = async (req, res) => {
   try {
-    const user = await db.Users.create({ req.body });
+    const user = await db.Users.create(req.body);
     res.json(user);
   } catch (error) {
     res.status(500).send(error);
