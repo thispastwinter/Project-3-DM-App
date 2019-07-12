@@ -29,6 +29,8 @@ if (process.env.NODE_ENV === 'production') {
 // Add routes, both API and view
 app.use(routes);
 
+require('./routes/api/huelights')(app);
+
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
 // Serve up static assets (usually on heroku)
