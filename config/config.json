@@ -8,7 +8,7 @@
     "define": {
       "charset": "utf8",
       "timestamps": true,
-      "underscored": false
+      "underscored": true
     }
   },
   "test": {
@@ -20,7 +20,7 @@
     "define": {
       "charset": "utf8",
       "timestamps": true,
-      "underscored": false
+      "underscored": true
     }
   },
   "production": {
@@ -29,7 +29,7 @@
     "define": {
       "charset": "utf8",
       "timestamps": true,
-      "underscored": false
+      "underscored": true
     },
     "logging": false
   }
