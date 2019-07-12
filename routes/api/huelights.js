@@ -2,7 +2,6 @@ const hue = require('node-hue-api');
 const HueApi = require('node-hue-api').HueApi;
 const express = require('express');
 
-
 // Request for bridge IP
 
 module.exports = function (app) {
