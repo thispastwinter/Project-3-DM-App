@@ -44,7 +44,8 @@ const server = app.listen(PORT, () => {
 });
 
 // Dynamically force schema refresh only for 'test'
-const FORCE_SCHEMA = process.env.NODE_ENV === 'test';
+const FORCE_SCHEMA = process.env.NODE_ENV === 'development';
+console.log(FORCE_SCHEMA, 'FORCE SCHEMA');
 
 db.sequelize
   .authenticate()
