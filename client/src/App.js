@@ -11,7 +11,7 @@ class App extends Component {
     ip: [],
     user: '',
     choices: ['one', 'two', 'three'],
-    lights
+    lights: []
   }
 
   componentDidMount() {
@@ -41,7 +41,8 @@ class App extends Component {
       host: this.state.ip,
       user: this.state.user
     }).then(res => {
-      let lights = res.data
+      console.log(res.data.swupdate.devicetypes.lights)
+      let lights = res.data.swupdate.devicetypes.lights
       this.setState({ lights })
     })
 
@@ -89,8 +90,8 @@ class App extends Component {
         <h1>Hue Lights</h1>
         <h4>Select a Light:</h4>
         <select>
-        {this.state.choices.map(options => (
-          <option>{options}</option>
+        {this.state.lights.map(lights => (
+          <option>{lights}</option>
         ))}
         </select>
         <hr></hr>

@@ -28,6 +28,18 @@ module.exports = function (app) {
     })
   })
 
+  // get all lights
+
+  app.post('/alllights', (req, res) => {
+    let host = req.body.host;
+    let user = req.body.user;
+    let api = new HueApi(host, user);
+    api.getConfig(function (err, config) {
+      if (err) throw err;
+      res.json(config);
+    });
+  })
+
   // Once this connection is established, requests can then be made to trigger light events.
 
   app.post('/lights', (req, res) => {
