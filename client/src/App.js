@@ -10,8 +10,8 @@ class App extends Component {
   state = {
     ip: [],
     user: '',
-    choices: ['one', 'two', 'three'],
-    lights: []
+    lights: [],
+    selectedLight: []
   }
 
   componentDidMount() {
@@ -48,11 +48,16 @@ class App extends Component {
 
   }
 
+  handleChange = (event) => {
+    this.setState({ selectedLight: event.target.value })
+  }
+
   lightOn = () => {
     axios.post('/lights', {
       host: this.state.ip,
       username: this.state.user,
-      huestate: 'on'
+      huestate: 'on',
+      light: this.state.selectedLight
     })
       .then(res => {
         console.log(res);
@@ -63,7 +68,8 @@ class App extends Component {
     axios.post('/lights', {
       host: this.state.ip,
       username: this.state.user,
-      huestate: 'off'
+      huestate: 'off',
+      light: this.state.selectedLight
     })
       .then(res => {
         console.log(res);
@@ -74,7 +80,8 @@ class App extends Component {
     axios.post('/lights', {
       host: this.state.ip,
       username: this.state.user,
-      huestate: 'critical'
+      huestate: 'critical',
+      light: this.state.selectedLight
     })
       .then(res => {
         console.log(res);
@@ -89,9 +96,9 @@ class App extends Component {
       <div>
         <h1>Hue Lights</h1>
         <h4>Select a Light:</h4>
-        <select>
+        <select onChange={this.handleChange} value={this.state.selectedLight}>
         {this.state.lights.map(lights => (
-          <option>{lights}</option>
+          <option value={lights} key={lights}>{lights}</option>
         ))}
         </select>
         <hr></hr>

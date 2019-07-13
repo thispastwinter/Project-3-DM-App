@@ -46,33 +46,34 @@ module.exports = function (app) {
     const lightState = hue.lightState;
     let host = req.body.host;
     let username = req.body.username;
+    let light = req.body.light;
     let api = new HueApi(host, username);
     let state;
     switch (req.body.huestate) {
       case 'on':
         state = lightState.create().on();
-        api.setLightState(5, state, function (err, lights) {
+        api.setLightState(light, state, function (err, lights) {
           if (err) throw err;
           res.json(lights)
         });
         break;
       case 'off':
         state = lightState.create().off();
-        api.setLightState(5, state, function (err, lights) {
+        api.setLightState(light, state, function (err, lights) {
           if (err) throw err;
           res.json(lights)
         });
         break;
       case 'critical':
         state = lightState.create().longAlert();
-        api.setLightState(5, state, function (err, lights) {
+        api.setLightState(light, state, function (err, lights) {
           if (err) throw err;
           res.json(lights)
         });
         break;
       default:
         state = lightState.create().on();
-        api.setLightState(5, state, function (err, lights) {
+        api.setLightState(light, state, function (err, lights) {
           if (err) throw err;
           res.json(lights)
         });
