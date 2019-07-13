@@ -37,7 +37,7 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   Characters.associate = (models) => {
-    Characters.belongsTo(models.Games, {
+    models.Characters.belongsTo(models.Games, {
       foreignKey: {
         allowNull: false,
         defaultValue: 1
