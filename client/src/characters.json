@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "init": 1,
+        "name": "Beedrill",
+        "image": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/015.png"
+    },
+    {
+        "id": 2,
+        "init": 14,
+        "name": "Golisopod",
+        "image": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/768.png"
+    },
+    {
+        "id": 3,
+        "init": 15,
+        "name": "Heracross",
+        "image": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/214.png"
+    },
+    {
+        "id": 4,
+        "init": 7,
+        "name": "Ninjask",
+        "image": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/291.png"
+    },
+    {
+        "id": 5,
+        "init": 19,
+        "name": "Pinsir",
+        "image": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/127.png"
+    },
+    {
+        "id": 6,
+        "init": 10,
+        "name": "Scyther",
+        "image": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/123.png"
+    }
+]
