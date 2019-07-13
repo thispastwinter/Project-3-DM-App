@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import './App.css';
 import Lights from './components/lights'
 import axios from 'axios';
+import List from './components/list/index';
+import ListItem from './components/listItem/index'
+import characterList from './characters.json'
+import socketIOClient from 'socket.io-client'
 
 // Create a Connect to Hue button that sends the ip to a createUser post request 
 // Text that informs user to hold the link button when pressing connect
@@ -11,7 +15,9 @@ class App extends Component {
     ip: [],
     user: '',
     lights: [],
-    selectedLight: []
+    selectedLight: [],
+    characterList,
+    endpoint: "localhost:3001"
   }
 
   componentDidMount() {
@@ -19,7 +25,52 @@ class App extends Component {
       .then(res => {
         let ip = res.data;
         this.setState({ ip });
-      })
+      });
+
+    this.initSort(this.state.characterList);
+
+    const socket = socketIOClient(this.state.endpoint);
+    socket.on('listChange', (characterList) => {
+      console.log('Change received');
+      this.setState({ characterList });
+    })
+  }
+
+  send = async (func) => {
+    await func
+    const socket = socketIOClient(this.state.endpoint);
+    socket.emit('listChange', this.state.characterList)
+    console.log('Sending List Change');
+  }
+
+  initSort = (array) => {
+    const newArr = array.slice()
+    newArr.sort((a, b) => {
+      return b.init - a.init;
+    });
+    this.setState((state) => {
+      return { characterList: newArr };
+    });
+  }
+
+  turnDone = (id) => {
+    const characterList = this.state.characterList.slice();
+    characterList.push(...characterList.splice(characterList.findIndex(c => c.id === id), 1))
+    this.send(this.setState({ characterList }));
+  }
+
+  delayTurn = (id) => {
+    const characterList = this.state.characterList.slice();
+    const index = characterList.findIndex(c => c.id === id);
+    if (index === (characterList.length - 1)) {
+      let temp = characterList[index];
+      characterList.pop();
+      characterList.unshift(temp);
+    }
+    else {
+      [characterList[index], characterList[index + 1]] = [characterList[index + 1], characterList[index]];
+    }
+    this.send(this.setState({ characterList }));
   }
 
   connectionHandler = () => {
@@ -94,12 +145,25 @@ class App extends Component {
   render() {
     return (
       <div>
+        <List >
+          {this.state.characterList.map(character => (
+            <ListItem
+              id={character.id}
+              key={character.id}
+              init={character.init}
+              name={character.name}
+              image={character.image}
+              turnDone={this.turnDone}
+              delayTurn={this.delayTurn}
+            />
+          ))}
+        </List>
         <h1>Hue Lights</h1>
         <h4>Select a Light:</h4>
         <select onChange={this.handleChange} value={this.state.selectedLight}>
-        {this.state.lights.map(lights => (
-          <option value={lights} key={lights}>{lights}</option>
-        ))}
+          {this.state.lights.map(lights => (
+            <option value={lights} key={lights}>{lights}</option>
+          ))}
         </select>
         <hr></hr>
         <Lights function={() => this.lightOn()} text="Light On">
