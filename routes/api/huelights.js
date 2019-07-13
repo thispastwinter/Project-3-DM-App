@@ -8,7 +8,11 @@ module.exports = function (app) {
   app.post('/', (req, res) => {
     hue.nupnpSearch(function (err, result) {
       if (err) throw err;
-      res.json(result);
+      if (result.length > 0) {
+        res.json(result[0].ipaddress);
+      } else {
+        res.send('')
+      }
     })
   })
 
@@ -21,7 +25,7 @@ module.exports = function (app) {
     newApi.createUser(host, function (err, user) {
       if (err) throw err;
       res.json(user);
-    });
+    })
   })
 
   // Once this connection is established, requests can then be made to trigger light events.
@@ -31,18 +35,35 @@ module.exports = function (app) {
     let host = req.body.host;
     let username = req.body.username;
     let api = new HueApi(host, username);
-    if (req.body.huestate === 'on') {
-      let state = lightState.create().on();
-      api.setLightState(5, state, function (err, lights) {
-        if (err) throw err;
-        res.json(lights)
-      });
-    } else {
-      let state = lightState.create().off();
-      api.setLightState(5, state, function (err, lights) {
-        if (err) throw err;
-        res.json(lights)
-      });
+    let state;
+    switch (req.body.huestate) {
+      case 'on':
+        state = lightState.create().on();
+        api.setLightState(5, state, function (err, lights) {
+          if (err) throw err;
+          res.json(lights)
+        });
+        break;
+      case 'off':
+        state = lightState.create().off();
+        api.setLightState(5, state, function (err, lights) {
+          if (err) throw err;
+          res.json(lights)
+        });
+        break;
+      case 'critical':
+        state = lightState.create().longAlert();
+        api.setLightState(5, state, function (err, lights) {
+          if (err) throw err;
+          res.json(lights)
+        });
+        break;
+      default:
+        state = lightState.create().on();
+        api.setLightState(5, state, function (err, lights) {
+          if (err) throw err;
+          res.json(lights)
+        });
     }
   })
 }
