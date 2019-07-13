@@ -15,14 +15,14 @@ module.exports = (sequelize, DataTypes) => {
         len:[1]
       }
     },
-    armorClass: {
+    armor_class: {
       type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
         len: [1]
       }
     },
-    hitPoints: {
+    hit_points: {
       type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
