@@ -16,9 +16,9 @@ module.exports = (sequelize, DataTypes) => {
   };
 
   Games.associate = (models) => {
-    models.Games.belongsToMany(models.Games, { 
-      as: 'Sessions',
-      through: 'users_and_games',
+    models.Games.belongsToMany(models.Users, { 
+      as: 'Games',
+      through: 'users_games',
       foreignKey: 'game_id'
       // foreignKey: {
       //   allowNull: false,

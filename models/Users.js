@@ -28,8 +28,8 @@ module.exports = (sequelize, DataTypes) => {
 
   Users.associate = (models) => {
     models.Users.belongsToMany(models.Games, { 
-      as: 'Profiles',
-      through: 'users_and_games',
+      as: 'Users',
+      through: 'users_games',
       foreignKey: 'user_id'
       // foreignKey: {
       //   allowNull: false,
