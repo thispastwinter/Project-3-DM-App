@@ -17,8 +17,8 @@ module.exports = (sequelize, DataTypes) => {
     admin: {
       type: DataTypes.BOOLEAN,
       defaultValue: true,
-    },
-    auth_token: DataTypes.STRING,
+    }
+    // auth_token: DataTypes.STRING,
   });
 
   // Users.associate = (models) => {
