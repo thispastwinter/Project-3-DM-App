@@ -3,6 +3,12 @@ const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
 const session = require('express-session');
+const http = require('http');
+const socketIo = require('socket.io');
+
+const app = express();
+const server = http.createServer(app);
+const io = socketIo(server);
 
 const db = require('./models');
 const routes = require('./routes');
@@ -10,7 +16,6 @@ const passport = require('./config/passport');
 const corsOptions = require('./config/cors.js');
 
 const PORT = process.env.PORT || 3001;
-const app = express();
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
@@ -29,6 +34,8 @@ if (process.env.NODE_ENV === 'production') {
 // Add routes, both API and view
 app.use(routes);
 
+require('./routes/api/huelights')(app);
+
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
 // Serve up static assets (usually on heroku)
@@ -38,13 +45,28 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-const server = app.listen(PORT, () => {
+server.listen(PORT, () => {
   // eslint-disable-next-line
   console.log(`🌎 ==> API server now on port ${PORT}!`);
 });
 
+// Socket IO logic
+io.on('connection', (socket) => {
+  console.log('a user connected'); // eslint-disable-line no-console
+  socket.on('chat message', (msg) => {
+    io.emit('chat message', msg);
+  });
+  socket.on('listChange', (data) => {
+    io.emit('listChange', data);
+  });
+  socket.on('disconnect', () => {
+    console.log('user disconnected'); // eslint-disable-line no-console
+  });
+});
+
 // Dynamically force schema refresh only for 'test'
-const FORCE_SCHEMA = process.env.NODE_ENV === 'test';
+const FORCE_SCHEMA = process.env.NODE_ENV === 'development';
+console.log(FORCE_SCHEMA, 'FORCE SCHEMA'); // eslint-disable-line no-console
 
 db.sequelize
   .authenticate()

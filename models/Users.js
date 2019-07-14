@@ -20,9 +20,21 @@ module.exports = (sequelize, DataTypes) => {
     }
   });
 
+  // Users.associate = (models) => {
+  //   Users.hasMany(models.Games, {
+  //     onDelete: 'cascade'
+  //   });
+  // };
+
   Users.associate = (models) => {
-    Users.hasMany(models.Games, {
-      onDelete: 'cascade'
+    models.Users.belongsToMany(models.Games, { 
+      as: 'Users',
+      through: 'users_games',
+      foreignKey: 'user_id'
+      // foreignKey: {
+      //   allowNull: false,
+      //   defaultValue: 1
+      // }
     });
   };
 
