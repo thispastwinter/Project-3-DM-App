@@ -1,0 +1,25 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "jon@gmail.com",
+      "password": "passwordjon",
+      "admin": 1,
+      "auth_token": "123abc" 
+    },
+    {
+      "id": 2,
+      "email": "justin@gmail.com",
+      "password": "passwordjustin",
+      "admin": 0,
+      "auth_token": "123abc"
+    },
+    {
+      "id": 3,
+      "email": "tyler@gmail.com",
+      "password": "passwordtyler",
+      "admin": 1,
+      "auth_token": "123abc"
+    }
+  ]
+}
