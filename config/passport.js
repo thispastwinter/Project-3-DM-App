@@ -1,6 +1,6 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-// const dummyUsers = require('../tests/dummyUsers.json');
+const dummyUsers = require('../tests/dummyUsers.json');
 
 // Telling passport we want to use a Local Strategy.
 // In other words, we want login with a username/email and password
@@ -9,23 +9,24 @@ passport.use(new LocalStrategy(
   {
     usernameField: 'email',
   },
-  async (email, password, done) => {
+  async (email, password) => {
 
     // When a user tries to sign in this code runs
-    // if (process.env.NODE_ENV !== 'production') {
-    //   const user = dummyUsers.users.find(u => u.email === email);
-    //   if (user) {
-    //     return done(null, user);
-    //   }
-    // }
+    if (process.env.NODE_ENV !== 'production') {
+      console.log('DUMMY DATABASE');
+      const user = dummyUsers.users.find(u => u.email === email);
+      if (user) {
+        return user;
+      }
+    }
 
     // Login failed
-    return done(null, false, {
-      message: 'Invalid user details',
-    });
+    // return done(null, false, {
+    //   message: 'Invalid user details',
+    // });
 
-    // Login success
-    return done(null, user);
+    // // Login success
+    // return done(null, user);
   },
 ));
 

@@ -1,7 +1,7 @@
 // const db = require('../models');
 
 const login = async (req, res) => {
-  console.log(req.user);
+  console.log('LOGIN SUCCESSFUL');
   res.json(req.user);
 };
 
