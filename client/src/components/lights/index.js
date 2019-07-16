@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button, Container} from 'react-bulma-components';
 
-const Hue = (props) => {
+const Lights = (props) => {
   return (
     <Container fluid>
       <Button color="success" onClick={() => props.lightOn()}>
@@ -21,4 +21,4 @@ const Hue = (props) => {
   )
 }
 
-export default Hue;
+export default Lights;
