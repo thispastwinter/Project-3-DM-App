@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Container } from 'react-bulma-components';
+import { Heading, Columns } from 'react-bulma-components';
 import Lights from '../lights';
 import axios from 'axios';
+import './index.css';
 
-class Hue_Page extends Component {
+class HuePage extends Component {
   state = {
     ip: [],
     user: '',
@@ -115,26 +116,30 @@ class Hue_Page extends Component {
 
   render() {
     return (
-      <Container id="hue-box">
-        <h1>Hue Lights</h1>
-        {this.state.ip.length > 0 ?
-          <div>
-            <h4>Select a Light:</h4>
-            <select onChange={this.handleChange} value={this.state.selectedLight}>
-              {this.state.lights.map((lights, index) => (
-                <option value={this.state.lightId[index]} key={this.state.lightId[index]}>{lights}</option>
-              ))}
-            </select>
-            <Lights
-              lightOn={this.lightOn}
-              lightOff={this.lightOff}
-              critical={this.criticalRoll}
-              lightning={this.lightning}
-              connection={this.connectionHandler}>
-            </Lights></div> : 'No Bridge Found'}
-      </Container>
+      <Columns.Column>
+        <Columns id="hue-box">
+          <Heading className="title-1">Hue Lights</Heading>
+          {this.state.ip.length > 0 ?
+            <div>
+              <Heading className="title-2" size={5}>Select a Light:</Heading>
+              <div className="select">
+                <select onChange={this.handleChange} value={this.state.selectedLight}>
+                  {this.state.lights.map((lights, index) => (
+                    <option value={this.state.lightId[index]} key={this.state.lightId[index]}>{lights}</option>
+                  ))}
+                </select>
+              </div>
+              <Lights
+                lightOn={this.lightOn}
+                lightOff={this.lightOff}
+                critical={this.criticalRoll}
+                lightning={this.lightning}
+                connection={this.connectionHandler}>
+              </Lights></div> : 'No Bridge Found'}
+        </Columns>
+      </Columns.Column>
     );
   }
 }
 
-export default Hue_Page;
+export default HuePage;
