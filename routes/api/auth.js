@@ -4,7 +4,8 @@ const authController = require('../../controllers/auth');
 
 router.use(passport.authenticate('local'));
 
-// Matches with '/api/auth/login'
+// Matches with 'http://localhost:3001/api/auth/login's
+// Make sure to use an email and a password for a post request.
 router.route('/login')
   .post(authController.login);
 
