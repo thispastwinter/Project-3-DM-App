@@ -2,37 +2,43 @@
     {
         "id": 1,
         "init": 1,
-        "name": "Beedrill",
-        "image": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/015.png"
+        "health": 70,
+        "ac": 16,
+        "name": "Logan the Grim"
     },
     {
         "id": 2,
         "init": 14,
-        "name": "Golisopod",
-        "image": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/768.png"
+        "health": 44,
+        "ac": 18,
+        "name": "Nag"
     },
     {
         "id": 3,
         "init": 15,
-        "name": "Heracross",
-        "image": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/214.png"
+        "health": 10,
+        "ac": 19,
+        "name": "Champa"
     },
     {
         "id": 4,
         "init": 7,
-        "name": "Ninjask",
-        "image": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/291.png"
+        "health": 95,
+        "ac": 11,
+        "name": "Wulfrik"
     },
     {
         "id": 5,
         "init": 19,
-        "name": "Pinsir",
-        "image": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/127.png"
+        "health": 33,
+        "ac": 14,
+        "name": "Malus"
     },
     {
         "id": 6,
         "init": 10,
-        "name": "Scyther",
-        "image": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/123.png"
+        "health": 82,
+        "ac": 12,
+        "name": "Placky"
     }
 ]

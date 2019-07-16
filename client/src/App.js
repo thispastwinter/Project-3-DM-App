@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import 'react-bulma-components/dist/react-bulma-components.min.css';
-import HuePage from './components/hue_page'
+import HuePage from './components/hue_page';
 import List from './components/list/index';
 import ListItem from './components/listItem/index';
 import characterList from './characters.json';
@@ -62,24 +62,24 @@ class App extends Component {
     this.send(this.setState({ characterList }));
   }
 
-  delayTurn = (id) => {
+  editChar = (updatedCharacter) => {
+    console.log(updatedCharacter);
+    this.send(this.setState({
+      characterList: this.state.characterList
+        .map((character) => character.id === updatedCharacter.id ? updatedCharacter : character)
+    }));
+  }
+
+  removeChar = (id) => {
     const characterList = this.state.characterList.slice();
-    const index = characterList.findIndex(c => c.id === id);
-    if (index === (characterList.length - 1)) {
-      let temp = characterList[index];
-      characterList.pop();
-      characterList.unshift(temp);
-    }
-    else {
-      [characterList[index], characterList[index + 1]] = [characterList[index + 1], characterList[index]];
-    }
+    characterList.splice(characterList.findIndex(c => c.id === id), 1);
     this.send(this.setState({ characterList }));
   }
 
   resetEncounter = () => {
     const characterList = this.state.characterList.slice();
     characterList.map(obj => {
-      return obj.init = 0;
+      return obj.init = parseInt(0);
     });
     this.send(this.setState({ characterList }));
   }
@@ -90,13 +90,18 @@ class App extends Component {
         <List >
           {this.state.characterList.map(character => (
             <ListItem
+              character={character}
               id={character.id}
               key={character.id}
+              ac={character.ac}
               init={character.init}
               name={character.name}
-              image={character.image}
+              health={character.health}
               turnDone={this.turnDone}
-              delayTurn={this.delayTurn}
+              editInit={this.editChar}
+              editHealth={this.editChar}
+              removeChar={this.removeChar}
+              currentOrder={this.state.characterList}
             />
           ))}
         </List>
