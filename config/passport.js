@@ -9,27 +9,24 @@ passport.use(new LocalStrategy(
   {
     usernameField: 'email',
   },
-  async (email, password) => {
-
+  async (email, password, done) => {
     // When a user tries to sign in this code runs
     if (process.env.NODE_ENV !== 'production') {
-      console.log('DUMMY DATABASE');
       const user = dummyUsers.users.find(u => u.email === email);
       if (user) {
-        return user;
+        return done(null, user);
       }
     }
 
     // Login failed
-    // return done(null, false, {
-    //   message: 'Invalid user details',
-    // });
+    return done(null, false, {
+      message: 'Invalid user details',
+    });
 
-    // // Login success
+    // Login success
     // return done(null, user);
   },
 ));
-
 // In order to help keep authentication state across HTTP requests,
 // Sequelize needs to serialize and deserialize the user
 // Just consider this part boilerplate needed to make it all work

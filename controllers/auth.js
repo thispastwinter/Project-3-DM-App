@@ -2,7 +2,7 @@
 
 const login = async (req, res) => {
   console.log('LOGIN SUCCESSFUL');
-  // res.json(req.user);
+  res.json(req.user);
 };
 
 exports.login = login;
