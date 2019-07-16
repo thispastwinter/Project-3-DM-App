@@ -72,6 +72,7 @@
     "passport-google-oauth2": "^0.2.0",
     "passport-local": "^1.0.0",
     "passport-session": "^1.0.2",
+    "react-bulma-components": "^2.3.0",
     "sequelize": "^5.8.11",
     "socket.io": "^2.2.0"
   }

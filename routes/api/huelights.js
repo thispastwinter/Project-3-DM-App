@@ -1,6 +1,7 @@
 const hue = require('node-hue-api');
 const HueApi = require('node-hue-api').HueApi;
 const express = require('express');
+require('../../light_effects/lightning');
 
 // Request for bridge IP
 
@@ -12,9 +13,9 @@ module.exports = function (app) {
         res.json(result[0].ipaddress);
       } else {
         res.send('')
-      }
-    })
-  })
+      };
+    });
+  });
 
   // Request to connect to the bridge
   // Generates a unique user token
@@ -25,8 +26,8 @@ module.exports = function (app) {
     newApi.createUser(host, function (err, user) {
       if (err) throw err;
       res.json(user);
-    })
-  })
+    });
+  });
 
   // get all lights
 
@@ -34,11 +35,11 @@ module.exports = function (app) {
     let host = req.body.host;
     let user = req.body.user;
     let api = new HueApi(host, user);
-    api.getConfig(function (err, config) {
+    api.lights(function (err, lights) {
       if (err) throw err;
-      res.json(config);
+      res.json(lights);
     });
-  })
+  });
 
   // Once this connection is established, requests can then be made to trigger light events.
 
@@ -71,14 +72,17 @@ module.exports = function (app) {
           res.json(lights)
         });
         break;
+      case 'lightning':
+        lightning(api, light);
+        break;
       default:
         state = lightState.create().on();
         api.setLightState(light, state, function (err, lights) {
           if (err) throw err;
           res.json(lights)
         });
-    }
-  })
-}
+    };
+  });
+};
 
 
