@@ -14,6 +14,11 @@ passport.use(new LocalStrategy(
     if (process.env.NODE_ENV !== 'production') {
       const user = dummyUsers.users.find(u => u.email === email);
       if (user) {
+        if (user.password === password) {
+          console.log('CORRECT PASSWORD');
+        } else {
+          console.log('INCORRECT PASSWORD');
+        }
         return done(null, user);
       }
     }
@@ -27,6 +32,7 @@ passport.use(new LocalStrategy(
     // return done(null, user);
   },
 ));
+
 // In order to help keep authentication state across HTTP requests,
 // Sequelize needs to serialize and deserialize the user
 // Just consider this part boilerplate needed to make it all work
