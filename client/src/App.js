@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import 'react-bulma-components/dist/react-bulma-components.min.css';
-import Hue_Page from './components/hue_page'
+import HuePage from './components/hue_page'
 import List from './components/list/index';
 import ListItem from './components/listItem/index';
 import characterList from './characters.json';
@@ -102,7 +102,7 @@ class App extends Component {
         </List>
         <button onClick={this.resetEncounter}>Reset Encounter</button>
         <button onClick={() => this.initSort(this.state.characterList)}>Initiative Sort</button>
-        <Hue_Page />
+        <HuePage />
       </div>
     );
   }

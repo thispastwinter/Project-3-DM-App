@@ -1,9 +1,10 @@
 import React from 'react';
 import {Button, Container} from 'react-bulma-components';
+import './index.css';
 
 const Lights = (props) => {
   return (
-    <Container fluid>
+    <Container id="buttons" fluid>
       <Button color="success" onClick={() => props.lightOn()}>
         Light On
       </Button>
@@ -16,7 +17,7 @@ const Lights = (props) => {
       <Button color="success" onClick={() => props.lightning()}>
         Lightning
       </Button>
-      <Button color="success" onClick={() => props.connection()}>Connect to Hue!</Button>
+      <Button color="info" onClick={() => props.connection()}>Connect to Hue!</Button>
    </Container>
   )
 }
