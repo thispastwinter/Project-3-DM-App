@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
+import { Container } from 'react-bulma-components';
 import './App.css';
-import Lights from './components/lights'
+import 'react-bulma-components/dist/react-bulma-components.min.css';
+import Hue from './components/hue';
 import axios from 'axios';
 import List from './components/list/index';
-import ListItem from './components/listItem/index'
-import characterList from './characters.json'
-import socketIOClient from 'socket.io-client'
+import ListItem from './components/listItem/index';
+import characterList from './characters.json';
+import socketIOClient from 'socket.io-client';
 
 // Create a Connect to Hue button that sends the ip to a createUser post request 
 // Text that informs user to hold the link button when pressing connect
@@ -15,6 +17,7 @@ class App extends Component {
     ip: [],
     user: '',
     lights: [],
+    lightId: [],
     selectedLight: [],
     characterList,
     endpoint: "localhost:3001"
@@ -104,24 +107,26 @@ class App extends Component {
         this.findAllLights();
       }).catch(function (error) {
         if (error) alert('Make sure to hold bridge link when connecting!')
-      })
-  }
+      });
+  };
 
   findAllLights = () => {
     axios.post('/allLights', {
       host: this.state.ip,
       user: this.state.user
     }).then(res => {
-      console.log(res.data.swupdate.devicetypes.lights)
-      let lights = res.data.swupdate.devicetypes.lights
-      this.setState({ lights })
-    })
+      console.log(res.data)
+      let lights = res.data.lights.map(lights => lights.name);
+      let lightId = res.data.lights.map(lights => lights.id);
+      this.setState({ lights });
+      this.setState({ lightId })
+    });
 
-  }
+  };
 
   handleChange = (event) => {
     this.setState({ selectedLight: event.target.value })
-  }
+  };
 
   lightOn = () => {
     axios.post('/lights', {
@@ -132,8 +137,8 @@ class App extends Component {
     })
       .then(res => {
         console.log(res);
-      })
-  }
+      });
+  };
 
   lightOff = () => {
     axios.post('/lights', {
@@ -144,8 +149,8 @@ class App extends Component {
     })
       .then(res => {
         console.log(res);
-      })
-  }
+      });
+  };
 
   criticalRoll = () => {
     axios.post('/lights', {
@@ -156,11 +161,20 @@ class App extends Component {
     })
       .then(res => {
         console.log(res);
-      })
-  }
+      });
+  };
 
-  // .map array method to populate light dropdown with all available lights
-  // On change event to change 'light' selected and update state accordingly
+  lightning = () => {
+    axios.post('/lights', {
+      host: this.state.ip,
+      username: this.state.user,
+      huestate: 'lightning',
+      light: this.state.selectedLight
+    })
+      .then(res => {
+        console.log(res);
+      });
+  };
 
   render() {
     return (
@@ -180,27 +194,25 @@ class App extends Component {
         </List>
         <button onClick={this.resetEncounter}>Reset Encounter</button>
         <button onClick={() => this.initSort(this.state.characterList)}>Initiative Sort</button>
-        <h1>Hue Lights</h1>
-        <h4>Select a Light:</h4>
-        <select onChange={this.handleChange} value={this.state.selectedLight}>
-          {this.state.lights.map(lights => (
-            <option value={lights} key={lights}>{lights}</option>
-          ))}
-        </select>
-        <hr></hr>
-        <Lights function={() => this.lightOn()} text="Light On">
-        </Lights>
-        <Lights function={() => this.lightOff()} text="Light Off">
-        </Lights>
-        <Lights function={() => this.criticalRoll()} text="Critical Roll">
-        </Lights>
-        <Lights function={() => this.candleLight()} text="Candlelight">
-        </Lights>
-        <Lights function={() => this.lightning()} text="Lightning">
-        </Lights>
-        <p>Bridge Status: {this.state.ip.length > 0 ? 'Bridge Found!' : 'No Bridge Found!'}</p>
-        <p>{this.state.ip.length > 0 ? `Your Bridge IP: ${this.state.ip}` : ``}</p>
-        <button onClick={() => this.connectionHandler()}>Connect to Hue!</button>
+        <br></br>
+        <Container id="hue-box">
+          <h1>Hue Lights</h1>
+          {this.state.ip.length > 0 ?
+            <div>
+              <h4>Select a Light:</h4>
+              <select onChange={this.handleChange} value={this.state.selectedLight}>
+                {this.state.lights.map((lights, index) => (
+                  <option value={this.state.lightId[index]} key={this.state.lightId[index]}>{lights}</option>
+                ))}
+              </select>
+              <Hue
+                lightOn={this.lightOn}
+                lightOff={this.lightOff}
+                critical={this.criticalRoll}
+                lightning={this.lightning}
+                connection={this.connectionHandler}>
+              </Hue></div> : 'No Bridge Found'}
+        </Container>
       </div>
     );
   }
