@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import { Container } from 'react-bulma-components';
 import './App.css';
 import 'react-bulma-components/dist/react-bulma-components.min.css';
-import Hue from './components/hue';
-import axios from 'axios';
+import Hue_Page from './components/hue_page'
 import List from './components/list/index';
 import ListItem from './components/listItem/index';
 import characterList from './characters.json';
@@ -14,21 +12,11 @@ import socketIOClient from 'socket.io-client';
 
 class App extends Component {
   state = {
-    ip: [],
-    user: '',
-    lights: [],
-    lightId: [],
-    selectedLight: [],
     characterList,
     endpoint: "localhost:3001"
   }
 
   componentDidMount() {
-    axios.post('/')
-      .then(res => {
-        let ip = res.data;
-        this.setState({ ip });
-      });
 
     window.addEventListener("beforeunload", this.onUnload);
     const stateObject = JSON.parse(localStorage.getItem("state"));
@@ -96,86 +84,6 @@ class App extends Component {
     this.send(this.setState({ characterList }));
   }
 
-  connectionHandler = () => {
-    axios.post('/connect', {
-      host: this.state.ip
-    })
-      .then(res => {
-        console.log(res.data);
-        let user = res.data;
-        this.setState({ user })
-        this.findAllLights();
-      }).catch(function (error) {
-        if (error) alert('Make sure to hold bridge link when connecting!')
-      });
-  };
-
-  findAllLights = () => {
-    axios.post('/allLights', {
-      host: this.state.ip,
-      user: this.state.user
-    }).then(res => {
-      console.log(res.data)
-      let lights = res.data.lights.map(lights => lights.name);
-      let lightId = res.data.lights.map(lights => lights.id);
-      this.setState({ lights });
-      this.setState({ lightId })
-    });
-
-  };
-
-  handleChange = (event) => {
-    this.setState({ selectedLight: event.target.value })
-  };
-
-  lightOn = () => {
-    axios.post('/lights', {
-      host: this.state.ip,
-      username: this.state.user,
-      huestate: 'on',
-      light: this.state.selectedLight
-    })
-      .then(res => {
-        console.log(res);
-      });
-  };
-
-  lightOff = () => {
-    axios.post('/lights', {
-      host: this.state.ip,
-      username: this.state.user,
-      huestate: 'off',
-      light: this.state.selectedLight
-    })
-      .then(res => {
-        console.log(res);
-      });
-  };
-
-  criticalRoll = () => {
-    axios.post('/lights', {
-      host: this.state.ip,
-      username: this.state.user,
-      huestate: 'critical',
-      light: this.state.selectedLight
-    })
-      .then(res => {
-        console.log(res);
-      });
-  };
-
-  lightning = () => {
-    axios.post('/lights', {
-      host: this.state.ip,
-      username: this.state.user,
-      huestate: 'lightning',
-      light: this.state.selectedLight
-    })
-      .then(res => {
-        console.log(res);
-      });
-  };
-
   render() {
     return (
       <div>
@@ -194,25 +102,7 @@ class App extends Component {
         </List>
         <button onClick={this.resetEncounter}>Reset Encounter</button>
         <button onClick={() => this.initSort(this.state.characterList)}>Initiative Sort</button>
-        <br></br>
-        <Container id="hue-box">
-          <h1>Hue Lights</h1>
-          {this.state.ip.length > 0 ?
-            <div>
-              <h4>Select a Light:</h4>
-              <select onChange={this.handleChange} value={this.state.selectedLight}>
-                {this.state.lights.map((lights, index) => (
-                  <option value={this.state.lightId[index]} key={this.state.lightId[index]}>{lights}</option>
-                ))}
-              </select>
-              <Hue
-                lightOn={this.lightOn}
-                lightOff={this.lightOff}
-                critical={this.criticalRoll}
-                lightning={this.lightning}
-                connection={this.connectionHandler}>
-              </Hue></div> : 'No Bridge Found'}
-        </Container>
+        <Hue_Page />
       </div>
     );
   }
