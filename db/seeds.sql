@@ -1,33 +1,13 @@
 USE initiative_db;
 
-DROP TABLE IF EXISTS Users;
-CREATE TABLE Users (
-  `email` VARCHAR (50)
-, `password` VARCHAR (50)
-, `admin` BOOLEAN
-);
-
-DROP TABLE IF EXISTS Games;
-CREATE TABLE Games (
-  `name` VARCHAR (250)
-);
-
-DROP TABLE IF EXISTS Characters;
-CREATE TABLE Characters (
-  `name` VARCHAR (250)
-, `armor-class` INT
-, `hit-points` INT
-, `image` VARCHAR (250)
-);
-
-INSERT INTO Users (`email`, `password`, `admin`)
+INSERT INTO Users (`email`, `password`, `admin`, created_at, updated_at)
 VALUES
-('jon@gmail.com', 'password', 1);
+('jon@gmail.com', 'password', 1, CURDATE(), CURDATE());
 
-INSERT INTO Games (`name`)
+INSERT INTO Games (`name`, created_at, updated_at)
 VALUES
-('My First D&D Game');
+('My First D&D Game', CURDATE(), CURDATE());
 
-INSERT INTO Characters (`name`, `armorClass`, `hitPoints`, `image`)
+INSERT INTO Characters (`name`, `initiative`, `armor_class`, `hit_points`, `image`, created_at, updated_at, game_id)
 VALUES
-('Ront', 17, 68, './images/orc.png');
+('Ront', 12, 17, 68, './images/orc.png', CURDATE(), CURDATE(), 1);

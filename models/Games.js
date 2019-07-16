@@ -10,19 +10,22 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   Games.associate = (models) => {
-    Games.hasMany(models.Characters, {
+    models.Games.hasMany(models.Characters, {
       onDelete: 'cascade'
     });
   };
 
   Games.associate = (models) => {
-    Games.belongsTo(models.Users, {
-      foreignKey: {
-        allowNull: false,
-        defaultValue: 1
-      }
-    })
-  }
+    models.Games.belongsToMany(models.Users, { 
+      as: 'Games',
+      through: 'users_games',
+      foreignKey: 'game_id'
+      // foreignKey: {
+      //   allowNull: false,
+      //   defaultValue: 1
+      // }
+    });
+  };
 
   return Games;
 }

@@ -4,25 +4,38 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        len: [1]
-      }
+        len: [1],
+      },
     },
     password: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        len: [1]
-      }
+        len: [1],
+      },
     },
     admin: {
       type: DataTypes.BOOLEAN,
-      defaultValue: true
+      defaultValue: true,
     }
+    // auth_token: DataTypes.STRING,
   });
 
+  // Users.associate = (models) => {
+  //   Users.hasMany(models.Games, {
+  //     onDelete: 'cascade'
+  //   });
+  // };
+
   Users.associate = (models) => {
-    Users.hasMany(models.Games, {
-      onDelete: 'cascade'
+    models.Users.belongsToMany(models.Games, { 
+      as: 'Users',
+      through: 'users_games',
+      foreignKey: 'user_id'
+      // foreignKey: {
+      //   allowNull: false,
+      //   defaultValue: 1
+      // }
     });
   };
 

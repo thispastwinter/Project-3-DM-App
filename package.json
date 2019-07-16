@@ -67,9 +67,13 @@
     "helmet": "^3.18.0",
     "if-env": "^1.0.4",
     "mysql2": "^1.6.5",
+    "node-hue-api": "^2.4.6",
     "passport": "^0.4.0",
+    "passport-google-oauth2": "^0.2.0",
     "passport-local": "^1.0.0",
     "passport-session": "^1.0.2",
+    "react-bulma-components": "^2.3.0",
+    "react-editext": "^3.3.0",
     "sequelize": "^5.8.11",
     "socket.io": "^2.2.0"
   }

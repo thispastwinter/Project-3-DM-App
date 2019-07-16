@@ -1,0 +1,44 @@
+[
+    {
+        "id": 1,
+        "init": 1,
+        "health": 70,
+        "ac": 16,
+        "name": "Logan the Grim"
+    },
+    {
+        "id": 2,
+        "init": 14,
+        "health": 44,
+        "ac": 18,
+        "name": "Nag"
+    },
+    {
+        "id": 3,
+        "init": 15,
+        "health": 10,
+        "ac": 19,
+        "name": "Champa"
+    },
+    {
+        "id": 4,
+        "init": 7,
+        "health": 95,
+        "ac": 11,
+        "name": "Wulfrik"
+    },
+    {
+        "id": 5,
+        "init": 19,
+        "health": 33,
+        "ac": 14,
+        "name": "Malus"
+    },
+    {
+        "id": 6,
+        "init": 10,
+        "health": 82,
+        "ac": 12,
+        "name": "Placky"
+    }
+]
