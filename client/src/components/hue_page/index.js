@@ -14,7 +14,7 @@ class HuePage extends Component {
   }
 
   componentDidMount() {
-    axios.post('/ip')
+    axios.post('/api/v1/huelights/connect')
       .then(res => {
         console.log(res.data)
         let ip = res.data;
