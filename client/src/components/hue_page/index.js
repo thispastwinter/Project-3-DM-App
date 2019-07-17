@@ -14,8 +14,9 @@ class HuePage extends Component {
   }
 
   componentDidMount() {
-    axios.post('/')
+    axios.post('/ip')
       .then(res => {
+        console.log(res.data)
         let ip = res.data;
         this.setState({ ip });
       });
