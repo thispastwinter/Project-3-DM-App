@@ -3,6 +3,7 @@ import List from '../list/index';
 import ListItem from '../listItem/index';
 import axios from 'axios';
 import socketIOClient from 'socket.io-client';
+import { Button, Container } from 'react-bulma-components';
 
 class InitPage extends Component {
     state = {
@@ -117,8 +118,10 @@ class InitPage extends Component {
                         />
                     ))}
                 </List>
-                <button onClick={this.resetEncounter}>Reset Encounter</button>
-                <button onClick={() => this.initSort(this.state.characterList)}>Initiative Sort</button>
+                <Container id="buttons" fluid>
+                    <Button color="success" onClick={this.resetEncounter}>Reset Encounter</Button>
+                    <Button color="success" onClick={() => this.initSort(this.state.characterList)}>Initiative Sort</Button>
+                </Container>
             </div>
         )
     }
