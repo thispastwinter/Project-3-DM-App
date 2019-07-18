@@ -3,6 +3,18 @@ const LocalStrategy = require('passport-local').Strategy;
 const db = require('../models');
 const bcrypt = require('bcrypt');
 
+const checkUser = async (email, password) => {
+  //... fetch user from a db etc.
+
+  const match = await bcrypt.compare(password, db.passwordHash);
+
+  if (match) {
+    //login
+  }
+
+  //...
+}
+
 // Telling passport we want to use a Local Strategy.
 // In other words, we want login with a username/email and password
 passport.use(new LocalStrategy(
@@ -20,13 +32,12 @@ passport.use(new LocalStrategy(
           email,
         },
       }).then(
-        user => console.log(user.password),
+        
       );
       // if (db && db.password === password) {
       //   console.log('CORRECT PASSWORD');
       //   return done(null, db);
       // }
-
     }
 
     // Production Code here
