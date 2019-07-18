@@ -1,5 +1,5 @@
 const hue = require('node-hue-api');
-const HueApi = require('node-hue-api').HueApi;
+const { HueApi } = require('node-hue-api');
 const express = require('express');
 require('../../light_effects/lightning');
 
@@ -7,13 +7,13 @@ require('../../light_effects/lightning');
 
 module.exports = function (app) {
   app.post('/', (req, res) => {
-    hue.nupnpSearch(function (err, result) {
+    hue.nupnpSearch((err, result) => {
       if (err) throw err;
       if (result.length > 0) {
         res.json(result[0].ipaddress);
       } else {
-        res.send('')
-      };
+        res.send('');
+      }
     });
   });
 
@@ -21,9 +21,9 @@ module.exports = function (app) {
   // Generates a unique user token
 
   app.post('/connect', (req, res) => {
-    let host = req.body.host;
-    let newApi = new HueApi();
-    newApi.createUser(host, function (err, user) {
+    const { host } = req.body;
+    const newApi = new HueApi();
+    newApi.createUser(host, (err, user) => {
       if (err) throw err;
       res.json(user);
     });
@@ -32,10 +32,10 @@ module.exports = function (app) {
   // get all lights
 
   app.post('/alllights', (req, res) => {
-    let host = req.body.host;
-    let user = req.body.user;
-    let api = new HueApi(host, user);
-    api.lights(function (err, lights) {
+    const { host } = req.body;
+    const { user } = req.body;
+    const api = new HueApi(host, user);
+    api.lights((err, lights) => {
       if (err) throw err;
       res.json(lights);
     });
@@ -44,32 +44,32 @@ module.exports = function (app) {
   // Once this connection is established, requests can then be made to trigger light events.
 
   app.post('/lights', (req, res) => {
-    const lightState = hue.lightState;
-    let host = req.body.host;
-    let username = req.body.username;
-    let light = req.body.light;
-    let api = new HueApi(host, username);
+    const { lightState } = hue;
+    const { host } = req.body;
+    const { username } = req.body;
+    const { light } = req.body;
+    const api = new HueApi(host, username);
     let state;
     switch (req.body.huestate) {
       case 'on':
         state = lightState.create().on();
-        api.setLightState(light, state, function (err, lights) {
+        api.setLightState(light, state, (err, lights) => {
           if (err) throw err;
-          res.json(lights)
+          res.json(lights);
         });
         break;
       case 'off':
         state = lightState.create().off();
-        api.setLightState(light, state, function (err, lights) {
+        api.setLightState(light, state, (err, lights) => {
           if (err) throw err;
-          res.json(lights)
+          res.json(lights);
         });
         break;
       case 'critical':
         state = lightState.create().longAlert();
-        api.setLightState(light, state, function (err, lights) {
+        api.setLightState(light, state, (err, lights) => {
           if (err) throw err;
-          res.json(lights)
+          res.json(lights);
         });
         break;
       case 'lightning':
@@ -77,12 +77,10 @@ module.exports = function (app) {
         break;
       default:
         state = lightState.create().on();
-        api.setLightState(light, state, function (err, lights) {
+        api.setLightState(light, state, (err, lights) => {
           if (err) throw err;
-          res.json(lights)
+          res.json(lights);
         });
-    };
+    }
   });
 };
-
-
