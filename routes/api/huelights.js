@@ -5,8 +5,8 @@ require('../../light_effects/lightning');
 
 // Request for bridge IP
 
-module.exports = function (app) {
-  app.post('/', (req, res) => {
+const hueLights = () => {
+  app.post('/ip', (req, res) => {
     hue.nupnpSearch(function (err, result) {
       if (err) throw err;
       if (result.length > 0) {
@@ -85,4 +85,5 @@ module.exports = function (app) {
   });
 };
 
+module.exports = hueLights;
 
