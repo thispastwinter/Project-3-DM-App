@@ -18,17 +18,14 @@ passport.use(new LocalStrategy(
       db.Users.findOne({
         where: {
           email,
-        }
+        },
       }).then(
-        user => console.log(user),
-        
+        user => console.log(user.password),
       );
       // if (db && db.password === password) {
       //   console.log('CORRECT PASSWORD');
       //   return done(null, db);
       // }
-      console.log('email', email);
-      console.log('password', password);
 
     }
 

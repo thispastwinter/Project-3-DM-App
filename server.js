@@ -65,7 +65,7 @@ io.on('connection', (socket) => {
 });
 
 // Dynamically force schema refresh only for 'test'
-const FORCE_SCHEMA = process.env.NODE_ENV === 'development';
+const FORCE_SCHEMA = process.env.NODE_ENV === 'notdevelopment';
 console.log(FORCE_SCHEMA, 'FORCE SCHEMA'); // eslint-disable-line no-console
 
 db.sequelize
