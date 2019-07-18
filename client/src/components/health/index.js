@@ -6,7 +6,7 @@ export default class Health extends Component {
     onSave = val => {
         this.props.editHealth({
             ...this.props.character,
-            health: parseInt(val)
+            hit_points: parseInt(val)
         });
     }
 

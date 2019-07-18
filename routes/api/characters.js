@@ -3,7 +3,8 @@ const characterController = require('../../controllers/characters');
 
 router.route('/')
   .get(characterController.findAll)
-  .post(characterController.create)
-  .delete(characterController.destroy);
+  .post(characterController.updateChar)
+// .post(characterController.create)
+// .delete(characterController.destroy);
 
 module.exports = router;
