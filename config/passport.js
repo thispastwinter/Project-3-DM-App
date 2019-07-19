@@ -22,15 +22,18 @@ passport.use(new LocalStrategy(
         where: {
           email,
         },
-      }).then(
-        bcrypt.compare(password, db.password, (err, res) => {
-          if (err) {
-            console.error(err);
-          } else {
-            console.log(res);
-          }
-        }),
-      );
+      }).then(data => 
+        console.log(data, 'TEST')
+        // const { password: dbPassword } = data.password;
+        // console.log(password === dbPassword, password, dbPassword);
+
+        bcrypt.compare(password, database.password, (err, res) => {
+        if (err) {
+          console.error(err);
+        } else {
+          console.log(res);
+        }
+      }));
     }
 
     // Production Code here
