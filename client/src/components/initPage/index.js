@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import List from '../list/index';
-import ListItem from '../listItem/index';
+import InitCard from '../initCard/index';
 import axios from 'axios';
 import socketIOClient from 'socket.io-client';
 import { Button, Container } from 'react-bulma-components';
@@ -102,10 +102,11 @@ class InitPage extends Component {
             <div>
                 <List >
                     {this.state.characterList.map(character => (
-                        <ListItem
+                        <InitCard
                             character={character}
                             id={character.id}
                             key={character.id}
+                            image={character.image}
                             ac={character.armor_class}
                             init={character.initiative}
                             name={character.name}

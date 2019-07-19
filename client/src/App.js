@@ -10,10 +10,6 @@ class App extends Component {
 
   render() {
     return (
-      // <React.Fragment>
-      //   <InitPage />
-      //   <HuePage />
-      // </ React.Fragment>
       <Router>
         <React.Fragment>
           <NavTabs />
