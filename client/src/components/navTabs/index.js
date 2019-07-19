@@ -1,23 +1,25 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Tabs } from 'react-bulma-components';
 
-function NavTabs() {
+
+function NavTabs(props) {
+    let classString = props.isActive ? 'is-active' : '';
+
     return (
-        <nav className="navbar">
-            <div className="navbar-item">
-                <Link to="/" className={window.location.pathname === "/" ? "nav-link active" : "nav-link"}>
+        <Tabs type='toggle' fullwidth='true'>
+            <Tabs.Tab renderAs="div" className={classString}>
+                <Link to="/">
                     Initiative
-        </Link>
-            </div>
-            <div className="navbar-item">
-                <Link
-                    to="/hue"
-                    className={window.location.pathname === "/hue" ? "nav-link active" : "nav-link"}
-                >
+                 </Link>
+            </Tabs.Tab>
+            <Tabs.Tab renderAs="div" className={classString}>
+                <Link to="/hue">
                     Philips Hue
-        </Link>
-            </div>
-        </nav>
+                    {console.log(window.location.pathname)}
+                </Link>
+            </Tabs.Tab>
+        </Tabs>
     );
 }
 
