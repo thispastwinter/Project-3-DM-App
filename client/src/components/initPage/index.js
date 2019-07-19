@@ -8,7 +8,7 @@ import { Button, Container } from 'react-bulma-components';
 class InitPage extends Component {
     state = {
         characterList: [],
-        endpoint: "localhost:3001"
+        endpoint: 'https://dry-cliffs-42105.herokuapp.com' + process.env.PORT
     }
 
 
