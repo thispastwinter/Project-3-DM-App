@@ -6,7 +6,7 @@ export default class Initiative extends Component {
     onSave = val => {
         this.props.editInit({
             ...this.props.character,
-            init: parseInt(val)
+            initiative: parseInt(val)
         });
     }
 

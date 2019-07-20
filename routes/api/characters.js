@@ -6,5 +6,6 @@ router.route('/')
   .get(characterController.findAll)
   .post(characterController.create)
   // .delete(characterController.destroy);
+//   .post(characterController.updateChar)
 
 module.exports = router;

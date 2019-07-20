@@ -2,9 +2,9 @@ import React from 'react';
 
 const List = (props) => {
     return (
-        <ul className='list is-hoverable'>
+        <div>
             {props.children}
-        </ul>
+        </div>
     );
 }
 
