@@ -5,6 +5,7 @@ import HuePage from './components/huePage';
 import InitPage from './components/initPage';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import NavTabs from "./components/navTabs";
+import LoginPage from './components/loginPage';
 
 class App extends Component {
 

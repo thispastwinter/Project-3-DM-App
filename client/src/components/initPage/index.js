@@ -11,7 +11,6 @@ class InitPage extends Component {
         endpoint: "localhost:3001"
     }
 
-
     componentDidMount() {
         this.loadChars()
         console.log(this.state.characterList);
