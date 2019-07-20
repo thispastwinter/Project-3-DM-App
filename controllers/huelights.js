@@ -14,23 +14,13 @@ require('../light_effects/lightning');
 const clientId = process.env.CLIENT_ID;
 const clientSecret = process.env.CLIENT_SECRET;
 
-const result = dotenv.config()
- 
-if (result.error) {
-  throw result.error
-}
- 
-console.log(result.parsed)
-
-
-
 const requestConnection = () => {
   axios.get('https://api.meethue.com/oauth2/auth?clientid=' + clientId + '&appid=dmcompanion&deviceid=dm&state=none&response_type=code')
-  .then(res => {
-    console.log(res.data);
-  }).catch(err => {
-    console.log(err);
-  })
+    .then(res => {
+      console.log(res.data);
+    }).catch(err => {
+      console.log(err);
+    })
 };
 
 requestConnection();
@@ -42,28 +32,34 @@ requestConnection();
 
 // I.E:
 
-let generatedNonce = '0245fed472822f7d969a1617699f8041';
+let generatedNonce = '';
+let code = '';
 
-const createHash = (nonce) => {
+const createHash = (val) => {
   let hash1 = md5(clientId + ':' + 'oauth2_client@api.meethue.com' + ':' + clientSecret);
   // HASH2	MD5(“VERB” + “:” + “PATH”)
   let hash2 = md5('POST:/oauth2/token');
   // response	MD5(HASH1 + “:” + “NONCE” + “:” + HASH2)
-  let response = md5(hash1 + ':' + nonce + ':' + hash2);
-  
-  return response
-  }
+  let response = md5(hash1 + ':' + val + ':' + hash2);
+  return response;
+}
 
 const generateAuthKeys = () => {
   axios.post('https:api.meethue.com/oauth2/token?code=' + code + '&grant_type=authorization_code', {
-    Authorization: username = clientId, 
-      realm = 'oauth2_client@api.meethue.com', 
-      nonce = generatedNonce, 
-      uri = '/oauth2/token', 
-      response = createHash(generatedNonce) 
-    }
-  );
+    auth: {
+    username = clientId,
+    realm = 'oauth2_client@api.meethue.com',
+    nonce = generatedNonce,
+    uri = '/oauth2/token',
+    response = createHash(generatedNonce)
+  }}).then(res => {
+    console.log(res);
+  })
 };
+
+generateAuthKeys(generatedNonce);
+
+
 
 
 
