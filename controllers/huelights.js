@@ -4,6 +4,7 @@ const hue = require('node-hue-api');
 const HueApi = require('node-hue-api').HueApi;
 const axios = require('axios');
 const md5 = require('md5');
+const base64 = require('base-64');
 require('../light_effects/lightning');
 
 
@@ -44,20 +45,34 @@ const createHash = (val) => {
   return response;
 }
 
-const generateAuthKeys = () => {
+// const generateAuthKeys = () => {
+//   axios.post('https:api.meethue.com/oauth2/token?code=' + code + '&grant_type=authorization_code', {
+//     auth: {
+//     username = clientId,
+//     realm = 'oauth2_client@api.meethue.com',
+//     nonce = generatedNonce,
+//     uri = '/oauth2/token',
+//     response = createHash(generatedNonce)
+//   }}).then(res => {
+//     console.log(res);
+//   })
+// };
+
+
+
+const generateAuthKeys2 = () => {
+  let addedValues;
   axios.post('https:api.meethue.com/oauth2/token?code=' + code + '&grant_type=authorization_code', {
-    auth: {
-    username = clientId,
-    realm = 'oauth2_client@api.meethue.com',
-    nonce = generatedNonce,
-    uri = '/oauth2/token',
-    response = createHash(generatedNonce)
-  }}).then(res => {
+    Authorization:
+      addedValues = base64.encode(clientId + ':' + clientSecret)
+  }).then(res => {
     console.log(res);
+  }).catch(err => {
+    console.log(err);
   })
 };
 
-generateAuthKeys(generatedNonce);
+generateAuthKeys2();
 
 
 
