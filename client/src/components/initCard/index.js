@@ -10,7 +10,7 @@ const InitCard = (props) => {
   const checkForTop = id => {
     const index = currentOrder.findIndex(c => c.id === id)
     if (index === 0) {
-      return <Card.Footer.Item><Button color={} onClick={() => props.turnDone(props.id)}> Turn Done</Button></Card.Footer.Item>
+      return <Card.Footer.Item><Button color="success" onClick={() => props.turnDone(props.id)}> Turn Done</Button></Card.Footer.Item>
     }
     else {
       return null;
@@ -19,7 +19,7 @@ const InitCard = (props) => {
 
   const checkForDeath = health => {
     if (health <= 0) {
-      return <Card.Footer.Item renderAs="button" onClick={() => props.removeChar(props.id)}> remove character </Card.Footer.Item>
+      return <Card.Footer.Item><Button color="danger" onClick={() => props.removeChar(props.id)}> remove character </Button></Card.Footer.Item>
     }
     else {
       return null;

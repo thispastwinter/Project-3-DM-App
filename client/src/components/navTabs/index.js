@@ -7,7 +7,7 @@ function NavTabs(props) {
     // let classString = props.isActive ? 'is-active' : '';
 
     return (
-        <Tabs type='toggle' fullwidth='true'>
+        <Tabs type='toggle' fullwidth={true}>
             <Tabs.Tab renderAs="div">
                 <NavLink exact to="/" activeClassName="is-active">
                     Initiative
