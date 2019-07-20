@@ -1,7 +1,8 @@
 require('dotenv').config();
+const dotenv = require('dotenv');
 const hue = require('node-hue-api');
 const HueApi = require('node-hue-api').HueApi;
-const express = require('express');
+const axios = require('axios');
 const md5 = require('md5');
 require('../light_effects/lightning');
 
@@ -10,6 +11,30 @@ require('../light_effects/lightning');
 
 // >GET https://api.meethue.com/oauth2/auth?clientid=<clientid>&appid=<appid>&deviceid=<deviceid>&devicename=<devicename>&state=<state>&response_type=code
 
+const clientId = process.env.CLIENT_ID;
+const clientSecret = process.env.CLIENT_SECRET;
+
+const result = dotenv.config()
+ 
+if (result.error) {
+  throw result.error
+}
+ 
+console.log(result.parsed)
+
+
+
+const requestConnection = () => {
+  axios.get('https://api.meethue.com/oauth2/auth?clientid=' + clientId + '&appid=dmcompanion&deviceid=dm&state=none&response_type=code')
+  .then(res => {
+    console.log(res.res.responseUrl);
+  }).catch(err => {
+    console.log(err);
+  })
+};
+
+requestConnection();
+
 // This get request is made, and redirects the user to the hue login page. It then asks them if they give permission for the app to use their acct.
 // The user is then redirected and a code is received from as a reponse.
 // This code will be given to the second request and used to trigger a 401 with a valid nonce key.
@@ -17,11 +42,13 @@ require('../light_effects/lightning');
 
 // I.E:
 
+
+
 let nonce = 1309809e8509823434;
 
 // HASH1	MD5(“CLIENTID” + “:” + “REALM” + “:” + “CLIENTSECRET”) //clientId and secret will be stored in a .env
 const createHash = (nonce) => {
-let hash1 = md5(process.env.CLIENT_ID + ':' + 'oauth2_client@api.meethue.com' + ':' + process.env.CLIENT_SECRET);
+let hash1 = md5(clientId + ':' + 'oauth2_client@api.meethue.com' + ':' + clientSecret);
 // HASH2	MD5(“VERB” + “:” + “PATH”)
 let hash2 = md5('POST:/oauth2/token');
 // response	MD5(HASH1 + “:” + “NONCE” + “:” + HASH2)
