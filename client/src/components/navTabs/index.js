@@ -1,25 +1,24 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { Tabs } from 'react-bulma-components';
 
 
 function NavTabs(props) {
-    let classString = props.isActive ? 'is-active' : '';
+    // let classString = props.isActive ? 'is-active' : '';
 
     return (
         <Tabs type='toggle' fullwidth='true'>
-            <Tabs.Tab renderAs="div" className={classString}>
-                <Link to="/">
+            <Tabs.Tab renderAs="div">
+                <NavLink exact to="/" activeClassName="is-active">
                     Initiative
-                 </Link>
+                 </NavLink>
             </Tabs.Tab>
-            <Tabs.Tab renderAs="div" className={classString}>
-                <Link to="/hue">
+            <Tabs.Tab renderAs="div">
+                <NavLink exact to="/hue" activeClassName="is-active">
                     Philips Hue
-                    {console.log(window.location.pathname)}
-                </Link>
+                </NavLink>
             </Tabs.Tab>
-        </Tabs>
+        </Tabs >
     );
 }
 

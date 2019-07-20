@@ -2,13 +2,12 @@ import React, { Component } from 'react';
 import List from '../list/index';
 import InitCard from '../initCard/index';
 import axios from 'axios';
-import socketIOClient from 'socket.io-client';
+import io from 'socket.io-client';
 import { Button, Container } from 'react-bulma-components';
 
 class InitPage extends Component {
     state = {
         characterList: [],
-        endpoint: "localhost:3001"
     }
 
 
@@ -20,7 +19,7 @@ class InitPage extends Component {
         const stateObject = JSON.parse(localStorage.getItem("state"));
         this.setState(stateObject);
 
-        const socket = socketIOClient(this.state.endpoint);
+        const socket = io();
         socket.on('listChange', (characterList) => {
             console.log('Change received');
             this.setState({ characterList });
@@ -46,7 +45,7 @@ class InitPage extends Component {
 
     send = async (func) => {
         await func
-        const socket = socketIOClient(this.state.endpoint);
+        const socket = io();
         socket.emit('listChange', this.state.characterList)
         console.log('Sending List Change');
     }
