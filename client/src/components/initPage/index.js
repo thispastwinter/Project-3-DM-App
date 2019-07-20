@@ -15,9 +15,9 @@ class InitPage extends Component {
         this.loadChars()
         console.log(this.state.characterList);
 
-        // window.addEventListener("beforeunload", this.onUnload);
-        // const stateObject = JSON.parse(localStorage.getItem("state"));
-        // this.setState(stateObject);
+        window.addEventListener("beforeunload", this.onUnload);
+        const stateObject = JSON.parse(localStorage.getItem("state"));
+        this.setState(stateObject);
 
         const socket = io();
         socket.on('listChange', (characterList) => {
@@ -35,13 +35,13 @@ class InitPage extends Component {
             });
     };
 
-    // onUnload = (event) => {
-    //     localStorage.setItem("state", JSON.stringify(this.state));
-    // }
+    onUnload = (event) => {
+        localStorage.setItem("state", JSON.stringify(this.state));
+    }
 
-    // componentWillUnmount() {
-    //     window.removeEventListener("beforeunload", this.onUnload)
-    // }
+    componentWillUnmount() {
+        window.removeEventListener("beforeunload", this.onUnload)
+    }
 
     send = async (func) => {
         await func
