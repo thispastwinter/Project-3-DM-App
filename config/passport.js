@@ -7,54 +7,39 @@ const saltRounds = 10;
 
 // Telling passport we want to use a Local Strategy.
 // In other words, we want login with a username/email and password
+// Telling passport we want to use a Local Strategy.
+// In other words, we want login with a username/email and password
 passport.use(new LocalStrategy(
   // Our user will sign in using an email, rather than a 'username'
   {
     usernameField: 'email',
   },
   async (email, password, done) => {
-    bcrypt.hash(password, saltRounds).then((hash) => {
-      console.log('PASSPORT.js', hash);
-      // Store hash in your password DB.
-    });
+    // Determine if in a NON-PROD environment
     if (process.env.NODE_ENV !== 'production') {
-      db.Users.findOne({
-        where: {
-          email,
-        },
-      }).then(data => 
-        console.log(data, 'TEST')
-        // const { password: dbPassword } = data.password;
-        // console.log(password === dbPassword, password, dbPassword);
-
-        bcrypt.compare(password, database.password, (err, res) => {
-        if (err) {
-          console.error(err);
-        } else {
-          console.log(res);
-        }
-      }));
+      console.log('Do you want any non-production code?');
     }
 
-    // Production Code here
-    return done(null, false, {
-      message: 'Invalid user details',
+    const user = await db.Users.findOne({
+      where: {
+        email,
+      },
     });
 
+    // Check to see if a User was found matching email
+    if (user) {
+      const match = await bcrypt.compare(password, user.password);
 
-    // Login failed
-    // if (!user) {
-    //   return done(null, false, {
-    //     message: 'Invalid user details',
-    //   });
-    // }
+      if (match) {
+        done(null, user);
+      }
+    }
 
-    // Login success
-
-    return done(null, user);
+    done(null, false, {
+      message: 'Invalid user details',
+    });
   },
 ));
-
 // In order to help keep authentication state across HTTP requests,
 // Sequelize needs to serialize and deserialize the user
 // Just consider this part boilerplate needed to make it all work
