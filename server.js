@@ -57,7 +57,7 @@ io.on('connection', (socket) => {
     io.emit('chat message', msg);
   });
   socket.on('listChange', (data) => {
-    io.emit('listChange', data);
+    socket.broadcast.emit('listChange', data);
   });
   socket.on('disconnect', () => {
     console.log('user disconnected'); // eslint-disable-line no-console
