@@ -17,13 +17,20 @@ require('../light_effects/lightning');
 
 // I.E:
 
+let nonce = 1309809e8509823434;
+
 // HASH1	MD5(“CLIENTID” + “:” + “REALM” + “:” + “CLIENTSECRET”) //clientId and secret will be stored in a .env
-let hash1 = md5(process.env.CLIENT_ID)
+const createHash = (nonce) => {
+let hash1 = md5(process.env.CLIENT_ID + ':' + 'oauth2_client@api.meethue.com' + ':' + process.env.CLIENT_SECRET);
 // HASH2	MD5(“VERB” + “:” + “PATH”)
+let hash2 = md5('POST:/oauth2/token');
 // response	MD5(HASH1 + “:” + “NONCE” + “:” + HASH2)
-// let HASH1 = MD5("kVWjgzqk8hayM38pAudrA6psflju6k0T:oauth2_client@api.meethue.com:GHFV3f4L736bwgEB");
-// let HASH2 = MD5("POST:/oauth2/token");
-// let response = MD5(HASH1 + ":" + "7b6e45de18ac4ee452ee0a0de91dbb10" + ":" + HASH2);
+let response = md5(hash1 + ':' + nonce + ':' + hash2);
+
+console.log(response);
+}
+
+createHash(nonce);
 
 // The response will generate an auth token and a refresh token.
 
