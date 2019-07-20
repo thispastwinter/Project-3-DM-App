@@ -2,7 +2,7 @@ import React from 'react';
 import Initiative from '../initiative/index';
 import Health from '../health/index';
 import 'react-bulma-components/dist/react-bulma-components.min.css';
-import { Card, Media, Image, Content, Heading } from 'react-bulma-components';
+import { Card, Media, Image, Content, Heading, Button } from 'react-bulma-components';
 
 const InitCard = (props) => {
 
@@ -10,7 +10,7 @@ const InitCard = (props) => {
   const checkForTop = id => {
     const index = currentOrder.findIndex(c => c.id === id)
     if (index === 0) {
-      return <Card.Footer.Item renderAs="button" onClick={() => props.turnDone(props.id)}> turn done </Card.Footer.Item>
+      return <Card.Footer.Item><Button color={} onClick={() => props.turnDone(props.id)}> Turn Done</Button></Card.Footer.Item>
     }
     else {
       return null;
