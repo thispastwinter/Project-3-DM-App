@@ -1,7 +1,12 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-const dummyUsers = require('../tests/dummyUsers.json');
+const bcrypt = require('bcrypt');
+const db = require('../models');
 
+const saltRounds = 10;
+
+// Telling passport we want to use a Local Strategy.
+// In other words, we want login with a username/email and password
 // Telling passport we want to use a Local Strategy.
 // In other words, we want login with a username/email and password
 passport.use(new LocalStrategy(
@@ -10,29 +15,31 @@ passport.use(new LocalStrategy(
     usernameField: 'email',
   },
   async (email, password, done) => {
-    // When a user tries to sign in this code runs
+    // Determine if in a NON-PROD environment
     if (process.env.NODE_ENV !== 'production') {
-      const user = dummyUsers.users.find(u => u.email === email);
-      if (user) {
-        if (user.password === password) {
-          console.log('CORRECT PASSWORD');
-        } else {
-          console.log('INCORRECT PASSWORD');
-        }
-        return done(null, user);
+      console.log('Do you want any non-production code?');
+    }
+
+    const user = await db.Users.findOne({
+      where: {
+        email,
+      },
+    });
+
+    // Check to see if a User was found matching email
+    if (user) {
+      const match = await bcrypt.compare(password, user.password);
+
+      if (match) {
+        done(null, user);
       }
     }
 
-    // Login failed
-    return done(null, false, {
+    done(null, false, {
       message: 'Invalid user details',
     });
-
-    // Login success
-    // return done(null, user);
   },
 ));
-
 // In order to help keep authentication state across HTTP requests,
 // Sequelize needs to serialize and deserialize the user
 // Just consider this part boilerplate needed to make it all work
