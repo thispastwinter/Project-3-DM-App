@@ -14,7 +14,7 @@ class HuePage extends Component {
   }
 
   componentDidMount() {
-    axios.post('/api/v1/huelights/connect')
+    axios.post('/api/v1/huelights/detect')
       .then(res => {
         console.log(res.data)
         let ip = res.data;
@@ -36,7 +36,7 @@ class HuePage extends Component {
   }
 
   connectionHandler = () => {
-    axios.post('/connect', {
+    axios.post('/api/v1/huelights/connect', {
       host: this.state.ip
     })
       .then(res => {
@@ -50,7 +50,7 @@ class HuePage extends Component {
   };
 
   findAllLights = () => {
-    axios.post('/allLights', {
+    axios.post('/api/v1/huelights/alllights', {
       host: this.state.ip,
       user: this.state.user
     }).then(res => {
@@ -68,7 +68,7 @@ class HuePage extends Component {
   };
 
   lightOn = () => {
-    axios.post('/lights', {
+    axios.post('/api/v1/huelights/controllights', {
       host: this.state.ip,
       username: this.state.user,
       huestate: 'on',
@@ -80,7 +80,7 @@ class HuePage extends Component {
   };
 
   lightOff = () => {
-    axios.post('/lights', {
+    axios.post('/api/v1/huelights/controllights', {
       host: this.state.ip,
       username: this.state.user,
       huestate: 'off',
@@ -92,7 +92,7 @@ class HuePage extends Component {
   };
 
   criticalRoll = () => {
-    axios.post('/lights', {
+    axios.post('/api/v1/huelights/controllights', {
       host: this.state.ip,
       username: this.state.user,
       huestate: 'critical',
@@ -104,7 +104,7 @@ class HuePage extends Component {
   };
 
   lightning = () => {
-    axios.post('/lights', {
+    axios.post('/api/v1/huelights/controllights', {
       host: this.state.ip,
       username: this.state.user,
       huestate: 'lightning',

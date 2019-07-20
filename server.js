@@ -57,7 +57,7 @@ io.on('connection', (socket) => {
     io.emit('chat message', msg);
   });
   socket.on('listChange', (data) => {
-    io.emit('listChange', data);
+    socket.broadcast.emit('listChange', data);
   });
   socket.on('disconnect', () => {
     console.log('user disconnected'); // eslint-disable-line no-console
@@ -65,7 +65,7 @@ io.on('connection', (socket) => {
 });
 
 // Dynamically force schema refresh only for 'test'
-const FORCE_SCHEMA = process.env.NODE_ENV === 'development';
+const FORCE_SCHEMA = process.env.NODE_ENV === 'notdevelopment';
 console.log(FORCE_SCHEMA, 'FORCE SCHEMA'); // eslint-disable-line no-console
 
 db.sequelize

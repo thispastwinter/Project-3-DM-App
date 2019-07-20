@@ -6,14 +6,14 @@ export default class Initiative extends Component {
     onSave = val => {
         this.props.editInit({
             ...this.props.character,
-            init: parseInt(val)
+            initiative: parseInt(val)
         });
     }
 
     render() {
         return (
             <EdiText
-                type='number'
+                type="number"
                 value={this.props.init}
                 key={this.props.init}
                 onSave={this.onSave}
