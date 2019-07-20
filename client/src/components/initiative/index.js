@@ -13,7 +13,7 @@ export default class Initiative extends Component {
     render() {
         return (
             <EdiText
-                type='number'
+                type="number"
                 value={this.props.init}
                 key={this.props.init}
                 onSave={this.onSave}
