@@ -2,8 +2,8 @@ const db = require('../models');
 
 const create = async (req, res) => {
   try {
-    const game = await db.Characters.create(req.body);
-    res.json(game);
+    const character = await db.Characters.create(req.body);
+    res.json(character);
   } catch (error) {
     res.status(500).send(error);
   }
@@ -35,7 +35,7 @@ const destroy = async (req, res) => {
   } catch (error) {
     res.status(500).send(error);
   }
-}
+};
 
 exports.create = create;
 exports.findAll = findAll;
