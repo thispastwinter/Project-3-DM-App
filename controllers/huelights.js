@@ -27,7 +27,7 @@ console.log(result.parsed)
 const requestConnection = () => {
   axios.get('https://api.meethue.com/oauth2/auth?clientid=' + clientId + '&appid=dmcompanion&deviceid=dm&state=none&response_type=code')
   .then(res => {
-    console.log(res.res.responseUrl);
+    console.log(res.data);
   }).catch(err => {
     console.log(err);
   })
@@ -42,22 +42,36 @@ requestConnection();
 
 // I.E:
 
+let generatedNonce = '0245fed472822f7d969a1617699f8041';
+
+const createHash = (nonce) => {
+  let hash1 = md5(clientId + ':' + 'oauth2_client@api.meethue.com' + ':' + clientSecret);
+  // HASH2	MD5(“VERB” + “:” + “PATH”)
+  let hash2 = md5('POST:/oauth2/token');
+  // response	MD5(HASH1 + “:” + “NONCE” + “:” + HASH2)
+  let response = md5(hash1 + ':' + nonce + ':' + hash2);
+  
+  return response
+  }
+
+const generateAuthKeys = () => {
+  axios.post('https:api.meethue.com/oauth2/token?code=' + code + '&grant_type=authorization_code', {
+    Authorization: username = clientId, 
+      realm = 'oauth2_client@api.meethue.com', 
+      nonce = generatedNonce, 
+      uri = '/oauth2/token', 
+      response = createHash(generatedNonce) 
+    }
+  );
+};
 
 
-let nonce = 1309809e8509823434;
+
+
 
 // HASH1	MD5(“CLIENTID” + “:” + “REALM” + “:” + “CLIENTSECRET”) //clientId and secret will be stored in a .env
-const createHash = (nonce) => {
-let hash1 = md5(clientId + ':' + 'oauth2_client@api.meethue.com' + ':' + clientSecret);
-// HASH2	MD5(“VERB” + “:” + “PATH”)
-let hash2 = md5('POST:/oauth2/token');
-// response	MD5(HASH1 + “:” + “NONCE” + “:” + HASH2)
-let response = md5(hash1 + ':' + nonce + ':' + hash2);
 
-console.log(response);
-}
 
-createHash(nonce);
 
 // The response will generate an auth token and a refresh token.
 
