@@ -1,7 +1,10 @@
 const hue = require('node-hue-api');
 const HueApi = require('node-hue-api').HueApi;
 const express = require('express');
+const md5 = require('md5');
+require('dotenv').config();
 require('../light_effects/lightning');
+
 
 // Remote Pseudocode //
 
@@ -15,6 +18,7 @@ require('../light_effects/lightning');
 // I.E:
 
 // HASH1	MD5(“CLIENTID” + “:” + “REALM” + “:” + “CLIENTSECRET”) //clientId and secret will be stored in a .env
+let hash1 = md5(clientId.env)
 // HASH2	MD5(“VERB” + “:” + “PATH”)
 // response	MD5(HASH1 + “:” + “NONCE” + “:” + HASH2)
 // let HASH1 = MD5("kVWjgzqk8hayM38pAudrA6psflju6k0T:oauth2_client@api.meethue.com:GHFV3f4L736bwgEB");
