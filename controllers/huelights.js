@@ -14,12 +14,18 @@ require('../light_effects/lightning');
 
 // I.E:
 
-//HASH1	MD5(“CLIENTID” + “:” + “REALM” + “:” + “CLIENTSECRET”) //clientId and secret will be stored in a .env
-//HASH2	MD5(“VERB” + “:” + “PATH”)
-//response	MD5(HASH1 + “:” + “NONCE” + “:” + HASH2)
+// HASH1	MD5(“CLIENTID” + “:” + “REALM” + “:” + “CLIENTSECRET”) //clientId and secret will be stored in a .env
+// HASH2	MD5(“VERB” + “:” + “PATH”)
+// response	MD5(HASH1 + “:” + “NONCE” + “:” + HASH2)
 // let HASH1 = MD5("kVWjgzqk8hayM38pAudrA6psflju6k0T:oauth2_client@api.meethue.com:GHFV3f4L736bwgEB");
 // let HASH2 = MD5("POST:/oauth2/token");
 // let response = MD5(HASH1 + ":" + "7b6e45de18ac4ee452ee0a0de91dbb10" + ":" + HASH2);
+
+// The response will generate an auth token and a refresh token.
+
+// Once all that is done requests can be made through https://api.meethue.com/bridge/<whitelist_identifier>
+
+// Follow this guide to complete the final step: https://developers.meethue.com/develop/hue-api/remote-api-quick-start-guide/
 
 const detect = (req, res) => {
   hue.nupnpSearch(function (err, result) {
