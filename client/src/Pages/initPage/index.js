@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import List from '../list/index';
-import InitCard from '../initCard/index';
+import List from '../../components/list/index';
+import InitCard from '../../components/initCard/index';
 import axios from 'axios';
 import io from 'socket.io-client';
 // Works better on localhost
