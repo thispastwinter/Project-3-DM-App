@@ -33,8 +33,8 @@ requestConnection();
 
 // I.E:
 
-let generatedNonce = '';
-let code = '';
+let generatedNonce = '7a29b868fc177293c2167379a83ba53d';
+let code = 'LCbpeKW2';
 
 const createHash = (val) => {
   let hash1 = md5(clientId + ':' + 'oauth2_client@api.meethue.com' + ':' + clientSecret);
@@ -45,34 +45,39 @@ const createHash = (val) => {
   return response;
 }
 
-// const generateAuthKeys = () => {
+const generateAuthKeys = () => {
+  axios.post('https://api.meethue.com/oauth2/token?code=' + code + '&grant_type=authorization_code', {
+    headers: {
+      Authorization: {
+      username: clientId,
+      realm: 'oauth2_client@api.meethue.com',
+      nonce: generatedNonce,
+      uri: '/oauth2/token',
+      response: createHash(generatedNonce)
+    }
+  }
+}).then(res => {
+    console.log(res.data);
+  }).catch(err => {
+    console.log(err);
+  });
+};
+
+
+
+// const generateAuthKeys2 = () => {
+//   let addedValues;
 //   axios.post('https:api.meethue.com/oauth2/token?code=' + code + '&grant_type=authorization_code', {
-//     auth: {
-//     username = clientId,
-//     realm = 'oauth2_client@api.meethue.com',
-//     nonce = generatedNonce,
-//     uri = '/oauth2/token',
-//     response = createHash(generatedNonce)
-//   }}).then(res => {
+//     Authorization:
+//       addedValues = base64.encode(clientId + ':' + clientSecret)
+//   }).then(res => {
 //     console.log(res);
+//   }).catch(err => {
+//     console.log(err);
 //   })
 // };
 
-
-
-const generateAuthKeys2 = () => {
-  let addedValues;
-  axios.post('https:api.meethue.com/oauth2/token?code=' + code + '&grant_type=authorization_code', {
-    Authorization:
-      addedValues = base64.encode(clientId + ':' + clientSecret)
-  }).then(res => {
-    console.log(res);
-  }).catch(err => {
-    console.log(err);
-  })
-};
-
-generateAuthKeys2();
+generateAuthKeys();
 
 
 
