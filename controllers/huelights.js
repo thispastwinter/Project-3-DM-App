@@ -7,32 +7,28 @@ const md5 = require('md5');
 const base64 = require('base-64');
 require('../light_effects/lightning');
 
-
-// Remote Pseudocode //
-
-// >GET https://api.meethue.com/oauth2/auth?clientid=<clientid>&appid=<appid>&deviceid=<deviceid>&devicename=<devicename>&state=<state>&response_type=code
-
 const clientId = process.env.CLIENT_ID;
 const clientSecret = process.env.CLIENT_SECRET;
 
-const requestConnection = () => {
+// This get request is made, and redirects the user to the hue login page. It then asks them if they give permission for the app to use their acct.
+// The user is then redirected and a code is received from as a reponse.
+// This code will be given to the second request and used to trigger a 401 with a valid nonce key.
+
+const requestConnection = (req, res) => {
   axios.get('https://api.meethue.com/oauth2/auth?clientid=' + clientId + '&appid=dmcompanion&deviceid=dm&state=none&response_type=code')
-    .then(res => {
-      console.log(res.data);
+    .then(result => {
+      res.send(result.data)
     }).catch(err => {
       console.log(err);
     })
 };
 
-// This get request is made, and redirects the user to the hue login page. It then asks them if they give permission for the app to use their acct.
-// The user is then redirected and a code is received from as a reponse.
-// This code will be given to the second request and used to trigger a 401 with a valid nonce key.
 // Another request is made with the given header from Hue Developer Remote Page implementing the clientid, nonce key, and a calculated hashed response.
 
 // I.E:
 
 let generatedNonce = '';
-let code = 'G471qkfF';
+let code = '';
 
 const createHash = (val) => {
   let hash1 = md5(clientId + ':' + 'oauth2_client@api.meethue.com' + ':' + clientSecret);
@@ -43,24 +39,7 @@ const createHash = (val) => {
   return response;
 }
 
-// const generateAuthKeys = () => {
-//   axios.post('https://api.meethue.com/oauth2/token?code=' + code + '&grant_type=authorization_code', {
-//     headers: {
-//       Authorization: {
-//         username: clientId,
-//         realm: 'oauth2_client@api.meethue.com',
-//         nonce: generatedNonce,
-//         uri: '/oauth2/token',
-//         response: createHash(generatedNonce)
-//       }
-//     }
-//   }).then(res => {
-//     console.log(res);
-//   }).catch(err => {
-//     console.log(err);
-//   });
-// };
-
+// Code for basic authentication:
 
 // let config = {
 //   method: 'POST',
@@ -70,7 +49,9 @@ const createHash = (val) => {
 //   }
 // };
 
-let config2 = {
+// The response will generate an auth token and a refresh token:
+
+let config = {
   method: 'POST',
   url: 'https://api.meethue.com/oauth2/token?code=' + code + '&grant_type=authorization_code',
   headers: {
@@ -84,29 +65,13 @@ let config2 = {
 };
 
 
-const generateAuthKeys2 = () => {
-  axios(config2).then(res => {
-    console.log(res.data);
+const generateAuthKeys2 = (req, res) => {
+  axios(config).then(result => {
+    res.send(result.data);
   }).catch(err => {
     console.log(err);
   })
 };
-
-generateAuthKeys2();
-
-
-
-
-
-
-
-
-
-// HASH1	MD5(“CLIENTID” + “:” + “REALM” + “:” + “CLIENTSECRET”) //clientId and secret will be stored in a .env
-
-
-
-// The response will generate an auth token and a refresh token.
 
 // Once all that is done requests can be made through https://api.meethue.com/bridge/<whitelist_identifier>
 
