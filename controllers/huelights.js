@@ -3,7 +3,9 @@ const dotenv = require('dotenv');
 const hue = require('node-hue-api');
 const HueApi = require('node-hue-api').HueApi;
 const axios = require('axios');
+// for Digest auth
 const md5 = require('md5');
+// for Basic auth
 const base64 = require('base-64');
 require('../light_effects/lightning');
 
@@ -32,9 +34,7 @@ let code = '';
 
 const createHash = (val) => {
   let hash1 = md5(clientId + ':' + 'oauth2_client@api.meethue.com' + ':' + clientSecret);
-  // HASH2	MD5(“VERB” + “:” + “PATH”)
   let hash2 = md5('POST:/oauth2/token');
-  // response	MD5(HASH1 + “:” + “NONCE” + “:” + HASH2)
   let response = md5(hash1 + ':' + val + ':' + hash2);
   return response;
 }
