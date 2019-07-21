@@ -24,8 +24,6 @@ const requestConnection = () => {
     })
 };
 
-requestConnection();
-
 // This get request is made, and redirects the user to the hue login page. It then asks them if they give permission for the app to use their acct.
 // The user is then redirected and a code is received from as a reponse.
 // This code will be given to the second request and used to trigger a 401 with a valid nonce key.
@@ -33,8 +31,8 @@ requestConnection();
 
 // I.E:
 
-let generatedNonce = '7a29b868fc177293c2167379a83ba53d';
-let code = 'LCbpeKW2';
+let generatedNonce = '';
+let code = 'zd3y9jzj';
 
 const createHash = (val) => {
   let hash1 = md5(clientId + ':' + 'oauth2_client@api.meethue.com' + ':' + clientSecret);
@@ -45,39 +43,45 @@ const createHash = (val) => {
   return response;
 }
 
-const generateAuthKeys = () => {
-  axios.post('https://api.meethue.com/oauth2/token?code=' + code + '&grant_type=authorization_code', {
-    headers: {
-      Authorization: {
-      username: clientId,
-      realm: 'oauth2_client@api.meethue.com',
-      nonce: generatedNonce,
-      uri: '/oauth2/token',
-      response: createHash(generatedNonce)
-    }
-  }
-}).then(res => {
-    console.log(res.data);
-  }).catch(err => {
-    console.log(err);
-  });
-};
-
-
-
-// const generateAuthKeys2 = () => {
-//   let addedValues;
-//   axios.post('https:api.meethue.com/oauth2/token?code=' + code + '&grant_type=authorization_code', {
-//     Authorization:
-//       addedValues = base64.encode(clientId + ':' + clientSecret)
-//   }).then(res => {
+// const generateAuthKeys = () => {
+//   axios.post('https://api.meethue.com/oauth2/token?code=' + code + '&grant_type=authorization_code', {
+//     headers: {
+//       Authorization: {
+//       username: clientId,
+//       realm: 'oauth2_client@api.meethue.com',
+//       nonce: generatedNonce,
+//       uri: '/oauth2/token',
+//       response: createHash(generatedNonce)
+//     }
+//   }
+// }).then(res => {
 //     console.log(res);
 //   }).catch(err => {
 //     console.log(err);
-//   })
+//   });
 // };
 
-generateAuthKeys();
+
+let config = {
+  method: 'POST',
+  url: 'https://api.meethue.com/oauth2/token?code=' + code + '&grant_type=authorization_code',
+  headers: {
+    Authorization: base64.encode(clientId + ':' + clientSecret)
+  }
+};
+
+
+const generateAuthKeys2 = () => {
+  axios(config).then(res => {
+    console.log(res.data);
+  }).catch(err => {
+    console.log(err);
+  })
+};
+
+generateAuthKeys2();
+
+
 
 
 
