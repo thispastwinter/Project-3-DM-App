@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import 'react-bulma-components/dist/react-bulma-components.min.css';
-import HuePage from './components/huePage';
-import InitPage from './components/initPage';
+import HuePage from './Pages/huePage';
+import InitPage from './Pages/initPage';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import NavTabs from "./components/navTabs";
 
