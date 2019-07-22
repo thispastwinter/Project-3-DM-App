@@ -29,13 +29,13 @@ const requestConnection = (req, res) => {
 
 // I.E:
 
-let generatedNonce = '';
-let code = '';
+let generatedNonce;
+let code = '3eceROZV';
 
-const createHash = () => {
+const createHash = (val) => {
   let hash1 = md5(clientId + ':' + 'oauth2_client@api.meethue.com' + ':' + clientSecret);
   let hash2 = md5('POST:/oauth2/token');
-  let response = md5(hash1 + ':' + generatedNonce + ':' + hash2);
+  let response = md5(hash1 + ':' + val + ':' + hash2);
   return (response);
 }
 
@@ -53,11 +53,11 @@ const createHash = () => {
 
 // The response will generate an auth token and a refresh token:
 
-const generateAuthKeys = () => {
+const generateAuthKeys = (val) => {
   axios({
     method: 'POST',
-    url: `https://api.meethue.com/oauth2/token?code=${code}&grant_type=authorization_code`, 
-    headers: { Authorization: `Digest username="${clientId}", realm="oauth2_client@api.meethue.com", nonce="${generatedNonce}", uri="/oauth2/token", response="${createHash()}"`}
+    url: `https://api.meethue.com/oauth2/token?code=${code}&grant_type=authorization_code`,
+    headers: { Authorization: `Digest username="${clientId}", realm="oauth2_client@api.meethue.com", nonce="${val}", uri="/oauth2/token", response="${createHash(val)}"` }
   }).then(res => {
     console.log(res.data)
   }).catch(err => {
@@ -65,7 +65,17 @@ const generateAuthKeys = () => {
   })
 };
 
-generateAuthKeys();
+const generateNonce = () => {
+  axios.post(`https://api.meethue.com/oauth2/token?code=${code}&grant_type=authorization_code`).then(res => {
+  }).catch(res => {
+    const nonce = res.response.headers['www-authenticate'].split(', ')[1].split('=')[1].replace(/['"]+/g, '');
+    generateAuthKeys(nonce)
+  }).then().catch(err => {
+    console.log(err);
+  })
+}
+
+generateNonce();
 
 
 
