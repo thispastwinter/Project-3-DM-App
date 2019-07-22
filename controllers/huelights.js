@@ -29,15 +29,17 @@ const requestConnection = (req, res) => {
 
 // I.E:
 
-let generatedNonce = '';
-let code = '';
+let generatedNonce = '537200ec103c0cb1213105c3579fc52a';
+let code = '1wZruGSE';
 
-const createHash = (val) => {
+const createHash = () => {
   let hash1 = md5(clientId + ':' + 'oauth2_client@api.meethue.com' + ':' + clientSecret);
   let hash2 = md5('POST:/oauth2/token');
-  let response = md5(hash1 + ':' + val + ':' + hash2);
-  return response;
+  let response = md5(hash1 + ':' + generatedNonce + ':' + hash2);
+  return (response);
 }
+
+
 
 // Code for basic authentication:
 
@@ -51,27 +53,23 @@ const createHash = (val) => {
 
 // The response will generate an auth token and a refresh token:
 
-let config = {
-  method: 'POST',
-  url: 'https://api.meethue.com/oauth2/token?code=' + code + '&grant_type=authorization_code',
-  headers: {
-    Authorization: base64.encode(clientId + ':' + clientSecret),
-    username: clientId,
-    realm: 'oauth2_client@api.meethue.com',
-    nonce: generatedNonce,
-    uri: '/oauth2/token',
-    response: createHash(generatedNonce)
-  }
-};
-
-
-const generateAuthKeys2 = (req, res) => {
-  axios(config).then(result => {
-    res.send(result.data);
+const generateAuthKeys = () => {
+  axios({
+    method: 'POST',
+    url: `https://api.meethue.com/oauth2/token?code=${code}&grant_type=authorization_code`, 
+    headers: { Authorization: `Digest username="${clientId}", realm="oauth2_client@api.meethue.com", nonce="${generatedNonce}", uri="/oauth2/token", response="${createHash()}"`}
+  }).then(res => {
+    console.log(res.data)
   }).catch(err => {
-    console.log(err);
+    console.error(err);
   })
 };
+
+generateAuthKeys();
+
+
+
+
 
 // Once all that is done requests can be made through https://api.meethue.com/bridge/<whitelist_identifier>
 
