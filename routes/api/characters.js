@@ -3,11 +3,11 @@ const characterController = require('../../controllers/characters');
 
 // http://localhost:3001/api/v1/characters
 router.route('/')
-  .get(characterController.findAll)
   .post(characterController.create)
   .put(characterController.updateTurnOrder);
 
 router.route('/:id')
+  .get(characterController.findAll)
   .post(characterController.updateChar)
   .delete(characterController.destroy);
 

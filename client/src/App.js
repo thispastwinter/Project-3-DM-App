@@ -8,6 +8,9 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import NavTabs from "./components/navTabs";
 
 class App extends Component {
+  state = {
+    gameId: 1
+  }
 
   render() {
     return (
@@ -15,7 +18,7 @@ class App extends Component {
         <React.Fragment>
           <NavTabs />
           <Switch>
-            <Route exact path="/" component={InitPage} />
+            <Route exact path="/" render={() => <InitPage gameId={this.state.gameId} />} />
             <Route exact path="/hue" component={HuePage} />
             <Route exact path='/login' component={LoginPage} />
           </Switch>

@@ -11,7 +11,7 @@ const create = async (req, res) => {
 
 const findAll = async (req, res) => {
   try {
-    res.json(await db.Characters.findAll({ order: [['turn_order', 'ASC']] }));
+    res.json(await db.Characters.findAll({ where: { GameId: req.params.id }, order: [['turn_order', 'ASC']] }));
   } catch (error) {
     res.status(500).send(error);
   }

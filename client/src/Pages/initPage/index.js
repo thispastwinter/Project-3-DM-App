@@ -13,20 +13,25 @@ class InitPage extends Component {
 
     constructor() {
         super();
-        this.socket = io();
-        // this.socket = io(this.state.endpoint);
-        this.loadChars();
+        // this.socket = io();
+        this.socket = io.connect(this.state.endpoint);
     }
 
-
     componentDidMount() {
+        this.loadChars();
+        let room = this.props.gameId;
+        this.socket.on('connect', () => {
+            // Connected, let's sign-up for to receive messages for this room
+            this.socket.emit('room', room);
+        });
         this.socket.on('listChange', (characterList) => {
             this.setState({ characterList });
         });
     }
 
     loadChars = () => {
-        axios.get('/api/v1/characters')
+        console.log("GameId: ", this.props.gameId);
+        axios.get('/api/v1/characters/' + this.props.gameId)
             .then(res => {
                 let characterList = res.data;
                 if (characterList !== this.state.characterList) {
