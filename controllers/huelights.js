@@ -29,8 +29,8 @@ const requestConnection = (req, res) => {
 
 // I.E:
 
-let generatedNonce = '537200ec103c0cb1213105c3579fc52a';
-let code = '1wZruGSE';
+let generatedNonce = '';
+let code = '';
 
 const createHash = () => {
   let hash1 = md5(clientId + ':' + 'oauth2_client@api.meethue.com' + ':' + clientSecret);
