@@ -20,8 +20,8 @@ const findAll = async (req, res) => {
 const updateChar = async (req, res) => {
   try {
     res.json(await db.Characters.update(
-      { hit_points: req.body.hit_points, initiative: req.body.initiative, turn_order: req.body.turn_order },
-      { where: { id: req.body.id } }
+      { hit_points: req.body.hit_points, initiative: req.body.initiative },
+      { where: { id: req.params.id } }
     )
     );
   } catch (error) {
@@ -31,8 +31,7 @@ const updateChar = async (req, res) => {
 
 const updateTurnOrder = async (req, res) => {
   try {
-    console.log(req.body);
-    res.json(await db.Characters.bulkCreate(req.body.newArr, { updateOnDuplicate: ['turn_order'] }));
+    res.json(await db.Characters.bulkCreate(req.body.array, { updateOnDuplicate: ['turn_order'] }));
   } catch (error) {
     res.status(500).send(error);
   }
@@ -40,7 +39,7 @@ const updateTurnOrder = async (req, res) => {
 
 const destroy = async (req, res) => {
   try {
-    res.json(await db.Characters.destroy(req.id));
+    res.json(await db.Characters.destroy({ where: { id: req.params.id } }));
   } catch (error) {
     res.status(500).send(error);
   }
@@ -48,6 +47,6 @@ const destroy = async (req, res) => {
 
 exports.create = create;
 exports.findAll = findAll;
-exports.delete = destroy;
+exports.destroy = destroy;
 exports.updateChar = updateChar;
 exports.updateTurnOrder = updateTurnOrder;
