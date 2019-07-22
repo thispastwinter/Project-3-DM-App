@@ -2,30 +2,37 @@ import React, { Component } from 'react';
 import List from '../list/index';
 import InitCard from '../initCard/index';
 import axios from 'axios';
-import io from 'socket.io-client';
+// import io from 'socket.io-client';
 // Works better on localhost
-// import socketIOClient from 'socket.io-client';
+import socketIOClient from 'socket.io-client';
 import { Button, Container } from 'react-bulma-components';
 
 class InitPage extends Component {
     state = {
         characterList: [],
-        // endpoint: "localhost:3001"
+        endpoint: "localhost:3001"
+    }
+
+    constructor() {
+        super();
+        this.socket = socketIOClient(this.state.endpoint);
+        // this.socket = io();
     }
 
 
     componentDidMount() {
-        this.loadChars()
-        console.log(this.state.characterList);
+        // if (this.state.characterList.length === 0) {
+        //     this.loadChars()
+        // }
+        this.loadChars();
+        // window.addEventListener("beforeunload", this.onUnload);
+        // const stateObject = JSON.parse(localStorage.getItem("state"));
+        // this.setState(stateObject);
 
-        window.addEventListener("beforeunload", this.onUnload);
-        const stateObject = JSON.parse(localStorage.getItem("state"));
-        this.setState(stateObject);
+        // console.log("Component Mounted state", this.state.characterList);
 
-        const socket = io();
-        //works better on localhost
-        // const socket = socketIOClient(this.state.endpoint);
-        socket.on('listChange', (characterList) => {
+
+        this.socket.on('listChange', (characterList) => {
             console.log('Change received Component');
             this.setState({ characterList });
         });
@@ -35,26 +42,27 @@ class InitPage extends Component {
         axios.get('/api/v1/characters')
             .then(res => {
                 let characterList = res.data;
-                console.log(characterList);
-                console.log(this.state.characterList)
-                this.send(this.setState({ characterList }));
+                console.log("Load chars axios response", characterList);
+                console.log("Load Chars State", this.state.characterList)
+                if (characterList !== this.state.characterList) {
+                    // this.setState({ characterList });
+                    this.send(this.setState({ characterList }));
+                }
             });
     };
 
-    onUnload = (event) => {
-        localStorage.setItem("state", JSON.stringify(this.state));
-    }
+    // onUnload = (event) => {
+    //     localStorage.setItem("state", JSON.stringify(this.state));
+    // }
 
     componentWillUnmount() {
-        window.removeEventListener("beforeunload", this.onUnload)
+        // window.removeEventListener("beforeunload", this.onUnload)
+        this.socket.disconnect();
     }
 
     send = async (func) => {
         await func
-        const socket = io();
-        //works better on localhost
-        // const socket = socketIOClient(this.state.endpoint);
-        socket.emit('listChange', this.state.characterList)
+        this.socket.emit('listChange', this.state.characterList)
         console.log('Sending List Change');
     }
 
@@ -63,14 +71,26 @@ class InitPage extends Component {
         newArr.sort((a, b) => {
             return b.initiative - a.initiative;
         });
+        for (let i = 0; i < newArr.length; i++) {
+            newArr[i].turn_order = i + 1;
+        }
+        console.log("newArr", newArr);
+        axios.put('/api/v1/characters', { newArr })
+            .then(res => {
+                console.log("Axios Response", res);
+            });
+
         this.send(this.setState((state) => {
             return { characterList: newArr };
         }));
     }
 
+    //Need logic to update turn order on each member of the array and send the 
     turnDone = (id) => {
         const characterList = this.state.characterList.slice();
         characterList.push(...characterList.splice(characterList.findIndex(c => c.id === id), 1))
+        characterList[characterList.length - 1].turn_order = (characterList.length - 1);
+        console.log(characterList[characterList.length - 1].turn_order);
         this.send(this.setState({ characterList }));
     }
 
@@ -79,7 +99,8 @@ class InitPage extends Component {
         axios.post('/api/v1/characters', {
             hit_points: updatedCharacter.hit_points,
             initiative: updatedCharacter.initiative,
-            id: updatedCharacter.id
+            id: updatedCharacter.id,
+            turn_order: updatedCharacter.turn_order
         })
             .then(res => {
                 console.log(res);

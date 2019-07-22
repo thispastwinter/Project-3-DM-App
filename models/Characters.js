@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       defaultValue: 1,
       validate: {
-        len:[1]
+        len: [1]
       }
     },
     armor_class: {
@@ -33,6 +33,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       defaultValue: false,
       allowNull: true
+    },
+    turn_order: {
+      type: DataTypes.INTEGER,
+      allowNull: false
     }
   });
 
