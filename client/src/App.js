@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import 'react-bulma-components/dist/react-bulma-components.min.css';
+import LoginPage from './Pages/loginPage';
 import HuePage from './Pages/huePage';
 import InitPage from './Pages/initPage';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
@@ -16,6 +17,7 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={InitPage} />
             <Route exact path="/hue" component={HuePage} />
+            <Route exact path='/login' component={LoginPage} />
           </Switch>
         </React.Fragment>
       </Router>

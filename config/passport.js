@@ -3,8 +3,6 @@ const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
 const db = require('../models');
 
-const saltRounds = 10;
-
 // Telling passport we want to use a Local Strategy.
 // In other words, we want login with a username/email and password
 // Telling passport we want to use a Local Strategy.
@@ -16,9 +14,9 @@ passport.use(new LocalStrategy(
   },
   async (email, password, done) => {
     // Determine if in a NON-PROD environment
-    if (process.env.NODE_ENV !== 'production') {
-      console.log('Do you want any non-production code?');
-    }
+    // if (process.env.NODE_ENV !== 'production') {
+    //   console.log('Do you want any non-production code?');
+    // }
 
     const user = await db.Users.findOne({
       where: {
