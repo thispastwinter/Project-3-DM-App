@@ -15,11 +15,6 @@ const clientSecret = process.env.CLIENT_SECRET;
 // This get request is made, and redirects the user to the hue login page. It then asks them if they give permission for the app to use their acct.
 // The user is then redirected and a code is received from as a reponse.
 // This code will be given to the second request and used to trigger a 401 with a valid nonce key.
-
-const hueRemote = (req, res) => {
-  res.send('https://api.meethue.com/oauth2/auth?clientid=' + clientId + '&appid=dmcompanion&deviceid=dm&state=none&response_type=code');
-};
-
 // Another request is made with the given header from Hue Developer Remote Page implementing the clientid, nonce key, and a calculated hashed response.
 
 // I.E:
@@ -48,15 +43,15 @@ const generateAuthKeys = (nonce, code) => {
     method: 'POST',
     url: `https://api.meethue.com/oauth2/token?code=${code}&grant_type=authorization_code`,
     headers: { Authorization: `Digest username="${clientId}", realm="oauth2_client@api.meethue.com", nonce="${nonce}", uri="/oauth2/token", response="${createHash(nonce)}"` }
-  }).then(res => {
-    console.log(res.data)
+  }).then(result => {
+    res.send(result.data)
   }).catch(err => {
     console.error(err);
   })
 };
 
-const generateNonce = () => {
-  let code = '2IjPJU3m';
+const generateNonce = (req, res) => {
+  let code = req.body.code;
   axios.post(`https://api.meethue.com/oauth2/token?code=${code}&grant_type=authorization_code`).then().catch(res => {
     const nonce = res.response.headers['www-authenticate'].split(', ')[1].split('=')[1].replace(/['"]+/g, '');
     generateAuthKeys(nonce, code)
@@ -145,4 +140,3 @@ exports.connect = connect;
 exports.allLights = allLights;
 exports.controlLights = controlLights;
 exports.generateKeys = generateNonce;
-exports.hueRemote = hueRemote;
