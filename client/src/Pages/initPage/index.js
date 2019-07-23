@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import List from '../../components/list';
+import InitCard from '../../components/initCard';
 import List from '../../components/list/index';
 import InitCard from '../../components/initCard/index';
 import axios from 'axios';
