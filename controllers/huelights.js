@@ -1,3 +1,4 @@
+const express = require('express');
 require('dotenv').config();
 const hue = require('node-hue-api');
 const HueApi = require('node-hue-api').HueApi;
@@ -16,12 +17,7 @@ const clientSecret = process.env.CLIENT_SECRET;
 // This code will be given to the second request and used to trigger a 401 with a valid nonce key.
 
 const hueRemote = (req, res) => {
-  axios.get('https://api.meethue.com/oauth2/auth?clientid=' + clientId + '&appid=dmcompanion&deviceid=dm&state=none&response_type=code')
-    .then(result => {
-      res.send(result.data)
-    }).catch(err => {
-      console.log(err);
-    })
+  res.send('https://api.meethue.com/oauth2/auth?clientid=' + clientId + '&appid=dmcompanion&deviceid=dm&state=none&response_type=code');
 };
 
 // Another request is made with the given header from Hue Developer Remote Page implementing the clientid, nonce key, and a calculated hashed response.
@@ -60,7 +56,7 @@ const generateAuthKeys = (nonce, code) => {
 };
 
 const generateNonce = () => {
-  let code = req.body.code;
+  let code = '2IjPJU3m';
   axios.post(`https://api.meethue.com/oauth2/token?code=${code}&grant_type=authorization_code`).then().catch(res => {
     const nonce = res.response.headers['www-authenticate'].split(', ')[1].split('=')[1].replace(/['"]+/g, '');
     generateAuthKeys(nonce, code)
