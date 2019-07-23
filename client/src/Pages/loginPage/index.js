@@ -72,7 +72,7 @@ class LoginPage extends Component {
               // autoFocus
               value={this.state.email}
               type="email"
-              defaultValue='email'
+              // defaultValue='email'
               onChange={this.handleChange}
             />
           </Container>
@@ -80,9 +80,9 @@ class LoginPage extends Component {
             <Form.Label>Password</Form.Label>
             <Form.Input
               value={this.state.password}
-              defaultValue='password'
-              onChange={this.handleChange}
               type="password"
+              // defaultValue='password'
+              onChange={this.handleChange}
             />
           </Container>
           <Button
