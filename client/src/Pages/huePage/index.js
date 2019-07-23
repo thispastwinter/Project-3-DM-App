@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Heading, Columns } from 'react-bulma-components';
-import Lights from '../../components/lights/index';
+import Lights from '../../components/lights';
 import axios from 'axios';
 import './index.css';
 
