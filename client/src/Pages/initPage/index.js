@@ -8,13 +8,13 @@ import { Button, Container } from 'react-bulma-components';
 class InitPage extends Component {
     state = {
         characterList: [],
-        endpoint: "localhost:3001"
+        // endpoint: "localhost:3001"
     }
 
     constructor() {
         super();
-        // this.socket = io();
-        this.socket = io.connect(this.state.endpoint);
+        this.socket = io();
+        // this.socket = io.connect(this.state.endpoint);
     }
 
     componentDidMount() {
