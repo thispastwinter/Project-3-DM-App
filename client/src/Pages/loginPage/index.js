@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 // import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 // import axios from 'axios';
-import { Button, FormGroup, FormControl, FormLabel } from "react-bootstrap";
+// import { Button, FormGroup, FormControl, FormLabel } from "react-bootstrap";
+import { Button, Form, Container} from 'react-bulma-components';
 import './index.css';
 
 class LoginPage extends Component {
@@ -29,6 +30,7 @@ class LoginPage extends Component {
 
   async handleLogin(event) {
     event.preventDefault();
+    
 
     // try {
     //   const response = await axios.post('api/v1/auth/login', {
@@ -64,28 +66,29 @@ class LoginPage extends Component {
     return (
       <div className="Login">
         <form onSubmit={this.handleSubmit}>
-          <FormGroup controlId="email" bsSize="large">
-            <FormLabel>Email</FormLabel>
-            <FormControl
+          <Container controlId="email" bssize="large">
+            <Form.Label>Email</Form.Label>
+            <Form.Input
               autoFocus
               type="email"
               value={this.state.email}
               onChange={this.handleChange}
             />
-          </FormGroup>
-          <FormGroup controlId="password" bsSize="large">
-            <FormLabel>Password</FormLabel>
-            <FormControl
+          </Container>
+          <Container controlId="password" bssize="large">
+            <Form.Label>Password</Form.Label>
+            <Form.Input
               value={this.state.password}
               onChange={this.handleChange}
               type="password"
             />
-          </FormGroup>
+          </Container>
           <Button
-            block
-            bsSize="large"
+            // block
+            bssize="large"
             disabled={!this.validateForm()}
             type="submit"
+            onClick={this.handleLogin}
           >
             Login
           </Button>
