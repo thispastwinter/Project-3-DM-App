@@ -98,7 +98,8 @@ class InitPage extends Component {
         characterList.map(obj => {
             return obj.initiative = parseInt(0);
         });
-        this.send(this.setState({ characterList }));
+        this.turnOrderUpdate(characterList);
+        // this.send(this.setState({ characterList }));
     }
 
     render() {

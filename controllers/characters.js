@@ -31,7 +31,7 @@ const updateChar = async (req, res) => {
 
 const updateTurnOrder = async (req, res) => {
   try {
-    res.json(await db.Characters.bulkCreate(req.body.array, { updateOnDuplicate: ['turn_order'] }));
+    res.json(await db.Characters.bulkCreate(req.body.array, { updateOnDuplicate: ['turn_order', 'initiative'] }));
   } catch (error) {
     res.status(500).send(error);
   }
