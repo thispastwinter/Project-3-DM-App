@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 // import axios from 'axios';
 // import { Button, FormGroup, FormControl, FormLabel } from "react-bootstrap";
-import { Button, Form, Container} from 'react-bulma-components';
+import { Button, Form, Container } from 'react-bulma-components';
 import './index.css';
 
 class LoginPage extends Component {
@@ -30,7 +30,7 @@ class LoginPage extends Component {
 
   async handleLogin(event) {
     event.preventDefault();
-    
+
 
     // try {
     //   const response = await axios.post('api/v1/auth/login', {
@@ -66,26 +66,26 @@ class LoginPage extends Component {
     return (
       <div className="Login">
         <form onSubmit={this.handleSubmit}>
-          <Container controlId="email" bssize="large">
+          <Container>
             <Form.Label>Email</Form.Label>
             <Form.Input
-              autoFocus
-              type="email"
+              // autoFocus
               value={this.state.email}
+              type="email"
+              defaultValue='email'
               onChange={this.handleChange}
             />
           </Container>
-          <Container controlId="password" bssize="large">
+          <Container>
             <Form.Label>Password</Form.Label>
             <Form.Input
               value={this.state.password}
+              defaultValue='password'
               onChange={this.handleChange}
               type="password"
             />
           </Container>
           <Button
-            // block
-            bssize="large"
             disabled={!this.validateForm()}
             type="submit"
             onClick={this.handleLogin}
