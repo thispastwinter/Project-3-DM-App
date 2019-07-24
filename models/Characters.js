@@ -38,7 +38,32 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       defaultValue: 0,
       allowNull: false
-    }
+    },
+    strength: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    dexterity: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    constitution: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    intelligence: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    wisdom: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    charisma: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    
   });
 
   Characters.associate = (models) => {
