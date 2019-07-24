@@ -38,27 +38,31 @@ const createHash = (nonce) => {
   return (response);
 }
 
-const generateAuthKeys = (nonce, code) => {
-  axios({
-    method: 'POST',
-    url: `https://api.meethue.com/oauth2/token?code=${code}&grant_type=authorization_code`,
-    headers: { Authorization: `Digest username="${clientId}", realm="oauth2_client@api.meethue.com", nonce="${nonce}", uri="/oauth2/token", response="${createHash(nonce)}"` }
-  }).then(result => {
-    res.send(result.data)
-  }).catch(err => {
-    console.error(err);
-  })
-};
-
-const generateNonce = (req, res) => {
-  let code = req.body.code;
-  axios.post(`https://api.meethue.com/oauth2/token?code=${code}&grant_type=authorization_code`).then().catch(res => {
-    const nonce = res.response.headers['www-authenticate'].split(', ')[1].split('=')[1].replace(/['"]+/g, '');
-    generateAuthKeys(nonce, code)
-  }).then().catch(err => {
-    console.log(err);
-  })
+const generateNonce = async (req, res, next) => {
+  const code = req.body.code;
+  try {
+    const nonceSuccess = await axios.post(`https://api.meethue.com/oauth2/token?code=${code}&grant_type=authorization_code`);
+    console.log('Nonce Success', nonceSuccess);
+    console.log('Why do did we not get an error?');
+    res.status(500).send(nonceSuccess);
+  } catch(nonceFail) {
+    req.nonce = nonceFail.response.headers['www-authenticate'].split(', ')[1].split('=')[1].replace(/['"]+/g, '');
+    next();
+  }
 }
+
+const generateAuthKeys = async (req, res) => {
+  try {
+    const{ data: hueToken } = await axios({
+      method: 'POST',
+      url: `https://api.meethue.com/oauth2/token?code=${req.body.code}&grant_type=authorization_code`,
+      headers: { Authorization: `Digest username="${clientId}", realm="oauth2_client@api.meethue.com", nonce="${req.nonce}", uri="/oauth2/token", response="${createHash(req.nonce)}"` }
+    });
+    res.json(hueToken);
+  } catch(err) {
+    res.status(500).send(err);
+  }
+};
 
 // Once all that is done requests can be made through https://api.meethue.com/bridge/<whitelist_identifier>
 
@@ -75,14 +79,14 @@ const detect = (req, res) => {
   });
 };
 
-const connect = (req, res) => {
-  let host = req.body.host;
-  let newApi = new HueApi();
-  newApi.createUser(host, function (err, user) {
-    if (err) throw err;
-    res.json(user);
-  });
-}
+// const connect = (req, res) => {
+//   let host = req.body.host;
+//   let newApi = new HueApi();
+//   newApi.createUser(host, function (err, user) {
+//     if (err) throw err;
+//     res.json(user);
+//   });
+// }
 
 const allLights = (req, res) => {
   let host = req.body.host;
@@ -136,7 +140,6 @@ const controlLights = (req, res) => {
 }
 
 exports.detect = detect;
-exports.connect = connect;
+exports.connect = [generateNonce, generateAuthKeys];
 exports.allLights = allLights;
 exports.controlLights = controlLights;
-exports.generateKeys = generateNonce;

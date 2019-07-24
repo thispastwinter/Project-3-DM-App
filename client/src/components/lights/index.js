@@ -17,7 +17,7 @@ const Lights = (props) => {
       <Button color="success" onClick={() => props.lightning()}>
         Lightning
       </Button>
-      <Button color="info" onClick={() => props.connection()}>Connect to Hue!</Button>
+      <Button color="info" onClick={() => props.connection()}>Connect to Bridge</Button>
    </Container>
   )
 }

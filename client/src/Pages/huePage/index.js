@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Heading, Columns } from 'react-bulma-components';
+import { Heading, Columns, Button } from 'react-bulma-components';
 import Lights from '../../components/lights';
 import axios from 'axios';
 import './index.css';
@@ -11,22 +11,45 @@ class HuePage extends Component {
     lights: [],
     lightId: [],
     selectedLight: [],
+    access_token: [],
+    refresh_token: []
   }
 
   componentDidMount() {
-    axios.post('/api/v1/huelights/detect')
-      .then(res => {
-        console.log(res.data)
-        let ip = res.data;
-        this.setState({ ip });
-      });
+    // axios.post('/api/v1/huelights/detect')
+    //   .then(res => {
+    //     console.log(res.data)
+    //     let ip = res.data;
+    //     this.setState({ ip });
+    //   }).catch(err => {
+    //     console.log(err);
+    //   })
+    const url = window.location.href;
+    // this.setState({ redirect: state })
+    // console.log(this.state.redirect)
+
+    if (url.includes('code')) {
+      const code = url.split('code=')[1].split('&state=none')[0]; //.com/?=
+      axios.post('/api/v1/huelights/connect', {
+        code: code,
+      }).then(res => {
+        const accessToken = res.data.access_token;
+        console.log(accessToken);
+        const refreshToken = res.data.refresh_token;
+        console.log(refreshToken)
+        this.setState({ access_token: accessToken });
+        this.setState({ refresh_token: refreshToken });
+      }).catch(err => {
+        console.log(err);
+      })
+    }
 
     window.addEventListener("beforeunload", this.onUnload);
     const stateObject = JSON.parse(localStorage.getItem("state"));
     this.setState(stateObject);
 
-  }
 
+  }
   onUnload = (event) => {
     localStorage.setItem("state", JSON.stringify(this.state));
   }
@@ -35,18 +58,33 @@ class HuePage extends Component {
     window.removeEventListener("beforeunload", this.onUnload)
   }
 
+  redirect = () => {
+    window.location.replace('https://api.meethue.com/oauth2/auth?clientid=BS84Hd1zriyzi5SvLPV1utAll96ynmyU&appid=dmcompanion&deviceid=dm&state=true&response_type=code');
+  }
+
+  // Put request, followed by post, followed by getting all available lights
+
   connectionHandler = () => {
-    axios.post('/api/v1/huelights/connect', {
-      host: this.state.ip
+    const config = {
+      headers: {
+        'Authorization': `Bearer ${this.state.access_token}`,
+        'Content-Type': 'application/json'
+      }
+    }
+    axios.put('https://api.meethue.com/bridge/0/config', {
+      config,
+      data: {
+        "linkbutton": true
+      }
+    }).then(res => {
+      return axios.post('https://api.meethue.com/bridge/', {
+        config,
+        data: {
+          "device-type": "dm-companion"
+        }
+      })
     })
-      .then(res => {
-        console.log(res.data);
-        let user = res.data;
-        this.setState({ user })
-        this.findAllLights();
-      }).catch(function (error) {
-        if (error) alert('Make sure to hold bridge link when connecting!')
-      });
+  
   };
 
   findAllLights = () => {
@@ -120,7 +158,7 @@ class HuePage extends Component {
       <Columns.Column>
         <Columns id="hue-box">
           <Heading className="title-1">Hue Lights</Heading>
-          {this.state.ip.length > 0 ?
+          {this.state.access_token.length > 0 ?
             <div>
               <Heading className="title-2" size={5}>Select a Light:</Heading>
               <div className="select">
@@ -136,7 +174,7 @@ class HuePage extends Component {
                 critical={this.criticalRoll}
                 lightning={this.lightning}
                 connection={this.connectionHandler}>
-              </Lights></div> : 'No Bridge Found'}
+              </Lights></div> : <div><Button onClick={this.redirect}>Connect To Hue</Button></div>}
         </Columns>
       </Columns.Column>
     );
