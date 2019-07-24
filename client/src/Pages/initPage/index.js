@@ -4,6 +4,7 @@ import InitCard from '../../components/initCard';
 import axios from 'axios';
 import io from 'socket.io-client';
 import { Button, Container } from 'react-bulma-components';
+import NavTabs from "../../components/navTabs";
 
 class InitPage extends Component {
     state = {
@@ -104,7 +105,8 @@ class InitPage extends Component {
 
     render() {
         return (
-            <div>
+            <React.Fragment>
+                <NavTabs />
                 <List >
                     {this.state.characterList.map(character => (
                         <InitCard
@@ -128,7 +130,7 @@ class InitPage extends Component {
                     <Button color="success" onClick={this.resetEncounter}>Reset Encounter</Button>
                     <Button color="success" onClick={() => this.initSort(this.state.characterList)}>Initiative Sort</Button>
                 </Container>
-            </div>
+            </React.Fragment>
         )
     }
 }

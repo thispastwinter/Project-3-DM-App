@@ -9,7 +9,7 @@ function NavTabs(props) {
     return (
         <Tabs type='toggle' fullwidth={true}>
             <Tabs.Tab renderAs="div">
-                <NavLink exact to="/" activeClassName="is-active">
+                <NavLink exact to="/init" activeClassName="is-active">
                     Initiative
                  </NavLink>
             </Tabs.Tab>
