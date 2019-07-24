@@ -18,14 +18,14 @@ const findAll = async (req, res) => {
   }
 };
 
-const findMonster = async (req, res) => {
-  try {
-    const monster = await monstersDb.find(m => m.name === req.params.name);
-    res.json(monster);
-  } catch (error) {
-    res.status(500).send(error);
-  }
-}
+// const findMonster = async (req, res) => {
+//   try {
+//     const monster = await monstersDb.find(m => m.name === req.params.name);
+//     res.json(monster);
+//   } catch (error) {
+//     res.status(500).send(error);
+//   }
+// };
 
 const updateChar = async (req, res) => {
   try {
