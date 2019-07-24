@@ -1,4 +1,5 @@
 const db = require('../models');
+const monstersDb = require('../config/monsters.json');
 
 const create = async (req, res) => {
   try {
@@ -16,6 +17,15 @@ const findAll = async (req, res) => {
     res.status(500).send(error);
   }
 };
+
+const findMonster = async (req, res) => {
+  try {
+    const monster = await monstersDb.find(m => m.name === req.params.name);
+    res.json(monster);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+}
 
 const updateChar = async (req, res) => {
   try {
@@ -50,3 +60,4 @@ exports.findAll = findAll;
 exports.destroy = destroy;
 exports.updateChar = updateChar;
 exports.updateTurnOrder = updateTurnOrder;
+exports.findMonster = findMonster;
