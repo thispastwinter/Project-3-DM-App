@@ -14,7 +14,7 @@ export default class Health extends Component {
         return (
             <EdiText
                 type='number'
-                value={this.props.health}
+                value={this.props.health.toString()}
                 key={this.props.health}
                 onSave={this.onSave}
                 buttonsAlign='before'
