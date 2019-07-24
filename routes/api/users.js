@@ -6,4 +6,7 @@ router.route('/')
   .get(usersController.findAll)
   .post(usersController.create);
 
+router.route('/:email')
+  .get(usersController.findOne);
+
 module.exports = router;
