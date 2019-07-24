@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import { Button, Form, Container } from 'react-bulma-components';
 import './index.css';
+import { Link } from "react-router-dom";
 
 class LoginPage extends Component {
   constructor(props) {
@@ -58,6 +59,7 @@ class LoginPage extends Component {
 
     return (
       <div className="Login">
+        <h1 className="title">DM-Companion App</h1>
         <form onSubmit={this.handleSubmit}>
           <Container>
             <Form.Label>Email</Form.Label>
@@ -82,12 +84,16 @@ class LoginPage extends Component {
           <Button
             disabled={!this.validateForm()}
             type="submit"
+            color="success"
             onClick={this.handleLogin}
           >
             Login
           </Button>
+          <Link exact to="/createuser">
+            <Button renderAs="button" color="warning"><span>Create New User</span></Button>
+          </Link>
         </form>
-      </div>
+      </div >
     );
   }
 }

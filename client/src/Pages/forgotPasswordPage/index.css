@@ -1,8 +1,8 @@
-.createUser {
+.passwordReset {
     padding: 60px 0;
 }
 
-.createUser form {
+.passwordReset form {
     margin: 0 auto;
     max-width: 320px;
 }

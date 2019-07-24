@@ -65,7 +65,8 @@ class CreateUserPage extends Component {
         }
 
         return (
-            <div className="Login">
+            <div className="createUser">
+                <h1 className="title">Create New User</h1>
                 <form onSubmit={this.handleSubmit}>
                     <Container>
                         <Form.Label>Email</Form.Label>
@@ -95,6 +96,7 @@ class CreateUserPage extends Component {
                     <Button
                         disabled={!this.validateForm()}
                         type="submit"
+                        color="success"
                         onClick={this.handleLogin}
                     >
                         Create Character
