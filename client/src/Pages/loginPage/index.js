@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
-// import axios from 'axios';
-// import { Button, FormGroup, FormControl, FormLabel } from "react-bootstrap";
+import axios from 'axios';
 import { Button, Form, Container } from 'react-bulma-components';
 import './index.css';
 
@@ -23,6 +21,7 @@ class LoginPage extends Component {
   };
 
   handleChange = event => {
+    console.log(event);
     this.setState({
       [event.target.id]: event.target.value
     });
@@ -32,35 +31,29 @@ class LoginPage extends Component {
     event.preventDefault();
 
 
-    // try {
-    //   const response = await axios.post('api/v1/auth/login', {
-    //     email: this.state.email,
-    //     password: this.state.password
-    //   });
-    //   if (response.data) {
-    //     this.setState({
-    //       // ? Should I set state for email and password here? 
-    //       // ? Does this work with the passport.js file/bcrypt.compare?
-    //       loginSuccess: true,
-    //     });
-    //     // console.log('LOGIN SUCCESS LoginPage/index.js');
-    //   } else {
-    //     console.log('error on handleLogin');
-    //   }
-    // } catch (err) {
-    //   if (err) throw err;
-    //   this.setState({
-    //     loginSuccess: false,
-    //   })
-    // }
+    try {
+      const response = await axios.post('api/v1/auth/login', {
+        email: this.state.email,
+        password: this.state.password
+      });
+      if (response.data) {
+        this.setState({
+          loginSuccess: true,
+        });
+      } else {
+        console.log('error on handleLogin');
+      }
+    } catch (err) {
+      if (err) throw err;
+      this.setState({
+        loginSuccess: false,
+      })
+    }
   }
 
   render() {
     if (this.state.loginSuccess) {
-      console.log('RENDER LOGIN SUCCESS = TRUE');
       return <Redirect to='/' />
-    } else {
-      console.log('RENDER LOGIN SUCCESS = FALSE');
     }
 
     return (
@@ -69,11 +62,11 @@ class LoginPage extends Component {
           <Container>
             <Form.Label>Email</Form.Label>
             <Form.Input
-              // autoFocus
               value={this.state.email}
               type="email"
-              // defaultValue='email'
               onChange={this.handleChange}
+              className="input"
+              id="email"
             />
           </Container>
           <Container>
@@ -81,8 +74,9 @@ class LoginPage extends Component {
             <Form.Input
               value={this.state.password}
               type="password"
-              // defaultValue='password'
               onChange={this.handleChange}
+              className="input"
+              id="password"
             />
           </Container>
           <Button
