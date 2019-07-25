@@ -26,7 +26,8 @@
     "lint": "eslint --quiet .",
     "lint:fix": "eslint --fix .",
     "tests": "yarn kill && NODE_ENV=test nyc --reporter=html --reporter=text mocha tests/**/*.spec.js --exit",
-    "test:coverage": "nyc report --reporter=text-lcov | coveralls"
+    "test:coverage": "nyc report --reporter=text-lcov | coveralls",
+    "db:init": "node ./db/init.js"
   },
   "nodemonConfig": {
     "events": {
