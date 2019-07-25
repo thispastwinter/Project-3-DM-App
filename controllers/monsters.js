@@ -2,7 +2,7 @@ const db = require('../models');
 const monsters = require('../config/monsters.json');
 
 const bulkCreate = (req, res) => {
-  db.Monsters.bulkCreate(monsters, { returning: true })
+  db.Monsters.bulkCreate({monsters})
     .then(response => {
       res.json(response)
     })
