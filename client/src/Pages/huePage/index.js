@@ -3,6 +3,7 @@ import { Heading, Columns } from 'react-bulma-components';
 import Lights from '../../components/lights';
 import axios from 'axios';
 import './index.css';
+import NavTabs from "../../components/navTabs";
 
 class HuePage extends Component {
   state = {
@@ -117,28 +118,31 @@ class HuePage extends Component {
 
   render() {
     return (
-      <Columns.Column>
-        <Columns id="hue-box">
-          <Heading className="title-1">Hue Lights</Heading>
-          {this.state.ip.length > 0 ?
-            <div>
-              <Heading className="title-2" size={5}>Select a Light:</Heading>
-              <div className="select">
-                <select onChange={this.handleChange} value={this.state.selectedLight}>
-                  {this.state.lights.map((lights, index) => (
-                    <option value={this.state.lightId[index]} key={this.state.lightId[index]}>{lights}</option>
-                  ))}
-                </select>
-              </div>
-              <Lights
-                lightOn={this.lightOn}
-                lightOff={this.lightOff}
-                critical={this.criticalRoll}
-                lightning={this.lightning}
-                connection={this.connectionHandler}>
-              </Lights></div> : 'No Bridge Found'}
-        </Columns>
-      </Columns.Column>
+      <React.Fragment>
+        <NavTabs />
+        <Columns.Column>
+          <Columns id="hue-box">
+            <Heading className="title-1">Hue Lights</Heading>
+            {this.state.ip.length > 0 ?
+              <div>
+                <Heading className="title-2" size={5}>Select a Light:</Heading>
+                <div className="select">
+                  <select onChange={this.handleChange} value={this.state.selectedLight}>
+                    {this.state.lights.map((lights, index) => (
+                      <option value={this.state.lightId[index]} key={this.state.lightId[index]}>{lights}</option>
+                    ))}
+                  </select>
+                </div>
+                <Lights
+                  lightOn={this.lightOn}
+                  lightOff={this.lightOff}
+                  critical={this.criticalRoll}
+                  lightning={this.lightning}
+                  connection={this.connectionHandler}>
+                </Lights></div> : 'No Bridge Found'}
+          </Columns>
+        </Columns.Column>
+      </React.Fragment>
     );
   }
 }

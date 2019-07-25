@@ -61,7 +61,7 @@ io.on('connection', (socket) => {
   });
   socket.on('listChange', (data) => {
     const roomNum = data[0].GameId;
-    socket.to(roomNum).broadcast.emit('listChange', data);
+    socket.to(roomNum).emit('listChange', data);
     // socket.broadcast.emit('listChange', data);
   });
   socket.on('disconnect', () => {
