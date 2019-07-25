@@ -6,8 +6,8 @@ router.route('/')
   .post(characterController.create)
   .put(characterController.updateTurnOrder);
 
-router.route('/monsters/:name')
-  .get(characterController.findMonster);
+// router.route('/monsters/:name')
+  // .get(characterController.findMonster);
 
 router.route('/:id')
   .get(characterController.findAll)

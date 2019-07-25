@@ -1,5 +1,5 @@
 const db = require('../models');
-const monstersDb = require('../config/monsters.json');
+// const monstersDb = require('../config/monsters.json');
 
 const create = async (req, res) => {
   try {
@@ -60,4 +60,4 @@ exports.findAll = findAll;
 exports.destroy = destroy;
 exports.updateChar = updateChar;
 exports.updateTurnOrder = updateTurnOrder;
-exports.findMonster = findMonster;
+// exports.findMonster = findMonster;
