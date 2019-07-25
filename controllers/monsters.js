@@ -1,14 +1,12 @@
 const db = require('../models');
-const monsters = require('../config/monsters.json');
+// const monsters = require('../config/monsters.json');
 
-const bulkCreate = (req, res) => {
-  db.Monsters.bulkCreate({monsters})
+const findAll = (req, res) => {
+  db.Monsters.findAll({ where: { name: req.body } })
     .then(response => {
       res.json(response)
     })
-    .catch(error) {
-    res.status(500).send(error);
-  }
+    .catch(error)
 }
 
-exports.bulkCreate = bulkCreate;
+exports.findAll = findAll;

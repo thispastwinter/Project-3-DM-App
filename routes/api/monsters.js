@@ -2,6 +2,6 @@ const router = require('express').Router();
 const monstersController = require('../../controllers/monsters');
 
 router.route('/')
-  .post(monstersController.bulkCreate);
+  .post(monstersController.findAll);
 
 module.exports = router; 
