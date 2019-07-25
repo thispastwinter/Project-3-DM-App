@@ -31,11 +31,13 @@ const clientSecret = process.env.CLIENT_SECRET;
 
 // The response will generate an auth token and a refresh token:
 
-const createHash = (nonce) => {
-  let hash1 = md5(clientId + ':' + 'oauth2_client@api.meethue.com' + ':' + clientSecret);
-  let hash2 = md5('POST:/oauth2/token');
-  let response = md5(hash1 + ':' + nonce + ':' + hash2);
-  return (response);
+const sendUrl = async (req, res) => {
+  try {
+    const url = `https://api.meethue.com/oauth2/auth?clientid=${clientId}&appid=dmcompanion&deviceid=dm&state=true&response_type=code`;
+    res.json(url);
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 const generateNonce = async (req, res, next) => {
@@ -63,6 +65,13 @@ const generateAuthKeys = async (req, res) => {
     res.status(500).send(err);
   }
 };
+
+const createHash = (nonce) => {
+  let hash1 = md5(clientId + ':' + 'oauth2_client@api.meethue.com' + ':' + clientSecret);
+  let hash2 = md5('POST:/oauth2/token');
+  let response = md5(hash1 + ':' + nonce + ':' + hash2);
+  return (response);
+}
 
 // Once all that is done requests can be made through https://api.meethue.com/bridge/<whitelist_identifier>
 
@@ -139,7 +148,7 @@ const controlLights = (req, res) => {
   };
 }
 
-exports.detect = detect;
+exports.url = sendUrl;
 exports.connect = [generateNonce, generateAuthKeys];
 exports.allLights = allLights;
 exports.controlLights = controlLights;

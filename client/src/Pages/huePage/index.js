@@ -11,8 +11,7 @@ class HuePage extends Component {
     lights: [],
     lightId: [],
     selectedLight: [],
-    access_token: [],
-    refresh_token: []
+    loggedIn: false
   }
 
   componentDidMount() {
@@ -30,8 +29,10 @@ class HuePage extends Component {
 
     if (url.includes('code')) {
       const code = url.split('code=')[1].split('&state=none')[0]; //.com/?=
+      const hueState = url.split('&state=')[1];
+      this.setState({ loggedIn: hueState })
       axios.post('/api/v1/huelights/connect', {
-        code: code,
+        code: code
       }).then(res => {
         const accessToken = res.data.access_token;
         console.log(accessToken);
@@ -44,25 +45,32 @@ class HuePage extends Component {
       })
     }
 
-    window.addEventListener("beforeunload", this.onUnload);
-    const stateObject = JSON.parse(localStorage.getItem("state"));
-    this.setState(stateObject);
+  //   window.addEventListener("beforeunload", this.onUnload);
+  //   const stateObject = JSON.parse(localStorage.getItem("state"));
+  //   this.setState(stateObject);
 
 
-  }
-  onUnload = (event) => {
-    localStorage.setItem("state", JSON.stringify(this.state));
-  }
+  // }
+  // onUnload = (event) => {
+  //   localStorage.setItem("state", JSON.stringify(this.state));
+  // }
 
-  componentWillUnmount() {
-    window.removeEventListener("beforeunload", this.onUnload)
+  // componentWillUnmount() {
+  //   window.removeEventListener("beforeunload", this.onUnload)
+  // }
   }
+  // All secure information must be store in backend, including access tokens. Look in express-session for potential local storage options.
 
   redirect = () => {
-    window.location.replace('https://api.meethue.com/oauth2/auth?clientid=BS84Hd1zriyzi5SvLPV1utAll96ynmyU&appid=dmcompanion&deviceid=dm&state=true&response_type=code');
-  }
+    axios.get('/api/v1/huelights/url').then(res => {
+      const url = res.data; 
+      console.log(url); 
+      window.location.href = url;
+    }).catch(err => {console.log(err)});
+  };
 
   // Put request, followed by post, followed by getting all available lights
+  // This isn't ideal, tokens need to be stored server side for best security. 
 
   connectionHandler = () => {
     const config = {
@@ -158,7 +166,7 @@ class HuePage extends Component {
       <Columns.Column>
         <Columns id="hue-box">
           <Heading className="title-1">Hue Lights</Heading>
-          {this.state.access_token.length > 0 ?
+          {this.state.loggedIn ?
             <div>
               <Heading className="title-2" size={5}>Select a Light:</Heading>
               <div className="select">
