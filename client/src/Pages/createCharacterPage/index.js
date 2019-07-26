@@ -4,25 +4,24 @@ import axios from 'axios';
 import { Button, Form, Container } from 'react-bulma-components';
 import './index.css';
 
-class CreateUserPage extends Component {
+class CreateCharacterPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: '',
-            password: '',
-            admin: false,
-            createSuccess: false
+            name: '',
+            armor_class: 0,
+            hit_points: 0,
         };
 
         this.handleLogin = this.handleLogin.bind(this);
     }
 
     validateForm() {
-        return this.state.email.length > 0 && this.state.password.length > 0;
+        return this.state.name.length > 0 && this.state.armor_class.length > 0 && this.state.hit_points.length > 0;
     };
 
     handleChange = event => {
-        const value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
+        const value = event.target.value;
         this.setState({
             [event.target.id]: value
         });
@@ -99,7 +98,7 @@ class CreateUserPage extends Component {
                         color="success"
                         onClick={this.handleLogin}
                     >
-                        Create User
+                        Create Character
           </Button>
                 </form>
             </div>
@@ -107,4 +106,4 @@ class CreateUserPage extends Component {
     }
 }
 
-export default CreateUserPage;
+export default CreateCharacterPage;

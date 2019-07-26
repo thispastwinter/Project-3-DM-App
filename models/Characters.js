@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     initiative: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      defaultValue: 1,
+      defaultValue: 0,
       validate: {
         len: [1]
       }
@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     armor_class: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      defaultValue: 10,
       validate: {
         len: [1]
       }
@@ -25,6 +26,7 @@ module.exports = (sequelize, DataTypes) => {
     hit_points: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      defaultValue: 1,
       validate: {
         len: [1]
       }

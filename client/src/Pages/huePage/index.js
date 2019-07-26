@@ -14,7 +14,8 @@ class HuePage extends Component {
     selectedLight: [],
     loggedIn: false,
     access_token: '',
-    refreshToken: ''
+    refreshToken: '',
+    gameId: null
   }
 
   componentDidMount() {
@@ -50,6 +51,8 @@ class HuePage extends Component {
   // componentWillUnmount() {
   //   window.removeEventListener("beforeunload", this.onUnload)
   // }
+
+    this.loadGameId();
   }
   // All secure information must be store in backend, including access tokens. Look in express-session for potential local storage options.
 
@@ -63,6 +66,11 @@ class HuePage extends Component {
 
   // Put request, followed by post, followed by getting all available lights
   // This isn't ideal, tokens need to be stored server side for best security. 
+
+  loadGameId = () => {
+    let gameId = this.props.location.state.gameId;
+    this.setState({ gameId });
+  }
 
   connectionHandler = () => {
     const accessToken = this.state.access_token;
@@ -141,7 +149,7 @@ class HuePage extends Component {
   render() {
     return (
       <React.Fragment>
-        <NavTabs />
+        <NavTabs gameId={this.state.gameId} />
         <Columns.Column>
           <Columns id="hue-box">
             <Heading className="title-1">Hue Lights</Heading>

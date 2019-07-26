@@ -22,7 +22,6 @@ class LoginPage extends Component {
   };
 
   handleChange = event => {
-    console.log(event);
     this.setState({
       [event.target.id]: event.target.value
     });
@@ -54,7 +53,7 @@ class LoginPage extends Component {
 
   render() {
     if (this.state.loginSuccess) {
-      return <Redirect to='/init' />
+      return <Redirect to='/game' />
     }
 
     return (
@@ -89,7 +88,7 @@ class LoginPage extends Component {
           >
             Login
           </Button>
-          <Link exact to="/createuser">
+          <Link to="/createuser">
             <Button renderAs="button" color="warning"><span>Create New User</span></Button>
           </Link>
         </form>
