@@ -12,9 +12,11 @@ class HuePage extends Component {
     lights: [],
     lightId: [],
     selectedLight: [],
+    gameId: null
   }
 
   componentDidMount() {
+    this.loadGameId();
     axios.post('/api/v1/huelights/detect')
       .then(res => {
         console.log(res.data)
@@ -34,6 +36,11 @@ class HuePage extends Component {
 
   componentWillUnmount() {
     window.removeEventListener("beforeunload", this.onUnload)
+  }
+
+  loadGameId = () => {
+    let gameId = this.props.location.state.gameId;
+    this.setState({ gameId });
   }
 
   connectionHandler = () => {
@@ -119,7 +126,7 @@ class HuePage extends Component {
   render() {
     return (
       <React.Fragment>
-        <NavTabs />
+        <NavTabs gameId={this.state.gameId} />
         <Columns.Column>
           <Columns id="hue-box">
             <Heading className="title-1">Hue Lights</Heading>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Media, Heading, Button } from 'react-bulma-components';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const GameCard = (props) => {
 
@@ -18,7 +18,7 @@ const GameCard = (props) => {
             </Card.Content>
             <Card.Footer>
                 <Card.Footer.Item>
-                    <NavLink to={{
+                    <Link to={{
                         pathname: '/init',
                         state: {
                             gameId: props.id
@@ -27,7 +27,7 @@ const GameCard = (props) => {
                         <Button color="success">
                             Join Game
                         </Button>
-                    </NavLink>
+                    </Link>
                 </Card.Footer.Item>
             </Card.Footer>
         </Card>

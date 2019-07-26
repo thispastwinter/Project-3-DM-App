@@ -41,7 +41,10 @@ class InitPage extends Component {
         axios.get('/api/v1/characters/' + this.state.gameId)
             .then(res => {
                 let characterList = res.data;
-                if (characterList !== this.state.characterList) {
+                if (characterList.length === 0) {
+                    alert("No Characters here yet");
+                }
+                else if (characterList !== this.state.characterList) {
                     this.send(this.setState({ characterList }));
                 }
             });
@@ -112,7 +115,7 @@ class InitPage extends Component {
     render() {
         return (
             <React.Fragment>
-                <NavTabs />
+                <NavTabs gameId={this.state.gameId} />
                 <div >
                     {this.state.characterList.map(character => (
                         <InitCard

@@ -17,7 +17,6 @@ class GamePage extends Component {
         axios.get('/api/v1/games/')
             .then(res => {
                 let gameList = res.data;
-                console.log(gameList);
                 if (gameList !== this.state.gameList) {
                     this.setState({ gameList });
                 }
@@ -36,7 +35,7 @@ class GamePage extends Component {
                         />
                     ))}
                 </div>
-                <Link exact to="/creategame">
+                <Link to="/creategame">
                     <Button renderAs="button" color="warning"><span>Create New Game</span></Button>
                 </Link>
             </React.Fragment>

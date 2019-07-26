@@ -6,13 +6,11 @@ import HuePage from './Pages/huePage';
 import InitPage from './Pages/initPage';
 import GamePage from './Pages/gamePage';
 import CreateUserPage from './Pages/createUserPage';
+import CreateGamePage from './Pages/createGamePage';
 import ForgotPasswordPage from './Pages/forgotPasswordPage'
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 class App extends Component {
-  state = {
-    gameId: 1
-  }
 
   render() {
     return (
@@ -25,6 +23,7 @@ class App extends Component {
             <Route exact path='/hue' component={HuePage} />
             <Route exact path='/forgotpassword' component={ForgotPasswordPage} />
             <Route exact path='/game' component={GamePage} />
+            <Route exact path='/creategame' component={CreateGamePage} />
           </Switch>
         </React.Fragment>
       </Router>
