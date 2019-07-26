@@ -1,5 +1,4 @@
 const db = require('../models');
-// const monstersDb = require('../config/monsters.json');
 
 const create = async (req, res) => {
   try {
@@ -32,8 +31,7 @@ const updateChar = async (req, res) => {
     res.json(await db.Characters.update(
       { hit_points: req.body.hit_points, initiative: req.body.initiative },
       { where: { id: req.params.id } }
-    )
-    );
+    ));
   } catch (error) {
     res.status(500).send(error);
   }

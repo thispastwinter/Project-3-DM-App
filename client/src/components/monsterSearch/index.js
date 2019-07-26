@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
-import axios from 'axios'
-
-const API_URL = 'http://localhost:3001/api/v1/monsters/';
+import axios from 'axios' 
 
 class Search extends Component {
   state = {
@@ -10,13 +8,17 @@ class Search extends Component {
   }
 
   getInfo = () => {
-    axios.get(API_URL)
+    axios.get(`api/v1/monsters/${this.state.query}`, {
+      name: this.state.name
+    })
       .then(({ data }) => {
+        console.log(data);
         this.setState({
-          results: data  
+          results: data
         })
       })
   }
+
   handleInputChange = () => {
     this.setState({
       query: this.search.value
@@ -25,7 +27,7 @@ class Search extends Component {
         if (this.state.query.length % 2 === 0) {
           this.getInfo()
         }
-      } 
+      }
     })
   }
 
@@ -43,4 +45,4 @@ class Search extends Component {
   }
 }
 
-export default Search
+export default Search;
