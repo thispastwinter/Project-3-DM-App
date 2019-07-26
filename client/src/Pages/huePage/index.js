@@ -19,6 +19,7 @@ class HuePage extends Component {
   }
 
   componentDidMount() {
+    this.loadGameId();
     const url = window.location.href;
     if (url.includes('code')) {
       const code = url.split('code=')[1].split('&state=none')[0]; //.com/?
@@ -52,7 +53,6 @@ class HuePage extends Component {
   //   window.removeEventListener("beforeunload", this.onUnload)
   // }
 
-    this.loadGameId();
   }
   // All secure information must be store in backend, including access tokens. Look in express-session for potential local storage options.
 
