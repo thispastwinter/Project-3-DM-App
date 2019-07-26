@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import GameCard from '../../components/gameCard';
-// import { Button, Container } from 'react-bulma-components';
+import { Button } from 'react-bulma-components';
+import { Link } from "react-router-dom";
 
 class GamePage extends Component {
     state = {
@@ -35,6 +36,9 @@ class GamePage extends Component {
                         />
                     ))}
                 </div>
+                <Link exact to="/creategame">
+                    <Button renderAs="button" color="warning"><span>Create New Game</span></Button>
+                </Link>
             </React.Fragment>
         )
     }

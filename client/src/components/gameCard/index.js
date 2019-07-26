@@ -17,14 +17,18 @@ const GameCard = (props) => {
                 </Media>
             </Card.Content>
             <Card.Footer>
-                <Card.Footer.Item><Button color="success"><NavLink to={{
-                    pathname: '/init',
-                    state: {
-                        gameId: props.id
-                    }
-                }}>
-                    Join Game
-                </NavLink></Button></Card.Footer.Item>
+                <Card.Footer.Item>
+                    <NavLink to={{
+                        pathname: '/init',
+                        state: {
+                            gameId: props.id
+                        }
+                    }}>
+                        <Button color="success">
+                            Join Game
+                        </Button>
+                    </NavLink>
+                </Card.Footer.Item>
             </Card.Footer>
         </Card>
     );
