@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import List from '../../components/list';
 import InitCard from '../../components/initCard';
 import axios from 'axios';
 import io from 'socket.io-client';
@@ -9,6 +8,7 @@ import NavTabs from "../../components/navTabs";
 class InitPage extends Component {
     state = {
         characterList: [],
+        gameId: null,
         // endpoint: "localhost:3001"
     }
 
@@ -20,7 +20,8 @@ class InitPage extends Component {
 
     componentDidMount() {
         this.loadChars();
-        let room = this.props.gameId;
+        let room = this.props.location.state.gameId;
+        console.log(room);
         this.socket.on('connect', () => {
             // Connected, let's sign-up for to receive messages for this room
             this.socket.emit('room', room);
@@ -30,12 +31,20 @@ class InitPage extends Component {
         });
     }
 
-    loadChars = () => {
-        console.log("GameId: ", this.props.gameId);
-        axios.get('/api/v1/characters/' + this.props.gameId)
+    loadGameId = () => {
+        let gameId = this.props.location.state.gameId;
+        this.setState({ gameId });
+    }
+
+    loadChars = async () => {
+        await this.loadGameId();
+        axios.get('/api/v1/characters/' + this.state.gameId)
             .then(res => {
                 let characterList = res.data;
-                if (characterList !== this.state.characterList) {
+                if (characterList.length === 0) {
+                    alert("No Characters here yet");
+                }
+                else if (characterList !== this.state.characterList) {
                     this.send(this.setState({ characterList }));
                 }
             });
@@ -106,8 +115,8 @@ class InitPage extends Component {
     render() {
         return (
             <React.Fragment>
-                <NavTabs />
-                <List >
+                <NavTabs gameId={this.state.gameId} />
+                <div >
                     {this.state.characterList.map(character => (
                         <InitCard
                             character={character}
@@ -125,7 +134,7 @@ class InitPage extends Component {
                             currentOrder={this.state.characterList}
                         />
                     ))}
-                </List>
+                </div>
                 <Container id="buttons" fluid>
                     <Button color="success" onClick={this.resetEncounter}>Reset Encounter</Button>
                     <Button color="success" onClick={() => this.initSort(this.state.characterList)}>Initiative Sort</Button>
