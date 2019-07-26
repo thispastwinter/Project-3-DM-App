@@ -9,13 +9,13 @@ class InitPage extends Component {
     state = {
         characterList: [],
         gameId: null,
-        endpoint: "localhost:3001"
+        // endpoint: "localhost:3001"
     }
 
     constructor() {
         super();
-        // this.socket = io();
-        this.socket = io.connect(this.state.endpoint);
+        this.socket = io();
+        // this.socket = io.connect(this.state.endpoint);
     }
 
     componentDidMount() {
