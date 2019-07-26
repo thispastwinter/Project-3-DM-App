@@ -1,13 +1,15 @@
 const router = require('express').Router();
 const hueLightsController = require('../../controllers/huelights');
 
-router.route('/detect')
-  .post(hueLightsController.detect);
+router.route('/url')
+  .get(hueLightsController.url);
 router.route('/connect')
   .post(hueLightsController.connect);
 router.route('/alllights')
   .post(hueLightsController.allLights);
 router.route('/controllights')
   .post(hueLightsController.controlLights);
+router.route('/bridge')
+  .post(hueLightsController.bridge);
 
 module.exports = router;
