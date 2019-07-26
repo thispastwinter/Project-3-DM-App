@@ -9,5 +9,7 @@ router.route('/alllights')
   .post(hueLightsController.allLights);
 router.route('/controllights')
   .post(hueLightsController.controlLights);
+router.route('/bridge')
+  .post(hueLightsController.bridge);
 
 module.exports = router;

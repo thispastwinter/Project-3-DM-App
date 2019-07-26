@@ -11,24 +11,15 @@ class HuePage extends Component {
     lights: [],
     lightId: [],
     selectedLight: [],
-    loggedIn: false
+    loggedIn: false,
+    access_token: '',
+    refreshToken: ''
   }
 
   componentDidMount() {
-    // axios.post('/api/v1/huelights/detect')
-    //   .then(res => {
-    //     console.log(res.data)
-    //     let ip = res.data;
-    //     this.setState({ ip });
-    //   }).catch(err => {
-    //     console.log(err);
-    //   })
     const url = window.location.href;
-    // this.setState({ redirect: state })
-    // console.log(this.state.redirect)
-
     if (url.includes('code')) {
-      const code = url.split('code=')[1].split('&state=none')[0]; //.com/?=
+      const code = url.split('code=')[1].split('&state=none')[0]; //.com/?
       const hueState = url.split('&state=')[1];
       this.setState({ loggedIn: hueState })
       axios.post('/api/v1/huelights/connect', {
@@ -73,26 +64,11 @@ class HuePage extends Component {
   // This isn't ideal, tokens need to be stored server side for best security. 
 
   connectionHandler = () => {
-    const config = {
-      headers: {
-        'Authorization': `Bearer ${this.state.access_token}`,
-        'Content-Type': 'application/json'
-      }
-    }
-    axios.put('https://api.meethue.com/bridge/0/config', {
-      config,
-      data: {
-        "linkbutton": true
-      }
-    }).then(res => {
-      return axios.post('https://api.meethue.com/bridge/', {
-        config,
-        data: {
-          "device-type": "dm-companion"
-        }
-      })
-    })
-  
+    const accessToken = this.state.access_token;
+    console.log(accessToken)
+    axios.post('/api/v1/huelights/bridge', {
+      accessToken: accessToken
+    }).then(res => console.log(res)).catch(err => console.log(err))
   };
 
   findAllLights = () => {

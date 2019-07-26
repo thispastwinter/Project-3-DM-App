@@ -47,7 +47,7 @@ const generateNonce = async (req, res, next) => {
     console.log('Nonce Success', nonceSuccess);
     console.log('Why do did we not get an error?');
     res.status(500).send(nonceSuccess);
-  } catch(nonceFail) {
+  } catch (nonceFail) {
     req.nonce = nonceFail.response.headers['www-authenticate'].split(', ')[1].split('=')[1].replace(/['"]+/g, '');
     next();
   }
@@ -55,13 +55,13 @@ const generateNonce = async (req, res, next) => {
 
 const generateAuthKeys = async (req, res) => {
   try {
-    const{ data: hueToken } = await axios({
+    const { data: hueToken } = await axios({
       method: 'POST',
       url: `https://api.meethue.com/oauth2/token?code=${req.body.code}&grant_type=authorization_code`,
       headers: { Authorization: `Digest username="${clientId}", realm="oauth2_client@api.meethue.com", nonce="${req.nonce}", uri="/oauth2/token", response="${createHash(req.nonce)}"` }
     });
     res.json(hueToken);
-  } catch(err) {
+  } catch (err) {
     res.status(500).send(err);
   }
 };
@@ -73,6 +73,42 @@ const createHash = (nonce) => {
   return (response);
 }
 
+const connectPart1 = async (req, res, next) => {
+  const accessToken = req.body.accessToken;
+  try {
+    const { data: linkbutton } = await axios({
+      method: 'PUT',
+      url: 'https://api.meethue.com/bridge/0/config',
+      headers: {
+        'Authorization': `Bearer ${accessToken}`,
+        'Content-Type': 'application/json'
+      },
+      data: { linkbutton: true }
+    });
+    req.token = accessToken;
+    return next();
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+const connectPart2 = async (req, res) => {
+  try {
+    const { data: connect } = await axios({
+      method: 'POST',
+      url: 'https://api.meethue.com/bridge/',
+      headers: {
+        'Authorization': `Bearer ${req.token}`,
+        'Content-Type': 'application/json'
+      },
+      data: { 'devicetype': 'dmcompanion' }
+    });
+    res.send(connect);
+    console.log(connect);
+  } catch (err) {
+    console.log(err);
+  }
+}
 // Once all that is done requests can be made through https://api.meethue.com/bridge/<whitelist_identifier>
 
 // Follow this guide to complete the final step: https://developers.meethue.com/develop/hue-api/remote-api-quick-start-guide/
@@ -149,6 +185,7 @@ const controlLights = (req, res) => {
 }
 
 exports.url = sendUrl;
+exports.bridge = [connectPart1, connectPart2];
 exports.connect = [generateNonce, generateAuthKeys];
 exports.allLights = allLights;
 exports.controlLights = controlLights;
