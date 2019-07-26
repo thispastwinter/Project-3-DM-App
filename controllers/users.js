@@ -31,5 +31,14 @@ const findAll = async (req, res) => {
   }
 };
 
+const findOne = async (req, res) => {
+  try {
+    res.json(await db.Users.findOne({ where: { email: req.params.email } }));
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
 exports.create = create;
 exports.findAll = findAll;
+exports.findOne = findOne;

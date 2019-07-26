@@ -26,7 +26,8 @@
     "lint": "eslint --quiet .",
     "lint:fix": "eslint --fix .",
     "tests": "yarn kill && NODE_ENV=test nyc --reporter=html --reporter=text mocha tests/**/*.spec.js --exit",
-    "test:coverage": "nyc report --reporter=text-lcov | coveralls"
+    "test:coverage": "nyc report --reporter=text-lcov | coveralls",
+    "db:init": "node ./db/init.js"
   },
   "nodemonConfig": {
     "events": {
@@ -73,10 +74,12 @@
     "mysql2": "^1.6.5",
     "node-hue-api": "^2.4.6",
     "node-sass-chokidar": "1.3.5",
+    "nodemailer": "^6.3.0",
     "passport": "^0.4.0",
     "passport-google-oauth2": "^0.2.0",
     "passport-local": "^1.0.0",
     "passport-session": "^1.0.2",
+    "react-bootstrap": "^1.0.0-beta.9",
     "react-bulma-components": "^2.3.0",
     "react-editext": "^3.3.0",
     "sequelize": "^5.8.11",

@@ -14,7 +14,7 @@ export default class Initiative extends Component {
         return (
             <EdiText
                 type="number"
-                value={this.props.init}
+                value={this.props.init.toString()}
                 key={this.props.init}
                 onSave={this.onSave}
                 buttonsAlign='before'

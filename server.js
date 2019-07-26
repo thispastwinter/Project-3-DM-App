@@ -56,8 +56,13 @@ io.on('connection', (socket) => {
   socket.on('chat message', (msg) => {
     io.emit('chat message', msg);
   });
+  socket.on('room', (room) => {
+    socket.join(room);
+  });
   socket.on('listChange', (data) => {
-    socket.broadcast.emit('listChange', data);
+    const roomNum = data[0].GameId;
+    socket.to(roomNum).emit('listChange', data);
+    // socket.broadcast.emit('listChange', data);
   });
   socket.on('disconnect', () => {
     console.log('user disconnected'); // eslint-disable-line no-console
