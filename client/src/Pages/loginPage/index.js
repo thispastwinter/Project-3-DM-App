@@ -54,7 +54,7 @@ class LoginPage extends Component {
 
   render() {
     if (this.state.loginSuccess) {
-      return <Redirect to='/init' />
+      return <Redirect to='/game' />
     }
 
     return (

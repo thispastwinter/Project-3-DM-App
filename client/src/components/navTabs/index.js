@@ -4,7 +4,6 @@ import { Tabs } from 'react-bulma-components';
 
 
 function NavTabs(props) {
-    // let classString = props.isActive ? 'is-active' : '';
 
     return (
         <Tabs type='toggle' fullwidth={true}>
