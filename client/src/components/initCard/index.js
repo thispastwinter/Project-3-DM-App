@@ -1,6 +1,7 @@
 import React from 'react';
 import Initiative from '../initiative/index';
 import Health from '../health/index';
+import ArmorClass from '../armorClass/index';
 import { Card, Media, Image, Content, Heading, Button } from 'react-bulma-components';
 
 const InitCard = (props) => {
@@ -39,13 +40,13 @@ const InitCard = (props) => {
               </Media.Item>
             </Media>
             <Content>
-              Initiative: <Initiative {...props} />
+              Initiative: {props.init}
             </Content>
           </Card.Content>
-          <Card.Footer>
+          {/* <Card.Footer>
             {checkForTop(props.id)}
             {checkForDeath(props.health)}
-          </Card.Footer>
+          </Card.Footer> */}
         </Card>
       );
     }
@@ -62,7 +63,7 @@ const InitCard = (props) => {
               </Media.Item>
             </Media>
             <Content>
-              Initiative: <Initiative {...props} /> AC: {props.ac} <br /> Health: <Health {...props} />
+              Initiative: <Initiative {...props} /> AC: <ArmorClass {...props} /> Health: <Health {...props} />
             </Content>
           </Card.Content>
           <Card.Footer>

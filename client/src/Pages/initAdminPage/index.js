@@ -9,7 +9,7 @@ import NavTabs from "../../components/navTabs";
 class InitAdminPage extends Component {
     state = {
         characterList: [],
-        game_id: 1,
+        game_id: 2,
         endpoint: "localhost:3001"
     }
 
@@ -91,6 +91,7 @@ class InitAdminPage extends Component {
         axios.post('/api/v1/characters/' + updateId, {
             hit_points: updatedCharacter.hit_points,
             initiative: updatedCharacter.initiative,
+            armor_class: updatedCharacter.armor_class
         });
         this.send(this.setState({
             characterList: this.state.characterList
@@ -125,13 +126,12 @@ class InitAdminPage extends Component {
                             id={character.id}
                             key={character.id}
                             image={character.image}
-                            ac={character.armor_class}
+                            armorClass={character.armor_class}
                             init={character.initiative}
                             name={character.name}
                             health={character.hit_points}
                             turnDone={this.turnDone}
-                            editInit={this.editChar}
-                            editHealth={this.editChar}
+                            editChar={this.editChar}
                             removeChar={this.removeChar}
                             currentOrder={this.state.characterList}
                         />

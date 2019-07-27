@@ -84,7 +84,10 @@ class CreateCharacterPage extends Component {
             return <Redirect to={{
                 pathname: '/init',
                 state: {
-                    game_id: this.state.game_id
+                    game_id: this.state.game_id,
+                    secret: this.props.location.state.secret,
+                    game_name: this.props.location.state.game_name
+
                 }
             }} />
         }

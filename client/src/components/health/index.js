@@ -4,7 +4,7 @@ import EdiText from 'react-editext'
 export default class Health extends Component {
     // EdiText onSave is called with an argument of the new value
     onSave = val => {
-        this.props.editHealth({
+        this.props.editChar({
             ...this.props.character,
             hit_points: parseInt(val)
         });

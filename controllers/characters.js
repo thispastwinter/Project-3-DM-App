@@ -26,7 +26,7 @@ const addMonster = async (req, res) => {
       initiative: 0,
       armor_class: monster.armor_class,
       hit_points: monster.hit_points,
-      image: null,
+      image: './images/brute.png',
       turn_order: 0,
       strength: monster.strength,
       dexterity: monster.dexterity,
@@ -46,7 +46,7 @@ const addMonster = async (req, res) => {
 const updateChar = async (req, res) => {
   try {
     res.json(await db.Characters.update(
-      { hit_points: req.body.hit_points, initiative: req.body.initiative },
+      { hit_points: req.body.hit_points, initiative: req.body.initiative, armor_class: req.body.armor_class },
       { where: { id: req.params.id } },
     ));
   } catch (error) {
