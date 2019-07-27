@@ -25,14 +25,15 @@ class MonsterSearch extends Component {
   loadGameId = () => {
     let game_id = this.props.gameId;
     this.setState({ game_id });
+    console.log('GAME_ID', game_id);
   };
 
-  addMonster() {
+  addMonster(gameId) {
     // axios.get(`api/v1/monsters/${this.state.monsterName}`)
     //   .then(
     //     ({ data: results }) => this.setState({ results }))
     //   .catch(console.error);
-    axios.post('api/v1/characters/name/' + this.state.monsterName)
+    axios.post('api/v1/characters/name/' + this.state.monsterName + '&' + gameId)
       .then(result => { return result })
       .catch(console.error);
   }
@@ -55,7 +56,7 @@ class MonsterSearch extends Component {
           onChange={(e) => this.setState({ monsterName: e.target.value })}
           onSelect={(val) => this.setState({ monsterName: val })}
         />
-        <Button color="danger" onClick={this.addMonster}></Button>
+        <Button color="danger" onClick={() => this.addMonster(this.state.game_id)}></Button>
       </div>
     );
   }

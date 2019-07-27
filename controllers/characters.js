@@ -11,19 +11,17 @@ const create = async (req, res) => {
 
 const findAll = async (req, res) => {
   try {
-    res.json(await db.Characters.findAll({ where: { GameId: req.params.id }, order: [['turn_order', 'ASC']] }));
+    res.json(await db.Characters.findAll({ where: { game_id: req.params.id }, order: [['turn_order', 'ASC']] }));
   } catch (error) {
     res.status(500).send(error);
   }
 };
 
 const addMonster = async (req, res) => {
-  console.log('TESTING');
   try {
     const monster = await db.Monsters.findOne({ where: { name: req.params.name } });
     console.log('MONSTER', monster);
     const character = await db.Characters.create({
-      // where: { name: req.params.name },
       name: monster.name,
       initiative: 0,
       armor_class: monster.armor_class,
@@ -36,7 +34,7 @@ const addMonster = async (req, res) => {
       intelligence: monster.intelligence,
       wisdom: monster.wisdom,
       charisma: monster.charisma,
-      // game_id: req.params.game_id,
+      game_id: req.params.game_id,
     });
     res.json(character);
   } catch (error) {
