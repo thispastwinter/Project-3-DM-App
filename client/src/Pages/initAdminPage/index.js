@@ -2,44 +2,44 @@ import React, { Component } from 'react';
 import InitCard from '../../components/initCard';
 import axios from 'axios';
 import io from 'socket.io-client';
+import MonsterSearch from '../../components/monsterSearch';
 import { Button, Container } from 'react-bulma-components';
 import NavTabs from "../../components/navTabs";
 
 class InitAdminPage extends Component {
     state = {
         characterList: [],
-        // gameId: null,
-        gameId: 1
-        // endpoint: "localhost:3001"
+        gameId: 2,
+        endpoint: "localhost:3001"
     }
 
     constructor() {
         super();
-        this.socket = io();
-        // this.socket = io.connect(this.state.endpoint);
+        // this.socket = io();
+        this.socket = io.connect(this.state.endpoint);
     }
 
     componentDidMount() {
         this.loadChars();
         // let room = this.props.location.state.gameId;
         let room = this.state.gameId;
-        console.log(room);
         this.socket.on('connect', () => {
             // Connected, let's sign-up for to receive messages for this room
             this.socket.emit('room', room);
         });
         this.socket.on('listChange', (characterList) => {
+            console.log("Update received");
             this.setState({ characterList });
         });
     }
 
-    loadGameId = () => {
-        let gameId = this.props.location.state.gameId;
-        this.setState({ gameId });
-    }
+    // loadGameId = () => {
+    //     let gameId = this.props.location.state.gameId;
+    //     this.setState({ gameId });
+    // }
 
     loadChars = async () => {
-        await this.loadGameId();
+        // await this.loadGameId();
         axios.get('/api/v1/characters/' + this.state.gameId)
             .then(res => {
                 let characterList = res.data;
@@ -111,7 +111,6 @@ class InitAdminPage extends Component {
             return obj.initiative = parseInt(0);
         });
         this.turnOrderUpdate(characterList);
-        // this.send(this.setState({ characterList }));
     }
 
     render() {
@@ -140,6 +139,7 @@ class InitAdminPage extends Component {
                 <Container id="buttons" fluid>
                     <Button color="success" onClick={this.resetEncounter}>Reset Encounter</Button>
                     <Button color="success" onClick={() => this.initSort(this.state.characterList)}>Initiative Sort</Button>
+                    <MonsterSearch />
                 </Container>
             </React.Fragment>
         )

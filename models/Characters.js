@@ -64,16 +64,13 @@ module.exports = (sequelize, DataTypes) => {
     charisma: {
       type: DataTypes.INTEGER,
       allowNull: true,
-    },
+    }
   });
 
   Characters.associate = (models) => {
     models.Characters.belongsTo(models.Games, {
-      foreignKey: {
-        allowNull: false,
-        defaultValue: 1
-      }
-    })
+      foreignKey: 'game_id',
+    });
   }
 
   return Characters;

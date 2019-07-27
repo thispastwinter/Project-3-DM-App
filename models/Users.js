@@ -16,22 +16,6 @@ module.exports = (sequelize, DataTypes) => {
     },
     admin: {
       type: DataTypes.BOOLEAN,
-<<<<<<< HEAD
-      defaultValue: false,
-      allowNull: false,
-    },
-    // auth_token: {
-    //   type: DataTypes.STRING,
-    //   allowNull: true,
-    //   defaultValue: null,
-    // },
-    // refresh_token: {
-    //   type: DataTypes.STRING,
-    //   allowNull: true,
-    //   defaultValue: null,
-    // }
-
-=======
       defaultValue: true,
     },
     auth_token: {
@@ -44,7 +28,6 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true,
       defaultValue: null,
     },
->>>>>>> dev
     // auth_token: DataTypes.STRING,
   });
 

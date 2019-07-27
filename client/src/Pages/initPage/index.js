@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import InitCard from '../../components/initCard';
-import MonsterSearch from '../../components/monsterSearch';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import io from 'socket.io-client';
 import { Button, Container } from 'react-bulma-components';
@@ -22,7 +22,6 @@ class InitPage extends Component {
     componentDidMount() {
         this.loadChars();
         let room = this.props.location.state.gameId;
-        console.log(room);
         this.socket.on('connect', () => {
             // Connected, let's sign-up for to receive messages for this room
             this.socket.emit('room', room);
@@ -110,7 +109,6 @@ class InitPage extends Component {
             return obj.initiative = parseInt(0);
         });
         this.turnOrderUpdate(characterList);
-        // this.send(this.setState({ characterList }));
     }
 
     render() {
@@ -137,9 +135,16 @@ class InitPage extends Component {
                     ))}
                 </div>
                 <Container id="buttons" fluid>
-                    <Button color="success" onClick={this.resetEncounter}>Reset Encounter</Button>
-                    <Button color="success" onClick={() => this.initSort(this.state.characterList)}>Initiative Sort</Button>
-                    <MonsterSearch />
+                    <Link to={{
+                        pathname: '/createcharacter',
+                        state: {
+                            gameId: this.props.location.state.gameId
+                        }
+                    }}>
+                        <Button color="warning">
+                            Create Character
+                        </Button>
+                    </Link>
                 </Container>
             </React.Fragment>
         )

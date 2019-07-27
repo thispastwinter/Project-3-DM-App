@@ -10,6 +10,7 @@ import CreateGamePage from './Pages/createGamePage';
 import ForgotPasswordPage from './Pages/forgotPasswordPage'
 import InitAdminPage from './Pages/initAdminPage'
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import CreateCharacterPage from './Pages/createCharacterPage'
 
 class App extends Component {
 
@@ -26,6 +27,7 @@ class App extends Component {
             <Route exact path='/forgotpassword' component={ForgotPasswordPage} />
             <Route exact path='/game' component={GamePage} />
             <Route exact path='/creategame' component={CreateGamePage} />
+            <Route exact path='/createcharacter' component={CreateCharacterPage} />
           </Switch>
         </React.Fragment>
       </Router>

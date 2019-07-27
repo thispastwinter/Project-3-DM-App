@@ -60,7 +60,7 @@ io.on('connection', (socket) => {
     socket.join(room);
   });
   socket.on('listChange', (data) => {
-    const roomNum = data[0].GameId;
+    const roomNum = data[0].game_id;
     socket.to(roomNum).emit('listChange', data);
     // socket.broadcast.emit('listChange', data);
   });

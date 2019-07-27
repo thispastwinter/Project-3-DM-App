@@ -11,7 +11,7 @@ const create = async (req, res) => {
 
 const findAll = async (req, res) => {
   try {
-    res.json(await db.Characters.findAll({ where: { GameId: req.params.id }, order: [['turn_order', 'ASC']] }));
+    res.json(await db.Characters.findAll({ where: { game_id: req.params.id }, order: [['turn_order', 'ASC']] }));
   } catch (error) {
     res.status(500).send(error);
   }
@@ -59,3 +59,4 @@ exports.destroy = destroy;
 exports.updateChar = updateChar;
 exports.updateTurnOrder = updateTurnOrder;
 // exports.findMonster = findMonster;
+
