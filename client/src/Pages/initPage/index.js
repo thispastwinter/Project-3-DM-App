@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import List from '../../components/list';
 import InitCard from '../../components/initCard';
-import MonsterSearch from '../../components/monsterSearch';
-// import { Autocomplete } from 'react-autocomplete';
+// import MonsterSearch from '../../components/monsterSearch';
+import { Autocomplete } from 'react-autocomplete';
 import axios from 'axios';
 import io from 'socket.io-client';
 import { Button, Container } from 'react-bulma-components';
@@ -10,6 +10,7 @@ import { Button, Container } from 'react-bulma-components';
 class InitPage extends Component {
     state = {
         characterList: [],
+        monsterQuery: '',
         // endpoint: "localhost:3001"
     }
 
@@ -127,23 +128,23 @@ class InitPage extends Component {
                     ))}
                 </List>
                 <Container id="buttons" fluid>
-                    {/* <Autocomplete
-                        getItemValue={(item) => item.label}
+                    <Autocomplete
+                        getItemValue={(item) => item.name}
                         items={[
-                            { label: 'apple' },
+                            { name: 'slime', type: 'ooze' },
                             { label: 'banana' },
                             { label: 'pear' }
                         ]}
                         renderItem={(item, isHighlighted) =>
                             <div style={{ background: isHighlighted ? 'lightgray' : 'white' }}>
-                                {item.label}
+                                {item.name}
                             </div>
                         }
-                        value={value}
-                        onChange={(e) => value = e.target.value}
-                        onSelect={(val) => value = val}
-                    /> */}
-                    <MonsterSearch></MonsterSearch>
+                        value={this.state.monsterQuery}
+                        onChange={(e) => this.setState({ monsterQuery = e.target.value })}
+                        onSelect={(val) => this.setState({ monsterQuery = val })}
+                    />
+                    {/* <MonsterSearch></MonsterSearch> */}
                     <Button color="success" onClick={this.resetEncounter}>Reset Encounter</Button>
                     <Button color="success" onClick={() => this.initSort(this.state.characterList)}>Initiative Sort</Button>
                 </Container>

@@ -3,13 +3,16 @@ import axios from 'axios'
 
 class Search extends Component {
   state = {
-    query: '',
-    results: []
+    query: {},
+    // monsterList: [],
+    results: [],
   }
+
+  componentDidMount();
 
   getInfo = () => {
     axios.get(`api/v1/monsters/${this.state.query}`, {
-      name: this.state.name
+      name: this.state.query
     })
       .then(({ data }) => {
         console.log(data);

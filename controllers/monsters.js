@@ -16,5 +16,17 @@ const findAll = async (req, res) => {
   }
 };
 
+const list = async (req, res) => {
+  try {
+    const monsters = await db.Monsters.findAll({
+      attributes: ['name', 'type'],
+    });
+    res.json(monsters);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
 exports.findAllWhere = findAllWhere;
 exports.findAll = findAll;
+exports.list = list;
