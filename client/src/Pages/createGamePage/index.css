@@ -1,0 +1,12 @@
+.createGame {
+    padding: 60px 0;
+}
+
+.createGame form {
+    margin: 0 auto;
+    max-width: 320px;
+}
+
+.title {
+    text-align: center;
+}

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Heading, Columns } from 'react-bulma-components';
+import { Heading, Columns, Button } from 'react-bulma-components';
 import Lights from '../../components/lights';
 import axios from 'axios';
 import './index.css';
+import NavTabs from "../../components/navTabs";
 
 class HuePage extends Component {
   state = {
@@ -11,42 +12,72 @@ class HuePage extends Component {
     lights: [],
     lightId: [],
     selectedLight: [],
+    loggedIn: false,
+    access_token: '',
+    refreshToken: '',
+    gameId: null
   }
 
   componentDidMount() {
-    axios.post('/api/v1/huelights/detect')
-      .then(res => {
-        console.log(res.data)
-        let ip = res.data;
-        this.setState({ ip });
-      });
+    this.loadGameId();
+    const url = window.location.href;
+    if (url.includes('code')) {
+      const code = url.split('code=')[1].split('&state=none')[0]; //.com/?
+      const hueState = url.split('&state=')[1];
+      this.setState({ loggedIn: hueState })
+      axios.post('/api/v1/huelights/connect', {
+        code: code
+      }).then(res => {
+        const accessToken = res.data.access_token;
+        console.log(accessToken);
+        const refreshToken = res.data.refresh_token;
+        console.log(refreshToken)
+        this.setState({ access_token: accessToken });
+        this.setState({ refresh_token: refreshToken });
+      }).catch(err => {
+        console.log(err);
+      })
+    }
 
-    window.addEventListener("beforeunload", this.onUnload);
-    const stateObject = JSON.parse(localStorage.getItem("state"));
-    this.setState(stateObject);
+  //   window.addEventListener("beforeunload", this.onUnload);
+  //   const stateObject = JSON.parse(localStorage.getItem("state"));
+  //   this.setState(stateObject);
+
+
+  // }
+  // onUnload = (event) => {
+  //   localStorage.setItem("state", JSON.stringify(this.state));
+  // }
+
+  // componentWillUnmount() {
+  //   window.removeEventListener("beforeunload", this.onUnload)
+  // }
 
   }
+  // All secure information must be store in backend, including access tokens. Look in express-session for potential local storage options.
 
-  onUnload = (event) => {
-    localStorage.setItem("state", JSON.stringify(this.state));
-  }
+  redirect = () => {
+    axios.get('/api/v1/huelights/url').then(res => {
+      const url = res.data; 
+      console.log(url); 
+      window.location.href = url;
+    }).catch(err => {console.log(err)});
+  };
 
-  componentWillUnmount() {
-    window.removeEventListener("beforeunload", this.onUnload)
+  // Put request, followed by post, followed by getting all available lights
+  // This isn't ideal, tokens need to be stored server side for best security. 
+
+  loadGameId = () => {
+    let gameId = this.props.location.state.gameId;
+    this.setState({ gameId });
   }
 
   connectionHandler = () => {
-    axios.post('/api/v1/huelights/connect', {
-      host: this.state.ip
-    })
-      .then(res => {
-        console.log(res.data);
-        let user = res.data;
-        this.setState({ user })
-        this.findAllLights();
-      }).catch(function (error) {
-        if (error) alert('Make sure to hold bridge link when connecting!')
-      });
+    const accessToken = this.state.access_token;
+    console.log(accessToken)
+    axios.post('/api/v1/huelights/bridge', {
+      accessToken: accessToken
+    }).then(res => console.log(res)).catch(err => console.log(err))
   };
 
   findAllLights = () => {
@@ -117,28 +148,31 @@ class HuePage extends Component {
 
   render() {
     return (
-      <Columns.Column>
-        <Columns id="hue-box">
-          <Heading className="title-1">Hue Lights</Heading>
-          {this.state.ip.length > 0 ?
-            <div>
-              <Heading className="title-2" size={5}>Select a Light:</Heading>
-              <div className="select">
-                <select onChange={this.handleChange} value={this.state.selectedLight}>
-                  {this.state.lights.map((lights, index) => (
-                    <option value={this.state.lightId[index]} key={this.state.lightId[index]}>{lights}</option>
-                  ))}
-                </select>
-              </div>
-              <Lights
-                lightOn={this.lightOn}
-                lightOff={this.lightOff}
-                critical={this.criticalRoll}
-                lightning={this.lightning}
-                connection={this.connectionHandler}>
-              </Lights></div> : 'No Bridge Found'}
-        </Columns>
-      </Columns.Column>
+      <React.Fragment>
+        <NavTabs gameId={this.state.gameId} />
+        <Columns.Column>
+          <Columns id="hue-box">
+            <Heading className="title-1">Hue Lights</Heading>
+            {this.state.loggedIn ?
+              <div>
+                <Heading className="title-2" size={5}>Select a Light:</Heading>
+                <div className="select">
+                  <select onChange={this.handleChange} value={this.state.selectedLight}>
+                    {this.state.lights.map((lights, index) => (
+                      <option value={this.state.lightId[index]} key={this.state.lightId[index]}>{lights}</option>
+                    ))}
+                  </select>
+                </div>
+                <Lights
+                  lightOn={this.lightOn}
+                  lightOff={this.lightOff}
+                  critical={this.criticalRoll}
+                  lightning={this.lightning}
+                  connection={this.connectionHandler}>
+                </Lights></div> : <div><Button onClick={this.redirect}>Connect To Hue</Button></div>}
+          </Columns>
+        </Columns.Column>
+      </React.Fragment>
     );
   }
 }
