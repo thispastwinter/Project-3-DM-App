@@ -51,11 +51,9 @@ class CreateCharacterPage extends Component {
         try {
             const response = await axios.post('api/v1/characters', {
                 name: this.state.name,
-                initiative: 0,
                 armor_class: parseInt(this.state.armor_class),
                 hit_points: parseInt(this.state.hit_points),
                 image: './images/orc.png',
-                turn_order: 0,
                 strength: parseInt(this.state.strength),
                 dexterity: parseInt(this.state.dexterity),
                 constitution: parseInt(this.state.constitution),

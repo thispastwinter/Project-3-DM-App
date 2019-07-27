@@ -9,7 +9,7 @@ function NavTabs(props) {
         <Tabs type='toggle' fullwidth={true}>
             <Tabs.Tab renderAs="div">
                 <NavLink to={{
-                    pathname: '/init',
+                    pathname: '/initadmin',
                     state: { gameId: props.gameId }
                 }} activeClassName="is-active">
                     Initiative
