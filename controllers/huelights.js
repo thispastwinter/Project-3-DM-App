@@ -133,6 +133,16 @@ const detect = (req, res) => {
 //   });
 // }
 
+// const allLights = (req, res) => {
+//   let host = req.body.host;
+//   let user = req.body.user;
+//   let api = new HueApi(host, user);
+//   api.lights(function (err, lights) {
+//     if (err) throw err;
+//     res.json(lights);
+//   });
+// }
+
 const allLights = (req, res) => {
   let host = req.body.host;
   let user = req.body.user;
@@ -144,45 +154,80 @@ const allLights = (req, res) => {
 }
 
 const controlLights = (req, res) => {
-  const lightState = hue.lightState;
-  let host = req.body.host;
-  let username = req.body.username;
   let light = req.body.light;
-  let api = new HueApi(host, username);
-  let state;
-  switch (req.body.huestate) {
+  let user = req.body.user;
+  let token = req.body.token;
+  const lightFunction = (state, value) => {
+    axios({
+      method: 'PUT',
+      url: 'https://api.meethue.com/bridge/' + user + '/lights/' + light + '/state',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      data: {
+        'on': state,
+        'bri': value,
+        'alert': 'select'
+      }
+    }).then(res => console.log(res))
+      .catch(err => console.log(err));
+  }
+  switch (req.body.hueState) {
     case 'on':
-      state = lightState.create().on();
-      api.setLightState(light, state, function (err, lights) {
-        if (err) throw err;
-        res.json(lights)
-      });
+      lightFunction(true, 200);
       break;
     case 'off':
-      state = lightState.create().off();
-      api.setLightState(light, state, function (err, lights) {
-        if (err) throw err;
-        res.json(lights)
-      });
-      break;
-    case 'critical':
-      state = lightState.create().longAlert();
-      api.setLightState(light, state, function (err, lights) {
-        if (err) throw err;
-        res.json(lights)
-      });
+      lightFunction(false, null);
       break;
     case 'lightning':
-      lightning(api, light);
+      lightning(lightFunction(true, 200), lightFunction(true, 50))
       break;
-    default:
-      state = lightState.create().on();
-      api.setLightState(light, state, function (err, lights) {
-        if (err) throw err;
-        res.json(lights)
-      });
-  };
+  }
+
 }
+
+
+// const controlLights = (req, res) => {
+//   const lightState = hue.lightState;
+//   let host = req.body.host;
+//   let username = req.body.username;
+//   let light = req.body.light;
+//   let api = new HueApi(host, username);
+//   let state;
+//   switch (req.body.huestate) {
+//     case 'on':
+//       state = lightState.create().on();
+//       api.setLightState(light, state, function (err, lights) {
+//         if (err) throw err;
+//         res.json(lights)
+//       });
+//       break;
+//     case 'off':
+//       state = lightState.create().off();
+//       api.setLightState(light, state, function (err, lights) {
+//         if (err) throw err;
+//         res.json(lights)
+//       });
+//       break;
+//     case 'critical':
+//       state = lightState.create().longAlert();
+//       api.setLightState(light, state, function (err, lights) {
+//         if (err) throw err;
+//         res.json(lights)
+//       });
+//       break;
+//     case 'lightning':
+//       lightning(api, light);
+//       break;
+//     default:
+//       state = lightState.create().on();
+//       api.setLightState(light, state, function (err, lights) {
+//         if (err) throw err;
+//         res.json(lights)
+//       });
+//   };
+// }
 
 exports.url = sendUrl;
 exports.bridge = [connectPart1, connectPart2];
