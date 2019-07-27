@@ -9,7 +9,7 @@ class CreateGamePage extends Component {
         super(props);
         this.state = {
             name: '',
-            gameId: null,
+            game_id: null,
             createSuccess: false,
         };
         this.handleCreate = this.handleCreate.bind(this);
@@ -35,7 +35,7 @@ class CreateGamePage extends Component {
             if (response.data) {
                 console.log(response.data);
                 this.setState({
-                    gameId: response.data.id,
+                    game_id: response.data.id,
                     createSuccess: true,
                 });
             } else {
@@ -53,7 +53,7 @@ class CreateGamePage extends Component {
         if (this.state.createSuccess) {
             return <Redirect to={{
                 pathname: '/initadmin',
-                state: { gameId: this.state.gameId }
+                state: { game_id: this.state.game_id }
             }}
             />
         }

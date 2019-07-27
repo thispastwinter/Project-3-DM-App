@@ -9,15 +9,16 @@ class CreateCharacterPage extends Component {
         super(props);
         this.state = {
             name: '',
-            armor_class: 0,
-            hit_points: 0,
-            gameId: null,
-            strength: 0,
-            dexterity: 0,
-            constitution: 0,
-            intelligence: 0,
-            wisdom: 0,
-            charisma: 0
+            armor_class: '',
+            hit_points: '',
+            game_id: null,
+            strength: '',
+            dexterity: '',
+            constitution: '',
+            intelligence: '',
+            wisdom: '',
+            charisma: '',
+            isMonster: false,
         };
 
         this.handleLogin = this.handleLogin.bind(this);
@@ -39,9 +40,9 @@ class CreateCharacterPage extends Component {
     }
 
     loadGameId = () => {
-        let gameId = this.props.location.state.gameId;
-        console.log(gameId);
-        this.setState({ gameId });
+        let game_id = this.props.location.state.game_id;
+        console.log(game_id);
+        this.setState({ game_id });
     }
 
     async handleLogin(event) {
@@ -60,7 +61,8 @@ class CreateCharacterPage extends Component {
                 intelligence: parseInt(this.state.intelligence),
                 wisdom: parseInt(this.state.wisdom),
                 charisma: parseInt(this.state.charisma),
-                game_id: this.props.location.state.gameId,
+                game_id: this.props.location.state.game_id,
+                isMonster: this.state.isMonster
             });
             if (response.data) {
                 this.setState({
@@ -82,7 +84,7 @@ class CreateCharacterPage extends Component {
             return <Redirect to={{
                 pathname: '/init',
                 state: {
-                    gameId: this.state.gameId
+                    game_id: this.state.game_id
                 }
             }} />
         }

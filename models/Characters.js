@@ -64,6 +64,11 @@ module.exports = (sequelize, DataTypes) => {
     charisma: {
       type: DataTypes.INTEGER,
       allowNull: true,
+    },
+    isMonster: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      default: false
     }
   });
 

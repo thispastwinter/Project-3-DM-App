@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import InitCard from '../../components/initCard';
+import InitCardAdmin from '../../components/initCardAdmin';
 import axios from 'axios';
 import io from 'socket.io-client';
 import MonsterSearch from '../../components/monsterSearch';
@@ -9,7 +9,7 @@ import NavTabs from "../../components/navTabs";
 class InitAdminPage extends Component {
     state = {
         characterList: [],
-        gameId: 2,
+        game_id: 1,
         endpoint: "localhost:3001"
     }
 
@@ -22,7 +22,7 @@ class InitAdminPage extends Component {
     componentDidMount() {
         this.loadChars();
         // let room = this.props.location.state.gameId;
-        let room = this.state.gameId;
+        let room = this.state.game_id;
         this.socket.on('connect', () => {
             // Connected, let's sign-up for to receive messages for this room
             this.socket.emit('room', room);
@@ -34,13 +34,14 @@ class InitAdminPage extends Component {
     }
 
     // loadGameId = () => {
-    //     let gameId = this.props.location.state.gameId;
-    //     this.setState({ gameId });
+    //     let game_id = this.props.location.state.game_id;
+    //     this.setState({ game_id });
     // }
 
     loadChars = async () => {
         // await this.loadGameId();
-        axios.get('/api/v1/characters/' + this.state.gameId)
+        console.log("loading chars");
+        axios.get('/api/v1/characters/' + this.state.game_id)
             .then(res => {
                 let characterList = res.data;
                 if (characterList.length === 0) {
@@ -116,10 +117,10 @@ class InitAdminPage extends Component {
     render() {
         return (
             <React.Fragment>
-                <NavTabs gameId={this.state.gameId} />
+                <NavTabs game_id={this.state.game_id} />
                 <div >
                     {this.state.characterList.map(character => (
-                        <InitCard
+                        <InitCardAdmin
                             character={character}
                             id={character.id}
                             key={character.id}
@@ -139,7 +140,7 @@ class InitAdminPage extends Component {
                 <Container id="buttons" fluid>
                     <Button color="success" onClick={this.resetEncounter}>Reset Encounter</Button>
                     <Button color="success" onClick={() => this.initSort(this.state.characterList)}>Initiative Sort</Button>
-                    <MonsterSearch />
+                    <MonsterSearch game_id={this.state.game_id} loadChars={this.loadChars} />
                 </Container>
             </React.Fragment>
         )

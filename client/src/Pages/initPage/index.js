@@ -4,12 +4,12 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import io from 'socket.io-client';
 import { Button, Container } from 'react-bulma-components';
-import NavTabs from "../../components/navTabs";
+// import NavTabs from "../../components/navTabs";
 
 class InitPage extends Component {
     state = {
         characterList: [],
-        gameId: null,
+        game_id: null,
         // endpoint: "localhost:3001"
     }
 
@@ -21,7 +21,7 @@ class InitPage extends Component {
 
     componentDidMount() {
         this.loadChars();
-        let room = this.props.location.state.gameId;
+        let room = this.props.location.state.game_id;
         this.socket.on('connect', () => {
             // Connected, let's sign-up for to receive messages for this room
             this.socket.emit('room', room);
@@ -32,13 +32,14 @@ class InitPage extends Component {
     }
 
     loadGameId = () => {
-        let gameId = this.props.location.state.gameId;
-        this.setState({ gameId });
+        let game_id = this.props.location.state.game_id;
+        console.log(game_id);
+        this.setState({ game_id });
     }
 
     loadChars = async () => {
         await this.loadGameId();
-        axios.get('/api/v1/characters/' + this.state.gameId)
+        axios.get('/api/v1/characters/' + this.state.game_id)
             .then(res => {
                 let characterList = res.data;
                 if (characterList.length === 0) {
@@ -114,7 +115,9 @@ class InitPage extends Component {
     render() {
         return (
             <React.Fragment>
-                <NavTabs gameId={this.state.gameId} />
+                {/* <NavTabs game_id={this.state.game_id} /> */}
+                <h1>Game: {this.props.location.state.game_name}</h1>
+                <h1>Secret: {this.props.location.state.secret}</h1>
                 <div >
                     {this.state.characterList.map(character => (
                         <InitCard
@@ -131,6 +134,7 @@ class InitPage extends Component {
                             editHealth={this.editChar}
                             removeChar={this.removeChar}
                             currentOrder={this.state.characterList}
+                            isMonster={character.isMonster}
                         />
                     ))}
                 </div>
@@ -138,7 +142,7 @@ class InitPage extends Component {
                     <Link to={{
                         pathname: '/createcharacter',
                         state: {
-                            gameId: this.props.location.state.gameId
+                            game_id: this.props.location.state.game_id
                         }
                     }}>
                         <Button color="warning">

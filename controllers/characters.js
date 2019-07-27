@@ -35,6 +35,7 @@ const addMonster = async (req, res) => {
       wisdom: monster.wisdom,
       charisma: monster.charisma,
       game_id: req.params.game_id,
+      isMonster: true,
     });
     res.json(character);
   } catch (error) {

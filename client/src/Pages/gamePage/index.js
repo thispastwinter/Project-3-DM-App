@@ -32,6 +32,7 @@ class GamePage extends Component {
                             id={game.id}
                             key={game.id}
                             name={game.name}
+                            secret={game.secret}
                         />
                     ))}
                 </div>

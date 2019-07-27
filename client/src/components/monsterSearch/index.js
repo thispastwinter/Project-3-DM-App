@@ -23,18 +23,18 @@ class MonsterSearch extends Component {
   };
 
   loadGameId = () => {
-    let game_id = this.props.gameId;
+    let game_id = this.props.game_id;
     this.setState({ game_id });
     console.log('GAME_ID', game_id);
   };
 
-  addMonster(gameId) {
+  addMonster(game_id) {
     // axios.get(`api/v1/monsters/${this.state.monsterName}`)
     //   .then(
     //     ({ data: results }) => this.setState({ results }))
     //   .catch(console.error);
-    axios.post('api/v1/characters/name/' + this.state.monsterName + '&' + gameId)
-      .then(result => { return result })
+    axios.post('api/v1/characters/name/' + this.state.monsterName + '&' + game_id)
+      .then(() => this.props.loadChars())
       .catch(console.error);
   }
 
