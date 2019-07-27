@@ -10,7 +10,8 @@ class CreateUserPage extends Component {
         this.state = {
             name: '',
             gameId: null,
-            createSuccess: false
+            createSuccess: false,
+            secret: null,
         };
 
         this.handleCreate = this.handleCreate.bind(this);
@@ -29,11 +30,14 @@ class CreateUserPage extends Component {
 
     async handleCreate(event) {
         event.preventDefault();
+        let secret = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 8);
+        this.setState({ secret });
 
 
         try {
             const response = await axios.post('api/v1/games', {
                 name: this.state.name,
+                secret: this.state.secret
             });
             if (response.data) {
                 console.log(response.data);
@@ -55,7 +59,7 @@ class CreateUserPage extends Component {
     render() {
         if (this.state.createSuccess) {
             return <Redirect to={{
-                pathname: '/init',
+                pathname: '/initadmin',
                 state: { gameId: this.state.gameId }
             }}
             />
