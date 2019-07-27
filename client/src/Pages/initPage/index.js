@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import InitCard from '../../components/initCard';
+import MonsterSearch from '../../components/monsterSearch';
 import axios from 'axios';
 import io from 'socket.io-client';
 import { Button, Container } from 'react-bulma-components';
@@ -138,6 +139,7 @@ class InitPage extends Component {
                 <Container id="buttons" fluid>
                     <Button color="success" onClick={this.resetEncounter}>Reset Encounter</Button>
                     <Button color="success" onClick={() => this.initSort(this.state.characterList)}>Initiative Sort</Button>
+                    <MonsterSearch />
                 </Container>
             </React.Fragment>
         )
