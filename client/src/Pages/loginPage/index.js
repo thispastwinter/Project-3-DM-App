@@ -15,7 +15,7 @@ class LoginPage extends Component {
     };
 
     this.handleLogin = this.handleLogin.bind(this);
-  }
+  };
 
   validateForm() {
     return this.state.email.length > 0 && this.state.password.length > 0;
@@ -25,7 +25,7 @@ class LoginPage extends Component {
     this.setState({
       [event.target.id]: event.target.value
     });
-  }
+  };
 
   async handleLogin(event) {
     event.preventDefault();
@@ -49,7 +49,7 @@ class LoginPage extends Component {
         loginSuccess: false,
       })
     }
-  }
+  };
 
   render() {
     if (this.state.loginSuccess) {
@@ -94,7 +94,7 @@ class LoginPage extends Component {
         </form>
       </div >
     );
-  }
+  };
 }
 
 export default LoginPage;

@@ -61,7 +61,7 @@ class CreateUserPage extends Component {
 
     render() {
         if (this.state.createSuccess) {
-            return <Redirect to='/init' />
+            return <Redirect to='/game' />
         }
 
         return (
