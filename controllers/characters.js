@@ -11,7 +11,32 @@ const create = async (req, res) => {
 
 const findAll = async (req, res) => {
   try {
-    res.json(await db.Characters.findAll({ where: { GameId: req.params.id }, order: [['turn_order', 'ASC']] }));
+    res.json(await db.Characters.findAll({ where: { game_id: req.params.id }, order: [['turn_order', 'ASC']] }));
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
+const addMonster = async (req, res) => {
+  try {
+    const monster = await db.Monsters.findOne({ where: { name: req.params.name } });
+    console.log('MONSTER', monster);
+    const character = await db.Characters.create({
+      name: monster.name,
+      initiative: 0,
+      armor_class: monster.armor_class,
+      hit_points: monster.hit_points,
+      image: null,
+      turn_order: 0,
+      strength: monster.strength,
+      dexterity: monster.dexterity,
+      constitution: monster.constitution,
+      intelligence: monster.intelligence,
+      wisdom: monster.wisdom,
+      charisma: monster.charisma,
+      game_id: req.params.game_id,
+    });
+    res.json(character);
   } catch (error) {
     res.status(500).send(error);
   }
@@ -30,7 +55,7 @@ const updateChar = async (req, res) => {
   try {
     res.json(await db.Characters.update(
       { hit_points: req.body.hit_points, initiative: req.body.initiative },
-      { where: { id: req.params.id } }
+      { where: { id: req.params.id } },
     ));
   } catch (error) {
     res.status(500).send(error);
@@ -58,4 +83,4 @@ exports.findAll = findAll;
 exports.destroy = destroy;
 exports.updateChar = updateChar;
 exports.updateTurnOrder = updateTurnOrder;
-// exports.findMonster = findMonster;
+exports.addMonster = addMonster;

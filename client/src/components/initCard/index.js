@@ -49,4 +49,3 @@ const InitCard = (props) => {
 }
 
 export default InitCard;
-

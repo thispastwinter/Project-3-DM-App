@@ -69,10 +69,7 @@ module.exports = (sequelize, DataTypes) => {
 
   Characters.associate = (models) => {
     models.Characters.belongsTo(models.Games, {
-      foreignKey: {
-        allowNull: false,
-        defaultValue: 1
-      }
+      foreignKey: 'game_id',
     })
   }
 
