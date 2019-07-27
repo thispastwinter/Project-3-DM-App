@@ -3,37 +3,33 @@ import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import { Button, Form, Container } from 'react-bulma-components';
 import './index.css';
-
 class CreateUserPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
             name: '',
             gameId: null,
-            createSuccess: false
+            createSuccess: false,
         };
-
         this.handleCreate = this.handleCreate.bind(this);
     }
-
     validateForm() {
         return this.state.name.length > 0;
     };
-
     handleChange = event => {
         const value = event.target.value;
         this.setState({
             [event.target.id]: value
         });
     }
-
     async handleCreate(event) {
         event.preventDefault();
-
+        let secret = Math.random().toString(36).replace(/[^a-zA-Z0-9]+/g, '').substr(0, 8);
 
         try {
             const response = await axios.post('api/v1/games', {
                 name: this.state.name,
+                secret: secret
             });
             if (response.data) {
                 console.log(response.data);
@@ -55,7 +51,7 @@ class CreateUserPage extends Component {
     render() {
         if (this.state.createSuccess) {
             return <Redirect to={{
-                pathname: '/init',
+                pathname: '/initadmin',
                 state: { gameId: this.state.gameId }
             }}
             />

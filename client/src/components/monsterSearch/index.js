@@ -9,18 +9,30 @@ class MonsterSearch extends Component {
     this.state = {
       monsterName: '',
       monsterList: [],
-      results: [],
+      game_id: null,
+      // results: [],
     };
+    this.addMonster = this.addMonster.bind(this);
   }
 
   componentDidMount() {
+    this.loadGameId();
     axios.get('/api/v1/monsters/list')
       .then(({ data: monsterList }) => this.setState({ monsterList }))
       .catch(console.error);
   };
 
+  loadGameId = () => {
+    let game_id = this.props.gameId;
+    this.setState({ game_id });
+  };
+
   addMonster() {
-    axios.post(`api/v1/characters/${this.state.monsterName}`)
+    // axios.get(`api/v1/monsters/${this.state.monsterName}`)
+    //   .then(
+    //     ({ data: results }) => this.setState({ results }))
+    //   .catch(console.error);
+    axios.post('api/v1/characters/name/' + this.state.monsterName)
       .then(result => { return result })
       .catch(console.error);
   }

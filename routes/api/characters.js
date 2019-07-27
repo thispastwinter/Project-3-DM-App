@@ -14,7 +14,7 @@ router.route('/:id')
   .post(characterController.updateChar)
   .delete(characterController.destroy);
 
-router.route('/:name')
+router.route('/name/:name')
   .post(characterController.addMonster);
 
 module.exports = router;

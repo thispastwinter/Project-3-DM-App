@@ -139,7 +139,7 @@ class InitPage extends Component {
                 <Container id="buttons" fluid>
                     <Button color="success" onClick={this.resetEncounter}>Reset Encounter</Button>
                     <Button color="success" onClick={() => this.initSort(this.state.characterList)}>Initiative Sort</Button>
-                    <MonsterSearch />
+                    <MonsterSearch gameId={this.state.gameId} />
                 </Container>
             </React.Fragment>
         )

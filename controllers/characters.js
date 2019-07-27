@@ -18,26 +18,31 @@ const findAll = async (req, res) => {
 };
 
 const addMonster = async (req, res) => {
+  console.log('TESTING');
   try {
-    const monster = await db.Monsters.create({ where: { name: req.params.name },
-      name: req.body.name,
+    const monster = await db.Monsters.findOne({ where: { name: req.params.name } });
+    console.log('MONSTER', monster);
+    const character = await db.Characters.create({
+      // where: { name: req.params.name },
+      name: monster.name,
       initiative: 0,
-      armor_class: req.body.armor_class,
-      hit_points: req.body.hit_points,
+      armor_class: monster.armor_class,
+      hit_points: monster.hit_points,
       image: null,
       turn_order: 0,
-      strength: req.body.strength,
-      dexterity: req.body.dexterity,
-      constitution: req.body.constitution,
-      intelligence: req.body.intelligence,
-      wisdom: req.body.wisdom,
-      charisma: req.body.charisma,
+      strength: monster.strength,
+      dexterity: monster.dexterity,
+      constitution: monster.constitution,
+      intelligence: monster.intelligence,
+      wisdom: monster.wisdom,
+      charisma: monster.charisma,
+      // game_id: req.params.game_id,
     });
-    res.json(monster);
+    res.json(character);
   } catch (error) {
     res.status(500).send(error);
   }
-}
+};
 
 // const findMonster = async (req, res) => {
 //   try {
@@ -52,7 +57,7 @@ const updateChar = async (req, res) => {
   try {
     res.json(await db.Characters.update(
       { hit_points: req.body.hit_points, initiative: req.body.initiative },
-      { where: { id: req.params.id } }
+      { where: { id: req.params.id } },
     ));
   } catch (error) {
     res.status(500).send(error);
