@@ -12,21 +12,17 @@ class CreateGamePage extends Component {
             gameId: null,
             createSuccess: false,
         };
-
         this.handleCreate = this.handleCreate.bind(this);
     }
-
     validateForm() {
         return this.state.name.length > 0;
     };
-
     handleChange = event => {
         const value = event.target.value;
         this.setState({
             [event.target.id]: value
         });
     }
-
     async handleCreate(event) {
         event.preventDefault();
         let secret = Math.random().toString(36).replace(/[^a-zA-Z0-9]+/g, '').substr(0, 8);

@@ -1,39 +1,63 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Autocomplete from 'react-autocomplete';
+import { Button } from 'react-bulma-components';
+
 class MonsterSearch extends Component {
   constructor(props) {
     super(props);
     this.state = {
       monsterName: '',
       monsterList: [],
-      results: [],
+      game_id: null,
+      // results: [],
     };
+    this.addMonster = this.addMonster.bind(this);
   }
 
   componentDidMount() {
-    axios.get(`/api/v1/monsters/list`)
+    this.loadGameId();
+    axios.get('/api/v1/monsters/list')
       .then(({ data: monsterList }) => this.setState({ monsterList }))
       .catch(console.error);
   };
 
+  loadGameId = () => {
+    let game_id = this.props.gameId;
+    this.setState({ game_id });
+    console.log('GAME_ID', game_id);
+  };
+
+  addMonster(gameId) {
+    // axios.get(`api/v1/monsters/${this.state.monsterName}`)
+    //   .then(
+    //     ({ data: results }) => this.setState({ results }))
+    //   .catch(console.error);
+    axios.post('api/v1/characters/name/' + this.state.monsterName + '&' + gameId)
+      .then(result => { return result })
+      .catch(console.error);
+  }
+
   render() {
     return (
-      <Autocomplete
-        getItemValue={(monster) => monster.name}
-        items={this.state.monsterList}
-        shouldItemRender={(monster, value) =>
-          monster.name.toLowerCase().includes(value.toLowerCase())
-        }
-        renderItem={(monster, isHighlighted) =>
-          <div style={{ background: isHighlighted ? 'lightgray' : 'white' }}>
-            {monster.name}
-          </div>
-        }
-        value={this.state.monsterName}
-        onChange={(e) => this.setState({ monsterName: e.target.value })}
-        onSelect={(val) => this.setState({ monsterName: val })}
-      />
+      <div>
+        <Autocomplete
+          getItemValue={(monster) => monster.name}
+          items={this.state.monsterList}
+          shouldItemRender={(monster, value) =>
+            monster.name.toLowerCase().includes(value.toLowerCase())
+          }
+          renderItem={(monster, isHighlighted) =>
+            <div style={{ background: isHighlighted ? 'lightgray' : 'white' }}>
+              {monster.name}
+            </div>
+          }
+          value={this.state.monsterName}
+          onChange={(e) => this.setState({ monsterName: e.target.value })}
+          onSelect={(val) => this.setState({ monsterName: val })}
+        />
+        <Button color="danger" onClick={() => this.addMonster(this.state.game_id)}></Button>
+      </div>
     );
   }
 }

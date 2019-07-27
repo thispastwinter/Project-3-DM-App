@@ -1,66 +1,47 @@
-const hue = require('node-hue-api');
-
-module.exports = lightning = (api, light) => {
-  const lightState = hue.lightState;
-  let state;
+module.exports = lightning = (method, method2) => {
   setTimeout(function () {
-    state = lightState.create().off();
-    api.setLightState(light, state);
+    method;
   }, 0);
   setTimeout(function () {
-    state = lightState.create().on().brightness(0);
-    api.setLightState(light, state);
+    method2;
   }, 20);
   setTimeout(function () {
-    state = lightState.create().on().brightness(100);
-    api.setLightState(light, state);
+    method;
   }, 100);
   setTimeout(function () {
-    state = lightState.create().on().brightness(0);
-    api.setLightState(light, state);
+    method2;
   }, 300);
   setTimeout(function () {
-    state = lightState.create().on().brightness(100);
-    api.setLightState(light, state);
+    method;
   }, 700);
   setTimeout(function () {
-    state = lightState.create().on().brightness(0);
-    api.setLightState(light, state);
+    method2;
   }, 945);
   setTimeout(function () {
-    state = lightState.create().on().brightness(100);
-    api.setLightState(light, state);
+    method;
   }, 1100);
   setTimeout(function () {
-    state = lightState.create().on().brightness(0);
-    api.setLightState(light, state);
+    method2;
   }, 1300);
   setTimeout(function () {
-    state = lightState.create().on().brightness(100);
-    api.setLightState(light, state);
+    method;
   }, 1600);
   setTimeout(function () {
-    state = lightState.create().on().brightness(0);
-    api.setLightState(light, state);
+    method2;
   }, 1955);
   setTimeout(function () {
-    state = lightState.create().on().brightness(100);
-    api.setLightState(light, state);
+    method;
   }, 2150);
   setTimeout(function () {
-    state = lightState.create().on().brightness(0);
-    api.setLightState(light, state);
+    method2;
   }, 2300);
   setTimeout(function () {
-    state = lightState.create().on().brightness(100);
-    api.setLightState(light, state);
+    method;
   }, 2500);
   setTimeout(function () {
-    state = lightState.create().off();
-    api.setLightState(light, state);
+    method2
   }, 3000);
   setTimeout(function () {
-    state = lightState.create().on().brightness(50);
-    api.setLightState(light, state);
+    method;
   }, 4000);
 };

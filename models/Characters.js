@@ -71,7 +71,7 @@ module.exports = (sequelize, DataTypes) => {
     models.Characters.belongsTo(models.Games, {
       foreignKey: 'game_id',
     });
-  }
+  };
 
   return Characters;
 }

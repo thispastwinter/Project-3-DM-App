@@ -6,13 +6,12 @@ router.route('/')
   .post(characterController.create)
   .put(characterController.updateTurnOrder);
 
-// router.route('/monsters/:name')
-  // .get(characterController.findMonster);
-
 router.route('/:id')
   .get(characterController.findAll)
   .post(characterController.updateChar)
   .delete(characterController.destroy);
 
+router.route('/name/:name&:game_id')
+  .post(characterController.addMonster);
 
 module.exports = router;
