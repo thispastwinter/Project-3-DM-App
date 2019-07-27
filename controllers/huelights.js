@@ -167,8 +167,7 @@ const controlLights = (req, res) => {
       },
       data: {
         'on': state,
-        'bri': value,
-        'alert': 'select'
+        'bri': value
       }
     }).then(res => console.log(res))
       .catch(err => console.log(err));
