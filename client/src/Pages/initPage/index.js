@@ -10,6 +10,7 @@ import { Button, Container } from 'react-bulma-components';
 class InitPage extends Component {
     state = {
         characterList: [],
+        monsterList: [],
         monsterQuery: '',
         // endpoint: "localhost:3001"
     }
@@ -22,6 +23,7 @@ class InitPage extends Component {
 
     componentDidMount() {
         this.loadChars();
+        // this.loadMonsters();
         let room = this.props.gameId;
         this.socket.on('connect', () => {
             // Connected, let's sign-up for to receive messages for this room
@@ -31,6 +33,16 @@ class InitPage extends Component {
             this.setState({ characterList });
         });
     }
+
+    // loadMonsters = () => {
+    //     axios.get('/api/v1/monsters/list')
+    //       .then(({ data }) => {
+    //         // console.log(data);
+    //         this.setState({
+    //           monsterList: data
+    //         })
+    //       })
+    //   } 
 
     loadChars = () => {
         console.log("GameId: ", this.props.gameId);
@@ -141,8 +153,8 @@ class InitPage extends Component {
                             </div>
                         }
                         value={this.state.monsterQuery}
-                        onChange={(e) => this.setState({ monsterQuery = e.target.value })}
-                        onSelect={(val) => this.setState({ monsterQuery = val })}
+                        onChange={(e) => this.setState({ monsterQuery: e.target.value })}
+                        onSelect={(val) => this.setState({ monsterQuery: val })}
                     />
                     {/* <MonsterSearch></MonsterSearch> */}
                     <Button color="success" onClick={this.resetEncounter}>Reset Encounter</Button>

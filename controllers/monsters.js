@@ -19,7 +19,7 @@ const findAll = async (req, res) => {
 const list = async (req, res) => {
   try {
     const monsters = await db.Monsters.findAll({
-      attributes: ['name', 'type'],
+      attributes: ['index', 'name', 'type', 'armor_class', 'hit_points', 'strength', 'dexterity', 'constitution', 'intelligence', 'wisdom', 'charisma'],
     });
     res.json(monsters);
   } catch (error) {
