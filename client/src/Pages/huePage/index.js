@@ -15,7 +15,8 @@ class HuePage extends Component {
     loggedIn: false,
     access_token: '',
     username: '',
-    gameId: null
+    gameId: null,
+    expired: false
   }
 
   componentDidMount() {
@@ -26,7 +27,7 @@ class HuePage extends Component {
 
     const url = window.location.href;
     if (url.includes('code')) {
-      const code = url.split('.com/?code=')[1].split('&state=none')[0];
+      const code = url.split('.com/hue?code=')[1].split('&state=none')[0];
       const hueState = url.split('&state=')[1];
       this.setState({ loggedIn: hueState })
       axios.post('/api/v1/huelights/connect', {
@@ -42,8 +43,6 @@ class HuePage extends Component {
 
   }
 
-  
-
     onUnload = (event) => {
       localStorage.setItem("state", JSON.stringify(this.state));
     }
@@ -51,8 +50,6 @@ class HuePage extends Component {
     componentWillUnmount() {
       window.removeEventListener("beforeunload", this.onUnload)
     }
-
-  
 
   // All secure information must be store in backend, including access tokens. Look in express-session for potential local storage options.
 
@@ -81,7 +78,8 @@ class HuePage extends Component {
       const userName = res.data[0].success.username;
       this.setState({ username: userName })
       console.log(res.data[0].success.username)
-    }).catch(err => console.log(err))
+    }).catch( 
+      this.setState({ expired: true }))
   };
 
   findAllLights = () => {
@@ -169,7 +167,7 @@ class HuePage extends Component {
         <Columns.Column>
           <Columns id="hue-box">
             <Heading className="title-1">Hue Lights</Heading>
-            {this.state.loggedIn ?
+            {!this.state.expired ?
               <div>
                 <Heading className="title-2" size={5}>Select a Light:</Heading>
                 <div className="select">
