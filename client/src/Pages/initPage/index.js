@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import List from '../../components/list';
 import InitCard from '../../components/initCard';
-// import MonsterSearch from '../../components/monsterSearch';
-import { Autocomplete } from 'react-autocomplete';
+import MonsterSearch from '../../components/monsterSearch';
 import axios from 'axios';
 import io from 'socket.io-client';
 import { Button, Container } from 'react-bulma-components';
@@ -140,25 +139,9 @@ class InitPage extends Component {
                     ))}
                 </List>
                 <Container id="buttons" fluid>
-                    <Autocomplete
-                        getItemValue={(item) => item.name}
-                        items={[
-                            { name: 'slime', type: 'ooze' },
-                            { label: 'banana' },
-                            { label: 'pear' }
-                        ]}
-                        renderItem={(item, isHighlighted) =>
-                            <div style={{ background: isHighlighted ? 'lightgray' : 'white' }}>
-                                {item.name}
-                            </div>
-                        }
-                        value={this.state.monsterQuery}
-                        onChange={(e) => this.setState({ monsterQuery: e.target.value })}
-                        onSelect={(val) => this.setState({ monsterQuery: val })}
-                    />
-                    {/* <MonsterSearch></MonsterSearch> */}
                     <Button color="success" onClick={this.resetEncounter}>Reset Encounter</Button>
                     <Button color="success" onClick={() => this.initSort(this.state.characterList)}>Initiative Sort</Button>
+                    <MonsterSearch />
                 </Container>
             </div>
         )

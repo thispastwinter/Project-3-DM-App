@@ -1,51 +1,41 @@
-import React, { Component } from 'react'
-import axios from 'axios' 
-
-class Search extends Component {
-  state = {
-    query: {},
-    // monsterList: [],
-    results: [],
+import React, { Component } from 'react';
+import axios from 'axios';
+import Autocomplete from 'react-autocomplete';
+class MonsterSearch extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      monsterName: '',
+      monsterList: [],
+      results: [],
+    };
   }
 
-  componentDidMount();
-
-  getInfo = () => {
-    axios.get(`api/v1/monsters/${this.state.query}`, {
-      name: this.state.query
-    })
-      .then(({ data }) => {
-        console.log(data);
-        this.setState({
-          results: data
-        })
-      })
-  }
-
-  handleInputChange = () => {
-    this.setState({
-      query: this.search.value
-    }, () => {
-      if (this.state.query && this.state.query.length > 1) {
-        if (this.state.query.length % 2 === 0) {
-          this.getInfo()
-        }
-      }
-    })
-  }
+  componentDidMount() {
+    axios.get(`/api/v1/monsters/list`)
+      .then(({ data: monsterList }) => this.setState({ monsterList }))
+      .catch(console.error);
+  };
 
   render() {
     return (
-      <form>
-        <input
-          placeholder="Search for..."
-          ref={input => this.search = input}
-          onChange={this.handleInputChange}
-        />
-        <p>{this.state.query}</p>
-      </form>
-    )
+      <Autocomplete
+        getItemValue={(monster) => monster.name}
+        items={this.state.monsterList}
+        shouldItemRender={(monster, value) =>
+          monster.name.toLowerCase().includes(value.toLowerCase())
+        }
+        renderItem={(monster, isHighlighted) =>
+          <div style={{ background: isHighlighted ? 'lightgray' : 'white' }}>
+            {monster.name}
+          </div>
+        }
+        value={this.state.monsterName}
+        onChange={(e) => this.setState({ monsterName: e.target.value })}
+        onSelect={(val) => this.setState({ monsterName: val })}
+      />
+    );
   }
 }
 
-export default Search;
+export default MonsterSearch;
