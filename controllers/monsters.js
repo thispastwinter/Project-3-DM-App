@@ -27,6 +27,8 @@ const list = async (req, res) => {
   }
 };
 
+// const addMonster = 
+
 exports.findAllWhere = findAllWhere;
 exports.findAll = findAll;
 exports.list = list;
