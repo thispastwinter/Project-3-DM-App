@@ -19,15 +19,13 @@ const findAll = async (req, res) => {
 const list = async (req, res) => {
   try {
     const monsters = await db.Monsters.findAll({
-      attributes: ['index', 'name', 'type', 'armor_class', 'hit_points', 'strength', 'dexterity', 'constitution', 'intelligence', 'wisdom', 'charisma'],
+      attributes: ['name', 'armor_class', 'hit_points', 'strength', 'dexterity', 'constitution', 'intelligence', 'wisdom', 'charisma'],
     });
     res.json(monsters);
   } catch (error) {
     res.status(500).send(error);
   }
 };
-
-// const addMonster = 
 
 exports.findAllWhere = findAllWhere;
 exports.findAll = findAll;

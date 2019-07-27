@@ -17,6 +17,28 @@ const findAll = async (req, res) => {
   }
 };
 
+const addMonster = async (req, res) => {
+  try {
+    const monster = await db.Monsters.create({ where: { name: req.params.name },
+      name: req.body.name,
+      initiative: 0,
+      armor_class: req.body.armor_class,
+      hit_points: req.body.hit_points,
+      image: null,
+      turn_order: 0,
+      strength: req.body.strength,
+      dexterity: req.body.dexterity,
+      constitution: req.body.constitution,
+      intelligence: req.body.intelligence,
+      wisdom: req.body.wisdom,
+      charisma: req.body.charisma,
+    });
+    res.json(monster);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+}
+
 // const findMonster = async (req, res) => {
 //   try {
 //     const monster = await monstersDb.find(m => m.name === req.params.name);
@@ -58,4 +80,4 @@ exports.findAll = findAll;
 exports.destroy = destroy;
 exports.updateChar = updateChar;
 exports.updateTurnOrder = updateTurnOrder;
-// exports.findMonster = findMonster;
+exports.addMonster = addMonster;

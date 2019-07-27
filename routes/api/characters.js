@@ -7,12 +7,14 @@ router.route('/')
   .put(characterController.updateTurnOrder);
 
 // router.route('/monsters/:name')
-  // .get(characterController.findMonster);
+// .get(characterController.findMonster);
 
 router.route('/:id')
   .get(characterController.findAll)
   .post(characterController.updateChar)
   .delete(characterController.destroy);
 
+router.route('/:name')
+  .post(characterController.addMonster);
 
 module.exports = router;

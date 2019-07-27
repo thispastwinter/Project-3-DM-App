@@ -28,6 +28,11 @@ class CreateUserPage extends Component {
         });
     }
 
+    // validateEmail = email => {
+    //     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    //     return re.test(String(email).toLowerCase());
+    // }
+
     async handleLogin(event) {
         event.preventDefault();
 
@@ -61,7 +66,7 @@ class CreateUserPage extends Component {
 
     render() {
         if (this.state.createSuccess) {
-            return <Redirect to='/init' />
+            return <Redirect to='/game' />
         }
 
         return (
@@ -72,9 +77,9 @@ class CreateUserPage extends Component {
                         <Form.Label>Email</Form.Label>
                         <Form.Input
                             value={this.state.email}
-                            type="email"
                             onChange={this.handleChange}
                             className="input"
+                            type="email"
                             id="email"
                         />
                     </Container>
@@ -82,9 +87,9 @@ class CreateUserPage extends Component {
                         <Form.Label>Password</Form.Label>
                         <Form.Input
                             value={this.state.password}
-                            type="password"
                             onChange={this.handleChange}
                             className="input"
+                            type="password"
                             id="password"
                         />
                     </Container>
