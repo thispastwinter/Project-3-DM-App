@@ -4,36 +4,67 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        len: [1]
-      }
+        len: [1],
+      },
     },
     initiative: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      defaultValue: 1,
+      defaultValue: 0,
       validate: {
-        len:[1]
-      }
+        len: [1],
+      },
     },
     armor_class: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      defaultValue: 10,
       validate: {
-        len: [1]
-      }
+        len: [1],
+      },
     },
     hit_points: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      defaultValue: 1,
       validate: {
-        len: [1]
-      }
+        len: [1],
+      },
     },
     image: {
       type: DataTypes.STRING,
       defaultValue: false,
-      allowNull: true
-    }
+      allowNull: true,
+    },
+    turn_order: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+      allowNull: false,
+    },
+    strength: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    dexterity: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    constitution: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    intelligence: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    wisdom: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    charisma: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
   });
 
   Characters.associate = (models) => {

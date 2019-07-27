@@ -1,61 +1,63 @@
 import React, { Component } from 'react';
-import List from '../list/index';
-import InitCard from '../initCard/index';
+import InitCard from '../../components/initCard';
+import MonsterSearch from '../../components/monsterSearch';
 import axios from 'axios';
 import io from 'socket.io-client';
-// Works better on localhost
-// import socketIOClient from 'socket.io-client';
 import { Button, Container } from 'react-bulma-components';
+import NavTabs from "../../components/navTabs";
 
 class InitPage extends Component {
     state = {
         characterList: [],
+        gameId: null,
         // endpoint: "localhost:3001"
     }
 
+    constructor() {
+        super();
+        this.socket = io();
+        // this.socket = io.connect(this.state.endpoint);
+    }
 
     componentDidMount() {
-        this.loadChars()
-        console.log(this.state.characterList);
-
-        window.addEventListener("beforeunload", this.onUnload);
-        const stateObject = JSON.parse(localStorage.getItem("state"));
-        this.setState(stateObject);
-
-        const socket = io();
-        //works better on localhost
-        // const socket = socketIOClient(this.state.endpoint);
-        socket.on('listChange', (characterList) => {
-            console.log('Change received Component');
+        this.loadChars();
+        let room = this.props.location.state.gameId;
+        console.log(room);
+        this.socket.on('connect', () => {
+            // Connected, let's sign-up for to receive messages for this room
+            this.socket.emit('room', room);
+        });
+        this.socket.on('listChange', (characterList) => {
             this.setState({ characterList });
         });
     }
 
-    loadChars = () => {
-        axios.get('/api/v1/characters')
+    loadGameId = () => {
+        let gameId = this.props.location.state.gameId;
+        this.setState({ gameId });
+    }
+
+    loadChars = async () => {
+        await this.loadGameId();
+        axios.get('/api/v1/characters/' + this.state.gameId)
             .then(res => {
                 let characterList = res.data;
-                console.log(characterList);
-                console.log(this.state.characterList)
-                this.send(this.setState({ characterList }));
+                if (characterList.length === 0) {
+                    alert("No Characters here yet");
+                }
+                else if (characterList !== this.state.characterList) {
+                    this.send(this.setState({ characterList }));
+                }
             });
     };
 
-    onUnload = (event) => {
-        localStorage.setItem("state", JSON.stringify(this.state));
-    }
-
     componentWillUnmount() {
-        window.removeEventListener("beforeunload", this.onUnload)
+        this.socket.disconnect();
     }
 
     send = async (func) => {
         await func
-        const socket = io();
-        //works better on localhost
-        // const socket = socketIOClient(this.state.endpoint);
-        socket.emit('listChange', this.state.characterList)
-        console.log('Sending List Change');
+        this.socket.emit('listChange', this.state.characterList)
     }
 
     initSort = (array) => {
@@ -63,27 +65,31 @@ class InitPage extends Component {
         newArr.sort((a, b) => {
             return b.initiative - a.initiative;
         });
+        this.turnOrderUpdate(newArr);
+    }
+
+    turnOrderUpdate = (array) => {
+        for (let i = 0; i < array.length; i++) {
+            array[i].turn_order = i + 1;
+        }
+        axios.put('/api/v1/characters', { array });
         this.send(this.setState((state) => {
-            return { characterList: newArr };
+            return { characterList: array };
         }));
     }
 
     turnDone = (id) => {
         const characterList = this.state.characterList.slice();
         characterList.push(...characterList.splice(characterList.findIndex(c => c.id === id), 1))
-        this.send(this.setState({ characterList }));
+        this.turnOrderUpdate(characterList);
     }
 
     editChar = (updatedCharacter) => {
-        console.log(updatedCharacter);
-        axios.post('/api/v1/characters', {
+        const updateId = updatedCharacter.id
+        axios.post('/api/v1/characters/' + updateId, {
             hit_points: updatedCharacter.hit_points,
             initiative: updatedCharacter.initiative,
-            id: updatedCharacter.id
-        })
-            .then(res => {
-                console.log(res);
-            });
+        });
         this.send(this.setState({
             characterList: this.state.characterList
                 .map((character) => character.id === updatedCharacter.id ? updatedCharacter : character)
@@ -91,8 +97,10 @@ class InitPage extends Component {
     }
 
     removeChar = (id) => {
+        let remId = id;
         const characterList = this.state.characterList.slice();
         characterList.splice(characterList.findIndex(c => c.id === id), 1);
+        axios.delete('/api/v1/characters/' + remId);
         this.send(this.setState({ characterList }));
     }
 
@@ -101,13 +109,15 @@ class InitPage extends Component {
         characterList.map(obj => {
             return obj.initiative = parseInt(0);
         });
-        this.send(this.setState({ characterList }));
+        this.turnOrderUpdate(characterList);
+        // this.send(this.setState({ characterList }));
     }
 
     render() {
         return (
-            <div>
-                <List >
+            <React.Fragment>
+                <NavTabs gameId={this.state.gameId} />
+                <div >
                     {this.state.characterList.map(character => (
                         <InitCard
                             character={character}
@@ -125,12 +135,13 @@ class InitPage extends Component {
                             currentOrder={this.state.characterList}
                         />
                     ))}
-                </List>
+                </div>
                 <Container id="buttons" fluid>
                     <Button color="success" onClick={this.resetEncounter}>Reset Encounter</Button>
                     <Button color="success" onClick={() => this.initSort(this.state.characterList)}>Initiative Sort</Button>
+                    <MonsterSearch />
                 </Container>
-            </div>
+            </React.Fragment>
         )
     }
 }
