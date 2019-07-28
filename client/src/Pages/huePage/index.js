@@ -12,11 +12,10 @@ class HuePage extends Component {
     lights: [],
     lightId: [],
     selectedLight: [],
-    loggedIn: false,
     access_token: '',
     username: '',
     game_id: null,
-    expired: false
+    expired: true
   }
 
   componentDidMount() {
@@ -24,23 +23,27 @@ class HuePage extends Component {
     const stateObject = JSON.parse(localStorage.getItem("state"));
     this.setState(stateObject);
     this.loadGameId();
+    this.checkForAuthCode();
 
+   
+
+  }
+
+  checkForAuthCode = () => {
     const url = window.location.href;
     if (url.includes('code')) {
-      const code = url.split('.com/hue?code=')[1].split('&state=none')[0];
-      const hueState = url.split('&state=')[1];
-      this.setState({ loggedIn: hueState })
+      const code = url.split('/hue?code=')[1].split('&state=none')[0]; //.com/hue
+      // const hueState = url.split('&state=')[1];
       axios.post('/api/v1/huelights/connect', {
         code: code
       }).then(res => {
-        const accessToken = res.data.access_token;
+        const accessToken = res;
         this.setState({ access_token: accessToken });
+        this.setState({ expired: false });
       }).catch(err => {
         console.log(err);
       })
     }
-
-
   }
 
   onUnload = (event) => {
@@ -75,9 +78,9 @@ class HuePage extends Component {
     axios.post('/api/v1/huelights/bridge', {
       accessToken: accessToken
     }).then(res => {
-      const userName = res.data[0].success.username;
+      const userName = res;
       this.setState({ username: userName })
-      console.log(res.data[0].success.username)
+      console.log(res)
     }).catch(
       this.setState({ expired: true }))
   };

@@ -60,7 +60,8 @@ const generateAuthKeys = async (req, res) => {
       url: `https://api.meethue.com/oauth2/token?code=${req.body.code}&grant_type=authorization_code`,
       headers: { Authorization: `Digest username="${clientId}", realm="oauth2_client@api.meethue.com", nonce="${req.nonce}", uri="/oauth2/token", response="${createHash(req.nonce)}"` }
     });
-    res.json(hueToken);
+    res.json(hueToken.access_token);
+    console.log(hueToken.access_token)
   } catch (err) {
     res.status(500).send(err);
   }
@@ -103,7 +104,7 @@ const connectPart2 = async (req, res) => {
       },
       data: { 'devicetype': 'dmcompanion' }
     });
-    res.send(connect);
+    res.send(connect.data[0].success.username);
     console.log(connect);
   } catch (err) {
     console.log(err);
