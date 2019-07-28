@@ -4,10 +4,11 @@ import Lights from '../../components/lights';
 import axios from 'axios';
 import './index.css';
 import NavTabs from "../../components/navTabs";
+import { Redirect } from 'react-router-dom'
+// import { all } from 'q';
 
 class HuePage extends Component {
   state = {
-    ip: [],
     user: '',
     lights: [],
     lightId: [],
@@ -15,6 +16,7 @@ class HuePage extends Component {
     access_token: '',
     username: '',
     game_id: null,
+    redirect: false,
     expired: true
   }
 
@@ -24,26 +26,29 @@ class HuePage extends Component {
     this.setState(stateObject);
     this.loadGameId();
     this.checkForAuthCode();
-
-   
-
   }
 
   checkForAuthCode = () => {
     const url = window.location.href;
     if (url.includes('code')) {
       const code = url.split('/hue?code=')[1].split('&state=none')[0]; //.com/hue
-      // const hueState = url.split('&state=')[1];
+      const hueState = url.split('&state=')[1];
       axios.post('/api/v1/huelights/connect', {
         code: code
       }).then(res => {
-        const accessToken = res;
+        const accessToken = res.data;
+        console.log(res.data);
         this.setState({ access_token: accessToken });
         this.setState({ expired: false });
+        this.setState({ redirect: hueState });
       }).catch(err => {
         console.log(err);
       })
     }
+  }
+
+  renderRedirect = () => {
+      return <Redirect to='/hue' />
   }
 
   onUnload = (event) => {
@@ -78,21 +83,25 @@ class HuePage extends Component {
     axios.post('/api/v1/huelights/bridge', {
       accessToken: accessToken
     }).then(res => {
-      const userName = res;
+      const userName = res.data;
       this.setState({ username: userName })
-      console.log(res)
+      this.setState({ expired: false })
+      this.findAllLights();
+      console.log(res.data)
     }).catch(
       this.setState({ expired: true }))
   };
 
   findAllLights = () => {
     axios.post('/api/v1/huelights/alllights', {
-      host: this.state.ip,
-      user: this.state.user
+      user: this.state.username,
+      token: this.state.access_token
     }).then(res => {
       console.log(res.data)
-      let lights = res.data.lights.map(lights => lights.name);
-      let lightId = res.data.lights.map(lights => lights.id);
+      const lights = res.data.map(lights => lights[1].name)
+      const lightId = res.data.map(lights => lights[0]);
+      console.log(lightId)
+      console.log(lights);
       this.setState({ lights });
       this.setState({ lightId })
     });
@@ -105,7 +114,7 @@ class HuePage extends Component {
 
   lightOn = () => {
     axios.post('/api/v1/huelights/controllights', {
-      light: 7,
+      light: this.state.selectedLight,
       user: this.state.username,
       token: this.state.access_token,
       hueState: 'on'
@@ -117,7 +126,7 @@ class HuePage extends Component {
 
   lightOff = () => {
     axios.post('/api/v1/huelights/controllights', {
-      light: 7,
+      light: this.state.selectedLight,
       user: this.state.username,
       token: this.state.access_token,
       hueState: 'off'
@@ -172,6 +181,7 @@ class HuePage extends Component {
             <Heading className="title-1">Hue Lights</Heading>
             {!this.state.expired ?
               <div>
+                {this.renderRedirect()}
                 <Heading className="title-2" size={5}>Select a Light:</Heading>
                 <div className="select">
                   <select onChange={this.handleChange} value={this.state.selectedLight}>
