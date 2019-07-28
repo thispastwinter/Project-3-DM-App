@@ -65,13 +65,18 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: true,
     },
+    isMonster: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      default: false
+    }
   });
 
   Characters.associate = (models) => {
     models.Characters.belongsTo(models.Games, {
       foreignKey: 'game_id',
-    })
-  }
+    });
+  };
 
   return Characters;
 }

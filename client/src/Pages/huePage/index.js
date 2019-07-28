@@ -15,7 +15,7 @@ class HuePage extends Component {
     loggedIn: false,
     access_token: '',
     username: '',
-    gameId: null,
+    game_id: null,
     expired: false
   }
 
@@ -43,13 +43,13 @@ class HuePage extends Component {
 
   }
 
-    onUnload = (event) => {
-      localStorage.setItem("state", JSON.stringify(this.state));
-    }
+  onUnload = (event) => {
+    localStorage.setItem("state", JSON.stringify(this.state));
+  }
 
-    componentWillUnmount() {
-      window.removeEventListener("beforeunload", this.onUnload)
-    }
+  componentWillUnmount() {
+    window.removeEventListener("beforeunload", this.onUnload)
+  }
 
   // All secure information must be store in backend, including access tokens. Look in express-session for potential local storage options.
 
@@ -65,8 +65,8 @@ class HuePage extends Component {
   // This isn't ideal, tokens need to be stored server side for best security. 
 
   loadGameId = () => {
-    let gameId = JSON.parse(localStorage.getItem("state.gameId"));
-    this.setState({ gameId });
+    let game_id = JSON.parse(localStorage.getItem("state.game_id"));
+    this.setState({ game_id });
   }
 
   connectionHandler = () => {
@@ -74,11 +74,11 @@ class HuePage extends Component {
     console.log(accessToken)
     axios.post('/api/v1/huelights/bridge', {
       accessToken: accessToken
-    }).then(res => { 
+    }).then(res => {
       const userName = res.data[0].success.username;
       this.setState({ username: userName })
       console.log(res.data[0].success.username)
-    }).catch( 
+    }).catch(
       this.setState({ expired: true }))
   };
 
@@ -163,7 +163,7 @@ class HuePage extends Component {
   render() {
     return (
       <React.Fragment>
-        <NavTabs gameId={this.state.gameId} />
+        <NavTabs game_id={this.state.game_id} />
         <Columns.Column>
           <Columns id="hue-box">
             <Heading className="title-1">Hue Lights</Heading>

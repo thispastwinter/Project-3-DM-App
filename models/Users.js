@@ -18,17 +18,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.BOOLEAN,
       defaultValue: true,
     },
-    auth_token: {
-      type: DataTypes.STRING,
-      allowNull: true,
-      defaultValue: null,
-    },
-    refresh_token: {
-      type: DataTypes.STRING,
-      allowNull: true,
-      defaultValue: null,
-    },
-    // auth_token: DataTypes.STRING,
   });
 
   // Users.associate = (models) => {
@@ -38,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
   // };
 
   Users.associate = (models) => {
-    models.Users.belongsToMany(models.Games, { 
+    models.Users.belongsToMany(models.Games, {
       as: 'Users',
       through: 'users_games',
       foreignKey: 'user_id'

@@ -26,7 +26,7 @@ const addMonster = async (req, res) => {
       initiative: 0,
       armor_class: monster.armor_class,
       hit_points: monster.hit_points,
-      image: null,
+      image: './images/brute.png',
       turn_order: 0,
       strength: monster.strength,
       dexterity: monster.dexterity,
@@ -35,6 +35,7 @@ const addMonster = async (req, res) => {
       wisdom: monster.wisdom,
       charisma: monster.charisma,
       game_id: req.params.game_id,
+      isMonster: true,
     });
     res.json(character);
   } catch (error) {
@@ -42,19 +43,10 @@ const addMonster = async (req, res) => {
   }
 };
 
-// const findMonster = async (req, res) => {
-//   try {
-//     const monster = await monstersDb.find(m => m.name === req.params.name);
-//     res.json(monster);
-//   } catch (error) {
-//     res.status(500).send(error);
-//   }
-// };
-
 const updateChar = async (req, res) => {
   try {
     res.json(await db.Characters.update(
-      { hit_points: req.body.hit_points, initiative: req.body.initiative },
+      { hit_points: req.body.hit_points, initiative: req.body.initiative, armor_class: req.body.armor_class },
       { where: { id: req.params.id } },
     ));
   } catch (error) {

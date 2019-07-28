@@ -14,6 +14,9 @@ const GameCard = (props) => {
                     <Media.Item>
                         <Heading size={3}>{props.name}</Heading>
                     </Media.Item>
+                    <Media.Item>
+                        <Heading size={3}>Secret: {props.secret}</Heading>
+                    </Media.Item>
                 </Media>
             </Card.Content>
             <Card.Footer>
@@ -21,7 +24,9 @@ const GameCard = (props) => {
                     <Link to={{
                         pathname: '/init',
                         state: {
-                            gameId: props.id
+                            game_id: props.id,
+                            secret: props.secret,
+                            game_name: props.name
                         }
                     }}>
                         <Button color="success">

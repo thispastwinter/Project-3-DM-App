@@ -1,6 +1,7 @@
 import React from 'react';
 import Initiative from '../initiative/index';
 import Health from '../health/index';
+import ArmorClass from '../armorClass/index';
 import { Card, Media, Image, Content, Heading, Button } from 'react-bulma-components';
 
 const InitCard = (props) => {
@@ -25,26 +26,57 @@ const InitCard = (props) => {
     }
   }
 
+  const checkForMonster = () => {
+    if (props.isMonster) {
+      return (
+        <Card>
+          <Card.Content>
+            <Media>
+              <Media.Item position="left">
+                <Image size={64} alt={props.name} src={props.image} />
+              </Media.Item>
+              <Media.Item>
+                <Heading size={3}>{props.name}</Heading>
+              </Media.Item>
+            </Media>
+            <Content>
+              Initiative: {props.init}
+            </Content>
+          </Card.Content>
+          {/* <Card.Footer>
+            {checkForTop(props.id)}
+            {checkForDeath(props.health)}
+          </Card.Footer> */}
+        </Card>
+      );
+    }
+    else {
+      return (
+        <Card>
+          <Card.Content>
+            <Media>
+              <Media.Item position="left">
+                <Image size={64} alt={props.name} src={props.image} />
+              </Media.Item>
+              <Media.Item>
+                <Heading size={3}>{props.name}</Heading>
+              </Media.Item>
+            </Media>
+            <Content>
+              Initiative: <Initiative {...props} /> AC: <ArmorClass {...props} /> Health: <Health {...props} />
+            </Content>
+          </Card.Content>
+          <Card.Footer>
+            {checkForTop(props.id)}
+            {checkForDeath(props.health)}
+          </Card.Footer>
+        </Card>
+      );
+    }
+  }
+
   return (
-    <Card>
-      <Card.Content>
-        <Media>
-          <Media.Item position="left">
-            <Image size={64} alt={props.name} src={props.image} />
-          </Media.Item>
-          <Media.Item>
-            <Heading size={3}>{props.name}</Heading>
-          </Media.Item>
-        </Media>
-        <Content>
-          Initiative: <Initiative {...props} /> AC: {props.ac} <br /> Health: <Health {...props} />
-        </Content>
-      </Card.Content>
-      <Card.Footer>
-        {checkForTop(props.id)}
-        {checkForDeath(props.health)}
-      </Card.Footer>
-    </Card>
+    checkForMonster()
   );
 }
 

@@ -3,12 +3,13 @@ import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import { Button, Form, Container } from 'react-bulma-components';
 import './index.css';
-class CreateUserPage extends Component {
+
+class CreateGamePage extends Component {
     constructor(props) {
         super(props);
         this.state = {
             name: '',
-            gameId: null,
+            game_id: null,
             createSuccess: false,
         };
         this.handleCreate = this.handleCreate.bind(this);
@@ -34,7 +35,7 @@ class CreateUserPage extends Component {
             if (response.data) {
                 console.log(response.data);
                 this.setState({
-                    gameId: response.data.id,
+                    game_id: response.data.id,
                     createSuccess: true,
                 });
             } else {
@@ -52,7 +53,7 @@ class CreateUserPage extends Component {
         if (this.state.createSuccess) {
             return <Redirect to={{
                 pathname: '/initadmin',
-                state: { gameId: this.state.gameId }
+                state: { game_id: this.state.game_id }
             }}
             />
         }
@@ -85,4 +86,4 @@ class CreateUserPage extends Component {
     }
 }
 
-export default CreateUserPage;
+export default CreateGamePage;

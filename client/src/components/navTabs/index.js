@@ -9,8 +9,8 @@ function NavTabs(props) {
         <Tabs type='toggle' fullwidth={true}>
             <Tabs.Tab renderAs="div">
                 <NavLink to={{
-                    pathname: '/init',
-                    state: { gameId: props.gameId }
+                    pathname: '/initadmin',
+                    state: { game_id: props.game_id }
                 }} activeClassName="is-active">
                     Initiative
                  </NavLink>
@@ -18,7 +18,7 @@ function NavTabs(props) {
             <Tabs.Tab renderAs="div">
                 <NavLink to={{
                     pathname: '/hue',
-                    state: { gameId: props.gameId }
+                    state: { game_id: props.game_id }
                 }} activeClassName="is-active">
                     Philips Hue
                 </NavLink>
