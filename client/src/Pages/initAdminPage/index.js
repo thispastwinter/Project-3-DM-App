@@ -9,14 +9,14 @@ import NavTabs from "../../components/navTabs";
 class InitAdminPage extends Component {
     state = {
         characterList: [],
-        game_id: 2,
-        endpoint: "localhost:3001"
+        game_id: 1,
+        // endpoint: "localhost:3001"
     }
 
     constructor() {
         super();
-        // this.socket = io();
-        this.socket = io.connect(this.state.endpoint);
+        this.socket = io();
+        // this.socket = io.connect(this.state.endpoint);
     }
 
     componentDidMount() {
