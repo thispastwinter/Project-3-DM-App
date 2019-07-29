@@ -148,21 +148,23 @@ const allLights = async (req, res) => {
   let user = req.body.user;
   let token = req.body.token;
   try {
-  const { data: lights } = await axios({
-    method: 'GET',
-    url: 'https://api.meethue.com/bridge/' + user + '/lights',
-    headers: {
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    }});
+    const { data: lights } = await axios({
+      method: 'GET',
+      url: 'https://api.meethue.com/bridge/' + user + '/lights',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    });
     const result = [];
-    for(let i in lights)
-    result.push([i, lights [i]]);
-      res.json(result); 
-      console.log(lights)
-    } catch(err) {
-      console.log(err);
+    for (let i in lights) {
+      result.push([i, lights[i]]);
     }
+    res.json(result);
+    console.log(lights)
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 const controlLights = (req, res) => {
@@ -194,6 +196,8 @@ const controlLights = (req, res) => {
     case 'lightning':
       lightning(lightFunction(true, 200), lightFunction(true, 50))
       break;
+    default:
+      lightFunction(true, 200);
   }
 
 }

@@ -47,8 +47,10 @@ class HuePage extends Component {
     }
   }
 
-  renderRedirect = () => {
+  resetUrl = () => {
+    if (this.state.redirect) {
       return <Redirect to='/hue' />
+    }
   }
 
   onUnload = (event) => {
@@ -59,8 +61,6 @@ class HuePage extends Component {
     window.removeEventListener("beforeunload", this.onUnload)
   }
 
-  // All secure information must be store in backend, including access tokens. Look in express-session for potential local storage options.
-
   redirect = () => {
     axios.get('/api/v1/huelights/url').then(res => {
       const url = res.data;
@@ -68,9 +68,6 @@ class HuePage extends Component {
       window.location.href = url;
     }).catch(err => { console.log(err) });
   };
-
-  // Put request, followed by post, followed by getting all available lights
-  // This isn't ideal, tokens need to be stored server side for best security. 
 
   loadGameId = () => {
     let game_id = JSON.parse(localStorage.getItem("state.game_id"));
@@ -136,18 +133,6 @@ class HuePage extends Component {
       });
   };
 
-  // lightOff = () => {
-  //   axios.post('/api/v1/huelights/controllights', {
-  //     host: this.state.ip,
-  //     username: this.state.user,
-  //     huestate: 'off',
-  //     light: this.state.selectedLight
-  //   })
-  //     .then(res => {
-  //       console.log(res);
-  //     });
-  // };
-
   criticalRoll = () => {
     axios.post('/api/v1/huelights/controllights', {
       host: this.state.ip,
@@ -181,7 +166,7 @@ class HuePage extends Component {
             <Heading className="title-1">Hue Lights</Heading>
             {!this.state.expired ?
               <div>
-                {this.renderRedirect()}
+                {this.resetUrl()}
                 <Heading className="title-2" size={5}>Select a Light:</Heading>
                 <div className="select">
                   <select onChange={this.handleChange} value={this.state.selectedLight}>

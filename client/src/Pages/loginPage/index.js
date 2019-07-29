@@ -11,7 +11,8 @@ class LoginPage extends Component {
     this.state = {
       email: '',
       password: '',
-      loginSuccess: false
+      loginSuccess: false,
+      admin: false
     };
 
     this.handleLogin = this.handleLogin.bind(this);
@@ -37,8 +38,12 @@ class LoginPage extends Component {
         password: this.state.password
       });
       if (response.data) {
+        console.log(response.data)
+        const admin = response.data
+        localStorage.setItem("isAdmin", JSON.stringify(admin));
         this.setState({
-          loginSuccess: true,
+          admin, 
+          loginSuccess: true
         });
       } else {
         console.log('error on handleLogin');
@@ -52,7 +57,9 @@ class LoginPage extends Component {
   };
 
   render() {
-    if (this.state.loginSuccess) {
+    if (this.state.admin && this.state.loginSuccess) {
+      return <Redirect to='/initadmin' />
+    } else if (this.state.loginSuccess) {
       return <Redirect to='/game' />
     }
 
