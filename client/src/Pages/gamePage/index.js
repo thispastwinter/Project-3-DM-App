@@ -23,6 +23,18 @@ class GamePage extends Component {
             });
     };
 
+    checkForAdmin = () => {
+        let admin = this.props.location.state.admin;
+        if (admin) {
+            return (
+                <Link to="/creategame">
+                    <Button renderAs="button" color="warning"><span>Create New Game</span></Button>
+                </Link>
+            )
+        }
+        else return null;
+    }
+
     render() {
         return (
             <React.Fragment>
@@ -33,12 +45,11 @@ class GamePage extends Component {
                             key={game.id}
                             name={game.name}
                             secret={game.secret}
+                            admin={this.props.location.state.admin}
                         />
                     ))}
                 </div>
-                <Link to="/creategame">
-                    <Button renderAs="button" color="warning"><span>Create New Game</span></Button>
-                </Link>
+                {this.checkForAdmin()}
             </React.Fragment>
         )
     }

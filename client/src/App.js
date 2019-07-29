@@ -15,12 +15,15 @@ import CreateCharacterPage from './Pages/createCharacterPage'
 class App extends Component {
 
   state = {
-    admin: false
+    admin: false,
+    user_id: null
   }
 
-  componentDidMount = () => {
-    const admin = JSON.parse(localStorage.getItem("isAdmin"));
-    this.setState({ admin });
+  componentDidMount = async () => {
+    const admin = await JSON.parse(localStorage.getItem("isAdmin"));
+    const user_id = await JSON.parse(localStorage.getItem("user_id"));
+    this.setState({ admin, user_id });
+    console.log(this.state);
   }
 
   render() {

@@ -160,7 +160,7 @@ class HuePage extends Component {
   render() {
     return (
       <React.Fragment>
-        <NavTabs game_id={this.state.game_id} />
+        <NavTabs game_id={this.props.location.state.game_id} game_name={this.props.location.state.game_name} secret={this.props.location.state.secret} />
         <Columns.Column>
           <Columns id="hue-box">
             <Heading className="title-1">Hue Lights</Heading>
