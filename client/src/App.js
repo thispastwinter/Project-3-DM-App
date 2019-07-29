@@ -14,6 +14,15 @@ import CreateCharacterPage from './Pages/createCharacterPage'
 
 class App extends Component {
 
+  state = {
+    admin: false
+  }
+
+  componentDidMount = () => {
+    const admin = JSON.parse(localStorage.getItem("isAdmin"));
+    this.setState({ admin });
+  }
+
   render() {
     return (
       <Router>

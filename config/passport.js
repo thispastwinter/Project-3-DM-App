@@ -27,7 +27,6 @@ passport.use(new LocalStrategy(
     // Check to see if a User was found matching email
     if (user) {
       const match = await bcrypt.compare(password, user.password);
-
       if (match) {
         done(null, user);
       }
