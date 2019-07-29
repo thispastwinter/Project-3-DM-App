@@ -23,7 +23,6 @@ class App extends Component {
     const admin = await JSON.parse(localStorage.getItem("isAdmin"));
     const user_id = await JSON.parse(localStorage.getItem("user_id"));
     this.setState({ admin, user_id });
-    console.log(this.state);
   }
 
   render() {

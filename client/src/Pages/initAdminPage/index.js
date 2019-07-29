@@ -21,14 +21,13 @@ class InitAdminPage extends Component {
 
     componentDidMount() {
         this.loadChars();
-        let room = this.props.location.state.gameId;
+        let room = this.props.location.state.game_id;
         // let room = this.state.game_id;
         this.socket.on('connect', () => {
             // Connected, let's sign-up for to receive messages for this room
             this.socket.emit('room', room);
         });
         this.socket.on('listChange', (characterList) => {
-            console.log("Update received");
             this.setState({ characterList });
         });
     }
@@ -40,7 +39,6 @@ class InitAdminPage extends Component {
 
     loadChars = async () => {
         await this.loadGameId();
-        console.log("loading chars");
         axios.get('/api/v1/characters/' + this.state.game_id)
             .then(res => {
                 let characterList = res.data;

@@ -41,7 +41,6 @@ class CreateCharacterPage extends Component {
 
     loadGameId = () => {
         let game_id = this.props.location.state.game_id;
-        console.log(game_id);
         this.setState({ game_id });
     }
 
@@ -87,7 +86,6 @@ class CreateCharacterPage extends Component {
                     game_id: this.state.game_id,
                     secret: this.props.location.state.secret,
                     game_name: this.props.location.state.game_name
-
                 }
             }} />
         }
