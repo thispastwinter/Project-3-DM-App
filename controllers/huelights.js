@@ -172,7 +172,7 @@ const controlLights = (req, res) => {
   let light = req.body.light;
   let user = req.body.user;
   let token = req.body.token;
-  const lightFunction = (state, value) => {
+  const lightFunction = (state, bri, alert) => {
     axios({
       method: 'PUT',
       url: 'https://api.meethue.com/bridge/' + user + '/lights/' + light + '/state',
@@ -182,7 +182,8 @@ const controlLights = (req, res) => {
       },
       data: {
         'on': state,
-        'bri': value
+        'bri': bri,
+        'alert': alert
       }
     }).then(res => console.log(res))
       .catch(err => console.log(err));
@@ -192,11 +193,13 @@ const controlLights = (req, res) => {
       lightFunction(true, 200);
       break;
     case 'off':
-      lightFunction(false, 200);
+      lightFunction(false, 0);
       break;
     case 'lightning':
-      lightning(lightFunction(true, 200), lightFunction(true, 50))
+      lightning(lightFunction(true, 200), lightFunction(true, 0))
       break;
+    case 'critical':
+      lightFunction(true, 200, 'lselect');
     default:
       lightFunction(true, 200);
   }

@@ -103,7 +103,7 @@ class HuePage extends Component {
       console.log(res.data)
       const lights = res.data.map(lights => lights[1].name)
       // I only want lights to be selectable if they are reachable
-      const isReachable = res.data.map(lights => !lights[1].state.reachable)
+      const isReachable = res.data.map(lights => !lights[1].state.reachable) // Yields an inverted boolean to be passed into the <select> disabled value
       console.log(isReachable)
       const lightId = res.data.map(lights => lights[0]);
       console.log(lightId)
@@ -145,10 +145,10 @@ class HuePage extends Component {
 
   criticalRoll = () => {
     axios.post('/api/v1/huelights/controllights', {
-      host: this.state.ip,
-      username: this.state.user,
-      huestate: 'critical',
-      light: this.state.selectedLight
+      light: this.state.selectedLight,
+      user: this.state.username,
+      token: this.state.access_token,
+      hueState: 'critical'
     })
       .then(res => {
         console.log(res);
@@ -157,7 +157,7 @@ class HuePage extends Component {
 
   lightning = () => {
     axios.post('/api/v1/huelights/controllights', {
-      light: 7,
+      light: this.state.selectedLight,
       user: this.state.username,
       token: this.state.access_token,
       hueState: 'lightning'
