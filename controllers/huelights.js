@@ -199,7 +199,7 @@ const controlLights = (req, res) => {
       lightning(lightFunction(true, 200), lightFunction(true, 0))
       break;
     case 'critical':
-      lightFunction(true, 200, 'lselect');
+      lightFunction(true, 200, 'lselect')
     default:
       lightFunction(true, 200);
   }
