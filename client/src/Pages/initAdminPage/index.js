@@ -34,7 +34,12 @@ class InitAdminPage extends Component {
 
     loadGameId = () => {
         let game_id = this.props.location.state.game_id;
+        let game_name = this.props.location.state.game_name;
+        let secret = this.props.location.state.secret
         this.setState({ game_id });
+        localStorage.setItem("gameId", JSON.stringify(game_id));
+        localStorage.setItem("gameName", JSON.stringify(game_name));
+        localStorage.setItem("gameSecret", JSON.stringify(secret));
     }
 
     loadChars = async () => {

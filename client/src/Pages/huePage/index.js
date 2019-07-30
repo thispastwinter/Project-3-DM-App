@@ -12,10 +12,13 @@ class HuePage extends Component {
     user: '',
     lights: [],
     lightId: [],
+    isReachable: [],
     selectedLight: [],
     access_token: '',
     username: '',
     game_id: null,
+    game_name: '',
+    secret: '',
     redirect: false,
     expired: true
   }
@@ -41,6 +44,7 @@ class HuePage extends Component {
         this.setState({ access_token: accessToken });
         this.setState({ expired: false });
         this.setState({ redirect: hueState });
+        this.connectionHandler();
       }).catch(err => {
         console.log(err);
       })
@@ -70,8 +74,10 @@ class HuePage extends Component {
   };
 
   loadGameId = () => {
-    let game_id = JSON.parse(localStorage.getItem("state.game_id"));
-    this.setState({ game_id });
+    let game_id = JSON.parse(localStorage.getItem("gameId"));
+    let game_name = JSON.parse(localStorage.getItem("gameName"));
+    let secret = JSON.parse(localStorage.getItem("gameSecret"));
+    this.setState({ game_id, game_name, secret });
   }
 
   connectionHandler = () => {
@@ -96,11 +102,15 @@ class HuePage extends Component {
     }).then(res => {
       console.log(res.data)
       const lights = res.data.map(lights => lights[1].name)
+      // I only want lights to be selectable if they are reachable
+      const isReachable = res.data.map(lights => !lights[1].state.reachable) // Yields an inverted boolean to be passed into the <select> disabled value
+      console.log(isReachable)
       const lightId = res.data.map(lights => lights[0]);
       console.log(lightId)
       console.log(lights);
       this.setState({ lights });
-      this.setState({ lightId })
+      this.setState({ lightId });
+      this.setState({ isReachable })
     });
 
   };
@@ -109,69 +119,99 @@ class HuePage extends Component {
     this.setState({ selectedLight: event.target.value })
   };
 
-  lightOn = () => {
-    axios.post('/api/v1/huelights/controllights', {
-      light: this.state.selectedLight,
-      user: this.state.username,
-      token: this.state.access_token,
-      hueState: 'on'
-    })
-      .then(res => {
-        console.log(res);
+  lightOn = async (res, req) => {
+    try {
+      await axios.post('/api/v1/huelights/controllights', {
+        light: this.state.selectedLight,
+        user: this.state.username,
+        token: this.state.access_token,
+        hueState: 'on'
       });
+    } catch (err) {
+      res.status(500).send(err);
+    }
   };
 
-  lightOff = () => {
-    axios.post('/api/v1/huelights/controllights', {
-      light: this.state.selectedLight,
-      user: this.state.username,
-      token: this.state.access_token,
-      hueState: 'off'
-    })
-      .then(res => {
-        console.log(res);
+  lightOff = async (res, req) => {
+    try {
+      await axios.post('/api/v1/huelights/controllights', {
+        light: this.state.selectedLight,
+        user: this.state.username,
+        token: this.state.access_token,
+        hueState: 'off'
       });
+    } catch (err) {
+      res.status(500).send(err);
+    }
   };
 
-  criticalRoll = () => {
-    axios.post('/api/v1/huelights/controllights', {
-      host: this.state.ip,
-      username: this.state.user,
-      huestate: 'critical',
-      light: this.state.selectedLight
-    })
-      .then(res => {
-        console.log(res);
+  lightning = async (res, req) => {
+    try {
+      await axios.post('/api/v1/huelights/controllights', {
+        light: this.state.selectedLight,
+        user: this.state.username,
+        token: this.state.access_token,
+        hueState: 'lightning'
       });
+    } catch (err) {
+      res.status(500).send(err);
+    }
   };
 
-  lightning = () => {
-    axios.post('/api/v1/huelights/controllights', {
-      light: 7,
-      user: this.state.username,
-      token: this.state.access_token,
-      hueState: 'lightning'
-    })
-      .then(res => {
-        console.log(res);
+  criticalRoll = async (req, res) => {
+    try {
+      await axios.post('/api/v1/huelights/controllights', {
+        light: this.state.selectedLight,
+        user: this.state.username,
+        token: this.state.access_token,
+        hueState: 'critical'
       });
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  };
+
+  fadeOut = async (res, req) => {
+    try {
+      axios.post('/api/v1/huelights/controllights', {
+        light: this.state.selectedLight,
+        user: this.state.username,
+        token: this.state.access_token,
+        hueState: 'fadeOut'
+      });
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  };
+
+  fadeIn = async (res, req) => {
+    try {
+      axios.post('/api/v1/huelights/controllights', {
+        light: this.state.selectedLight,
+        user: this.state.username,
+        token: this.state.access_token,
+        hueState: 'fadeIn'
+      });
+    } catch (err) {
+      res.status(500).send(err);
+    }
   };
 
   render() {
     return (
       <React.Fragment>
-        <NavTabs game_id={this.props.location.state.game_id} game_name={this.props.location.state.game_name} secret={this.props.location.state.secret} />
+        <NavTabs game_id={this.state.game_id} game_name={this.state.game_name} secret={this.state.secret} />
         <Columns.Column>
           <Columns id="hue-box">
-            <Heading className="title-1">Hue Lights</Heading>
+            <Heading className="title-1">Lanterns</Heading>
             {!this.state.expired ?
               <div>
                 {this.resetUrl()}
                 <Heading className="title-2" size={5}>Select a Light:</Heading>
-                <div className="select">
+                <div className="select" onClick={this.findAllLights}>
                   <select onChange={this.handleChange} value={this.state.selectedLight}>
                     {this.state.lights.map((lights, index) => (
-                      <option value={this.state.lightId[index]} key={this.state.lightId[index]}>{lights}</option>
+                      <option disabled={this.state.isReachable[index]} value={this.state.lightId[index]} key={this.state.lightId[index]}>{lights}</option>
                     ))}
                   </select>
                 </div>
@@ -180,7 +220,8 @@ class HuePage extends Component {
                   lightOff={this.lightOff}
                   critical={this.criticalRoll}
                   lightning={this.lightning}
-                  connection={this.connectionHandler}>
+                  fadeOut={this.fadeOut}
+                  fadeIn={this.fadeIn}>
                 </Lights></div> : <div><Button onClick={this.redirect}>Connect To Hue</Button></div>}
           </Columns>
         </Columns.Column>
