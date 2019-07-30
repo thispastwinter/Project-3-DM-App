@@ -1,9 +1,4 @@
-#buttons {
-  display: flex;
-  align-content: space-between;
-  flex-direction: column;
-  width: 200px;
-}
+
 
 #buttons button {
   margin: 5px;

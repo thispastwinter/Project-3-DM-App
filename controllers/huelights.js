@@ -60,7 +60,8 @@ const generateAuthKeys = async (req, res) => {
       url: `https://api.meethue.com/oauth2/token?code=${req.body.code}&grant_type=authorization_code`,
       headers: { Authorization: `Digest username="${clientId}", realm="oauth2_client@api.meethue.com", nonce="${req.nonce}", uri="/oauth2/token", response="${createHash(req.nonce)}"` }
     });
-    res.json(hueToken);
+    res.send(hueToken.access_token);
+    console.log(hueToken.access_token)
   } catch (err) {
     res.status(500).send(err);
   }
@@ -103,7 +104,7 @@ const connectPart2 = async (req, res) => {
       },
       data: { 'devicetype': 'dmcompanion' }
     });
-    res.send(connect);
+    res.send(connect[0].success.username);
     console.log(connect);
   } catch (err) {
     console.log(err);
@@ -124,64 +125,76 @@ const detect = (req, res) => {
   });
 };
 
-// const connect = (req, res) => {
-//   let host = req.body.host;
-//   let newApi = new HueApi();
-//   newApi.createUser(host, function (err, user) {
-//     if (err) throw err;
-//     res.json(user);
-//   });
-// }
-
-const allLights = (req, res) => {
-  let host = req.body.host;
+const allLights = async (req, res) => {
   let user = req.body.user;
-  let api = new HueApi(host, user);
-  api.lights(function (err, lights) {
-    if (err) throw err;
-    res.json(lights);
-  });
+  let token = req.body.token;
+  try {
+    const { data: lights } = await axios({
+      method: 'GET',
+      url: 'https://api.meethue.com/bridge/' + user + '/lights',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    });
+    const result = [];
+    for (let i in lights) {
+      result.push([i, lights[i]]);
+    }
+    res.json(result);
+    console.log(result)
+    console.log(lights)
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 const controlLights = (req, res) => {
-  const lightState = hue.lightState;
-  let host = req.body.host;
-  let username = req.body.username;
   let light = req.body.light;
-  let api = new HueApi(host, username);
-  let state;
-  switch (req.body.huestate) {
+  let user = req.body.user;
+  let token = req.body.token;
+  const lightFunction = async (state, bri, alert, transitionTime) => {
+    try {
+    const { data: lights } = await axios({
+      method: 'PUT',
+      url: 'https://api.meethue.com/bridge/' + user + '/lights/' + light + '/state',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      data: {
+        'on': state,
+        'bri': bri,
+        'alert': alert,
+        'transitiontime': transitionTime
+      }
+    });
+      console.log(lights);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  switch (req.body.hueState) {
     case 'on':
-      state = lightState.create().on();
-      api.setLightState(light, state, function (err, lights) {
-        if (err) throw err;
-        res.json(lights)
-      });
+      lightFunction(true, 200);
       break;
     case 'off':
-      state = lightState.create().off();
-      api.setLightState(light, state, function (err, lights) {
-        if (err) throw err;
-        res.json(lights)
-      });
+      lightFunction(false, 0);
       break;
-    case 'critical':
-      state = lightState.create().longAlert();
-      api.setLightState(light, state, function (err, lights) {
-        if (err) throw err;
-        res.json(lights)
-      });
+    case 'fadeOut':
+      lightFunction(true, 0, 'none', 50);
+      break;
+    case 'fadeIn':
+      lightFunction(true, 200, 'none', 50);
       break;
     case 'lightning':
-      lightning(api, light);
       break;
+    case 'critical':
+      lightFunction(true, 200, 'lselect')
     default:
-      state = lightState.create().on();
-      api.setLightState(light, state, function (err, lights) {
-        if (err) throw err;
-        res.json(lights)
-      });
-  };
+      lightFunction(true, 200);
+  }
+
 }
 
 exports.url = sendUrl;

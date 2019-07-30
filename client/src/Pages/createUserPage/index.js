@@ -11,7 +11,8 @@ class CreateUserPage extends Component {
             email: '',
             password: '',
             admin: false,
-            createSuccess: false
+            createSuccess: false,
+            user_id: null
         };
 
         this.handleLogin = this.handleLogin.bind(this);
@@ -27,6 +28,11 @@ class CreateUserPage extends Component {
             [event.target.id]: value
         });
     }
+
+    // validateEmail = email => {
+    //     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    //     return re.test(String(email).toLowerCase());
+    // }
 
     async handleLogin(event) {
         event.preventDefault();
@@ -44,8 +50,12 @@ class CreateUserPage extends Component {
                     admin: this.state.admin
                 });
                 if (response.data) {
+                    const admin = response.data.admin;
+                    const user_id = response.data.id;
                     this.setState({
                         createSuccess: true,
+                        admin,
+                        user_id
                     });
                 } else {
                     console.log('error on createUser');
@@ -61,7 +71,13 @@ class CreateUserPage extends Component {
 
     render() {
         if (this.state.createSuccess) {
-            return <Redirect to='/init' />
+            return <Redirect to={{
+                pathname: '/game',
+                state: {
+                    user_id: this.state.user_id,
+                    admin: this.state.admin,
+                }
+            }} />
         }
 
         return (
@@ -72,9 +88,9 @@ class CreateUserPage extends Component {
                         <Form.Label>Email</Form.Label>
                         <Form.Input
                             value={this.state.email}
-                            type="email"
                             onChange={this.handleChange}
                             className="input"
+                            type="email"
                             id="email"
                         />
                     </Container>
@@ -82,9 +98,9 @@ class CreateUserPage extends Component {
                         <Form.Label>Password</Form.Label>
                         <Form.Input
                             value={this.state.password}
-                            type="password"
                             onChange={this.handleChange}
                             className="input"
+                            type="password"
                             id="password"
                         />
                     </Container>

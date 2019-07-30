@@ -3,6 +3,42 @@ import { Card, Media, Heading, Button } from 'react-bulma-components';
 import { Link } from 'react-router-dom';
 
 const GameCard = (props) => {
+    const checkForAdmin = () => {
+        if (props.admin) {
+            return (<Card.Footer.Item>
+                <Link to={{
+                    pathname: '/initadmin',
+                    state: {
+                        game_id: props.id,
+                        secret: props.secret,
+                        game_name: props.name,
+                        admin: props.admin
+                    }
+                }}>
+                    <Button color="success">
+                        Join Game
+                    </Button>
+                </Link>
+            </Card.Footer.Item>)
+        }
+        else {
+            return ((<Card.Footer.Item>
+                <Link to={{
+                    pathname: '/init',
+                    state: {
+                        game_id: props.id,
+                        secret: props.secret,
+                        game_name: props.name,
+                        admin: props.admin
+                    }
+                }}>
+                    <Button color="success">
+                        Join Game
+                    </Button>
+                </Link>
+            </Card.Footer.Item>))
+        }
+    }
 
     return (
         <Card>
@@ -14,21 +50,13 @@ const GameCard = (props) => {
                     <Media.Item>
                         <Heading size={3}>{props.name}</Heading>
                     </Media.Item>
+                    <Media.Item>
+                        <Heading size={3}>Secret: {props.secret}</Heading>
+                    </Media.Item>
                 </Media>
             </Card.Content>
             <Card.Footer>
-                <Card.Footer.Item>
-                    <Link to={{
-                        pathname: '/init',
-                        state: {
-                            gameId: props.id
-                        }
-                    }}>
-                        <Button color="success">
-                            Join Game
-                        </Button>
-                    </Link>
-                </Card.Footer.Item>
+                {checkForAdmin()}
             </Card.Footer>
         </Card>
     );

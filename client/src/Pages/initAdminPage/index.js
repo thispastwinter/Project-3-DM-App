@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import InitCard from '../../components/initCard';
-import { Link } from 'react-router-dom';
+import InitCardAdmin from '../../components/initCardAdmin';
 import axios from 'axios';
 import io from 'socket.io-client';
+import MonsterSearch from '../../components/monsterSearch';
 import { Button, Container } from 'react-bulma-components';
-// import NavTabs from "../../components/navTabs";
+import NavTabs from "../../components/navTabs";
 
-class InitPage extends Component {
+class InitAdminPage extends Component {
     state = {
         characterList: [],
         game_id: null,
@@ -22,6 +22,7 @@ class InitPage extends Component {
     componentDidMount() {
         this.loadChars();
         let room = this.props.location.state.game_id;
+        // let room = this.state.game_id;
         this.socket.on('connect', () => {
             // Connected, let's sign-up for to receive messages for this room
             this.socket.emit('room', room);
@@ -33,7 +34,12 @@ class InitPage extends Component {
 
     loadGameId = () => {
         let game_id = this.props.location.state.game_id;
+        let game_name = this.props.location.state.game_name;
+        let secret = this.props.location.state.secret
         this.setState({ game_id });
+        localStorage.setItem("gameId", JSON.stringify(game_id));
+        localStorage.setItem("gameName", JSON.stringify(game_name));
+        localStorage.setItem("gameSecret", JSON.stringify(secret));
     }
 
     loadChars = async () => {
@@ -115,12 +121,12 @@ class InitPage extends Component {
     render() {
         return (
             <React.Fragment>
-                {/* <NavTabs game_id={this.state.game_id} /> */}
+                <NavTabs game_id={this.props.location.state.game_id} game_name={this.props.location.state.game_name} secret={this.props.location.state.secret} />
                 <h1>Game: {this.props.location.state.game_name}</h1>
                 <h1>Secret: {this.props.location.state.secret}</h1>
                 <div >
                     {this.state.characterList.map(character => (
-                        <InitCard
+                        <InitCardAdmin
                             character={character}
                             id={character.id}
                             key={character.id}
@@ -133,27 +139,17 @@ class InitPage extends Component {
                             editChar={this.editChar}
                             removeChar={this.removeChar}
                             currentOrder={this.state.characterList}
-                            isMonster={character.isMonster}
                         />
                     ))}
                 </div>
                 <Container id="buttons" fluid>
-                    <Link to={{
-                        pathname: '/createcharacter',
-                        state: {
-                            game_id: this.props.location.state.game_id,
-                            secret: this.props.location.state.secret,
-                            game_name: this.props.location.state.game_name
-                        }
-                    }}>
-                        <Button color="warning">
-                            Create Character
-                        </Button>
-                    </Link>
+                    <Button color="success" onClick={this.resetEncounter}>Reset Encounter</Button>
+                    <Button color="success" onClick={() => this.initSort(this.state.characterList)}>Initiative Sort</Button>
+                    <MonsterSearch game_id={this.props.location.state.game_id} loadChars={this.loadChars} />
                 </Container>
             </React.Fragment>
         )
     }
 }
 
-export default InitPage;
+export default InitAdminPage;
