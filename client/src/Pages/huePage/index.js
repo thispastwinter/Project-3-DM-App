@@ -12,10 +12,13 @@ class HuePage extends Component {
     user: '',
     lights: [],
     lightId: [],
+    isReachable: [],
     selectedLight: [],
     access_token: '',
     username: '',
     game_id: null,
+    game_name: '',
+    secret: '',
     redirect: false,
     expired: true
   }
@@ -41,6 +44,7 @@ class HuePage extends Component {
         this.setState({ access_token: accessToken });
         this.setState({ expired: false });
         this.setState({ redirect: hueState });
+        this.connectionHandler();
       }).catch(err => {
         console.log(err);
       })
@@ -70,8 +74,10 @@ class HuePage extends Component {
   };
 
   loadGameId = () => {
-    let game_id = JSON.parse(localStorage.getItem("state.game_id"));
-    this.setState({ game_id });
+    let game_id = JSON.parse(localStorage.getItem("gameId"));
+    let game_name = JSON.parse(localStorage.getItem("gameName"));
+    let secret = JSON.parse(localStorage.getItem("gameSecret"));
+    this.setState({ game_id, game_name, secret });
   }
 
   connectionHandler = () => {
@@ -96,11 +102,15 @@ class HuePage extends Component {
     }).then(res => {
       console.log(res.data)
       const lights = res.data.map(lights => lights[1].name)
+      // I only want lights to be selectable if they are reachable
+      const isReachable = res.data.map(lights => !lights[1].state.reachable)
+      console.log(isReachable)
       const lightId = res.data.map(lights => lights[0]);
       console.log(lightId)
       console.log(lights);
       this.setState({ lights });
-      this.setState({ lightId })
+      this.setState({ lightId });
+      this.setState({ isReachable })
     });
 
   };
@@ -160,10 +170,10 @@ class HuePage extends Component {
   render() {
     return (
       <React.Fragment>
-        <NavTabs game_id={this.props.location.state.game_id} game_name={this.props.location.state.game_name} secret={this.props.location.state.secret} />
+        <NavTabs game_id={this.state.game_id} game_name={this.state.game_name} secret={this.state.secret} />
         <Columns.Column>
           <Columns id="hue-box">
-            <Heading className="title-1">Hue Lights</Heading>
+            <Heading className="title-1">Lanterns</Heading>
             {!this.state.expired ?
               <div>
                 {this.resetUrl()}
@@ -171,7 +181,7 @@ class HuePage extends Component {
                 <div className="select">
                   <select onChange={this.handleChange} value={this.state.selectedLight}>
                     {this.state.lights.map((lights, index) => (
-                      <option value={this.state.lightId[index]} key={this.state.lightId[index]}>{lights}</option>
+                      <option disabled={this.state.isReachable[index]} value={this.state.lightId[index]} key={this.state.lightId[index]}>{lights}</option>
                     ))}
                   </select>
                 </div>
@@ -179,8 +189,7 @@ class HuePage extends Component {
                   lightOn={this.lightOn}
                   lightOff={this.lightOff}
                   critical={this.criticalRoll}
-                  lightning={this.lightning}
-                  connection={this.connectionHandler}>
+                  lightning={this.lightning}>
                 </Lights></div> : <div><Button onClick={this.redirect}>Connect To Hue</Button></div>}
           </Columns>
         </Columns.Column>

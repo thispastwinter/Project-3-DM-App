@@ -161,6 +161,7 @@ const allLights = async (req, res) => {
       result.push([i, lights[i]]);
     }
     res.json(result);
+    console.log(result)
     console.log(lights)
   } catch (err) {
     console.log(err);
