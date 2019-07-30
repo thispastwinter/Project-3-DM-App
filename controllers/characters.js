@@ -20,7 +20,6 @@ const findAll = async (req, res) => {
 const addMonster = async (req, res) => {
   try {
     const monster = await db.Monsters.findOne({ where: { name: req.params.name } });
-    console.log('MONSTER', monster);
     const character = await db.Characters.create({
       name: monster.name,
       initiative: 0,

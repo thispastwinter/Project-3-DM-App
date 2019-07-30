@@ -11,6 +11,7 @@ class CreateGamePage extends Component {
             name: '',
             game_id: null,
             createSuccess: false,
+            secret: ''
         };
         this.handleCreate = this.handleCreate.bind(this);
     }
@@ -30,16 +31,18 @@ class CreateGamePage extends Component {
         try {
             const response = await axios.post('api/v1/games', {
                 name: this.state.name,
-                secret: secret
+                secret: secret,
+                user_id: this.props.location.state.user_id
             });
             if (response.data) {
                 console.log(response.data);
                 this.setState({
                     game_id: response.data.id,
+                    secret,
                     createSuccess: true,
                 });
             } else {
-                console.log('error on createGame');
+                console.log(response);
             }
         } catch (err) {
             if (err) throw err;
@@ -53,7 +56,13 @@ class CreateGamePage extends Component {
         if (this.state.createSuccess) {
             return <Redirect to={{
                 pathname: '/initadmin',
-                state: { game_id: this.state.game_id }
+                state: {
+                    game_id: this.state.game_id,
+                    secret: this.state.secret,
+                    game_name: this.state.name,
+                    admin: this.props.location.state.admin,
+                    user_id: this.props.location.state.user_id
+                }
             }}
             />
         }

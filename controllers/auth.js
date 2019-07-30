@@ -1,5 +1,5 @@
 const login = async (req, res) => {
-  res.json(req.user.admin);
+  res.json(req.user);
 };
 
 exports.login = login;
