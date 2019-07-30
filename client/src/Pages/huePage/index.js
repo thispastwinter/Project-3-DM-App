@@ -119,52 +119,82 @@ class HuePage extends Component {
     this.setState({ selectedLight: event.target.value })
   };
 
-  lightOn = () => {
-    axios.post('/api/v1/huelights/controllights', {
-      light: this.state.selectedLight,
-      user: this.state.username,
-      token: this.state.access_token,
-      hueState: 'on'
-    })
-      .then(res => {
-        console.log(res);
+  lightOn = async (res, req) => {
+    try {
+      await axios.post('/api/v1/huelights/controllights', {
+        light: this.state.selectedLight,
+        user: this.state.username,
+        token: this.state.access_token,
+        hueState: 'on'
       });
+    } catch (err) {
+      res.status(500).send(err);
+    }
   };
 
-  lightOff = () => {
-    axios.post('/api/v1/huelights/controllights', {
-      light: this.state.selectedLight,
-      user: this.state.username,
-      token: this.state.access_token,
-      hueState: 'off'
-    })
-      .then(res => {
-        console.log(res);
+  lightOff = async (res, req) => {
+    try {
+      await axios.post('/api/v1/huelights/controllights', {
+        light: this.state.selectedLight,
+        user: this.state.username,
+        token: this.state.access_token,
+        hueState: 'off'
       });
+    } catch (err) {
+      res.status(500).send(err);
+    }
   };
 
-  criticalRoll = () => {
-    axios.post('/api/v1/huelights/controllights', {
-      light: this.state.selectedLight,
-      user: this.state.username,
-      token: this.state.access_token,
-      hueState: 'critical'
-    })
-      .then(res => {
-        console.log(res);
+  lightning = async (res, req) => {
+    try {
+      await axios.post('/api/v1/huelights/controllights', {
+        light: this.state.selectedLight,
+        user: this.state.username,
+        token: this.state.access_token,
+        hueState: 'lightning'
       });
+    } catch (err) {
+      res.status(500).send(err);
+    }
   };
 
-  lightning = () => {
-    axios.post('/api/v1/huelights/controllights', {
-      light: this.state.selectedLight,
-      user: this.state.username,
-      token: this.state.access_token,
-      hueState: 'lightning'
-    })
-      .then(res => {
-        console.log(res);
+  criticalRoll = async (req, res) => {
+    try {
+      await axios.post('/api/v1/huelights/controllights', {
+        light: this.state.selectedLight,
+        user: this.state.username,
+        token: this.state.access_token,
+        hueState: 'critical'
       });
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  };
+
+  fadeOut = async (res, req) => {
+    try {
+      axios.post('/api/v1/huelights/controllights', {
+        light: this.state.selectedLight,
+        user: this.state.username,
+        token: this.state.access_token,
+        hueState: 'fadeOut'
+      });
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  };
+
+  fadeIn = async (res, req) => {
+    try {
+      axios.post('/api/v1/huelights/controllights', {
+        light: this.state.selectedLight,
+        user: this.state.username,
+        token: this.state.access_token,
+        hueState: 'fadeIn'
+      });
+    } catch (err) {
+      res.status(500).send(err);
+    }
   };
 
   render() {
@@ -178,7 +208,7 @@ class HuePage extends Component {
               <div>
                 {this.resetUrl()}
                 <Heading className="title-2" size={5}>Select a Light:</Heading>
-                <div className="select">
+                <div className="select" onClick={this.findAllLights}>
                   <select onChange={this.handleChange} value={this.state.selectedLight}>
                     {this.state.lights.map((lights, index) => (
                       <option disabled={this.state.isReachable[index]} value={this.state.lightId[index]} key={this.state.lightId[index]}>{lights}</option>
@@ -189,7 +219,9 @@ class HuePage extends Component {
                   lightOn={this.lightOn}
                   lightOff={this.lightOff}
                   critical={this.criticalRoll}
-                  lightning={this.lightning}>
+                  lightning={this.lightning}
+                  fadeOut={this.fadeOut}
+                  fadeIn={this.fadeIn}>
                 </Lights></div> : <div><Button onClick={this.redirect}>Connect To Hue</Button></div>}
           </Columns>
         </Columns.Column>
