@@ -121,6 +121,7 @@ class InitPage extends Component {
                 <div >
                     {this.state.characterList.map(character => (
                         <InitCard
+                        className="card"
                             character={character}
                             id={character.id}
                             key={character.id}

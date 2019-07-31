@@ -1,34 +1,29 @@
 import React from 'react';
 import {Button, Container, Columns} from 'react-bulma-components';
 import './index.css';
+import MyButton from '../../components/buttons'
 
 const Lights = (props) => {
   return (
     <Container id="buttons" fluid>
       <Columns>
       <Columns.Column>
-      <Button color="success" onClick={() => props.lightOn()}>
-        Light On
-      </Button>
-      <Button color="success" onClick={() => props.lightOff()}>
-        Light Off
-      </Button>
+      <MyButton text="Light On" onClick={() => props.lightOn()}>
+      </MyButton>
+      <MyButton text="Light Off" onClick={() => props.lightOff()}>
+      </MyButton>
       </Columns.Column>
       <Columns.Column>
-      <Button color="success" onClick={() => props.critical()}>
-        Critical
-      </Button>
-      <Button color="success" onClick={() => props.lightning()}>
-        Lightning
-      </Button>
+      <MyButton text="Critical" onClick={() => props.critical()}>
+      </MyButton>
+      <MyButton text="Lightning" onClick={() => props.lightning()}>
+      </MyButton>
       </Columns.Column>
       <Columns.Column>
-      <Button color="success" onClick={() => props.fadeIn()}>
-        Fade In
-      </Button>
-      <Button color="success" onClick={() => props.fadeOut()}>
-        Fade Out
-      </Button>
+      <MyButton text="Fade In" onClick={() => props.fadeIn()}>
+      </MyButton>
+      <MyButton text="Fade Out" onClick={() => props.fadeOut()}>
+      </MyButton>
       </Columns.Column>
       </Columns>
    </Container>
