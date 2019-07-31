@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Cinzel+Decorative&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Princess+Sofia|Redressed&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Almendra&display=swap');
-
 .title-1 {
   font-family: 'Almendra';
 }
@@ -21,4 +20,30 @@
   border: 2px solid rgb(25, 25, 59);
   border-radius: 4px;
   margin: 10px;
+}
+
+#buttons {
+  display: flex;
+  justify-content: space-around;
+  align-content: space-around;
+  flex-direction: row;
+  width: 400px;
+}
+
+#buttons button {
+  margin: 5px;
+}
+
+#monsterSearch {
+  padding-bottom: 100px;
+  overflow: auto;
+  text-align: center
+}
+
+#monsterSearch input {
+  width: 200px;
+}
+
+#monsterSearchButton {
+  margin-left: 10px;
 }

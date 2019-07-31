@@ -128,8 +128,8 @@ class InitAdminPage extends Component {
         return (
             <React.Fragment>
                 <NavTabs game_id={this.props.location.state.game_id} game_name={this.props.location.state.game_name} secret={this.props.location.state.secret} />
-                <h1>Game: {this.props.location.state.game_name}</h1>
-                <h1>Secret: {this.props.location.state.secret}</h1>
+                <h1 className="title-1 title-2">Game: {this.props.location.state.game_name}</h1>
+                <h1 className="title-1 title-2">Secret: {this.props.location.state.secret}</h1>
                 <div >
                     {this.state.characterList.map(character => (
                         <InitCardAdmin
@@ -157,6 +157,9 @@ class InitAdminPage extends Component {
                 <Container id="buttons" fluid>
                     <Button color="success" onClick={this.resetEncounter}>Reset Encounter</Button>
                     <Button color="success" onClick={() => this.initSort(this.state.characterList)}>Initiative Sort</Button>
+                </Container>
+                <Container id="monsterSearch" fluid>
+                    <p>Monster Search Bar</p>
                     <MonsterSearch game_id={this.props.location.state.game_id} loadChars={this.loadChars} />
                 </Container>
             </React.Fragment>

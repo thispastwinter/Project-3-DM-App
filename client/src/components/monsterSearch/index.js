@@ -40,7 +40,7 @@ class MonsterSearch extends Component {
 
   render() {
     return (
-      <div>
+      <div id="monsterSearch">
         <Autocomplete
           getItemValue={(monster) => monster.name}
           items={this.state.monsterList}
@@ -56,7 +56,7 @@ class MonsterSearch extends Component {
           onChange={(e) => this.setState({ monsterName: e.target.value })}
           onSelect={(val) => this.setState({ monsterName: val })}
         />
-        <Button color="danger" onClick={() => this.addMonster(this.state.game_id)}>+</Button>
+        <Button id="monsterSearchButton" color="danger" onClick={() => this.addMonster(this.state.game_id)}>+</Button>
       </div>
     );
   }
