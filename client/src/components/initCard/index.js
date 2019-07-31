@@ -3,6 +3,7 @@ import Initiative from '../initiative/index';
 import Health from '../health/index';
 import ArmorClass from '../armorClass/index';
 import { Card, Media, Image, Content, Heading, Button } from 'react-bulma-components';
+import './index.css'
 
 const InitCard = (props) => {
 
