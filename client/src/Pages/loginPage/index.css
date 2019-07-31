@@ -27,3 +27,12 @@
     width: 40%;
   }
 }
+@media screen and (max-width: 1087px) {
+  #email,
+  #password {
+    display: block;
+    /* margin-left: auto; */
+    margin-right: auto;
+    width: 100%;
+  }
+}
