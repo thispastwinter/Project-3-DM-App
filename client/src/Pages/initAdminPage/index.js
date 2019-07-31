@@ -5,6 +5,7 @@ import io from 'socket.io-client';
 import MonsterSearch from '../../components/monsterSearch';
 import { Button, Container } from 'react-bulma-components';
 import NavTabs from "../../components/navTabs";
+import MyButton from '../../components/buttons'
 
 class InitAdminPage extends Component {
     state = {
@@ -155,8 +156,8 @@ class InitAdminPage extends Component {
                     ))}
                 </div>
                 <Container id="buttons" fluid>
-                    <Button color="success" onClick={this.resetEncounter}>Reset Encounter</Button>
-                    <Button color="success" onClick={() => this.initSort(this.state.characterList)}>Initiative Sort</Button>
+                    <MyButton text="Reset Encounter" onClick={this.resetEncounter}></MyButton>
+                    <MyButton text="Initiative Sort" onClick={() => this.initSort(this.state.characterList)}></MyButton>
                     <MonsterSearch game_id={this.props.location.state.game_id} loadChars={this.loadChars} />
                 </Container>
             </React.Fragment>
