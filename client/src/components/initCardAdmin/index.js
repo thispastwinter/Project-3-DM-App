@@ -61,7 +61,7 @@ const InitCardAdmin = (props) => {
           <Columns>
             <div className="init-field-columns">
               <Columns.Column>
-                Initiative: <Initiative {...props} /> AC: <ArmorClass {...props} />  Health: <Health {...props} />
+                Initiative: <Initiative {...props} /> Armor Class: <ArmorClass {...props} />  Health: <Health {...props} />
               </Columns.Column>
             </div>
             {/* </Columns> */}
