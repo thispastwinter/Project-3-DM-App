@@ -1,7 +1,8 @@
 #buttons {
   display: flex;
+  justify-content: space-between;
   align-content: space-between;
-  flex-direction: column;
+  flex-direction: row;
   width: 200px;
 }
 

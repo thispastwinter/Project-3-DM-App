@@ -8,7 +8,7 @@ import Constitution from '../constitution/index';
 import Intelligence from '../intelligence/index';
 import Wisdom from '../wisdom/index';
 import Charisma from '../charisma/index';
-import { Card, Media, Image, Content, Heading, Button, Columns } from 'react-bulma-components';
+import { Card, Media, Image, Content, Heading, Columns } from 'react-bulma-components';
 import './index.css';
 import MyButton from '../buttons'
 
@@ -29,7 +29,8 @@ const InitCardAdmin = (props) => {
 
   const checkForDeath = health => {
     if (health <= 0) {
-      return <Card.Footer.Item><Button color="danger" onClick={() => props.removeChar(props.id)}> remove character </Button></Card.Footer.Item>
+      return <Card.Footer.Item>
+        <MyButton text="Remove Character" onClick={() => props.removeChar(props.id)}></MyButton></Card.Footer.Item>
     }
     else {
       return null;
@@ -60,7 +61,7 @@ const InitCardAdmin = (props) => {
           <Columns>
             <div className="init-field-columns">
               <Columns.Column>
-                Initiative: <Initiative {...props} /> AC: <ArmorClass {...props} />  Health: <Health {...props} />
+                Initiative: <Initiative {...props} /> Armor Class: <ArmorClass {...props} />  Health: <Health {...props} />
               </Columns.Column>
             </div>
             {/* </Columns> */}
