@@ -94,7 +94,13 @@ class InitAdminPage extends Component {
         axios.post('/api/v1/characters/' + updateId, {
             hit_points: updatedCharacter.hit_points,
             initiative: updatedCharacter.initiative,
-            armor_class: updatedCharacter.armor_class
+            armor_class: updatedCharacter.armor_class,
+            strength: updatedCharacter.strength,
+            dexterity: updatedCharacter.dexterity,
+            constitution: updatedCharacter.constitution,
+            intelligence: updatedCharacter.intelligence,
+            wisdom: updatedCharacter.wisdom,
+            charisma: updatedCharacter.charisma
         });
         this.send(this.setState({
             characterList: this.state.characterList
@@ -132,6 +138,12 @@ class InitAdminPage extends Component {
                             key={character.id}
                             image={character.image}
                             armorClass={character.armor_class}
+                            strength={character.strength}
+                            dexterity={character.dexterity}
+                            constitution={character.constitution}
+                            intelligence={character.intelligence}
+                            wisdom={character.wisdom}
+                            charisma={character.charisma}
                             init={character.initiative}
                             name={character.name}
                             health={character.hit_points}
