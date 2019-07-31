@@ -18,6 +18,8 @@ export default class Initiative extends Component {
                 key={this.props.init}
                 onSave={this.onSave}
                 buttonsAlign='before'
+                editButtonContent={<img alt="shield" src="/images/init.png" />}
+                editButtonClassName="icon"
             />
         )
     }

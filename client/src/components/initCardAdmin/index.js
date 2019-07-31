@@ -3,6 +3,7 @@ import Initiative from '../initiative/index';
 import Health from '../health/index';
 import ArmorClass from '../armorClass/index'
 import { Card, Media, Image, Content, Heading, Button } from 'react-bulma-components';
+import "./index.css"
 
 const InitCardAdmin = (props) => {
 
@@ -38,7 +39,7 @@ const InitCardAdmin = (props) => {
           </Media.Item>
         </Media>
         <Content>
-          Initiative: <Initiative {...props} /> AC: <ArmorClass {...props} />  Health: <Health {...props} />
+          Initiative: <Initiative {...props} /> Armor Class: <ArmorClass {...props} />  Health: <Health {...props} />
         </Content>
       </Card.Content>
       <Card.Footer>
