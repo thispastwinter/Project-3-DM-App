@@ -11,7 +11,8 @@ class CreateUserPage extends Component {
             email: '',
             password: '',
             admin: false,
-            createSuccess: false
+            createSuccess: false,
+            user_id: null
         };
 
         this.handleLogin = this.handleLogin.bind(this);
@@ -49,8 +50,12 @@ class CreateUserPage extends Component {
                     admin: this.state.admin
                 });
                 if (response.data) {
+                    const admin = response.data.admin;
+                    const user_id = response.data.id;
                     this.setState({
                         createSuccess: true,
+                        admin,
+                        user_id
                     });
                 } else {
                     console.log('error on createUser');
@@ -66,7 +71,13 @@ class CreateUserPage extends Component {
 
     render() {
         if (this.state.createSuccess) {
-            return <Redirect to='/game' />
+            return <Redirect to={{
+                pathname: '/game',
+                state: {
+                    user_id: this.state.user_id,
+                    admin: this.state.admin,
+                }
+            }} />
         }
 
         return (

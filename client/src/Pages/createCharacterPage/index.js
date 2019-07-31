@@ -3,11 +3,17 @@ import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import { Button, Form, Container } from 'react-bulma-components';
 import './index.css';
+import images from './images.json';
+import ImagePicker from 'react-image-picker'
+import 'react-image-picker/dist/index.css'
+
+const imageList = images;
 
 class CreateCharacterPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            image: null,
             name: '',
             armor_class: '',
             hit_points: '',
@@ -20,13 +26,20 @@ class CreateCharacterPage extends Component {
             charisma: '',
             isMonster: false,
         };
-
+        this.onPick = this.onPick.bind(this)
         this.handleLogin = this.handleLogin.bind(this);
     }
 
     componentDidMount() {
         this.loadGameId();
     }
+
+    onPick(image) {
+        this.setState({ image })
+        console.log(image.src)
+    }
+
+
 
     validateForm() {
         return this.state.name.length > 0;
@@ -41,7 +54,6 @@ class CreateCharacterPage extends Component {
 
     loadGameId = () => {
         let game_id = this.props.location.state.game_id;
-        console.log(game_id);
         this.setState({ game_id });
     }
 
@@ -52,9 +64,9 @@ class CreateCharacterPage extends Component {
         try {
             const response = await axios.post('api/v1/characters', {
                 name: this.state.name,
+                image: this.state.image.src,
                 armor_class: parseInt(this.state.armor_class),
                 hit_points: parseInt(this.state.hit_points),
-                image: './images/orc.png',
                 strength: parseInt(this.state.strength),
                 dexterity: parseInt(this.state.dexterity),
                 constitution: parseInt(this.state.constitution),
@@ -87,7 +99,6 @@ class CreateCharacterPage extends Component {
                     game_id: this.state.game_id,
                     secret: this.props.location.state.secret,
                     game_name: this.props.location.state.game_name
-
                 }
             }} />
         }
@@ -96,6 +107,7 @@ class CreateCharacterPage extends Component {
             <div className="createCharacter">
                 <h1 className="title">Create New Character</h1>
                 <form onSubmit={this.handleSubmit}>
+
                     <Container>
                         <Form.Label>Name</Form.Label>
                         <Form.Input
@@ -105,6 +117,15 @@ class CreateCharacterPage extends Component {
                             className="input"
                             id="name"
                         />
+                    </Container>
+                    <Container className="images">
+                        <Form.Label>Select An Avatar:</Form.Label>
+
+                        <ImagePicker
+                            images={imageList.map(image => ({ src: image.image, value: image.id }))}
+                            onPick={this.onPick}
+                        />
+
                     </Container>
                     <Container>
                         <Form.Label>Armor Class</Form.Label>

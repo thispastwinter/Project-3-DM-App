@@ -33,7 +33,6 @@ class InitPage extends Component {
 
     loadGameId = () => {
         let game_id = this.props.location.state.game_id;
-        console.log(game_id);
         this.setState({ game_id });
     }
 
