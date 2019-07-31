@@ -4,6 +4,7 @@ import Health from '../health/index';
 import ArmorClass from '../armorClass/index';
 import { Card, Media, Image, Content, Heading, Button } from 'react-bulma-components';
 import './index.css'
+import MyButton from '../buttons'
 
 const InitCard = (props) => {
 
@@ -11,7 +12,7 @@ const InitCard = (props) => {
   const checkForTop = id => {
     const index = currentOrder.findIndex(c => c.id === id)
     if (index === 0) {
-      return <Card.Footer.Item><Button color="success" onClick={() => props.turnDone(props.id)}> Turn Done</Button></Card.Footer.Item>
+      return <Card.Footer.Item><MyButton text="Turn Done" onClick={() => props.turnDone(props.id)}></MyButton></Card.Footer.Item>
     }
     else {
       return null;
@@ -20,7 +21,8 @@ const InitCard = (props) => {
 
   const checkForDeath = health => {
     if (health <= 0) {
-      return <Card.Footer.Item><Button color="danger" onClick={() => props.removeChar(props.id)}> remove character </Button></Card.Footer.Item>
+      return <Card.Footer.Item>
+        <MyButton text="Remove Character" onClick={() => props.removeChar(props.id)}></MyButton></Card.Footer.Item>
     }
     else {
       return null;

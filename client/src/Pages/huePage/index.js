@@ -225,7 +225,7 @@ class HuePage extends Component {
                   lightning={this.lightning}
                   fadeOut={this.fadeOut}
                   fadeIn={this.fadeIn}>
-                </Lights></div> : <div><MyButton onClick={this.redirect}>Connect To Hue</MyButton></div>}
+                </Lights></div> : <div><MyButton text="Connect To Hue" onClick={this.redirect}></MyButton></div>}
           </Columns>
           </Container>
         </Columns.Column>
