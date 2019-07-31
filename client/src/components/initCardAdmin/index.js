@@ -62,15 +62,15 @@ const InitCardAdmin = (props) => {
                 Initiative: <Initiative {...props} /> AC: <ArmorClass {...props} />  Health: <Health {...props} />
               </Columns.Column>
             </div>
-          {/* </Columns> */}
-          {/* <Columns> */}
+            {/* </Columns> */}
+            {/* <Columns> */}
             <div className="init-field-columns">
               <Columns.Column>
                 Strength: <Strength {...props} /> Dexterity: <Dexterity {...props} /> Constitution: <Constitution {...props} />
               </Columns.Column>
             </div>
-          {/* </Columns> */}
-          {/* <Columns> */}
+            {/* </Columns> */}
+            {/* <Columns> */}
             <div className="init-field-columns">
               <Columns.Column>
                 Intelligence: <Intelligence {...props} /> Wisdom: <Wisdom {...props} /> Charisma: <Charisma {...props} />

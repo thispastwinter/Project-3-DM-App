@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import EdiText from 'react-editext'
+import "./index.css"
 
 export default class Initiative extends Component {
     // EdiText onSave is called with an argument of the new value
@@ -18,6 +19,8 @@ export default class Initiative extends Component {
                 key={this.props.init}
                 onSave={this.onSave}
                 buttonsAlign='before'
+                editButtonContent={<img alt="roll initiative" src="/images/init.png" />}
+                editButtonClassName="icon"
             />
         )
     }

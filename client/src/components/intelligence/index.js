@@ -18,6 +18,8 @@ export default class Intelligence extends Component {
                 key={this.props.intelligence}
                 onSave={this.onSave}
                 buttonsAlign='before'
+                editButtonContent={<img alt="brain" src="/images/intelligence.png" />}
+                editButtonClassName="icon"
             />
         )
     }

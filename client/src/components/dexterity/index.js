@@ -18,6 +18,8 @@ export default class Dexterity extends Component {
                 key={this.props.dexterity}
                 onSave={this.onSave}
                 buttonsAlign='before'
+                editButtonContent={<img alt="hand" src="/images/dexterity.png" />}
+                editButtonClassName="icon"
             />
         )
     }

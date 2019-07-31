@@ -18,6 +18,8 @@ export default class Constitution extends Component {
                 key={this.props.constitution}
                 onSave={this.onSave}
                 buttonsAlign='before'
+                editButtonContent={<img alt="body" src="/images/constitution.png" />}
+                editButtonClassName="icon"
             />
         )
     }
