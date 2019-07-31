@@ -62,7 +62,7 @@ const InitCard = (props) => {
                 <Heading size={3}>{props.name}</Heading>
               </Media.Item>
             </Media>
-            <Content className="has-text-centered">
+            <Content>
               Initiative: <Initiative {...props} /> AC: <ArmorClass {...props} /> Health: <Health {...props} />
             </Content>
           </Card.Content>

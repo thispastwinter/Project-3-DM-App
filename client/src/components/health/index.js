@@ -19,7 +19,7 @@ export default class Health extends Component {
                 key={this.props.health}
                 onSave={this.onSave}
                 buttonsAlign='before'
-                editButtonContent={<img alt="shield" src="/images/heart.png" />}
+                editButtonContent={<img alt="heart" src="/images/heart.png" />}
                 editButtonClassName="icon"
             />
         )

@@ -1,6 +1,11 @@
 import React from 'react';
 import Initiative from '../initiative/index';
 import Health from '../health/index';
+import ArmorClass from '../armorClass/index';
+import Strength from '../strength/index';
+import Dexterity from '../dexterity/index';
+import Constitution from '../constitution/index';
+import Intelligence from '../intelligence/index';
 import Wisdom from '../wisdom/index';
 import Charisma from '../charisma/index';
 import { Card, Media, Image, Content, Heading, Button, Columns } from 'react-bulma-components';
@@ -12,6 +17,7 @@ const InitCardAdmin = (props) => {
 
   const currentOrder = props.currentOrder;
   const checkForTop = id => {
+    const index = currentOrder.findIndex(c => c.id === id)
     if (index === 0) {
       return <Card.Footer.Item><Button color="success" onClick={() => props.turnDone(props.id)}> Turn Done</Button></Card.Footer.Item>
     }

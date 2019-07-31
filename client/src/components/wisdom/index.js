@@ -18,6 +18,8 @@ export default class Wisdom extends Component {
                 key={this.props.wisdom}
                 onSave={this.onSave}
                 buttonsAlign='before'
+                editButtonContent={<img alt="spellbook" src="/images/wisdom.png" />}
+                editButtonClassName="icon"
             />
         )
     }
