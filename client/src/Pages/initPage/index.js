@@ -151,6 +151,15 @@ class InitPage extends Component {
                         </Button>
                     </Link>
                 </Container>
+                <Container id="buttons" fluid>
+                    <Link to={{
+                        pathname: '/',
+                    }}>
+                        <Button color="warning">
+                            Login Page
+                        </Button>
+                    </Link>
+                </Container>
             </React.Fragment>
         )
     }

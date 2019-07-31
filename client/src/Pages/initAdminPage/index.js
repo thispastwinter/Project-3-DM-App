@@ -5,11 +5,13 @@ import io from 'socket.io-client';
 import MonsterSearch from '../../components/monsterSearch';
 import { Button, Container } from 'react-bulma-components';
 import NavTabs from "../../components/navTabs";
+import { Link } from 'react-router-dom';
 
 class InitAdminPage extends Component {
     state = {
         characterList: [],
         game_id: null,
+        user_id: null,
         // endpoint: "localhost:3001"
     }
 
@@ -35,7 +37,7 @@ class InitAdminPage extends Component {
     loadGameId = () => {
         let game_id = this.props.location.state.game_id;
         let game_name = this.props.location.state.game_name;
-        let secret = this.props.location.state.secret
+        let secret = this.props.location.state.secret;
         this.setState({ game_id });
         localStorage.setItem("gameId", JSON.stringify(game_id));
         localStorage.setItem("gameName", JSON.stringify(game_name));
@@ -158,6 +160,29 @@ class InitAdminPage extends Component {
                     <Button color="success" onClick={this.resetEncounter}>Reset Encounter</Button>
                     <Button color="success" onClick={() => this.initSort(this.state.characterList)}>Initiative Sort</Button>
                     <MonsterSearch game_id={this.props.location.state.game_id} loadChars={this.loadChars} />
+                </Container>
+                <Container id="buttons" fluid>
+                    <Link to={{
+                        pathname: '/createcharacter',
+                        state: {
+                            game_id: this.props.location.state.game_id,
+                            secret: this.props.location.state.secret,
+                            game_name: this.props.location.state.game_name
+                        }
+                    }}>
+                        <Button color="warning">
+                            Create Character
+                        </Button>
+                    </Link>
+                </Container>
+                <Container id="buttons" fluid>
+                    <Link to={{
+                        pathname: '/',
+                    }}>
+                        <Button color="warning">
+                            Login Page
+                        </Button>
+                    </Link>
                 </Container>
             </React.Fragment>
         )
