@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import EdiText from 'react-editext'
+import "./index.css"
 
 export default class Initiative extends Component {
     // EdiText onSave is called with an argument of the new value
