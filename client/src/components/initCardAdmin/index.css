@@ -1,11 +1,11 @@
 @media print, screen and (min-width: 320px) {
   .columns:not(.is-desktop) {
     display: flex;
-  }
+  };
   .styles_Editext__input__1534X {
     max-width: 35px;
-  }
+  };
   .card-content {
     padding: 1.2rem;
-  }
+  };
 }
