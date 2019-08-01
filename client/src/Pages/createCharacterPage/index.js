@@ -160,15 +160,6 @@ class CreateCharacterPage extends Component {
                             id="name"
                         />
                     </Container>
-                    <Container className="images">
-                        <Form.Label>Select An Avatar:</Form.Label>
-
-                        <ImagePicker
-                            images={imageList.map(image => ({ src: image.image, value: image.id }))}
-                            onPick={this.onPick}
-                        />
-
-                    </Container>
                     <Container>
                         <Form.Label>Armor Class</Form.Label>
                         <Form.Input
@@ -248,6 +239,15 @@ class CreateCharacterPage extends Component {
                             className="input"
                             id="charisma"
                         />
+                    </Container>
+                    <Container className="images">
+                        <Form.Label>Select An Avatar:</Form.Label>
+
+                        <ImagePicker
+                            images={imageList.map(image => ({ src: image.image, value: image.id }))}
+                            onPick={this.onPick}
+                        />
+
                     </Container>
                     <Container id="buttons" fluid>
                         <MyButton

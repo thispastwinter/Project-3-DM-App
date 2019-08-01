@@ -82,13 +82,15 @@ class CreateGamePage extends Component {
                             id="name"
                         />
                     </Container>
-                    <MyButton
-                        text="Create Game"
-                        primary={true}
-                        disabled={!this.validateForm()}
-                        onClick={this.handleCreate}
-                    >
-          </MyButton>
+                    <Container id="buttons" fluid>
+                        <MyButton
+                            text="Create Game"
+                            primary={true}
+                            disabled={!this.validateForm()}
+                            onClick={this.handleCreate}
+                        >
+                        </MyButton>
+                    </Container>
                 </form>
             </div>
         );
