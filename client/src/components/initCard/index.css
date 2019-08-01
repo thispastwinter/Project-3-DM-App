@@ -5,11 +5,20 @@
   flex-direction: column;
 }
 
+.character-names {
+  font-size: calc(170% + 1.3vw);
+}
+
 @media print, screen and (min-width: 320px) {
   .styles_Editext__input__1534X {
-    max-width: 55px;
+    max-width: 550px;
   }
   .card-content {
     padding: .5rem;
+  }
+  .init-field-columns {
+    margin-left: auto;
+    margin-right: auto;
+    /* display: flex; */
   }
 }

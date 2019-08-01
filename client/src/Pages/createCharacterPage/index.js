@@ -147,7 +147,7 @@ class CreateCharacterPage extends Component {
 
         return (
             <div className="createCharacter">
-                 <Heading className="title-1">Create New Character</Heading>
+                <Heading className="title-1">Create New Character</Heading>
                 <form onSubmit={this.handleSubmit}>
 
                     <Container className="characterForm">
@@ -242,7 +242,6 @@ class CreateCharacterPage extends Component {
                     </Container>
                     <Container className="images">
                         <Form.Label id="avatarSelectText">Select An Avatar:</Form.Label>
-
                         <ImagePicker
                             images={imageList.map(image => ({ src: image.image, value: image.id }))}
                             onPick={this.onPick}
