@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import { Button, Form, Container } from 'react-bulma-components';
 import './index.css';
+import MyButton from '../../components/buttons'
 
 class CreateUserPage extends Component {
     constructor(props) {
@@ -109,14 +110,14 @@ class CreateUserPage extends Component {
                             Will this be a Dungeon Master account for a game?
                 </Form.Checkbox>
                     </Container>
-                    <Button
+                    <MyButton 
+                        primary={true}
                         disabled={!this.validateForm()}
-                        type="submit"
-                        color="success"
                         onClick={this.handleLogin}
+                        text="Create User"
                     >
-                        Create User
-          </Button>
+                       
+          </MyButton>
                 </form>
             </div>
         );

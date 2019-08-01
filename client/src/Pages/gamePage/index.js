@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import GameCard from '../../components/gameCard';
-import { Button, Form, Container } from 'react-bulma-components';
+import { Form, Container, Heading } from 'react-bulma-components';
 import { Link } from "react-router-dom";
+import MyButton from '../../components/buttons';
 
 class GamePage extends Component {
     state = {
@@ -42,7 +43,7 @@ class GamePage extends Component {
                         user_id: this.props.location.state.user_id
                     }
                 }}>
-                    <Button renderAs="button" color="warning"><span>Create New Game</span></Button>
+                    <MyButton text="Create New Game" primary={true}></MyButton>
                 </Link>
             )
         }
@@ -60,8 +61,9 @@ class GamePage extends Component {
 
     checkForEmpty = () => {
         if (this.state.gameList.length === 0) {
-            return (<div><h1>It doesn't look like you are current playing in any games</h1>
-                <h2>Use the form below to join a game that your DM has already created</h2></div>);
+            return (<div><Heading className="title-1 title-2" size={3}>It doesn't look like you are current playing in any games.</Heading>
+                <Heading className="title-1 title-2" size={5}>Use the form below to join a game that your DM has already created</Heading><br />
+            </div>);
         }
         else {
             return (<div >
@@ -93,17 +95,16 @@ class GamePage extends Component {
                             className="input"
                             id="gameKey"
                         />
-                        <Form.Help color="success">Please type the secret provided by your DM that is associated with your game</Form.Help>
+                        <Form.Help>Please type the secret provided by your DM that is associated with your game</Form.Help>
                     </Container>
-                    <Button
-                        type="submit"
-                        color="success"
+                    <MyButton
+                        primary={false}
+                        text="Bind Game To Your Account"
                         onClick={this.bindGame}
                     >
-                        Bind game to your account
-          </Button>
+                    </MyButton>
+                    {this.checkForAdmin()}
                 </form>
-                {this.checkForAdmin()}
             </React.Fragment>
         )
     }

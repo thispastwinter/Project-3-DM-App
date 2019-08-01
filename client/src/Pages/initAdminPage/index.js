@@ -158,8 +158,8 @@ class InitAdminPage extends Component {
                     ))}
                 </div>
                 <Container id="buttons" fluid>
-                    <MyButton text="Reset Encounter" onClick={this.resetEncounter}></MyButton>
-                    <MyButton text="Initiative Sort" onClick={() => this.initSort(this.state.characterList)}></MyButton>
+                    <MyButton primary={true} text="Reset Encounter" onClick={this.resetEncounter}></MyButton>
+                    <MyButton primary={true} text="Initiative Sort" onClick={() => this.initSort(this.state.characterList)}></MyButton>
                     <Link to={{
                         pathname: '/createcharacter',
                         state: {
@@ -169,10 +169,9 @@ class InitAdminPage extends Component {
                             admin: this.props.location.state.admin
                         }
                     }}>
-                        <Button color="warning">
-                            Create Character
-                        </Button>
-                    </Link>
+                        <MyButton static={true} text="Create NPC" primary={false}>
+                        </MyButton>
+                    </ Link>
                 </Container>
                 <Container id="monsterSearch" fluid>
                     <h1>Monster Search Bar</h1>

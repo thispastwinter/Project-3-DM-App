@@ -6,6 +6,7 @@ import './index.css';
 import images from './images.json';
 import ImagePicker from 'react-image-picker'
 import 'react-image-picker/dist/index.css'
+import MyButton from '../../components/buttons'
 
 const imageList = images;
 
@@ -149,7 +150,7 @@ class CreateCharacterPage extends Component {
                 <form onSubmit={this.handleSubmit}>
 
                     <Container>
-                        <Form.Label>Name</Form.Label>
+                        <Form.Label>Character Name</Form.Label>
                         <Form.Input
                             value={this.state.name}
                             type="text"
@@ -247,14 +248,15 @@ class CreateCharacterPage extends Component {
                             id="charisma"
                         />
                     </Container>
-                    <Button
-                        disabled={!this.validateForm()}
-                        type="submit"
-                        color="success"
-                        onClick={this.handleLogin}
-                    >
-                        Create Character
-          </Button>
+                    <Container id="buttons" fluid>
+                        <MyButton
+                            text="Create Character"
+                            primary={true}
+                            type="submit"
+                            disabled={!this.validateForm()}
+                            onClick={this.handleLogin}
+                        />
+                    </Container>
                 </form>
             </div>
         );
