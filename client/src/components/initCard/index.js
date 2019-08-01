@@ -63,12 +63,7 @@ const InitCard = (props) => {
     else {
       let index = currentOrder.findIndex(c => c.id === props.id)
       return (
-<<<<<<< HEAD
         <Card className={index === 0 ? 'init-blinking' : 'init-card'}>
-           {/* <Card className={index === 0 ? 'init-card-blinking' : 'init-card'}> */}
-=======
-        <Card className="init-card">
->>>>>>> dev
           <Card.Content>
             <Media>
               <Media.Item position="left">
