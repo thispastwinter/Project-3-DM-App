@@ -19,7 +19,7 @@ const GameCard = (props) => {
                         admin: props.admin
                     }
                 }}>
-                    <MyButton onClick="" text="Join Game" primary={true}>
+                    <MyButton disabled={true} text="Join Game" primary={true}>
                     </MyButton>
                 </Link>
             </Card.Footer.Item>)
@@ -35,7 +35,7 @@ const GameCard = (props) => {
                         admin: props.admin
                     }
                 }}>
-                    <MyButton onClick="" text="Join Game" primary={true}>
+                    <MyButton disabled={true} text="Join Game" primary={true}>
                     </MyButton>
                 </Link>
             </Card.Footer.Item>))
