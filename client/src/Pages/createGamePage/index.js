@@ -73,7 +73,7 @@ class CreateGamePage extends Component {
                 <h1 className="title">Create New Game</h1>
                 <form onSubmit={this.handleSubmit}>
                     <Container>
-                        <Form.Label>Game Name</Form.Label>
+                        <Form.Label className="createGameHeader">Game Name</Form.Label>
                         <Form.Input
                             value={this.state.name}
                             type="text"
