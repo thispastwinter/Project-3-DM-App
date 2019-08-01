@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Autocomplete from 'react-autocomplete';
-import { Button } from 'react-bulma-components';
 import MyButton from '../buttons'
 
 class MonsterSearch extends Component {
