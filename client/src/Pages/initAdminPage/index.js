@@ -165,7 +165,8 @@ class InitAdminPage extends Component {
                         state: {
                             game_id: this.props.location.state.game_id,
                             secret: this.props.location.state.secret,
-                            game_name: this.props.location.state.game_name
+                            game_name: this.props.location.state.game_name,
+                            admin: this.props.location.state.admin
                         }
                     }}>
                         <Button color="warning">
