@@ -1,4 +1,4 @@
-#buttons,
+#buttons2,
 #npcButton {
   display: flex;
   justify-content: space-between;
@@ -7,11 +7,11 @@
   width: 200px;
 }
 
-#buttons {
+#buttons2 {
   margin-top: 2%;
 }
 
-#buttons button {
+#buttons2 button {
   margin: 5px;
 }
 
