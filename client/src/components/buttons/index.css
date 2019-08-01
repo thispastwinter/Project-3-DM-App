@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto|Darker+Grotesque|Farro&display=swap');
 
 .mybutton {
+  margin: 5px;
   width: 200px;
   padding: 10px;
   font-family: 'Farro';
@@ -16,6 +17,7 @@
 }
 
 .mybutton-secondary {
+  margin: 5px;
   width: 200px;
   padding: 10px;
   font-family: 'Farro';
