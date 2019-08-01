@@ -42,7 +42,7 @@ class InitPage extends Component {
             .then(res => {
                 let characterList = res.data;
                 if (characterList.length === 0) {
-                    alert("No Characters here yet");
+                    //Put modal here eventually
                 }
                 else if (characterList !== this.state.characterList) {
                     this.send(this.setState({ characterList }));

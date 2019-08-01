@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
-import { Button, Form, Container } from 'react-bulma-components';
+import { Form, Container } from 'react-bulma-components';
 import './index.css';
 import MyButton from '../../components/buttons';
 
@@ -82,13 +82,15 @@ class CreateGamePage extends Component {
                             id="name"
                         />
                     </Container>
-                    <MyButton
-                        text="Create Game"
-                        primary={true}
-                        disabled={!this.validateForm()}
-                        onClick={this.handleCreate}
-                    >
-          </MyButton>
+                    <Container id="buttons" fluid>
+                        <MyButton
+                            text="Create Game"
+                            primary={true}
+                            disabled={!this.validateForm()}
+                            onClick={this.handleCreate}
+                        >
+                        </MyButton>
+                    </Container>
                 </form>
             </div>
         );

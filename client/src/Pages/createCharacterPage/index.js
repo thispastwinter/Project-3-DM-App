@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
-import { Button, Form, Container } from 'react-bulma-components';
+import { Form, Container } from 'react-bulma-components';
 import './index.css';
 import images from './images.json';
 import ImagePicker from 'react-image-picker'
@@ -160,15 +160,6 @@ class CreateCharacterPage extends Component {
                             id="name"
                         />
                     </Container>
-                    <Container className="images">
-                        <Form.Label>Select An Avatar:</Form.Label>
-
-                        <ImagePicker
-                            images={imageList.map(image => ({ src: image.image, value: image.id }))}
-                            onPick={this.onPick}
-                        />
-
-                    </Container>
                     <Container>
                         <Form.Label>Armor Class</Form.Label>
                         <Form.Input
@@ -248,6 +239,15 @@ class CreateCharacterPage extends Component {
                             className="input"
                             id="charisma"
                         />
+                    </Container>
+                    <Container className="images">
+                        <Form.Label>Select An Avatar:</Form.Label>
+
+                        <ImagePicker
+                            images={imageList.map(image => ({ src: image.image, value: image.id }))}
+                            onPick={this.onPick}
+                        />
+
                     </Container>
                     <Container id="buttons" fluid>
                         <MyButton

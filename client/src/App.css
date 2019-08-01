@@ -53,3 +53,7 @@
   width: 10px;
   margin-left: 20px;
 }
+
+#secretForm {
+  max-width: 350px;
+}
