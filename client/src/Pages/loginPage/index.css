@@ -23,14 +23,13 @@ label.label {
   margin: 0;
 }
 
-/* .loginForm {
-
-} */
+.title-1 {
+  font-size: calc(168% + 2vw);
+}
 
 #button {
   width: auto;
 }
-
 
 .mybutton-secondary {
   width: 50%;
