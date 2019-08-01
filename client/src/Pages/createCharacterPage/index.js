@@ -147,118 +147,116 @@ class CreateCharacterPage extends Component {
 
         return (
             <div className="createCharacter">
-                <Heading className="title-1">Create New Character</Heading>
+                 <Heading className="title-1">Create New Character</Heading>
                 <form onSubmit={this.handleSubmit}>
 
-                    <Container className="form">
-                        <Container>
-                            <Form.Label>Character Name</Form.Label>
-                            <Form.Input
-                                value={this.state.name}
-                                type="text"
-                                onChange={this.handleChange}
-                                className="input"
-                                id="name"
-                            />
-                        </Container>
-                        <Container>
-                            <Form.Label>Armor Class</Form.Label>
-                            <Form.Input
-                                value={this.state.armor_class}
-                                type="text"
-                                onChange={this.handleChange}
-                                className="input"
-                                id="armor_class"
-                            />
-                        </Container>
-                        <Container>
-                            <Form.Label>Hit Points</Form.Label>
-                            <Form.Input
-                                value={this.state.hit_points}
-                                type="text"
-                                onChange={this.handleChange}
-                                className="input"
-                                id="hit_points"
-                            />
-                        </Container>
-                        <Container>
-                            <Form.Label>Strength</Form.Label>
-                            <Form.Input
-                                value={this.state.strength}
-                                type="text"
-                                onChange={this.handleChange}
-                                className="input"
-                                id="strength"
-                            />
-                        </Container>
-                        <Container>
-                            <Form.Label>Dexterity</Form.Label>
-                            <Form.Input
-                                value={this.state.dexterity}
-                                type="text"
-                                onChange={this.handleChange}
-                                className="input"
-                                id="dexterity"
-                            />
-                        </Container>
-                        <Container>
-                            <Form.Label>Constitution</Form.Label>
-                            <Form.Input
-                                value={this.state.constitution}
-                                type="text"
-                                onChange={this.handleChange}
-                                className="input"
-                                id="constitution"
-                            />
-                        </Container>
-                        <Container>
-                            <Form.Label>Intelligence</Form.Label>
-                            <Form.Input
-                                value={this.state.intelligence}
-                                type="text"
-                                onChange={this.handleChange}
-                                className="input"
-                                id="intelligence"
-                            />
-                        </Container>
-                        <Container>
-                            <Form.Label>Wisdom</Form.Label>
-                            <Form.Input
-                                value={this.state.wisdom}
-                                type="text"
-                                onChange={this.handleChange}
-                                className="input"
-                                id="wisdom"
-                            />
-                        </Container>
-                        <Container>
-                            <Form.Label>Charisma</Form.Label>
-                            <Form.Input
-                                value={this.state.charisma}
-                                type="text"
-                                onChange={this.handleChange}
-                                className="input"
-                                id="charisma"
-                            />
-                        </Container>
-                        <Container className="images">
-                            <Form.Label>Select An Avatar:</Form.Label>
+                    <Container className="characterForm">
+                        <Form.Label>Character Name</Form.Label>
+                        <Form.Input
+                            value={this.state.name}
+                            type="text"
+                            onChange={this.handleChange}
+                            className="input"
+                            id="name"
+                        />
+                    </Container>
+                    <Container className="characterForm">
+                        <Form.Label>Armor Class</Form.Label>
+                        <Form.Input
+                            value={this.state.armor_class}
+                            type="text"
+                            onChange={this.handleChange}
+                            className="input"
+                            id="armor_class"
+                        />
+                    </Container>
+                    <Container className="characterForm">
+                        <Form.Label>Hit Points</Form.Label>
+                        <Form.Input
+                            value={this.state.hit_points}
+                            type="text"
+                            onChange={this.handleChange}
+                            className="input"
+                            id="hit_points"
+                        />
+                    </Container>
+                    <Container className="characterForm">
+                        <Form.Label>Strength</Form.Label>
+                        <Form.Input
+                            value={this.state.strength}
+                            type="text"
+                            onChange={this.handleChange}
+                            className="input"
+                            id="strength"
+                        />
+                    </Container>
+                    <Container className="characterForm">
+                        <Form.Label>Dexterity</Form.Label>
+                        <Form.Input
+                            value={this.state.dexterity}
+                            type="text"
+                            onChange={this.handleChange}
+                            className="input"
+                            id="dexterity"
+                        />
+                    </Container>
+                    <Container className="characterForm">
+                        <Form.Label>Constitution</Form.Label>
+                        <Form.Input
+                            value={this.state.constitution}
+                            type="text"
+                            onChange={this.handleChange}
+                            className="input"
+                            id="constitution"
+                        />
+                    </Container>
+                    <Container className="characterForm">
+                        <Form.Label>Intelligence</Form.Label>
+                        <Form.Input
+                            value={this.state.intelligence}
+                            type="text"
+                            onChange={this.handleChange}
+                            className="input"
+                            id="intelligence"
+                        />
+                    </Container>
+                    <Container className="characterForm">
+                        <Form.Label>Wisdom</Form.Label>
+                        <Form.Input
+                            value={this.state.wisdom}
+                            type="text"
+                            onChange={this.handleChange}
+                            className="input"
+                            id="wisdom"
+                        />
+                    </Container>
+                    <Container className="characterForm">
+                        <Form.Label>Charisma</Form.Label>
+                        <Form.Input
+                            value={this.state.charisma}
+                            type="text"
+                            onChange={this.handleChange}
+                            className="input"
+                            id="charisma"
+                        />
+                    </Container>
+                    <Container className="images">
+                        <Form.Label id="avatarSelectText">Select An Avatar:</Form.Label>
 
-                            <ImagePicker
-                                images={imageList.map(image => ({ src: image.image, value: image.id }))}
-                                onPick={this.onPick}
-                            />
+                        <ImagePicker
+                            images={imageList.map(image => ({ src: image.image, value: image.id }))}
+                            onPick={this.onPick}
+                        />
 
-                        </Container>
-                        <Container id="buttons" fluid>
-                            <MyButton
-                                text="Create Character"
-                                primary={true}
-                                type="submit"
-                                disabled={!this.validateForm()}
-                                onClick={this.handleLogin}
-                            />
-                        </Container>
+                    </Container>
+                    <Container id="buttons" fluid>
+                        <MyButton
+                            text="Create Character"
+                            primary={true}
+                            type="submit"
+                            disabled={!this.validateForm()}
+                            onClick={this.handleLogin}
+                        />
                     </Container>
                 </form>
             </div>
