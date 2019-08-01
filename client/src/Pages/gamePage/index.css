@@ -3,10 +3,20 @@
   text-align: center;
 }
 
-@media screen and (min-width: 768px) {
+.card-content {
+  padding: 0;
+}
+
+@media screen and (max-width: 360px) {
+  #gameKey {
+    width: 90%;
+  }
+}
+
+@media screen and (min-width: 600px) {
   #gameCard {
-    margin-left: 10%;
-    margin-right: 10%;
+    margin-left: 15%;
+    margin-right: 15%;
   }
 }
 
