@@ -8,6 +8,7 @@ import Constitution from '../constitution/index';
 import Intelligence from '../intelligence/index';
 import Wisdom from '../wisdom/index';
 import Charisma from '../charisma/index';
+import Name from '../name/index';
 import { Card, Media, Image, Content, Heading, Columns } from 'react-bulma-components';
 import './index.css';
 import MyButton from '../buttons'
@@ -37,6 +38,15 @@ const InitCardAdmin = (props) => {
     }
   }
 
+  const monsterRename = () => {
+    if (props.isMonster) {
+      return (<Name {...props} />);
+    }
+    else {
+      return (props.name);
+    }
+  }
+
   return (
 
 
@@ -54,7 +64,7 @@ const InitCardAdmin = (props) => {
             <Image size={64} alt={props.name} src={props.image} />
           </Media.Item>
           <Media.Item>
-            <Heading size={3}>{props.name}</Heading>
+            <Heading size={3}>{monsterRename()}</Heading>
           </Media.Item>
         </Media>
         <Content>

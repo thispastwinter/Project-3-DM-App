@@ -2,8 +2,14 @@ import React from 'react';
 import Initiative from '../initiative/index';
 import Health from '../health/index';
 import ArmorClass from '../armorClass/index';
-import { Card, Media, Image, Content, Heading, } from 'react-bulma-components';
-import './index.css'
+import Strength from '../strength/index';
+import Dexterity from '../dexterity/index';
+import Constitution from '../constitution/index';
+import Intelligence from '../intelligence/index';
+import Wisdom from '../wisdom/index';
+import Charisma from '../charisma/index';
+import { Card, Media, Image, Content, Heading, Columns } from 'react-bulma-components';
+import './index.css';
 import MyButton from '../buttons'
 
 const InitCard = (props) => {
@@ -66,7 +72,27 @@ const InitCard = (props) => {
               </Media.Item>
             </Media>
             <Content>
-              Initiative: <Initiative {...props} /> AC: <ArmorClass {...props} /> Health: <Health {...props} />
+              <Columns>
+                <div className="init-field-columns">
+                  <Columns.Column>
+                    Initiative: <Initiative {...props} /> Armor Class: <ArmorClass {...props} />  Health: <Health {...props} />
+                  </Columns.Column>
+                </div>
+                {/* </Columns> */}
+                {/* <Columns> */}
+                <div className="init-field-columns">
+                  <Columns.Column>
+                    Strength: <Strength {...props} /> Dexterity: <Dexterity {...props} /> Constitution: <Constitution {...props} />
+                  </Columns.Column>
+                </div>
+                {/* </Columns> */}
+                {/* <Columns> */}
+                <div className="init-field-columns">
+                  <Columns.Column>
+                    Intelligence: <Intelligence {...props} /> Wisdom: <Wisdom {...props} /> Charisma: <Charisma {...props} />
+                  </Columns.Column>
+                </div>
+              </Columns>
             </Content>
           </Card.Content>
           <Card.Footer>

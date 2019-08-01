@@ -23,7 +23,6 @@ class InitPage extends Component {
         this.loadChars();
         let room = this.props.location.state.game_id;
         this.socket.on('connect', () => {
-            // Connected, let's sign-up for to receive messages for this room
             this.socket.emit('room', room);
         });
         this.socket.on('listChange', (characterList) => {
@@ -86,9 +85,16 @@ class InitPage extends Component {
     editChar = (updatedCharacter) => {
         const updateId = updatedCharacter.id
         axios.post('/api/v1/characters/' + updateId, {
+            name: updatedCharacter.name,
             hit_points: updatedCharacter.hit_points,
             initiative: updatedCharacter.initiative,
-            armor_class: updatedCharacter.armor_class
+            armor_class: updatedCharacter.armor_class,
+            strength: updatedCharacter.strength,
+            dexterity: updatedCharacter.dexterity,
+            constitution: updatedCharacter.constitution,
+            intelligence: updatedCharacter.intelligence,
+            wisdom: updatedCharacter.wisdom,
+            charisma: updatedCharacter.charisma
         });
         this.send(this.setState({
             characterList: this.state.characterList
@@ -115,7 +121,6 @@ class InitPage extends Component {
     render() {
         return (
             <React.Fragment>
-                {/* <NavTabs game_id={this.state.game_id} /> */}
                 <Heading className="title-1 title-2" size={2}>Game: {this.props.location.state.game_name}</Heading>
                 <Heading className="title-2" size={3}>Secret: {this.props.location.state.secret}</Heading>
                 <div >
@@ -127,6 +132,12 @@ class InitPage extends Component {
                             key={character.id}
                             image={character.image}
                             armorClass={character.armor_class}
+                            strength={character.strength}
+                            dexterity={character.dexterity}
+                            constitution={character.constitution}
+                            intelligence={character.intelligence}
+                            wisdom={character.wisdom}
+                            charisma={character.charisma}
                             init={character.initiative}
                             name={character.name}
                             health={character.hit_points}
