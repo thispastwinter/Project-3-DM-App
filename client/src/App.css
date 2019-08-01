@@ -1,9 +1,77 @@
 @import url('https://fonts.googleapis.com/css?family=Cinzel+Decorative&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Princess+Sofia|Redressed&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Almendra&display=swap');
+@font-face {
+  font-family: 'Nodesto';
+  src: url('/fonts/nodesto.otf');
+}
+
+@font-face {
+  font-family: 'Mr Eaves';
+  src: url('/fonts/mreaves.otf');
+}
 
 .title-1 {
-  font-family: 'Cinzel Decorative';
+  font-family: 'Nodesto';
+  text-transform: uppercase;
+  text-shadow: 1px 1px 5px gray;
+  font-size: 40px;
+}
+
+.character-names {
+  font-family: 'Nodesto';
+  font-size: 50px;
 }
 
 .title-2 {
   text-align: center;
+}
+
+.images {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 400px;
+}
+
+.card {
+  border: 2px solid rgb(25, 25, 59);
+  border-radius: 4px;
+  margin: 10px;
+}
+
+#buttons {
+  display: flex;
+  justify-content: space-around;
+  align-content: space-around;
+  flex-direction: row;
+  width: 300px;
+  margin: auto;
+}
+
+#buttons button {
+  margin: 5px;
+}
+
+#monsterSearch {
+  padding-bottom: 100px;
+  overflow: auto;
+  text-align: center
+}
+
+#monsterSearch input {
+  width: 200px;
+  height: 38px;
+  border: 2px solid;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.searchbutton {
+  width: 10px;
+  margin-left: 20px;
+}
+
+#secretForm {
+  max-width: 350px;
 }

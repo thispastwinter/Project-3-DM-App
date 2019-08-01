@@ -13,8 +13,7 @@ const create = async (req, res) => {
           email: req.body.email,
           password: hash,
           admin: req.body.admin,
-        });
-        res.json(user);
+        }).then(newUser => res.json(newUser));
         return hash;
       }
     });

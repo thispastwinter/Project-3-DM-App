@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import InitCard from '../../components/initCard';
-import MonsterSearch from '../../components/monsterSearch';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import io from 'socket.io-client';
-import { Button, Container } from 'react-bulma-components';
-import NavTabs from "../../components/navTabs";
+import { Container, Heading } from 'react-bulma-components';
+import MyButton from '../../components/buttons'
+// import NavTabs from "../../components/navTabs";
 
 class InitPage extends Component {
     state = {
         characterList: [],
-        gameId: null,
+        game_id: null,
         // endpoint: "localhost:3001"
     }
 
@@ -21,10 +22,8 @@ class InitPage extends Component {
 
     componentDidMount() {
         this.loadChars();
-        let room = this.props.location.state.gameId;
-        console.log(room);
+        let room = this.props.location.state.game_id;
         this.socket.on('connect', () => {
-            // Connected, let's sign-up for to receive messages for this room
             this.socket.emit('room', room);
         });
         this.socket.on('listChange', (characterList) => {
@@ -33,17 +32,17 @@ class InitPage extends Component {
     }
 
     loadGameId = () => {
-        let gameId = this.props.location.state.gameId;
-        this.setState({ gameId });
+        let game_id = this.props.location.state.game_id;
+        this.setState({ game_id });
     }
 
     loadChars = async () => {
         await this.loadGameId();
-        axios.get('/api/v1/characters/' + this.state.gameId)
+        axios.get('/api/v1/characters/' + this.state.game_id)
             .then(res => {
                 let characterList = res.data;
                 if (characterList.length === 0) {
-                    alert("No Characters here yet");
+                    //Put modal here eventually
                 }
                 else if (characterList !== this.state.characterList) {
                     this.send(this.setState({ characterList }));
@@ -87,8 +86,16 @@ class InitPage extends Component {
     editChar = (updatedCharacter) => {
         const updateId = updatedCharacter.id
         axios.post('/api/v1/characters/' + updateId, {
+            name: updatedCharacter.name,
             hit_points: updatedCharacter.hit_points,
             initiative: updatedCharacter.initiative,
+            armor_class: updatedCharacter.armor_class,
+            strength: updatedCharacter.strength,
+            dexterity: updatedCharacter.dexterity,
+            constitution: updatedCharacter.constitution,
+            intelligence: updatedCharacter.intelligence,
+            wisdom: updatedCharacter.wisdom,
+            charisma: updatedCharacter.charisma
         });
         this.send(this.setState({
             characterList: this.state.characterList
@@ -110,36 +117,51 @@ class InitPage extends Component {
             return obj.initiative = parseInt(0);
         });
         this.turnOrderUpdate(characterList);
-        // this.send(this.setState({ characterList }));
     }
 
     render() {
         return (
             <React.Fragment>
-                <NavTabs gameId={this.state.gameId} />
+                <Heading className="title-1 title-2" size={2}>Game: {this.props.location.state.game_name}</Heading>
+                <Heading className="title-2" size={3}>Secret: {this.props.location.state.secret}</Heading>
                 <div >
                     {this.state.characterList.map(character => (
                         <InitCard
+                            className="card"
                             character={character}
                             id={character.id}
                             key={character.id}
                             image={character.image}
-                            ac={character.armor_class}
+                            armorClass={character.armor_class}
+                            strength={character.strength}
+                            dexterity={character.dexterity}
+                            constitution={character.constitution}
+                            intelligence={character.intelligence}
+                            wisdom={character.wisdom}
+                            charisma={character.charisma}
                             init={character.initiative}
                             name={character.name}
                             health={character.hit_points}
                             turnDone={this.turnDone}
-                            editInit={this.editChar}
-                            editHealth={this.editChar}
+                            editChar={this.editChar}
                             removeChar={this.removeChar}
                             currentOrder={this.state.characterList}
+                            isMonster={character.isMonster}
                         />
                     ))}
                 </div>
                 <Container id="buttons" fluid>
-                    <Button color="success" onClick={this.resetEncounter}>Reset Encounter</Button>
-                    <Button color="success" onClick={() => this.initSort(this.state.characterList)}>Initiative Sort</Button>
-                    <MonsterSearch />
+                    <Link to={{
+                        pathname: '/createcharacter',
+                        state: {
+                            game_id: this.props.location.state.game_id,
+                            secret: this.props.location.state.secret,
+                            game_name: this.props.location.state.game_name
+                        }
+                    }}>
+                        <MyButton static={true} text="Add New Character" primary={false}>
+                        </MyButton>
+                    </Link>
                 </Container>
             </React.Fragment>
         )

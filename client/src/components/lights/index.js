@@ -1,24 +1,28 @@
 import React from 'react';
-import {Button, Container} from 'react-bulma-components';
+import { Container } from 'react-bulma-components';
 import './index.css';
+import MyButton from '../../components/buttons'
 
 const Lights = (props) => {
   return (
-    <Container id="buttons" fluid>
-      <Button color="success" onClick={() => props.lightOn()}>
-        Light On
-      </Button>
-      <Button color="success" onClick={() => props.lightOff()}>
-        Light Off
-      </Button>
-      <Button color="success" onClick={() => props.critical()}>
-        Critical
-      </Button>
-      <Button color="success" onClick={() => props.lightning()}>
-        Lightning
-      </Button>
-      <Button color="info" onClick={() => props.connection()}>Connect to Bridge</Button>
-   </Container>
+    <Container id="buttons">
+  
+          <MyButton text="Light On" onClick={() => props.lightOn()}>
+          </MyButton>
+          <MyButton text="Light Off" onClick={() => props.lightOff()}>
+          </MyButton>
+       
+          <MyButton text="Critical" onClick={() => props.critical()}>
+          </MyButton>
+          <MyButton text="Lightning" onClick={() => props.lightning()}>
+          </MyButton>
+        
+          <MyButton text="Fade In" onClick={() => props.fadeIn()}>
+          </MyButton>
+          <MyButton text="Fade Out" onClick={() => props.fadeOut()}>
+          </MyButton>
+        
+    </Container>
   )
 }
 
