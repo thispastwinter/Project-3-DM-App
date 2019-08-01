@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import GameCard from '../../components/gameCard';
-import { Form, Container } from 'react-bulma-components';
+import { Form, Container, Heading } from 'react-bulma-components';
 import { Link } from "react-router-dom";
 import MyButton from '../../components/buttons';
 
@@ -61,8 +61,9 @@ class GamePage extends Component {
 
     checkForEmpty = () => {
         if (this.state.gameList.length === 0) {
-            return (<div><h1>It doesn't look like you are current playing in any games</h1>
-                <h2>Use the form below to join a game that your DM has already created</h2></div>);
+            return (<div><Heading className="title-1 title-2" size={3}>It doesn't look like you are current playing in any games.</Heading>
+                <Heading className="title-1 title-2" size={5}>Use the form below to join a game that your DM has already created</Heading><br />
+            </div>);
         }
         else {
             return (<div >
@@ -101,9 +102,9 @@ class GamePage extends Component {
                         text="Bind Game To Your Account"
                         onClick={this.bindGame}
                     >
-          </MyButton>
+                    </MyButton>
+                    {this.checkForAdmin()}
                 </form>
-                {this.checkForAdmin()}
             </React.Fragment>
         )
     }

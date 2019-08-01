@@ -99,16 +99,19 @@ class LoginPage extends Component {
               id="password"
             />
           </Container>
-          <Button
-            type="submit"
-            disabled={!this.validateForm()}
-            onClick={this.handleLogin}
-          >
-            Login
-          </Button>
-          <Link to="/createuser">
-            <MyButton static={true} text="Create New User"></MyButton>
-          </Link>
+          <Container id="buttons" fluid>
+            <MyButton
+              text="Login"
+              primary={true}
+              type="submit"
+              disabled={!this.validateForm()}
+              onClick={this.handleLogin}
+            >
+            </MyButton>
+            <Link to="/createuser">
+              <MyButton static={true} text="Create New User"></MyButton>
+            </Link>
+          </Container>
         </form>
       </div >
     );

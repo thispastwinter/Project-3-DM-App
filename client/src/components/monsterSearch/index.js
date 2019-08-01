@@ -35,7 +35,10 @@ class MonsterSearch extends Component {
     //     ({ data: results }) => this.setState({ results }))
     //   .catch(console.error);
     axios.post('api/v1/characters/name/' + this.state.monsterName + '&' + game_id)
-      .then(() => this.props.loadChars())
+      .then(() => {
+        this.setState({ monsterName: '' });
+        this.props.loadChars()
+      })
       .catch(console.error);
   }
 
