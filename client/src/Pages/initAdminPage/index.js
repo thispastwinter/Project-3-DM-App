@@ -156,8 +156,8 @@ class InitAdminPage extends Component {
                     ))}
                 </div>
                 <Container id="buttons" fluid>
-                    <MyButton text="Reset Encounter" onClick={this.resetEncounter}></MyButton>
-                    <MyButton text="Initiative Sort" onClick={() => this.initSort(this.state.characterList)}></MyButton>
+                    <MyButton primary={true} text="Reset Encounter" onClick={this.resetEncounter}></MyButton>
+                    <MyButton primary={true} text="Initiative Sort" onClick={() => this.initSort(this.state.characterList)}></MyButton>
                 </Container>
                 <Container id="monsterSearch" fluid>
                     <h1>Monster Search Bar</h1>

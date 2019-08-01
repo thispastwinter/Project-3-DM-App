@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto|Darker+Grotesque|Farro&display=swap');
 
 .mybutton {
+  margin: 5px;
   width: 200px;
   padding: 10px;
   font-family: 'Farro';
@@ -15,11 +16,36 @@
   box-shadow: 0 2.5px 2.5px rgba(0,0,0,0.19), 0 1.5px 1.5px rgba(0,0,0,0.23);
 }
 
+.mybutton-secondary {
+  margin: 5px;
+  width: 200px;
+  padding: 10px;
+  font-family: 'Farro';
+  text-decoration: none;
+  text-transform: uppercase;
+  text-align: center;
+  color: white;
+  outline: 0;
+  background-color: #B3A878;
+  border-radius: 2px;
+  border: 1px;
+  box-shadow: 0 2.5px 2.5px rgba(0,0,0,0.19), 0 1.5px 1.5px rgba(0,0,0,0.23);
+}
+
+.mybutton-secondary:hover {
+  background-color: rgb(214, 202, 145);
+  color: white
+}
+
 .mybutton:hover {
   background-color: rgb(37, 37, 87);
   color: white
 }
 
 .mybutton:active {
+  box-shadow: none;
+}
+
+.mybutton-secondary:active {
   box-shadow: none;
 }

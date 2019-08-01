@@ -3,7 +3,8 @@ import InitCard from '../../components/initCard';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import io from 'socket.io-client';
-import { Button, Container, Heading } from 'react-bulma-components';
+import { Container, Heading } from 'react-bulma-components';
+import MyButton from '../../components/buttons'
 // import NavTabs from "../../components/navTabs";
 
 class InitPage extends Component {
@@ -147,9 +148,8 @@ class InitPage extends Component {
                             game_name: this.props.location.state.game_name
                         }
                     }}>
-                        <Button color="warning">
-                            Create Character
-                        </Button>
+                        <MyButton text="Create Character" primary={false}>
+                        </MyButton>
                     </Link>
                 </Container>
             </React.Fragment>
