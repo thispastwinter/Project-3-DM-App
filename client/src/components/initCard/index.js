@@ -61,7 +61,7 @@ const InitCard = (props) => {
     }
     else {
       return (
-        <Card>
+        <Card className="initcard">
           <Card.Content>
             <Media>
               <Media.Item position="left">
