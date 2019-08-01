@@ -67,7 +67,7 @@ class GamePage extends Component {
             </div>);
         }
         else {
-            return (<div >
+            return (<div id="gameCard">
                 {this.state.gameList.map(game => (
                     <GameCard
                         id={game.id}
@@ -98,13 +98,18 @@ class GamePage extends Component {
                         />
                         <Form.Help>Please type the secret provided by your DM that is associated with your game</Form.Help>
                     </Container>
-                    <MyButton
-                        primary={true}
-                        text="Bind Game To Your Account"
-                        onClick={this.bindGame}
-                    >
-                    </MyButton>
-                    {this.checkForAdmin()}
+                    <Container
+                        id="buttonContainer">
+                        <MyButton
+                            primary={true}
+                            text="Bind Game To Your Account"
+                            onClick={this.bindGame}
+                        >
+                        </MyButton>
+                        <div>
+                            {this.checkForAdmin()}
+                        </div>
+                    </Container>
                 </form>
             </React.Fragment>
         )
