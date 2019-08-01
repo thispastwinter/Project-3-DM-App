@@ -20,6 +20,15 @@
   text-align: center;
 }
 
+/* .gameTitle {
+  font-size: calc(250% + 1vw);
+} */
+
+.createGameHeader {
+  font-size: calc(100% + 1.2vw);
+  text-align: center;
+}
+
 @media screen and (min-width: 300px) {
   .login-container {
     margin: 0 auto;
@@ -34,15 +43,11 @@
 }
 
 @media screen and (min-width: 1088px) {
-    #name,
-    .createGameHeader {
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-      width: 31%;
-    }
-    .createGameHeader {
-        text-align: center;
-    }
+  #name,
+  .createGameHeader {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 31%;
   }
-  
+}
