@@ -18,6 +18,8 @@ export default class Strength extends Component {
                 key={this.props.strength}
                 onSave={this.onSave}
                 buttonsAlign='before'
+                editButtonContent={<img alt="lifting weights" src="/images/strength.png" />}
+                editButtonClassName="icon"
             />
         )
     }

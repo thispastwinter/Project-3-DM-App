@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Autocomplete from 'react-autocomplete';
 import { Button } from 'react-bulma-components';
+import MyButton from '../buttons'
 
 class MonsterSearch extends Component {
   constructor(props) {
@@ -40,7 +41,7 @@ class MonsterSearch extends Component {
 
   render() {
     return (
-      <div>
+      <div id="monsterSearch">
         <Autocomplete
           getItemValue={(monster) => monster.name}
           items={this.state.monsterList}
@@ -56,7 +57,7 @@ class MonsterSearch extends Component {
           onChange={(e) => this.setState({ monsterName: e.target.value })}
           onSelect={(val) => this.setState({ monsterName: val })}
         />
-        <Button color="danger" onClick={() => this.addMonster(this.state.game_id)}>+</Button>
+        <MyButton className="searchbutton" text="Add Monster" primary={false} onClick={() => this.addMonster(this.state.game_id)}></MyButton>
       </div>
     );
   }

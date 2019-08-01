@@ -3,7 +3,8 @@ import InitCard from '../../components/initCard';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import io from 'socket.io-client';
-import { Button, Container } from 'react-bulma-components';
+import { Container, Heading } from 'react-bulma-components';
+import MyButton from '../../components/buttons'
 // import NavTabs from "../../components/navTabs";
 
 class InitPage extends Component {
@@ -116,11 +117,12 @@ class InitPage extends Component {
         return (
             <React.Fragment>
                 {/* <NavTabs game_id={this.state.game_id} /> */}
-                <h1>Game: {this.props.location.state.game_name}</h1>
-                <h1>Secret: {this.props.location.state.secret}</h1>
+                <Heading className="title-1 title-2" size={2}>Game: {this.props.location.state.game_name}</Heading>
+                <Heading className="title-2" size={3}>Secret: {this.props.location.state.secret}</Heading>
                 <div >
                     {this.state.characterList.map(character => (
                         <InitCard
+                            className="card"
                             character={character}
                             id={character.id}
                             key={character.id}
@@ -146,9 +148,8 @@ class InitPage extends Component {
                             game_name: this.props.location.state.game_name
                         }
                     }}>
-                        <Button color="warning">
-                            Create Character
-                        </Button>
+                        <MyButton text="Create Character" primary={false}>
+                        </MyButton>
                     </Link>
                 </Container>
                 <Container id="buttons" fluid>

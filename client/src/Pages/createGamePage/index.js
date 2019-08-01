@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import { Button, Form, Container } from 'react-bulma-components';
 import './index.css';
+import MyButton from '../../components/buttons';
 
 class CreateGamePage extends Component {
     constructor(props) {
@@ -81,14 +82,13 @@ class CreateGamePage extends Component {
                             id="name"
                         />
                     </Container>
-                    <Button
+                    <MyButton
+                        text="Create Game"
+                        primary={true}
                         disabled={!this.validateForm()}
-                        type="submit"
-                        color="success"
                         onClick={this.handleCreate}
                     >
-                        Create Game
-          </Button>
+          </MyButton>
                 </form>
             </div>
         );

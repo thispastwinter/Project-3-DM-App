@@ -8,8 +8,9 @@ import Constitution from '../constitution/index';
 import Intelligence from '../intelligence/index';
 import Wisdom from '../wisdom/index';
 import Charisma from '../charisma/index';
-import { Card, Media, Image, Content, Heading, Button, Columns } from 'react-bulma-components';
+import { Card, Media, Image, Content, Heading, Columns } from 'react-bulma-components';
 import './index.css';
+import MyButton from '../buttons'
 
 // const bulmaAccordion = require('bulma-accordion');
 
@@ -19,7 +20,7 @@ const InitCardAdmin = (props) => {
   const checkForTop = id => {
     const index = currentOrder.findIndex(c => c.id === id)
     if (index === 0) {
-      return <Card.Footer.Item><Button color="success" onClick={() => props.turnDone(props.id)}> Turn Done</Button></Card.Footer.Item>
+      return <Card.Footer.Item><MyButton primary={true} text="Turn Done" onClick={() => props.turnDone(props.id)}></MyButton></Card.Footer.Item>
     }
     else {
       return null;
@@ -28,7 +29,8 @@ const InitCardAdmin = (props) => {
 
   const checkForDeath = health => {
     if (health <= 0) {
-      return <Card.Footer.Item><Button color="danger" onClick={() => props.removeChar(props.id)}> remove character </Button></Card.Footer.Item>
+      return <Card.Footer.Item>
+        <MyButton primary={false} text="Remove Character" onClick={() => props.removeChar(props.id)}></MyButton></Card.Footer.Item>
     }
     else {
       return null;
@@ -59,18 +61,18 @@ const InitCardAdmin = (props) => {
           <Columns>
             <div className="init-field-columns">
               <Columns.Column>
-                Initiative: <Initiative {...props} /> AC: <ArmorClass {...props} />  Health: <Health {...props} />
+                Initiative: <Initiative {...props} /> Armor Class: <ArmorClass {...props} />  Health: <Health {...props} />
               </Columns.Column>
             </div>
-          {/* </Columns> */}
-          {/* <Columns> */}
+            {/* </Columns> */}
+            {/* <Columns> */}
             <div className="init-field-columns">
               <Columns.Column>
                 Strength: <Strength {...props} /> Dexterity: <Dexterity {...props} /> Constitution: <Constitution {...props} />
               </Columns.Column>
             </div>
-          {/* </Columns> */}
-          {/* <Columns> */}
+            {/* </Columns> */}
+            {/* <Columns> */}
             <div className="init-field-columns">
               <Columns.Column>
                 Intelligence: <Intelligence {...props} /> Wisdom: <Wisdom {...props} /> Charisma: <Charisma {...props} />

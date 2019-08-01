@@ -18,6 +18,8 @@ export default class Charisma extends Component {
                 key={this.props.charisma}
                 onSave={this.onSave}
                 buttonsAlign='before'
+                editButtonContent={<img alt="speaker" src="/images/charisma.png" />}
+                editButtonClassName="icon"
             />
         )
     }

@@ -3,9 +3,10 @@ import InitCardAdmin from '../../components/initCardAdmin';
 import axios from 'axios';
 import io from 'socket.io-client';
 import MonsterSearch from '../../components/monsterSearch';
-import { Button, Container } from 'react-bulma-components';
+import { Container, Heading } from 'react-bulma-components';
 import NavTabs from "../../components/navTabs";
 import { Link } from 'react-router-dom';
+import MyButton from '../../components/buttons'
 
 class InitAdminPage extends Component {
     state = {
@@ -130,8 +131,8 @@ class InitAdminPage extends Component {
         return (
             <React.Fragment>
                 <NavTabs game_id={this.props.location.state.game_id} game_name={this.props.location.state.game_name} secret={this.props.location.state.secret} />
-                <h1>Game: {this.props.location.state.game_name}</h1>
-                <h1>Secret: {this.props.location.state.secret}</h1>
+                <Heading className="title-1 title-2" size={2}>Game: {this.props.location.state.game_name}</Heading>
+                <Heading className="title-2" size={3}>Secret: {this.props.location.state.secret}</Heading>
                 <div >
                     {this.state.characterList.map(character => (
                         <InitCardAdmin
@@ -157,8 +158,11 @@ class InitAdminPage extends Component {
                     ))}
                 </div>
                 <Container id="buttons" fluid>
-                    <Button color="success" onClick={this.resetEncounter}>Reset Encounter</Button>
-                    <Button color="success" onClick={() => this.initSort(this.state.characterList)}>Initiative Sort</Button>
+                    <MyButton primary={true} text="Reset Encounter" onClick={this.resetEncounter}></MyButton>
+                    <MyButton primary={true} text="Initiative Sort" onClick={() => this.initSort(this.state.characterList)}></MyButton>
+                </Container>
+                <Container id="monsterSearch" fluid>
+                    <h1>Monster Search Bar</h1>
                     <MonsterSearch game_id={this.props.location.state.game_id} loadChars={this.loadChars} />
                 </Container>
                 <Container id="buttons" fluid>

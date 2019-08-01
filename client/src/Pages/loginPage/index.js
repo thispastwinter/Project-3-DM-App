@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Button, Form, Container } from 'react-bulma-components';
 import './index.css';
 import { Link } from "react-router-dom";
+import MyButton from '../../components/buttons';
 
 class LoginPage extends Component {
   constructor(props) {
@@ -75,43 +76,40 @@ class LoginPage extends Component {
     // }
 
     return (
-      <div className="login-container">
-        <div className="Login">
-          <h1 className="title">DM-Companion App</h1>
-          <form onSubmit={this.handleSubmit}>
-            <Container>
-              <Form.Label>Email</Form.Label>
-              <Form.Input
-                value={this.state.email}
-                type="email"
-                onChange={this.handleChange}
-                className="input"
-                id="email"
-              />
-            </Container>
-            <Container>
-              <Form.Label>Password</Form.Label>
-              <Form.Input
-                value={this.state.password}
-                type="password"
-                onChange={this.handleChange}
-                className="input"
-                id="password"
-              />
-            </Container>
-            <Button
-              disabled={!this.validateForm()}
-              type="submit"
-              color="success"
-              onClick={this.handleLogin}
-            >
-              Login
+      <div className="Login">
+        <h1 className="title">DM-Companion App</h1>
+        <form onSubmit={this.handleSubmit}>
+          <Container>
+            <Form.Label>Email</Form.Label>
+            <Form.Input
+              value={this.state.email}
+              type="email"
+              onChange={this.handleChange}
+              className="input"
+              id="email"
+            />
+          </Container>
+          <Container>
+            <Form.Label>Password</Form.Label>
+            <Form.Input
+              value={this.state.password}
+              type="password"
+              onChange={this.handleChange}
+              className="input"
+              id="password"
+            />
+          </Container>
+          <Button
+            type="submit"
+            disabled={!this.validateForm()}
+            onClick={this.handleLogin}
+          >
+            Login
           </Button>
-            <Link to="/createuser">
-              <Button renderAs="button" color="warning"><span>Create New User</span></Button>
-            </Link>
-          </form>
-        </div >
+          <Link to="/createuser">
+            <MyButton static={true} text="Create New User"></MyButton>
+          </Link>
+        </form>
       </div >
     );
   };

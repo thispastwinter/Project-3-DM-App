@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import { Heading, Columns, Button } from 'react-bulma-components';
+import { Heading, Columns, Container } from 'react-bulma-components';
 import Lights from '../../components/lights';
 import axios from 'axios';
 import './index.css';
 import NavTabs from "../../components/navTabs";
-import { Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom';
+import MyButton from '../../components/buttons'
+
 // import { all } from 'q';
 
 class HuePage extends Component {
@@ -202,8 +204,9 @@ class HuePage extends Component {
       <React.Fragment>
         <NavTabs game_id={this.state.game_id} game_name={this.state.game_name} secret={this.state.secret} />
         <Columns.Column>
-          <Columns id="hue-box">
-            <Heading className="title-1">Lanterns</Heading>
+        <Container id="huebox">
+          <Columns>
+            <Heading className="title-1" size={1}>Lanterns</Heading>
             {!this.state.expired ?
               <div>
                 {this.resetUrl()}
@@ -222,8 +225,9 @@ class HuePage extends Component {
                   lightning={this.lightning}
                   fadeOut={this.fadeOut}
                   fadeIn={this.fadeIn}>
-                </Lights></div> : <div><Button onClick={this.redirect}>Connect To Hue</Button></div>}
+                </Lights></div> : <div><MyButton text="Connect To Hue" onClick={this.redirect}></MyButton></div>}
           </Columns>
+          </Container>
         </Columns.Column>
       </React.Fragment>
     );
