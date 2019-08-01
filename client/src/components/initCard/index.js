@@ -49,7 +49,7 @@ const InitCard = (props) => {
               </Media.Item>
             </Media>
             <Content>
-              Initiative: {props.init}
+            <div className="statHeader" id="monsterInitHeader">Initiative: {props.init}</div>
             </Content>
           </Card.Content>
           {/* <Card.Footer>
@@ -61,7 +61,7 @@ const InitCard = (props) => {
     }
     else {
       return (
-        <Card className="initcard">
+        <Card className="init-card">
           <Card.Content>
             <Media>
               <Media.Item position="left">
