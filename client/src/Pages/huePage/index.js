@@ -36,7 +36,7 @@ class HuePage extends Component {
   checkForAuthCode = () => {
     const url = window.location.href;
     if (url.includes('code')) {
-      const code = url.split('/hue?code=')[1].split('&state=none')[0]; //.com/hue
+      const code = url.split('.com/hue?code=')[1].split('&state=none')[0]; 
       const hueState = url.split('&state=')[1];
       axios.post('/api/v1/huelights/connect', {
         code: code
