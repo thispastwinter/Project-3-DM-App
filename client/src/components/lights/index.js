@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Columns } from 'react-bulma-components';
+import { Container } from 'react-bulma-components';
 import './index.css';
 import MyButton from '../../components/buttons'
 

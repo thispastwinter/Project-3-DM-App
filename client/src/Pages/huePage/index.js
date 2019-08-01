@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Heading, Columns, Card } from 'react-bulma-components';
+import { Heading, Card } from 'react-bulma-components';
 import Lights from '../../components/lights';
 import axios from 'axios';
 import './index.css';
