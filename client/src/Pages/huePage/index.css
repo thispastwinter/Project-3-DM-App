@@ -1,9 +1,11 @@
 #huebox {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 300px;
   
-  width: auto;
 }
 
 .custom {

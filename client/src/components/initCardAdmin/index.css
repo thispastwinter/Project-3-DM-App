@@ -7,6 +7,13 @@
   /* justify-content: center; */
 }
 
+.init-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
 @media print, screen and (min-width: 320px) {
   .columns:not(.is-desktop) {
     display: flex;
@@ -14,18 +21,19 @@
   .styles_Editext__input__1534X {
     max-width: 55px;
   }
-  .card-content {
-    padding: 0.8rem;
-  }
   .column {
     padding: 3px;
   }
   .card {
     margin: 7px;
+    padding: 0.5rem;
   }
 }
 
 @media print, screen and (min-width: 330px) {
+  .card-content {
+    /* padding: 0.8rem; */
+  }
   .card {
     margin: 8px;
   }

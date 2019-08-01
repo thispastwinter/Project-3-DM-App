@@ -83,7 +83,7 @@ class CreateUserPage extends Component {
 
         return (
             <div className="createUser">
-                <h1 className="title">Create New User</h1>
+                 <h1 className="title-1">Create New User</h1>
                 <form onSubmit={this.handleSubmit}>
                     <Container>
                         <Form.Label>Email</Form.Label>

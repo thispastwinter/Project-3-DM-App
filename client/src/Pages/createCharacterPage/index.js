@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
-import { Form, Container } from 'react-bulma-components';
+import { Form, Container, Heading } from 'react-bulma-components';
 import './index.css';
 import images from './images.json';
 import ImagePicker from 'react-image-picker'
@@ -147,7 +147,7 @@ class CreateCharacterPage extends Component {
 
         return (
             <div className="createCharacter">
-                <h1 className="title">Create New Character</h1>
+                 <Heading className="title-1">Create New Character</Heading>
                 <form onSubmit={this.handleSubmit}>
 
                     <Container>

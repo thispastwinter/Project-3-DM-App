@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Heading, Columns, Container } from 'react-bulma-components';
+import { Heading, Columns, Card } from 'react-bulma-components';
 import Lights from '../../components/lights';
 import axios from 'axios';
 import './index.css';
@@ -203,10 +203,10 @@ class HuePage extends Component {
     return (
       <React.Fragment>
         <NavTabs game_id={this.state.game_id} game_name={this.state.game_name} secret={this.state.secret} />
-        <Columns.Column>
-        <Container id="huebox">
-          <Columns>
-            <Heading className="title-1" size={1}>Lanterns</Heading>
+        <Heading className="title-1" size={1}>Lanterns</Heading>
+        <Card id="huebox">
+      
+         
             {!this.state.expired ?
               <div>
                 {this.resetUrl()}
@@ -226,9 +226,9 @@ class HuePage extends Component {
                   fadeOut={this.fadeOut}
                   fadeIn={this.fadeIn}>
                 </Lights></div> : <div><MyButton text="Connect To Hue" onClick={this.redirect}></MyButton></div>}
-          </Columns>
-          </Container>
-        </Columns.Column>
+        
+          </Card>
+     
       </React.Fragment>
     );
   }

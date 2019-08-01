@@ -18,7 +18,7 @@ const InitCard = (props) => {
   const checkForTop = id => {
     const index = currentOrder.findIndex(c => c.id === id)
     if (index === 0) {
-      return <Card.Footer.Item><MyButton text="Turn Done" onClick={() => props.turnDone(props.id)}></MyButton></Card.Footer.Item>
+      return <Card.Footer.Item><MyButton primary={true} text="Turn Done" onClick={() => props.turnDone(props.id)}></MyButton></Card.Footer.Item>
     }
     else {
       return null;
@@ -45,7 +45,7 @@ const InitCard = (props) => {
                 <Image size={64} alt={props.name} src={props.image} />
               </Media.Item>
               <Media.Item>
-                <Heading size={3}>{props.name}</Heading>
+                <h2 className="character-names" size={3}>{props.name}</h2>
               </Media.Item>
             </Media>
             <Content>
@@ -61,14 +61,14 @@ const InitCard = (props) => {
     }
     else {
       return (
-        <Card>
+        <Card className="initcard">
           <Card.Content>
             <Media>
               <Media.Item position="left">
                 <Image size={64} alt={props.name} src={props.image} />
               </Media.Item>
               <Media.Item>
-                <Heading size={3}>{props.name}</Heading>
+                <h2 className="character-names" size={3}>{props.name}</h2>
               </Media.Item>
             </Media>
             <Content>
