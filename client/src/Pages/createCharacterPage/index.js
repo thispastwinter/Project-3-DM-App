@@ -6,6 +6,7 @@ import './index.css';
 import images from './images.json';
 import ImagePicker from 'react-image-picker'
 import 'react-image-picker/dist/index.css'
+import MyButton from '../../components/buttons'
 
 const imageList = images;
 
@@ -80,6 +81,7 @@ class CreateCharacterPage extends Component {
                 this.setState({
                     createSuccess: true,
                 });
+                console.log(this.state.createSuccess);
             } else {
                 console.log('error on createCharacter');
             }
@@ -91,16 +93,55 @@ class CreateCharacterPage extends Component {
         }
     }
 
-    render() {
-        if (this.state.createSuccess) {
+    checkForAdmin = () => {
+        if (this.props.location.state.admin) {
+            console.log("Admin is true");
             return <Redirect to={{
+                pathname: '/initadmin',
+                state: {
+                    game_id: this.state.game_id,
+                    secret: this.props.location.state.secret,
+                    game_name: this.props.location.state.game_name,
+                    admin: this.props.location.state.admin
+                }
+            }} />
+        }
+        else {
+            console.log("Admin is ");
+            return (<Redirect to={{
                 pathname: '/init',
                 state: {
                     game_id: this.state.game_id,
                     secret: this.props.location.state.secret,
                     game_name: this.props.location.state.game_name
                 }
-            }} />
+            }} />)
+        }
+    }
+
+    render() {
+        if (this.state.createSuccess) {
+            if (this.props.location.state.admin) {
+                return <Redirect to={{
+                    pathname: '/initadmin',
+                    state: {
+                        game_id: this.state.game_id,
+                        secret: this.props.location.state.secret,
+                        game_name: this.props.location.state.game_name,
+                        admin: this.props.location.state.admin
+                    }
+                }} />
+            }
+            else {
+                return (<Redirect to={{
+                    pathname: '/init',
+                    state: {
+                        game_id: this.state.game_id,
+                        secret: this.props.location.state.secret,
+                        game_name: this.props.location.state.game_name
+                    }
+                }} />)
+            }
         }
 
         return (
@@ -109,7 +150,7 @@ class CreateCharacterPage extends Component {
                 <form onSubmit={this.handleSubmit}>
 
                     <Container>
-                        <Form.Label>Name</Form.Label>
+                        <Form.Label>Character Name</Form.Label>
                         <Form.Input
                             value={this.state.name}
                             type="text"
@@ -207,14 +248,15 @@ class CreateCharacterPage extends Component {
                             id="charisma"
                         />
                     </Container>
-                    <Button
-                        disabled={!this.validateForm()}
-                        type="submit"
-                        color="success"
-                        onClick={this.handleLogin}
-                    >
-                        Create Character
-          </Button>
+                    <Container id="buttons" fluid>
+                        <MyButton
+                            text="Create Character"
+                            primary={true}
+                            type="submit"
+                            disabled={!this.validateForm()}
+                            onClick={this.handleLogin}
+                        />
+                    </Container>
                 </form>
             </div>
         );

@@ -1,12 +1,9 @@
 import React from 'react';
-import { Card, Media, Heading } from 'react-bulma-components';
+import { Card, Media, Heading, Content } from 'react-bulma-components';
 import MyButton from '../buttons';
 import { Link } from 'react-router-dom';
 
 const GameCard = (props) => {
-    const admin = () => {
-        
-    }
     const checkForAdmin = () => {
         if (props.admin) {
             return (<Card.Footer.Item>
@@ -46,16 +43,13 @@ const GameCard = (props) => {
         <Card>
             <Card.Content>
                 <Media>
-                    <Media.Item position="left">
-                        <Heading size={3}>Game Id: {props.id}</Heading>
-                    </Media.Item>
                     <Media.Item>
                         <Heading size={3}>{props.name}</Heading>
                     </Media.Item>
-                    <Media.Item>
-                        <Heading size={3}>Secret: {props.secret}</Heading>
-                    </Media.Item>
                 </Media>
+                <Content>
+                    <Heading size={3}>Secret: {props.secret}</Heading>
+                </Content>
             </Card.Content>
             <Card.Footer>
                 {checkForAdmin()}

@@ -3,7 +3,8 @@ import InitCardAdmin from '../../components/initCardAdmin';
 import axios from 'axios';
 import io from 'socket.io-client';
 import MonsterSearch from '../../components/monsterSearch';
-import { Container, Heading } from 'react-bulma-components';
+import { Container, Heading, Button } from 'react-bulma-components';
+import { Link } from 'react-router-dom';
 import NavTabs from "../../components/navTabs";
 import MyButton from '../../components/buttons'
 
@@ -23,9 +24,7 @@ class InitAdminPage extends Component {
     componentDidMount() {
         this.loadChars();
         let room = this.props.location.state.game_id;
-        // let room = this.state.game_id;
         this.socket.on('connect', () => {
-            // Connected, let's sign-up for to receive messages for this room
             this.socket.emit('room', room);
         });
         this.socket.on('listChange', (characterList) => {
@@ -93,6 +92,7 @@ class InitAdminPage extends Component {
     editChar = (updatedCharacter) => {
         const updateId = updatedCharacter.id
         axios.post('/api/v1/characters/' + updateId, {
+            name: updatedCharacter.name,
             hit_points: updatedCharacter.hit_points,
             initiative: updatedCharacter.initiative,
             armor_class: updatedCharacter.armor_class,
@@ -134,6 +134,7 @@ class InitAdminPage extends Component {
                 <div >
                     {this.state.characterList.map(character => (
                         <InitCardAdmin
+                            className="card"
                             character={character}
                             id={character.id}
                             key={character.id}
@@ -152,12 +153,25 @@ class InitAdminPage extends Component {
                             editChar={this.editChar}
                             removeChar={this.removeChar}
                             currentOrder={this.state.characterList}
+                            isMonster={character.isMonster}
                         />
                     ))}
                 </div>
                 <Container id="buttons" fluid>
                     <MyButton primary={true} text="Reset Encounter" onClick={this.resetEncounter}></MyButton>
                     <MyButton primary={true} text="Initiative Sort" onClick={() => this.initSort(this.state.characterList)}></MyButton>
+                    <Link to={{
+                        pathname: '/createcharacter',
+                        state: {
+                            game_id: this.props.location.state.game_id,
+                            secret: this.props.location.state.secret,
+                            game_name: this.props.location.state.game_name,
+                            admin: this.props.location.state.admin
+                        }
+                    }}>
+                        <MyButton static={true} text="Create NPC" primary={false}>
+                        </MyButton>
+                    </ Link>
                 </Container>
                 <Container id="monsterSearch" fluid>
                     <h1>Monster Search Bar</h1>
