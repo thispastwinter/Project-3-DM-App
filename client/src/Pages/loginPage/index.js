@@ -79,7 +79,7 @@ class LoginPage extends Component {
       <div className="Login">
         <h1 className="title-1">DM Companion</h1>
         <img width="275px" src="/images/wyvern-realistic.png"></img>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit} className="loginForm">
           <Container>
             <Form.Label>Email</Form.Label>
             <Form.Input
@@ -100,19 +100,21 @@ class LoginPage extends Component {
               id="password"
             />
           </Container>
-          <Container id="buttons" fluid>
-            <MyButton
-              text="Login"
-              primary={true}
-              type="submit"
-              disabled={!this.validateForm()}
-              onClick={this.handleLogin}
-            >
-            </MyButton>
-            <Link to="/createuser">
-              <MyButton static={true} text="Create New User"></MyButton>
-            </Link>
-          </Container>
+          <div>
+            <Container id="buttons" fluid>
+              <MyButton
+                text="Login"
+                primary={true}
+                type="submit"
+                disabled={!this.validateForm()}
+                onClick={this.handleLogin}
+              >
+              </MyButton>
+              <Link to="/createuser">
+                <MyButton static={true} text="Create Account"></MyButton>
+              </Link>
+            </Container>
+          </div>
         </form>
       </div >
     );
