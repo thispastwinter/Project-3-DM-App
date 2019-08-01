@@ -111,7 +111,7 @@ class LoginPage extends Component {
               >
               </MyButton>
               <Link to="/createuser">
-                <MyButton static={true} text="Create New User"></MyButton>
+                <MyButton static={true} text="Create Account"></MyButton>
               </Link>
             </Container>
           </div>

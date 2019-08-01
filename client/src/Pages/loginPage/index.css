@@ -17,10 +17,10 @@
   padding: 2%;
 }
 
-.label {
+label.label {
   /* font-size: calc(168% + 1vw); */
   text-align: center;
-  font-size: 50px;
+  margin: 0;
 }
 
 /* .loginForm {
@@ -31,9 +31,18 @@
   width: auto;
 }
 
+
+.mybutton-secondary {
+  width: 50%;
+}
+
 .title {
   text-align: center;
   padding-top: 3%;
+}
+
+#buttons {
+  width: 300px;
 }
 
 @media screen and (min-width: 300px) {
