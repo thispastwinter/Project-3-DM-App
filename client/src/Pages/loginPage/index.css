@@ -9,39 +9,20 @@
 
 .Login form {
   /* margin: 0 auto; */
-  width: 100%;
-  /* max-width: 75%; */
+  max-width: 320px;
   display: block;
   margin-left: auto;
   margin-right: auto;
   padding: 2%;
 }
 
-label.label {
-  /* font-size: calc(168% + 1vw); */
-  text-align: center;
-  margin: 0;
-}
-
-.title-1 {
-  font-size: calc(168% + 2vw);
-}
-
-#button {
+#buttons2 {
   width: auto;
-}
-
-.mybutton-secondary {
-  width: 50%;
 }
 
 .title {
   text-align: center;
   padding-top: 3%;
-}
-
-#buttons {
-  width: 300px;
 }
 
 @media screen and (min-width: 300px) {
@@ -54,25 +35,16 @@ label.label {
     display: block;
     /* margin-left: auto; */
     margin-right: auto;
-    width: 65%;
-  }
-}
-
-@media screen and (min-width: 520px) {
-  #email,
-  #password {
-    display: block;
-    margin-right: auto;
     width: 40%;
   }
 }
-
-@media screen and (min-width: 768px) {
+@media screen and (max-width: 1088px) {
   #email,
   #password {
     display: block;
+    /* margin-left: auto; */
     margin-right: auto;
-    width: 30%;
+    width: 100%;
   }
 }
 
@@ -82,7 +54,7 @@ label.label {
     display: block;
     /* margin-left: auto; */
     margin-right: auto;
-    width: 33%;
+    width: 31%;
   }
 }
 

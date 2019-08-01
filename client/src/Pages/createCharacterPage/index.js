@@ -147,7 +147,7 @@ class CreateCharacterPage extends Component {
 
         return (
             <div className="createCharacter">
-                 <Heading className="title-1">Create New Character</Heading>
+                <Heading className="title-1">Create New Character</Heading>
                 <form onSubmit={this.handleSubmit}>
 
                     <Container className="characterForm">
@@ -196,7 +196,7 @@ class CreateCharacterPage extends Component {
                             value={this.state.dexterity}
                             type="text"
                             onChange={this.handleChange}
-                            className="input"
+                            className="input2"
                             id="dexterity"
                         />
                     </Container>
@@ -206,7 +206,7 @@ class CreateCharacterPage extends Component {
                             value={this.state.constitution}
                             type="text"
                             onChange={this.handleChange}
-                            className="input"
+                            className="input2"
                             id="constitution"
                         />
                     </Container>
@@ -216,7 +216,7 @@ class CreateCharacterPage extends Component {
                             value={this.state.intelligence}
                             type="text"
                             onChange={this.handleChange}
-                            className="input"
+                            className="input2"
                             id="intelligence"
                         />
                     </Container>
@@ -226,7 +226,7 @@ class CreateCharacterPage extends Component {
                             value={this.state.wisdom}
                             type="text"
                             onChange={this.handleChange}
-                            className="input"
+                            className="input2"
                             id="wisdom"
                         />
                     </Container>
@@ -236,13 +236,12 @@ class CreateCharacterPage extends Component {
                             value={this.state.charisma}
                             type="text"
                             onChange={this.handleChange}
-                            className="input"
+                            className="input2"
                             id="charisma"
                         />
                     </Container>
                     <Container className="images">
                         <Form.Label id="avatarSelectText">Select An Avatar:</Form.Label>
-
                         <ImagePicker
                             images={imageList.map(image => ({ src: image.image, value: image.id }))}
                             onPick={this.onPick}

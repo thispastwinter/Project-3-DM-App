@@ -14,7 +14,7 @@ import MyButton from '../buttons'
 
 const InitCard = (props) => {
 
-  const currentOrder = props.currentOrder;
+  let currentOrder = props.currentOrder;
   const checkForTop = id => {
     const index = currentOrder.findIndex(c => c.id === id)
     if (index === 0) {
@@ -37,8 +37,9 @@ const InitCard = (props) => {
 
   const checkForMonster = () => {
     if (props.isMonster) {
+      let index = currentOrder.findIndex(c => c.id === props.id)
       return (
-        <Card>
+        <Card className={index === 0 ? "init-blinking" : "init-card"}>
           <Card.Content>
             <Media>
               <Media.Item position="left">
@@ -49,7 +50,7 @@ const InitCard = (props) => {
               </Media.Item>
             </Media>
             <Content>
-              Initiative: {props.init}
+            <div className="statHeader" id="monsterInitHeader">Initiative: {props.init}</div>
             </Content>
           </Card.Content>
           {/* <Card.Footer>
@@ -60,8 +61,9 @@ const InitCard = (props) => {
       );
     }
     else {
+      let index = currentOrder.findIndex(c => c.id === props.id)
       return (
-        <Card className="initcard">
+        <Card className={index === 0 ? 'init-blinking' : 'init-card'}>
           <Card.Content>
             <Media>
               <Media.Item position="left">
