@@ -3,7 +3,7 @@ import InitCardAdmin from '../../components/initCardAdmin';
 import axios from 'axios';
 import io from 'socket.io-client';
 import MonsterSearch from '../../components/monsterSearch';
-import { Container, Heading, Button} from 'react-bulma-components';
+import { Container, Heading } from 'react-bulma-components';
 import NavTabs from "../../components/navTabs";
 import { Link } from 'react-router-dom';
 import MyButton from '../../components/buttons'
@@ -177,29 +177,6 @@ class InitAdminPage extends Component {
                 <Container id="monsterSearch" fluid>
                     <h1>Monster Search Bar</h1>
                     <MonsterSearch game_id={this.props.location.state.game_id} loadChars={this.loadChars} />
-                </Container>
-                <Container id="buttons" fluid>
-                    <Link to={{
-                        pathname: '/createcharacter',
-                        state: {
-                            game_id: this.props.location.state.game_id,
-                            secret: this.props.location.state.secret,
-                            game_name: this.props.location.state.game_name
-                        }
-                    }}>
-                        <Button color="warning">
-                            Create Character
-                        </Button>
-                    </Link>
-                </Container>
-                <Container id="buttons" fluid>
-                    <Link to={{
-                        pathname: '/',
-                    }}>
-                        <Button color="warning">
-                            Login Page
-                        </Button>
-                    </Link>
                 </Container>
             </React.Fragment>
         )

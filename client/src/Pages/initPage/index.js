@@ -3,7 +3,7 @@ import InitCard from '../../components/initCard';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import io from 'socket.io-client';
-import { Container, Heading, Button } from 'react-bulma-components';
+import { Container, Heading } from 'react-bulma-components';
 import MyButton from '../../components/buttons'
 // import NavTabs from "../../components/navTabs";
 
@@ -161,15 +161,6 @@ class InitPage extends Component {
                     }}>
                         <MyButton static={true} text="Add New Character" primary={false}>
                         </MyButton>
-                    </Link>
-                </Container>
-                <Container id="buttons" fluid>
-                    <Link to={{
-                        pathname: '/',
-                    }}>
-                        <Button color="warning">
-                            Login Page
-                        </Button>
                     </Link>
                 </Container>
             </React.Fragment>

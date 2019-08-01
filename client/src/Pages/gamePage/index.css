@@ -1,0 +1,33 @@
+#buttonContainer,
+#secretForm {
+  text-align: center;
+}
+
+.card-content {
+  padding: 0;
+}
+
+@media screen and (max-width: 360px) {
+  #gameKey {
+    width: 90%;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  #gameCard {
+    margin-left: 15%;
+    margin-right: 15%;
+  }
+}
+
+@media screen and (min-width: 1088px) {
+  #secretForm {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+  }
+  #gameCard {
+    margin-left: 20%;
+    margin-right: 20%;
+  }
+}
