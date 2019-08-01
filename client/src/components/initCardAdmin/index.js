@@ -9,7 +9,7 @@ import Intelligence from '../intelligence/index';
 import Wisdom from '../wisdom/index';
 import Charisma from '../charisma/index';
 import Name from '../name/index';
-import { Card, Media, Image, Content, Heading, Columns } from 'react-bulma-components';
+import { Card, Media, Image, Content, Columns } from 'react-bulma-components';
 import './index.css';
 import MyButton from '../buttons'
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
-import { Form, Container, Heading } from 'react-bulma-components';
+import { Form, Container } from 'react-bulma-components';
 import './index.css';
 import { Link } from "react-router-dom";
 import MyButton from '../../components/buttons';
