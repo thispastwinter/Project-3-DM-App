@@ -57,14 +57,14 @@ const InitCardAdmin = (props) => {
     //   </div>
     // </div>
 
-    <Card>
+    <Card className="init-card">
       <Card.Content>
         <Media>
           <Media.Item position="left">
             <Image size={64} alt={props.name} src={props.image} />
           </Media.Item>
           <Media.Item>
-            <Heading size={3}>{monsterRename()}</Heading>
+            <h2 className="character-names" size={3}>{monsterRename()}</h2>
           </Media.Item>
         </Media>
         <Content>
