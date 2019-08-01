@@ -6,7 +6,7 @@
   flex-direction: column;
 }
 
-.label {
+.label2 {
   margin-left: 6%;
   font-size: calc(68% + 0.7vw);
 }
@@ -29,7 +29,7 @@
   width: 100%;
 }
 
-.input {
+.input2 {
   margin-left: auto;
   margin-right: auto;
 }
