@@ -3,7 +3,7 @@ import InitCardAdmin from '../../components/initCardAdmin';
 import axios from 'axios';
 import io from 'socket.io-client';
 import MonsterSearch from '../../components/monsterSearch';
-import { Container, Heading } from 'react-bulma-components';
+import { Container, Heading, Button } from 'react-bulma-components';
 import NavTabs from "../../components/navTabs";
 import { Link } from 'react-router-dom';
 import MyButton from '../../components/buttons'
