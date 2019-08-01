@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
-import { Form, Container } from 'react-bulma-components';
+import { Form, Container, Heading } from 'react-bulma-components';
 import './index.css';
 import { Link } from "react-router-dom";
 import MyButton from '../../components/buttons';
@@ -77,7 +77,8 @@ class LoginPage extends Component {
 
     return (
       <div className="Login">
-        <h1 className="title">DM-Companion App</h1>
+        <h1 className="title-1">DM Companion</h1>
+        <img width="200px" src="/images/wyvern.png"></img>
         <form onSubmit={this.handleSubmit}>
           <Container>
             <Form.Label>Email</Form.Label>

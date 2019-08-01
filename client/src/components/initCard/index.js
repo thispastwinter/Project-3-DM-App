@@ -45,7 +45,7 @@ const InitCard = (props) => {
                 <Image size={64} alt={props.name} src={props.image} />
               </Media.Item>
               <Media.Item>
-                <Heading size={3}>{props.name}</Heading>
+                <Heading className="character-names" size={3}>{props.name}</Heading>
               </Media.Item>
             </Media>
             <Content>

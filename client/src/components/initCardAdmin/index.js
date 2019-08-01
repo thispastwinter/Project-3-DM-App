@@ -64,7 +64,7 @@ const InitCardAdmin = (props) => {
             <Image size={64} alt={props.name} src={props.image} />
           </Media.Item>
           <Media.Item>
-            <Heading size={3}>{monsterRename()}</Heading>
+            <Heading className="character-names" size={3}>{monsterRename()}</Heading>
           </Media.Item>
         </Media>
         <Content>
