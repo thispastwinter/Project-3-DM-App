@@ -14,7 +14,7 @@ class MonsterSearch extends Component {
     };
     this.addMonster = this.addMonster.bind(this);
   }
-
+ 
   componentDidMount() {
     this.loadGameId();
     axios.get('/api/v1/monsters/list')

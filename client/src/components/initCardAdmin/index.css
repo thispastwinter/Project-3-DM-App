@@ -1,7 +1,7 @@
 @media print, screen and (min-width: 320px) {
   .columns:not(.is-desktop) {
     display: flex;
-  }
+  };
   .styles_Editext__input__1534X {
     max-width: 55px;
   }

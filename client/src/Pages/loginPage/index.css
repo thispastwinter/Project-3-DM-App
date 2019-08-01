@@ -1,12 +1,74 @@
 .Login {
-  padding: 60px 0;
+  overflow: hidden;
 }
 
 .Login form {
-  margin: 0 auto;
+  /* margin: 0 auto; */
   max-width: 320px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 2%;
+}
+
+#button {
+  width: auto;
 }
 
 .title {
   text-align: center;
+  padding-top: 3%;
+}
+
+@media screen and (min-width: 300px) {
+  .login-container {
+    margin: 0 auto;
+    position: relative;
+  }
+  #email,
+  #password {
+    display: block;
+    /* margin-left: auto; */
+    margin-right: auto;
+    width: 40%;
+  }
+}
+@media screen and (max-width: 1088px) {
+  #email,
+  #password {
+    display: block;
+    /* margin-left: auto; */
+    margin-right: auto;
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 1088px) {
+  #email,
+  #password {
+    display: block;
+    /* margin-left: auto; */
+    margin-right: auto;
+    width: 31%;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  #email,
+  #password {
+    display: block;
+    /* margin-left: auto; */
+    margin-right: auto;
+    width: 26%;
+  }
+}
+
+@media screen and (min-width: 1472px) {
+  #email,
+  #password {
+    display: block;
+    /* margin-left: auto; */
+    margin-right: auto;
+    width: 22.5%;
+  }
 }

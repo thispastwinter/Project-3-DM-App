@@ -4,6 +4,7 @@ import GameCard from '../../components/gameCard';
 import { Form, Container, Heading } from 'react-bulma-components';
 import { Link } from "react-router-dom";
 import MyButton from '../../components/buttons';
+import './index.css';
 
 class GamePage extends Component {
     state = {
