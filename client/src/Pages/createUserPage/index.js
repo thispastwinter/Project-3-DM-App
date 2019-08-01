@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
-import { Button, Form, Container } from 'react-bulma-components';
+import { Form, Container } from 'react-bulma-components';
 import './index.css';
 import MyButton from '../../components/buttons'
 
@@ -110,14 +110,14 @@ class CreateUserPage extends Component {
                             Will this be a Dungeon Master account for a game?
                 </Form.Checkbox>
                     </Container>
-                    <MyButton 
+                    <MyButton
                         primary={true}
                         disabled={!this.validateForm()}
                         onClick={this.handleLogin}
                         text="Create User"
                     >
-                       
-          </MyButton>
+
+                    </MyButton>
                 </form>
             </div>
         );
