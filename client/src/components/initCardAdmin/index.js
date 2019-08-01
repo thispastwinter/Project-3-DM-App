@@ -71,21 +71,21 @@ const InitCardAdmin = (props) => {
           <Columns>
             <div className="init-field-columns">
               <Columns.Column>
-                Initiative: <Initiative {...props} /> Armor Class: <ArmorClass {...props} />  Health: <Health {...props} />
+              <div className="statHeader">Initiative:</div> <Initiative {...props} /> <div className="statHeader">Armor Class:</div> <ArmorClass {...props} />  <div className="statHeader">Health:</div> <Health {...props} />
               </Columns.Column>
             </div>
             {/* </Columns> */}
             {/* <Columns> */}
             <div className="init-field-columns">
               <Columns.Column>
-                Strength: <Strength {...props} /> Dexterity: <Dexterity {...props} /> Constitution: <Constitution {...props} />
+              <div className="statHeader">Strength:</div> <Strength {...props} /> <div className="statHeader">Dexterity:</div> <Dexterity {...props} /> <div className="statHeader">Constitution:</div> <Constitution {...props} />
               </Columns.Column>
             </div>
             {/* </Columns> */}
             {/* <Columns> */}
             <div className="init-field-columns">
               <Columns.Column>
-                Intelligence: <Intelligence {...props} /> Wisdom: <Wisdom {...props} /> Charisma: <Charisma {...props} />
+                <div className="statHeader">Intelligence:</div> <Intelligence {...props} /> <div className="statHeader">Wisdom:</div> <Wisdom {...props} /> <div className="statHeader">Charisma:</div> <Charisma {...props} />
               </Columns.Column>
             </div>
           </Columns>

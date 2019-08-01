@@ -7,6 +7,8 @@ import { Container, Heading } from 'react-bulma-components';
 import NavTabs from "../../components/navTabs";
 import { Link } from 'react-router-dom';
 import MyButton from '../../components/buttons'
+import './index.css';
+
 
 class InitAdminPage extends Component {
     state = {
@@ -161,6 +163,8 @@ class InitAdminPage extends Component {
                 <Container id="buttons" fluid>
                     <MyButton primary={true} text="Reset Encounter" onClick={this.resetEncounter}></MyButton>
                     <MyButton primary={true} text="Initiative Sort" onClick={() => this.initSort(this.state.characterList)}></MyButton>
+                </Container>
+                <Container id="npcContainer" fluid>
                     <Link to={{
                         pathname: '/createcharacter',
                         state: {
@@ -170,10 +174,13 @@ class InitAdminPage extends Component {
                             admin: this.props.location.state.admin
                         }
                     }}>
-                        <MyButton static={true} text="Create NPC" primary={false}>
-                        </MyButton>
+                        <Container id="npcButton">
+                            <MyButton static={true} text="Create NPC" primary={false}>
+                            </MyButton>
+                        </Container>
                     </ Link>
                 </Container>
+
                 <Container id="monsterSearch" fluid>
                     <h1>Monster Search Bar</h1>
                     <MonsterSearch game_id={this.props.location.state.game_id} loadChars={this.loadChars} />
