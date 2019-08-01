@@ -178,29 +178,6 @@ class InitAdminPage extends Component {
                     <h1>Monster Search Bar</h1>
                     <MonsterSearch game_id={this.props.location.state.game_id} loadChars={this.loadChars} />
                 </Container>
-                <Container id="buttons" fluid>
-                    <Link to={{
-                        pathname: '/createcharacter',
-                        state: {
-                            game_id: this.props.location.state.game_id,
-                            secret: this.props.location.state.secret,
-                            game_name: this.props.location.state.game_name
-                        }
-                    }}>
-                        <Button color="warning">
-                            Create Character
-                        </Button>
-                    </Link>
-                </Container>
-                <Container id="buttons" fluid>
-                    <Link to={{
-                        pathname: '/',
-                    }}>
-                        <Button color="warning">
-                            Login Page
-                        </Button>
-                    </Link>
-                </Container>
             </React.Fragment>
         )
     }
