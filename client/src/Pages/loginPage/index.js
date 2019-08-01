@@ -102,7 +102,7 @@ class LoginPage extends Component {
           </Container>
           <Container id="buttons" fluid>
             <MyButton
-              text=""
+              text="Login"
               primary={true}
               type="submit"
               disabled={!this.validateForm()}
