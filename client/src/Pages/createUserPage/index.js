@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
-import { Button, Form, Container } from 'react-bulma-components';
+import { Form, Container } from 'react-bulma-components';
 import './index.css';
 import MyButton from '../../components/buttons'
 
@@ -105,19 +105,19 @@ class CreateUserPage extends Component {
                             id="password"
                         />
                     </Container>
-                    <Container>
+                    <Container fluid>
                         <Form.Checkbox onChange={this.handleChange} id="admin" checked={this.state.admin}>
-                            Will this be a Dungeon Master account for a game?
-                </Form.Checkbox>
+                            <span>Are you the dungeon master for a game?</span>
+                        </Form.Checkbox>
                     </Container>
-                    <MyButton 
-                        primary={true}
-                        disabled={!this.validateForm()}
-                        onClick={this.handleLogin}
-                        text="Create User"
-                    >
-                       
-          </MyButton>
+                    <Container id="buttons" fluid>
+                        <MyButton
+                            primary={true}
+                            disabled={!this.validateForm()}
+                            onClick={this.handleLogin}
+                            text="Create User"
+                        />
+                    </Container>
                 </form>
             </div>
         );

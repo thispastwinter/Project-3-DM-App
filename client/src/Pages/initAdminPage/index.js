@@ -3,7 +3,7 @@ import InitCardAdmin from '../../components/initCardAdmin';
 import axios from 'axios';
 import io from 'socket.io-client';
 import MonsterSearch from '../../components/monsterSearch';
-import { Container, Heading, Button } from 'react-bulma-components';
+import { Container, Heading, } from 'react-bulma-components';
 import { Link } from 'react-router-dom';
 import NavTabs from "../../components/navTabs";
 import MyButton from '../../components/buttons'
@@ -48,7 +48,7 @@ class InitAdminPage extends Component {
             .then(res => {
                 let characterList = res.data;
                 if (characterList.length === 0) {
-                    alert("No Characters here yet");
+                    //put modal here eventually
                 }
                 else if (characterList !== this.state.characterList) {
                     this.send(this.setState({ characterList }));

@@ -43,7 +43,7 @@ class GamePage extends Component {
                         user_id: this.props.location.state.user_id
                     }
                 }}>
-                    <MyButton text="Create New Game" primary={true}></MyButton>
+                    <MyButton text="Create New Game" primary={false}></MyButton>
                 </Link>
             )
         }
@@ -86,7 +86,7 @@ class GamePage extends Component {
             <React.Fragment>
                 {this.checkForEmpty()}
                 <form onSubmit={this.handleSubmit}>
-                    <Container>
+                    <Container id="secretForm" fluid>
                         <Form.Label>Join an existing game</Form.Label>
                         <Form.Input
                             value={this.state.gameKey}
@@ -98,7 +98,7 @@ class GamePage extends Component {
                         <Form.Help>Please type the secret provided by your DM that is associated with your game</Form.Help>
                     </Container>
                     <MyButton
-                        primary={false}
+                        primary={true}
                         text="Bind Game To Your Account"
                         onClick={this.bindGame}
                     >
