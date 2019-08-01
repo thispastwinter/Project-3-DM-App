@@ -33,6 +33,7 @@ class CreateCharacterPage extends Component {
 
     componentDidMount() {
         this.loadGameId();
+        window.scrollTo(0, 0);
     }
 
     onPick(image) {
