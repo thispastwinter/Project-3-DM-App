@@ -5,11 +5,17 @@
   font-family: 'Nodesto';
   src: url('/fonts/nodesto.otf');
 }
+
+@font-face {
+  font-family: 'Mr Eaves';
+  src: url('/fonts/mreaves.otf');
+}
+
 .title-1 {
-  font-family: 'Nodesto';
+  font-family: 'Mr Eaves';
   text-transform: uppercase;
   text-shadow: 1px 1px 5px gray;
-  font-size: 50px;
+  font-size: 40px;
 }
 
 .character-names {
