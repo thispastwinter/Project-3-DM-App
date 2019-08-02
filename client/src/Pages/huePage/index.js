@@ -122,7 +122,7 @@ class HuePage extends Component {
   lightOn = async (res, req) => {
     try {
       await axios.post('/api/v1/huelights/controllights', {
-        light: 7,
+        light: this.state.selectedLight,
         user: this.state.username,
         token: this.state.access_token,
         hueState: 'on'
@@ -135,7 +135,7 @@ class HuePage extends Component {
   lightOff = async (res, req) => {
     try {
       await axios.post('/api/v1/huelights/controllights', {
-        light: 7,
+        light: this.state.selectedLight,
         user: this.state.username,
         token: this.state.access_token,
         hueState: 'off'
@@ -212,7 +212,7 @@ class HuePage extends Component {
                 <div className="select" onClick={this.findAllLights}>
                   <select onChange={this.handleChange} value={this.state.selectedLight}>
                     {this.state.lights.map((lights, index) => (
-                      <option disabled={this.state.isReachable[index]} value={this.state.lightId[index]} key={this.state.lightId[index]}>{lights}</option>
+                      <option selected={this.state.isReachable[index] ? this.state.lightId[index] : ''} disabled={this.state.isReachable[index]} value={this.state.lightId[index]} key={this.state.lightId[index]}>{lights}</option>
                     ))}
                   </select>
                 </div>
