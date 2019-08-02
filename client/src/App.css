@@ -16,6 +16,7 @@
   text-transform: uppercase;
   text-shadow: 1px 1px 5px gray;
   font-size: 40px;
+  letter-spacing: 0.05em;
 }
 
 .character-names {

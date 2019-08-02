@@ -3,6 +3,10 @@
   text-align: center;
 }
 
+#buttonContainer {
+  margin-bottom: 5%;
+}
+
 .card-content {
   padding: 0;
 }

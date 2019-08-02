@@ -11,7 +11,8 @@ import Charisma from '../charisma/index';
 import Name from '../name/index';
 import { Card, Media, Image, Content, Columns } from 'react-bulma-components';
 import './index.css';
-import MyButton from '../buttons'
+import MyButton from '../buttons';
+
 
 // const bulmaAccordion = require('bulma-accordion');
 
