@@ -39,7 +39,7 @@ const InitCard = (props) => {
     if (props.isMonster) {
       let index = currentOrder.findIndex(c => c.id === props.id)
       return (
-        <Card className={index === 0 ? "init-blinking" : "init-card"}>
+        <Card className={index === 0 && props.init > 0 ? "init-blinking" : "init-card"}>
           <Card.Content>
             <Media>
               <Media.Item position="left">
@@ -63,7 +63,7 @@ const InitCard = (props) => {
     else {
       let index = currentOrder.findIndex(c => c.id === props.id)
       return (
-        <Card className={index === 0 ? 'init-blinking' : 'init-card'}>
+        <Card className={index === 0 && props.init > 0 ? 'init-blinking' : 'init-card'}>
           <Card.Content>
             <Media>
               <Media.Item position="left">

@@ -44,6 +44,7 @@ class HuePage extends Component {
         this.setState({ access_token: accessToken });
         this.setState({ expired: false });
         this.setState({ redirect: hueState });
+        localStorage.setItem("state", JSON.stringify(this.state));
         this.connectionHandler();
       }).catch(err => {
         console.log(err);
