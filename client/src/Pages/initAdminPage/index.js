@@ -179,13 +179,11 @@ class InitAdminPage extends Component {
                             admin: this.props.location.state.admin
                         }
                     }}>
-                        <Container id="npcButton">
-                            <MyButton static={true} text="Create NPC" primary={false}>
-                            </MyButton>
-                        </Container>
+                        <MyButton text="Create NPC" primary={false}>
+                        </MyButton>
                     </ Link>
                 </Container>
-                    {/* <hr id="hr"/> */}
+                {/* <hr id="hr"/> */}
                 <Container fluid id="bottomPadding">
                     <h1 id="monsterSearch">Monster Creation</h1>
                     <MonsterSearch game_id={this.props.location.state.game_id} loadChars={this.loadChars} />
