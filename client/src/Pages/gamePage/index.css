@@ -12,6 +12,8 @@
 
 #joinHeader {
   margin-top: 5%;
+  margin-bottom: 1%;
+  text-decoration: underline;
 }
 
 @media screen and (max-width: 360px) {

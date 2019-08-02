@@ -48,7 +48,7 @@ const GameCard = (props) => {
                     </Media.Item>
                 </Media>
                 <Content>
-                    <Heading size={3}>Secret: {props.secret}</Heading>
+                    <Heading size={6}>Secret: {props.secret}</Heading>
                 </Content>
             </Card.Content>
             <Card.Footer>
