@@ -46,7 +46,7 @@
 
 #monsterSearch {
   font-family: "Nodesto";
-  font-size: calc(60% + 2.0vw);
+  font-size: calc(100% + 2.0vw);
   text-decoration: underline;
 }
 
