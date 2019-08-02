@@ -59,7 +59,7 @@ class MonsterSearch extends Component {
           onChange={(e) => this.setState({ monsterName: e.target.value })}
           onSelect={(val) => this.setState({ monsterName: val })}
         />
-        <MyButton className="searchbutton" text="Add Monster" primary={false} onClick={() => this.addMonster(this.state.game_id)}></MyButton>
+        <MyButton className="searchbutton" id="monsterSearchButton" text="Add Monster" primary={false} onClick={() => this.addMonster(this.state.game_id)}></MyButton>
       </div>
     );
   }

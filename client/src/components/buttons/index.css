@@ -10,7 +10,7 @@
   text-align: center;
   color: white;
   outline: 0;
-  background-color: #473125;
+  background-color: #5E372C;
   background-color: #;
   border-radius: 2px;
   border: 1px;
@@ -35,12 +35,12 @@
 }
 
 .mybutton-secondary:hover {
-  background-color: #468732;
+  background-color: #3F842A;
   color: white
 }
 
 .mybutton:hover {
-  background-color: #8F7D5E;
+  background-color: #84473E;
   color: white
 }
 
