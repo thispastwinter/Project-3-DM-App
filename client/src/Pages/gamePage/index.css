@@ -6,6 +6,11 @@
 .card-content {
   padding: 0;
 }
+
+.loginTitle {
+  font-size: calc(150% + 2vw);
+}
+
 #formHelp {
   margin-bottom: 5%;
 }

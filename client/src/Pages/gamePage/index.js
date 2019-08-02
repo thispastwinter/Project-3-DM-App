@@ -85,6 +85,7 @@ class GamePage extends Component {
     render() {
         return (
             <React.Fragment>
+                <h1 className="title-1 loginTitle" style={{textAlign: 'center'}}>Game List</h1>
                 {this.checkForEmpty()}
                 <form onSubmit={this.handleSubmit}>
                     <Container id="secretForm" fluid>
