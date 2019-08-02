@@ -46,14 +46,14 @@
 
 @media print, screen and (min-width: 1088px) {
   .image_picker {
-    max-width: 85%;
+    /* max-width: 85%; */
     margin-left: -25%;
   }
 }
 
 @media print, screen and (min-width: 1280px) {
   .image_picker {
-    max-width: 70%;
-    margin-left: -18%;
+    max-width: 600px;
+    margin-left: -33%;
   }
 }
