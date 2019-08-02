@@ -83,7 +83,7 @@ class CreateUserPage extends Component {
 
         return (
             <div className="createUser">
-                 <h1 className="title-1">Create New User</h1>
+                <h1 className="title-1">Create New User</h1>
                 <form onSubmit={this.handleSubmit}>
                     <Container>
                         <Form.Label>Email</Form.Label>
@@ -105,7 +105,7 @@ class CreateUserPage extends Component {
                             id="password"
                         />
                     </Container>
-                    <Container fluid>
+                    <Container id="checkContainer" breakpoint='fullhd'>
                         <Form.Checkbox onChange={this.handleChange} id="admin" checked={this.state.admin}>
                             <span>Are you the dungeon master for a game?</span>
                         </Form.Checkbox>
