@@ -5,6 +5,7 @@ import axios from 'axios';
 import io from 'socket.io-client';
 import { Container, Heading } from 'react-bulma-components';
 import MyButton from '../../components/buttons'
+import './index.css';
 // import NavTabs from "../../components/navTabs";
 
 class InitPage extends Component {
@@ -126,7 +127,7 @@ class InitPage extends Component {
 
     render() {
         return (
-            <React.Fragment>
+            <React.Fragment id="initPageContainer">
                 <Heading className="title-1 title-2" size={2}>Game: {this.props.location.state.game_name}</Heading>
                 <Heading className="title-2" size={3}>Secret: {this.props.location.state.secret}</Heading>
                 <div >
@@ -168,6 +169,7 @@ class InitPage extends Component {
                         </MyButton>
                     </Link>
                 </Container>
+                <div id="newCharButton"></div>
             </React.Fragment>
         )
     }

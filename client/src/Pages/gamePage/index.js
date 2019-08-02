@@ -85,10 +85,11 @@ class GamePage extends Component {
     render() {
         return (
             <React.Fragment>
+                <h1 className="title-1 loginTitle" style={{textAlign: 'center'}}>Game List</h1>
                 {this.checkForEmpty()}
                 <form onSubmit={this.handleSubmit}>
                     <Container id="secretForm" fluid>
-                        <Form.Label>Join an existing game</Form.Label>
+                        <Form.Label id="joinHeader">Join an existing game</Form.Label>
                         <Form.Input
                             value={this.state.gameKey}
                             type="text"
@@ -96,7 +97,7 @@ class GamePage extends Component {
                             className="input"
                             id="gameKey"
                         />
-                        <Form.Help>Please type the secret provided by your Dungeon Master</Form.Help>
+                        <Form.Help id="formHelp">Please type the secret provided by your Dungeon Master</Form.Help>
                     </Container>
                     <Container
                         id="buttonContainer">

@@ -77,7 +77,7 @@ class LoginPage extends Component {
 
     return (
       <div className="Login">
-        <h1 className="title-1">DM Companion</h1>
+        <h1 className="title-1 loginTitle">DM Companion</h1>
         <img width="275px" alt="wyvern" src="/images/wyvern-realistic.png"></img>
         <form onSubmit={this.handleSubmit} className="loginForm">
           <Container>
@@ -90,7 +90,7 @@ class LoginPage extends Component {
               id="email"
             />
           </Container>
-          <Container>
+          <Container id="passwordInput">
             <Form.Label>Password</Form.Label>
             <Form.Input
               value={this.state.password}
