@@ -208,11 +208,11 @@ class HuePage extends Component {
             {!this.state.expired ?
               <div>
                 {this.resetUrl()}
-                <Heading className="title-2" size={5}>Select a Light:</Heading>
                 <div className="select" onClick={this.findAllLights}>
                   <select onChange={this.handleChange} value={this.state.selectedLight}>
+                    <option disabled="true">Select A Light</option>
                     {this.state.lights.map((lights, index) => (
-                      <option selected={this.state.isReachable[index] ? this.state.isReachable[index] : false} disabled={this.state.isReachable[index]} value={this.state.lightId[index]} key={this.state.lightId[index]}>{lights}</option>
+                      <option disabled={this.state.isReachable[index]} value={this.state.lightId[index]} key={this.state.lightId[index]}>{lights}</option>
                     ))}
                   </select>
                 </div>
