@@ -70,7 +70,7 @@ class MonsterSearch extends Component {
             boxShadow: '0 2px 12px rgba(0, 0, 0, 0.1)',
             background: 'rgba(255, 255, 255, 0.9)',
             padding: '2px 0',
-            fontSize: '70%',
+            fontSize: 'calc(20% + 2.0vh)',
             position: 'fixed',
             overflow: 'auto',
             maxWidth: '200px',
