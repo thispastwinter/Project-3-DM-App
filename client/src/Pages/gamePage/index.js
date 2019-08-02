@@ -96,7 +96,7 @@ class GamePage extends Component {
                             className="input"
                             id="gameKey"
                         />
-                        <Form.Help>Please type the secret provided by your DM that is associated with your game</Form.Help>
+                        <Form.Help>Please type the secret provided by your Dungeon Master</Form.Help>
                     </Container>
                     <Container
                         id="buttonContainer">

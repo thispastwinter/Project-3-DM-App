@@ -78,7 +78,7 @@ class LoginPage extends Component {
     return (
       <div className="Login">
         <h1 className="title-1">DM Companion</h1>
-        <img width="275px" src="/images/wyvern-realistic.png"></img>
+        <img width="275px" alt="wyvern" src="/images/wyvern-realistic.png"></img>
         <form onSubmit={this.handleSubmit} className="loginForm">
           <Container>
             <Form.Label>Email</Form.Label>

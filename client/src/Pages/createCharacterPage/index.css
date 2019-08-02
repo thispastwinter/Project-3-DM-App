@@ -12,7 +12,13 @@
 }
 
 #avatarSelectText {
-    margin-top: 5%;
+  margin-top: 5%;
+  font-size: calc(80% + 0.8vw);
+  text-align: center;
+}
+
+.statHeaderCreateChar {
+  font-size: calc(60% + 0.9vw);
 }
 
 .createCharacter form {
@@ -35,7 +41,7 @@
 }
 
 .image_picker {
-    width: 70%;
+  width: 70%;
 }
 
 @media print, screen and (min-width: 1088px) {
