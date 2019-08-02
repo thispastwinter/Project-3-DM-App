@@ -7,8 +7,6 @@ import NavTabs from "../../components/navTabs";
 import { Redirect } from 'react-router-dom';
 import MyButton from '../../components/buttons'
 
-// import { all } from 'q';
-
 class HuePage extends Component {
   state = {
     user: '',
@@ -222,7 +220,6 @@ class HuePage extends Component {
                   lightOn={this.lightOn}
                   lightOff={this.lightOff}
                   critical={this.criticalRoll}
-                  lightning={this.lightning}
                   fadeOut={this.fadeOut}
                   fadeIn={this.fadeIn}>
                 </Lights></div> : <div><MyButton text="Connect To Hue" onClick={this.redirect}></MyButton></div>}
