@@ -14,6 +14,10 @@
   margin: 5px;
 }
 
+.init-card {
+  margin-bottom: 1%;
+}
+
 #monsterSearchButton {
   background-color: #BD452A;
 }
@@ -46,7 +50,13 @@
   text-decoration: underline;
 }
 
-#MonsterSearchHeader {}
+#gameTitle,
+#secret {
+  margin: 0;
+  padding-top: 15px;
+}
+
+/* #MonsterSearchHeader {} */
 
 .column {
   margin-right: auto;
