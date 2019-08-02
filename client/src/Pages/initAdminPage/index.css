@@ -1,5 +1,4 @@
-#buttons2,
-#npcButton {
+#buttons2, #npcButton {
   display: flex;
   justify-content: space-between;
   align-content: space-between;
@@ -15,15 +14,39 @@
   margin: 5px;
 }
 
-#npcButton {
-  margin-bottom: 2%;
+#monsterSearchButton {
+  background-color: #BD452A;
+}
+
+#monsterSearchButton:hover {
+  background-color: #CD4A2D;
+}
+
+/* .mybutton:hover {
+  background-color: #8F7D5E;
+  color: white
+} */
+
+#bottomPadding {
+  margin-bottom: 20%;
+  border-top: 1px solid black;
 }
 
 #npcContainer {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+  /* display: block; */
+  /* margin-left: auto;
+  margin-right: auto; */
+  text-align: center;
+  margin-bottom: 2%;
 }
+
+#monsterSearch {
+  font-family: "Nodesto";
+  font-size: calc(60% + 2.0vw);
+  text-decoration: underline;
+}
+
+#MonsterSearchHeader {}
 
 .column {
   margin-right: auto;
