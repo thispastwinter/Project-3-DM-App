@@ -11,7 +11,9 @@ import Charisma from '../charisma/index';
 import Name from '../name/index';
 import { Card, Media, Image, Content, Columns } from 'react-bulma-components';
 import './index.css';
-import MyButton from '../buttons'
+import MyButton from '../buttons';
+import images from './images.json';
+
 
 // const bulmaAccordion = require('bulma-accordion');
 
@@ -57,7 +59,7 @@ const InitCardAdmin = (props) => {
     //   </div>
     // </div>
 
-    <Card className="init-card">
+    <Card className="init-card" style={{backgroundImage: images}}>
       <Card.Content>
         <Media>
           <Media.Item position="left">
