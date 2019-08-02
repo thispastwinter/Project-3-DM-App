@@ -241,7 +241,7 @@ class CreateCharacterPage extends Component {
                         />
                     </Container>
                         <Form.Label id="avatarSelectText">Select An Avatar:</Form.Label>
-                    <Container className="images">
+                    <Container className="images" fluid>
                         <ImagePicker
                             images={imageList.map(image => ({ src: image.image, value: image.id }))}
                             onPick={this.onPick}
