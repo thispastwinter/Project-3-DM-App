@@ -96,24 +96,24 @@ class GamePage extends Component {
                             className="input"
                             id="gameKey"
                         />
-                        <Form.Help>Please type the secret provided by your DM that is associated with your game</Form.Help>
+                        <Form.Help>Please type the secret provided by your Dungeon Master</Form.Help>
                     </Container>
-                    <Container
-                        id="buttonContainer">
-                        <MyButton
-                            primary={true}
-                            text="Bind Game To Your Account"
-                            onClick={this.bindGame}
-                        >
-                        </MyButton>
-                        <div>
-                            {this.checkForAdmin()}
-                        </div>
+                                tainer
+                                id="buttonContainer">
+                                    utton
+                                    primary={true}
+                                    text="Bind Game To Your Account"
+                                    onClick={this.bindGame}
+                                >
+                                </MyButton>
+                                    >
+                                    {this.checkForAdmin()}
+                                </div>
                     </Container>
                 </form>
-            </React.Fragment>
-        )
-    }
-}
-
+                        </React.Fragment>
+                    )
+                }
+            }
+            
 export default GamePage;
