@@ -185,7 +185,7 @@ class InitAdminPage extends Component {
                         </Container>
                     </ Link>
                 </Container>
-                    <hr/>
+                    {/* <hr id="hr"/> */}
                 <Container fluid id="bottomPadding">
                     <h1 id="monsterSearch">Monster Creation</h1>
                     <MonsterSearch game_id={this.props.location.state.game_id} loadChars={this.loadChars} />

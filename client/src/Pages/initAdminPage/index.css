@@ -34,6 +34,7 @@
 
 #bottomPadding {
   margin-bottom: 5%;
+  border-top: 1px solid black;
 }
 
 #npcContainer {
@@ -44,8 +45,11 @@
 
 #monsterSearch {
   font-family: "Nodesto";
-  font-size: calc(150% + 1.2vw);
-  /* text-emphasis-style: underline; */
+  font-size: calc(170% + 1.4vw);
+  text-decoration: underline;
+}
+
+#MonsterSearchHeader {
 }
 
 .column {
