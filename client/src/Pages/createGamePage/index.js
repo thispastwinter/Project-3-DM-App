@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
-import { Form, Container } from 'react-bulma-components';
+import { Form, Container, Heading } from 'react-bulma-components';
 import './index.css';
 import MyButton from '../../components/buttons';
 
@@ -70,7 +70,7 @@ class CreateGamePage extends Component {
 
         return (
             <div className="createGame">
-                <h1 className="title gameTitle">Create New Game</h1>
+                <Heading className="title-1 title-2" size={2}>Create New Game</Heading>
                 <form onSubmit={this.handleSubmit}>
                     <Container>
                         <Form.Label className="createGameHeader">Game Name</Form.Label>
@@ -78,7 +78,7 @@ class CreateGamePage extends Component {
                             value={this.state.name}
                             type="text"
                             onChange={this.handleChange}
-                            className="input"
+                            className="gameInput"
                             id="name"
                         />
                     </Container>
