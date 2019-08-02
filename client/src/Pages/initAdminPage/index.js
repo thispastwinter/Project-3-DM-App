@@ -117,7 +117,12 @@ class InitAdminPage extends Component {
         const characterList = this.state.characterList.slice();
         characterList.splice(characterList.findIndex(c => c.id === id), 1);
         axios.delete('/api/v1/characters/' + remId);
-        this.send(this.setState({ characterList }));
+        if (this.state.characterList.length === 0) {
+            //don't send anything because no data[0].game_id for transmitting to correct room.
+        }
+        else {
+            this.send(this.setState({ characterList }));
+        }
     }
 
     resetEncounter = () => {
