@@ -151,7 +151,7 @@ class CreateCharacterPage extends Component {
                 <form onSubmit={this.handleSubmit}>
 
                     <Container className="characterForm">
-                        <Form.Label>Character Name</Form.Label>
+                        <Form.Label className="statHeaderCreateChar">Character Name</Form.Label>
                         <Form.Input
                             value={this.state.name}
                             type="text"
@@ -161,7 +161,7 @@ class CreateCharacterPage extends Component {
                         />
                     </Container>
                     <Container className="characterForm">
-                        <Form.Label>Armor Class</Form.Label>
+                        <Form.Label className="statHeaderCreateChar">Armor Class</Form.Label>
                         <Form.Input
                             value={this.state.armor_class}
                             type="text"
@@ -171,7 +171,7 @@ class CreateCharacterPage extends Component {
                         />
                     </Container>
                     <Container className="characterForm">
-                        <Form.Label>Hit Points</Form.Label>
+                        <Form.Label className="statHeaderCreateChar">Hit Points</Form.Label>
                         <Form.Input
                             value={this.state.hit_points}
                             type="text"
@@ -181,7 +181,7 @@ class CreateCharacterPage extends Component {
                         />
                     </Container>
                     <Container className="characterForm">
-                        <Form.Label>Strength</Form.Label>
+                        <Form.Label className="statHeaderCreateChar">Strength</Form.Label>
                         <Form.Input
                             value={this.state.strength}
                             type="text"
@@ -191,7 +191,7 @@ class CreateCharacterPage extends Component {
                         />
                     </Container>
                     <Container className="characterForm">
-                        <Form.Label>Dexterity</Form.Label>
+                        <Form.Label className="statHeaderCreateChar">Dexterity</Form.Label>
                         <Form.Input
                             value={this.state.dexterity}
                             type="text"
@@ -201,7 +201,7 @@ class CreateCharacterPage extends Component {
                         />
                     </Container>
                     <Container className="characterForm">
-                        <Form.Label>Constitution</Form.Label>
+                        <Form.Label className="statHeaderCreateChar">Constitution</Form.Label>
                         <Form.Input
                             value={this.state.constitution}
                             type="text"
@@ -211,7 +211,7 @@ class CreateCharacterPage extends Component {
                         />
                     </Container>
                     <Container className="characterForm">
-                        <Form.Label>Intelligence</Form.Label>
+                        <Form.Label className="statHeaderCreateChar">Intelligence</Form.Label>
                         <Form.Input
                             value={this.state.intelligence}
                             type="text"
@@ -221,7 +221,7 @@ class CreateCharacterPage extends Component {
                         />
                     </Container>
                     <Container className="characterForm">
-                        <Form.Label>Wisdom</Form.Label>
+                        <Form.Label className="statHeaderCreateChar">Wisdom</Form.Label>
                         <Form.Input
                             value={this.state.wisdom}
                             type="text"
@@ -231,7 +231,7 @@ class CreateCharacterPage extends Component {
                         />
                     </Container>
                     <Container className="characterForm">
-                        <Form.Label>Charisma</Form.Label>
+                        <Form.Label className="statHeaderCreateChar">Charisma</Form.Label>
                         <Form.Input
                             value={this.state.charisma}
                             type="text"
@@ -240,8 +240,8 @@ class CreateCharacterPage extends Component {
                             id="charisma"
                         />
                     </Container>
-                    <Container className="images">
                         <Form.Label id="avatarSelectText">Select An Avatar:</Form.Label>
+                    <Container className="images">
                         <ImagePicker
                             images={imageList.map(image => ({ src: image.image, value: image.id }))}
                             onPick={this.onPick}
