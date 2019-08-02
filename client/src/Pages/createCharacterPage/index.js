@@ -248,7 +248,7 @@ class CreateCharacterPage extends Component {
                         />
 
                     </Container>
-                    <Container id="buttons" fluid>
+                    <Container className="characterButton" id="buttons" fluid>
                         <MyButton
                             text="Create Character"
                             primary={true}
