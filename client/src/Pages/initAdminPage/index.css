@@ -19,10 +19,24 @@
   margin-bottom: 2%;
 }
 
+#monsterSearchButton {
+  background-color: #a5542c;
+}
+
+#bottomPadding {
+  margin-bottom: 5%;
+}
+
 #npcContainer {
   display: block;
   margin-left: auto;
   margin-right: auto;
+}
+
+#monsterSearch {
+  font-family: "Nodesto";
+  font-size: calc(150% + 1.2vw);
+  /* text-emphasis-style: underline; */
 }
 
 .column {
