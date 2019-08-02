@@ -7,6 +7,20 @@
   padding: 0;
 }
 
+.loginTitle {
+  font-size: calc(150% + 2vw);
+}
+
+#formHelp {
+  margin-bottom: 5%;
+}
+
+#joinHeader {
+  margin-top: 5%;
+  margin-bottom: 1%;
+  text-decoration: underline;
+}
+
 @media screen and (max-width: 360px) {
   #gameKey {
     width: 90%;

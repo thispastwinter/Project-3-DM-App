@@ -18,12 +18,13 @@
 }
 
 .statHeaderCreateChar {
-  font-size: calc(60% + 0.9vw);
+  font-size: calc(60% + 0.8vw);
 }
 
 .createCharacter form {
   margin: 0 auto;
   max-width: 320px;
+  margin-bottom: 2%;
 }
 
 .title {

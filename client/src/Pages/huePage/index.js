@@ -13,7 +13,7 @@ class HuePage extends Component {
     lights: [],
     lightId: [],
     isReachable: [],
-    selectedLight: [],
+    selectedLight: null,
     access_token: '',
     username: '',
     game_id: null,
@@ -44,6 +44,7 @@ class HuePage extends Component {
         this.setState({ access_token: accessToken });
         this.setState({ expired: false });
         this.setState({ redirect: hueState });
+        localStorage.setItem("state", JSON.stringify(this.state));
         this.connectionHandler();
       }).catch(err => {
         console.log(err);
@@ -208,9 +209,9 @@ class HuePage extends Component {
             {!this.state.expired ?
               <div>
                 {this.resetUrl()}
-                <Heading className="title-2" size={5}>Select a Light:</Heading>
                 <div className="select" onClick={this.findAllLights}>
                   <select onChange={this.handleChange} value={this.state.selectedLight}>
+                    <option selected="selected">Select A Light</option>
                     {this.state.lights.map((lights, index) => (
                       <option disabled={this.state.isReachable[index]} value={this.state.lightId[index]} key={this.state.lightId[index]}>{lights}</option>
                     ))}

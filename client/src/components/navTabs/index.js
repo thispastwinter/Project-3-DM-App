@@ -8,7 +8,7 @@ function NavTabs(props) {
     return (
         <Tabs type='toggle' fullwidth={true}>
             <Tabs.Tab renderAs="div">
-                <NavLink to={{
+                <NavLink style={{ fontSize: 'calc(100% + 0.8vw)', fontWeight: '600', textDecoration: 'underline' }} to={{
                     pathname: '/initadmin',
                     state: {
                         game_id: props.game_id,
@@ -20,7 +20,8 @@ function NavTabs(props) {
                  </NavLink>
             </Tabs.Tab>
             <Tabs.Tab renderAs="div">
-                <NavLink to={{
+
+                <NavLink style={{ fontSize: 'calc(100% + 0.8vw)', fontWeight: '600', textDecoration: 'underline' }} to={{
                     pathname: '/hue',
                     state: {
                         game_id: props.game_id,

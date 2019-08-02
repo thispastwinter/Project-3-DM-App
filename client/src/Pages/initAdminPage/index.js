@@ -136,9 +136,9 @@ class InitAdminPage extends Component {
     render() {
         return (
             <React.Fragment>
-                <NavTabs game_id={this.props.location.state.game_id} game_name={this.props.location.state.game_name} secret={this.props.location.state.secret} />
-                <Heading className="title-1 title-2" size={2}>Game: {this.props.location.state.game_name}</Heading>
-                <Heading className="title-2" size={3}>Secret: {this.props.location.state.secret}</Heading>
+                <NavTabs game_id={this.props.location.state.game_id} game_name={this.props.location.state.game_name} secret={this.props.location.state.secret}/>
+                <Heading className="title-1 title-2" id="gameTitle" size={1}> {this.props.location.state.game_name}</Heading>
+                <Heading className="title-2" id="secret" size={6}>Secret: {this.props.location.state.secret}</Heading>
                 <div >
                     {this.state.characterList.map(character => (
                         <InitCardAdmin
@@ -179,15 +179,13 @@ class InitAdminPage extends Component {
                             admin: this.props.location.state.admin
                         }
                     }}>
-                        <Container id="npcButton">
-                            <MyButton static={true} text="Create NPC" primary={false}>
-                            </MyButton>
-                        </Container>
+                        <MyButton text="Create NPC" primary={false}>
+                        </MyButton>
                     </ Link>
                 </Container>
-
-                <Container id="monsterSearch" fluid>
-                    <h1>Monster Search Bar</h1>
+                {/* <hr id="hr"/> */}
+                <Container fluid id="bottomPadding">
+                    <h1 id="monsterSearch">Monster Creation</h1>
                     <MonsterSearch game_id={this.props.location.state.game_id} loadChars={this.loadChars} />
                 </Container>
             </React.Fragment>

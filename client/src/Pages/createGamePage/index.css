@@ -7,6 +7,10 @@
   margin-top: 5%;
 }
 
+#avatarSelectText {
+  text-decoration: underline;
+}
+
 .createGame form {
   overflow: hidden;
   display: inline-block;
@@ -27,6 +31,13 @@
 .createGameHeader {
   font-size: calc(100% + 1.2vw);
   text-align: center;
+}
+
+.gameInput {
+  max-width: 50%;
+  margin: auto;
+  width: 450px;
+  margin-bottom: 5px;
 }
 
 @media screen and (min-width: 300px) {

@@ -44,11 +44,11 @@ const GameCard = (props) => {
             <Card.Content>
                 <Media>
                     <Media.Item>
-                        <Heading size={3}>{props.name}</Heading>
+                        <Heading className="title-1 title-2 gameName" size={3}>{props.name}</Heading>
                     </Media.Item>
                 </Media>
                 <Content>
-                    <Heading size={3}>Secret: {props.secret}</Heading>
+                    <Heading size={6}>Secret: {props.secret}</Heading>
                 </Content>
             </Card.Content>
             <Card.Footer>
