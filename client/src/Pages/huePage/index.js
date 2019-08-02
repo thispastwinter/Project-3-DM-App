@@ -13,7 +13,7 @@ class HuePage extends Component {
     lights: [],
     lightId: [],
     isReachable: [],
-    selectedLight: [],
+    selectedLight: null,
     access_token: '',
     username: '',
     game_id: null,
