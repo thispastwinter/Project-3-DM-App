@@ -7,6 +7,10 @@
   margin-top: 5%;
 }
 
+#avatarSelectText {
+  text-decoration: underline;
+}
+
 .createGame form {
   overflow: hidden;
   display: inline-block;

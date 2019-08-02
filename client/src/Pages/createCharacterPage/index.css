@@ -24,6 +24,7 @@
 .createCharacter form {
   margin: 0 auto;
   max-width: 320px;
+  margin-bottom: 5%;
 }
 
 .title {
