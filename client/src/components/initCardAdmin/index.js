@@ -12,7 +12,6 @@ import Name from '../name/index';
 import { Card, Media, Image, Content, Columns } from 'react-bulma-components';
 import './index.css';
 import MyButton from '../buttons';
-import images from './images.json';
 
 
 // const bulmaAccordion = require('bulma-accordion');
@@ -59,7 +58,7 @@ const InitCardAdmin = (props) => {
     //   </div>
     // </div>
 
-    <Card className="init-card" style={{backgroundImage: images}}>
+    <Card className="init-card">
       <Card.Content>
         <Media>
           <Media.Item position="left">
