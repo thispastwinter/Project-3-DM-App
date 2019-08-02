@@ -43,7 +43,6 @@
 }
 
 @media screen and (min-width: 1088px) {
-  #name,
   .createGameHeader {
     display: block;
     margin-left: auto;

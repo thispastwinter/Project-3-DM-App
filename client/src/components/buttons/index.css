@@ -10,7 +10,8 @@
   text-align: center;
   color: white;
   outline: 0;
-  background-color: rgb(25, 25, 59);
+  background-color: #473125;
+  background-color: #;
   border-radius: 2px;
   border: 1px;
   box-shadow: 0 2.5px 2.5px rgba(0,0,0,0.19), 0 1.5px 1.5px rgba(0,0,0,0.23);
@@ -26,19 +27,20 @@
   text-align: center;
   color: white;
   outline: 0;
-  background-color: #B3A878;
+  /* background-color: #346E23; */
+  background-color: #346E23;
   border-radius: 2px;
   border: 1px;
   box-shadow: 0 2.5px 2.5px rgba(0,0,0,0.19), 0 1.5px 1.5px rgba(0,0,0,0.23);
 }
 
 .mybutton-secondary:hover {
-  background-color: rgb(214, 202, 145);
+  background-color: #468732;
   color: white
 }
 
 .mybutton:hover {
-  background-color: rgb(37, 37, 87);
+  background-color: #8F7D5E;
   color: white
 }
 
