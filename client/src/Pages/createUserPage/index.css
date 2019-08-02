@@ -24,6 +24,10 @@
   width: auto;
 }
 
+.checkbox {
+    text-align: center;
+}
+
 .title {
   text-align: center;
   padding-top: 3%;
