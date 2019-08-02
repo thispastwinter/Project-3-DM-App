@@ -212,7 +212,7 @@ class HuePage extends Component {
                 <div className="select" onClick={this.findAllLights}>
                   <select onChange={this.handleChange} value={this.state.selectedLight}>
                     {this.state.lights.map((lights, index) => (
-                      <option selected={this.state.isReachable[index] ? this.state.lightId[index] : ''} disabled={this.state.isReachable[index]} value={this.state.lightId[index]} key={this.state.lightId[index]}>{lights}</option>
+                      <option selected={this.state.isReachable[index] ? this.state.isReachable[index] : false} disabled={this.state.isReachable[index]} value={this.state.lightId[index]} key={this.state.lightId[index]}>{lights}</option>
                     ))}
                   </select>
                 </div>
