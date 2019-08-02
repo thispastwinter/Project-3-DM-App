@@ -122,7 +122,7 @@ class HuePage extends Component {
   lightOn = async (res, req) => {
     try {
       await axios.post('/api/v1/huelights/controllights', {
-        light: this.state.selectedLight,
+        light: 7,
         user: this.state.username,
         token: this.state.access_token,
         hueState: 'on'
@@ -135,7 +135,7 @@ class HuePage extends Component {
   lightOff = async (res, req) => {
     try {
       await axios.post('/api/v1/huelights/controllights', {
-        light: this.state.selectedLight,
+        light: 7,
         user: this.state.username,
         token: this.state.access_token,
         hueState: 'off'
