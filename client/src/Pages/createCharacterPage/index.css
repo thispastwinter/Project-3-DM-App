@@ -40,11 +40,11 @@
   margin-right: auto;
 }
 
-.image_picker {
-  width: 70%;
-}
+/* .image_picker {
+  max-width: 70%;
+} */
 
-@media print, screen and (min-width: 1088px) {
+/* @media print, screen and (min-width: 1088px) {
   .image_picker {
     max-width: 85%;
     margin-left: -25%;
@@ -56,4 +56,4 @@
     max-width: 70%;
     margin-left: -18%;
   }
-}
+} */
