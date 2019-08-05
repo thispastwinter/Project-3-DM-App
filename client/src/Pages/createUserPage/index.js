@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
-import { Button, Form, Container } from 'react-bulma-components';
+import { Form, Container } from 'react-bulma-components';
 import './index.css';
+import MyButton from '../../components/buttons'
 
 class CreateUserPage extends Component {
     constructor(props) {
@@ -11,7 +12,8 @@ class CreateUserPage extends Component {
             email: '',
             password: '',
             admin: false,
-            createSuccess: false
+            createSuccess: false,
+            user_id: null
         };
 
         this.handleLogin = this.handleLogin.bind(this);
@@ -27,6 +29,11 @@ class CreateUserPage extends Component {
             [event.target.id]: value
         });
     }
+
+    // validateEmail = email => {
+    //     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    //     return re.test(String(email).toLowerCase());
+    // }
 
     async handleLogin(event) {
         event.preventDefault();
@@ -44,11 +51,13 @@ class CreateUserPage extends Component {
                     admin: this.state.admin
                 });
                 if (response.data) {
+                    const admin = response.data.admin;
+                    const user_id = response.data.id;
                     this.setState({
                         createSuccess: true,
+                        admin,
+                        user_id
                     });
-                } else {
-                    console.log('error on createUser');
                 }
             }
         } catch (err) {
@@ -61,20 +70,26 @@ class CreateUserPage extends Component {
 
     render() {
         if (this.state.createSuccess) {
-            return <Redirect to='/game' />
+            return <Redirect to={{
+                pathname: '/game',
+                state: {
+                    user_id: this.state.user_id,
+                    admin: this.state.admin,
+                }
+            }} />
         }
 
         return (
             <div className="createUser">
-                <h1 className="title">Create New User</h1>
+                <h1 className="title-1">Create New User</h1>
                 <form onSubmit={this.handleSubmit}>
                     <Container>
                         <Form.Label>Email</Form.Label>
                         <Form.Input
                             value={this.state.email}
-                            type="email"
                             onChange={this.handleChange}
                             className="input"
+                            type="email"
                             id="email"
                         />
                     </Container>
@@ -82,25 +97,25 @@ class CreateUserPage extends Component {
                         <Form.Label>Password</Form.Label>
                         <Form.Input
                             value={this.state.password}
-                            type="password"
                             onChange={this.handleChange}
                             className="input"
+                            type="password"
                             id="password"
                         />
                     </Container>
-                    <Container>
+                    <Container id="checkContainer" breakpoint='fullhd'>
                         <Form.Checkbox onChange={this.handleChange} id="admin" checked={this.state.admin}>
-                            Will this be a Dungeon Master account for a game?
-                </Form.Checkbox>
+                            <span>Are you the dungeon master for a game?</span>
+                        </Form.Checkbox>
                     </Container>
-                    <Button
-                        disabled={!this.validateForm()}
-                        type="submit"
-                        color="success"
-                        onClick={this.handleLogin}
-                    >
-                        Create User
-          </Button>
+                    <Container id="buttons" fluid>
+                        <MyButton
+                            primary={true}
+                            disabled={!this.validateForm()}
+                            onClick={this.handleLogin}
+                            text="Create User"
+                        />
+                    </Container>
                 </form>
             </div>
         );

@@ -60,9 +60,13 @@ io.on('connection', (socket) => {
     socket.join(room);
   });
   socket.on('listChange', (data) => {
-    const roomNum = data[0].GameId;
-    socket.to(roomNum).emit('listChange', data);
-    // socket.broadcast.emit('listChange', data);
+    if (data.length === 0) {
+      //should only occur if no characters present on list
+    }
+    else {
+      const roomNum = data[0].game_id;
+      socket.to(roomNum).emit('listChange', data);
+    }
   });
   socket.on('disconnect', () => {
     console.log('user disconnected'); // eslint-disable-line no-console

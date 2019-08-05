@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "name": "Barbarian",
+    "image": "./images/barb.png"
+  },
+  {
+    "id": 2,
+    "name": "Bard",
+    "image": "./images/bard.png"
+  },
+  {
+    "id": 3,
+    "name": "Human",
+    "image": "./images/dunno.png"
+  },
+  {
+    "id": 4,
+    "name": "Human",
+    "image": "./images/dunno-pt-2.png"
+  },
+  {
+    "id": 5,
+    "name": "Dwarf",
+    "image": "./images/dwarf.png"
+  },
+  {
+    "id": 6,
+    "name": "Fighter",
+    "image": "./images/fighter.png"
+  },
+  {
+    "id": 7,
+    "name": "Fighter2",
+    "image": "./images/fighter2.png"
+  },
+  {
+    "id": 8,
+    "name": "Paladin",
+    "image": "./images/paladin.png"
+  },
+  {
+    "id": 9,
+    "name": "Ranger",
+    "image": "./images/ranger.png"
+  },
+  {
+    "id": 10,
+    "name": "Tiefling",
+    "image": "./images/tiefling.png"
+  }
+]

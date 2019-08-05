@@ -1,12 +1,95 @@
 .createUser {
-    padding: 60px 0;
+  /* padding: 60px 0;
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; */
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 5%;
 }
 
 .createUser form {
-    margin: 0 auto;
-    max-width: 320px;
+  max-width: 320px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 2%;
+}
+
+#buttons2 {
+  width: auto;
+}
+
+.checkbox {
+  font-family: 'Nodesto';
+  font-size: 1.2rem;
+  margin-top: 10px;
+}
+
+#checkContainer {
+  margin: auto;
+  text-align: center;
+}
+
+span {
+  text-align: center;
+  margin: auto;
 }
 
 .title {
-    text-align: center;
+  text-align: center;
+  padding-top: 3%;
+}
+
+@media screen and (min-width: 300px) {
+  .login-container {
+    margin: 0 auto;
+    position: relative;
+  }
+  #email, #password {
+    display: block;
+    /* margin-left: auto; */
+    margin-right: auto;
+    width: 40%;
+  }
+}
+
+@media screen and (max-width: 1088px) {
+  #email, #password {
+    display: block;
+    /* margin-left: auto; */
+    margin-right: auto;
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 1088px) {
+  #email, #password {
+    display: block;
+    /* margin-left: auto; */
+    margin-right: auto;
+    width: 31%;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  #email, #password {
+    display: block;
+    /* margin-left: auto; */
+    margin-right: auto;
+    width: 26%;
+  }
+}
+
+@media screen and (min-width: 1472px) {
+  #email, #password {
+    display: block;
+    /* margin-left: auto; */
+    margin-right: auto;
+    width: 22.5%;
+  }
 }

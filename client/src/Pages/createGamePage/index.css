@@ -1,12 +1,63 @@
 .createGame {
-    padding: 60px 0;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 5%;
+}
+
+#avatarSelectText {
+  text-decoration: underline;
 }
 
 .createGame form {
-    margin: 0 auto;
-    max-width: 320px;
+  overflow: hidden;
+  display: inline-block;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 5%;
 }
 
 .title {
-    text-align: center;
+  text-align: center;
+}
+
+/* .gameTitle {
+  font-size: calc(250% + 1vw);
+} */
+
+.createGameHeader {
+  font-size: calc(100% + 1.2vw);
+  text-align: center;
+}
+
+.gameInput {
+  max-width: 50%;
+  margin: auto;
+  width: 450px;
+  margin-bottom: 5px;
+}
+
+@media screen and (min-width: 300px) {
+  .login-container {
+    margin: 0 auto;
+    position: relative;
+  }
+  #name {
+    display: block;
+    /* margin-left: auto; */
+    margin-right: auto;
+    /* width: 100%; */
+  }
+}
+
+@media screen and (min-width: 1088px) {
+  .createGameHeader {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 31%;
+  }
 }
